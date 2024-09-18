@@ -199,8 +199,8 @@
     "objectID": "0-Information.html#information",
     "href": "0-Information.html#information",
     "title": "Bayesian Data Analysis",
-    "section": "",
-    "text": "🏢 Office: Room 223, Logic House\n📧 Email: niamh.cahill@mu.ie\n📅 Lectures:\n\n📍 Mondays @11am in TSI125\n\n📍 Tuesdays @10am in Physics Hall (PH)\n\n📚 Tutorials:\n\n📍 Wednesdays @3pm, 4pm, 5pm in GFLAB, starting Week 4 (Oct 14th)"
+    "section": "Information",
+    "text": "Information\n🏢 Office: Room 223, Logic House\n📧 Email: niamh.cahill@mu.ie\n📅 Lectures:\n\n📍 Mondays @11am in TSI125\n\n📍 Tuesdays @10am in Physics Hall (PH)\n\n📚 Tutorials:\n\n📍 Wednesdays @3pm, 4pm, 5pm in GFLAB, starting Week 4 (Oct 14th)"
   },
   {
     "objectID": "0-Information.html#information-1",
@@ -221,7 +221,7 @@
     "href": "0-Information.html#what-is-this-course-about",
     "title": "Bayesian Data Analysis",
     "section": "What is this Course About?",
-    "text": "What is this Course About?\n\n🎯 The goal of this course is to introduce you to Bayesian Data Analysis (BDA).\n📚 BDA relies on two foundational ideas:\n\n🔄 The first idea is the updating of uncertainty across possibilities through Bayesian inference.\n🎲 The second idea is that parameter values are given probability distributions, known as “prior” distributions.\n\n\n\n\n“How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth.”\n— Sherlock Holmes (fictional character)"
+    "text": "What is this Course About?\n\n🎯 The goal of this course is to introduce you to Bayesian Data Analysis (BDA).\n📚 BDA relies on two foundational ideas:\n\n🔄 The first idea is the updating of uncertainty across possibilities through Bayesian inference.\n🎲 The second idea is that parameter values are given probability distributions, known as “prior” distributions."
   },
   {
     "objectID": "0-Information.html#what-topics-will-we-cover",
