@@ -18,4 +18,4 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 ### Week 1 
 
-a: [Bayes Rule](https://ncahill89.github.io/ST405/1-BayesRule.html)
+1a: [Bayes Rule](https://ncahill89.github.io/ST405/1-BayesRule.html)

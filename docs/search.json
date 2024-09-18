@@ -215,5 +215,19 @@
     "title": "Bayesian Data Analysis",
     "section": "Marginal likelihood - \\(p(y)\\)",
     "text": "Marginal likelihood - \\(p(y)\\)\nRecall: \\[\\underset{\\text{posterior}}{P(\\theta|y)} = \\frac{\\underset{\\text{likelihood}}{P(y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}}{\\underset{\\text{marginal likelihood}}{P(y)}}\\]\nWhat is \\(P(y)\\)?\n\\[P(y) = \\sum_{\\theta^*} P(y|\\theta^*)P(\\theta^*)\\]\nSo for \\(k = 0,0.25,0.5,0.75,1\\), \\(Pr(\\theta = k) = 1/5\\) (i.e., all are equally likely)\n\\(P(y) = p(y|\\theta = 0)Pr(\\theta = 0) + P(y|\\theta = 0.25)Pr(\\theta = 0.25) + \\ldots = 0.073\\)\nTo do this in R:\n\nn_grid = 5\ntheta &lt;- seq(0,1,length = n_grid) \np_y &lt;- (1/n_grid)*(sum(dbinom(6, 10, prob = theta)))"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to Bayesian Data Analysis!",
+    "section": "",
+    "text": "Welcome to the course website for ST405 (code share ST645) Bayesian Data Analysis!\nModule information\nLecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.\nContact: Niamh Cahill (niamh.cahill@mu.ie)"
+  },
+  {
+    "objectID": "index.html#lecture-slides",
+    "href": "index.html#lecture-slides",
+    "title": "Welcome to Bayesian Data Analysis!",
+    "section": "Lecture Slides",
+    "text": "Lecture Slides\n\nWeek 1\na: Bayes Rule"
   }
 ]
