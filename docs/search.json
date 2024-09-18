@@ -11,7 +11,7 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability"
   },
   {
     "objectID": "1b-InferringBinomialProp.html#recall-bayes-rule",
@@ -187,5 +187,54 @@
     "title": "Bayesian Data Analysis",
     "section": "Likelihood, Prior & Posterior",
     "text": "Likelihood, Prior & Posterior\n\\[\\underset{\\text{posterior}}{P(\\theta|Y)} \\propto \\underset{\\text{likelihood}}{P(Y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}\\]\n\n\n\n\\(P(Y|\\theta)\\) - the likelihood. The likelihood represents the evidence that we have based on data.\n\\(P(\\theta)\\) - the prior. The prior represents what we know about the parameters before the data are observed.\n\\(P(\\theta|Y)\\) - the posterior. The posterior represents our updated knowledge about parameters after the data are observed."
+  },
+  {
+    "objectID": "0-Information.html",
+    "href": "0-Information.html",
+    "title": "Bayesian Data Analysis",
+    "section": "",
+    "text": "🏢 Office: Room 223, Logic House\n📧 Email: niamh.cahill@mu.ie\n📅 Lectures:\n\n📍 Mondays @11am in TSI125\n\n📍 Tuesdays @10am in Physics Hall (PH)\n\n📚 Tutorials:\n\n📍 Wednesdays @3pm, 4pm, 5pm in GFLAB, starting Week 4 (Oct 14th)"
+  },
+  {
+    "objectID": "0-Information.html#information",
+    "href": "0-Information.html#information",
+    "title": "Bayesian Data Analysis",
+    "section": "",
+    "text": "🏢 Office: Room 223, Logic House\n📧 Email: niamh.cahill@mu.ie\n📅 Lectures:\n\n📍 Mondays @11am in TSI125\n\n📍 Tuesdays @10am in Physics Hall (PH)\n\n📚 Tutorials:\n\n📍 Wednesdays @3pm, 4pm, 5pm in GFLAB, starting Week 4 (Oct 14th)"
+  },
+  {
+    "objectID": "0-Information.html#information-1",
+    "href": "0-Information.html#information-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Information",
+    "text": "Information\n📝 Assessment:\n\n4 Assignments worth 10%\n1 Midterm worth 15% (November 11th)\nFinal Exam worth 75% (Date TBC)\n\n📖 Textbooks:\n\nDoing Bayesian Data Analysis by J. K. Kruschke\n\nBayesian Data Analysis by A. Gelman et al.\n\n⏰ Office Hours: By appointment (and please do make an appointment if needed)"
+  },
+  {
+    "objectID": "0-Information.html#lecturing-format",
+    "href": "0-Information.html#lecturing-format",
+    "title": "Bayesian Data Analysis",
+    "section": "Lecturing Format",
+    "text": "Lecturing Format\n\n📝 Lecture notes will be provided, but feel free to take additional notes for your understanding.\n🌐 All course materials will be available on Moodle for easy access.\nLectures will be a mix of theory and practical examples, to help you apply what you learn.\n💻 R code will be provided along with lecture notes whenever relevant.\n❓ Please ask questions! Interaction is encouraged to help clarify any doubts."
+  },
+  {
+    "objectID": "0-Information.html#what-is-this-course-about",
+    "href": "0-Information.html#what-is-this-course-about",
+    "title": "Bayesian Data Analysis",
+    "section": "What is this Course About?",
+    "text": "What is this Course About?\n\n🎯 The goal of this course is to introduce you to Bayesian Data Analysis (BDA).\n📚 BDA relies on two foundational ideas:\n\n🔄 The first idea is the updating of uncertainty across possibilities through Bayesian inference.\n🎲 The second idea is that parameter values are given probability distributions, known as “prior” distributions.\n\n\n\n\n“How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth.”\n— Sherlock Holmes (fictional character)"
+  },
+  {
+    "objectID": "0-Information.html#what-topics-will-we-cover",
+    "href": "0-Information.html#what-topics-will-we-cover",
+    "title": "Bayesian Data Analysis",
+    "section": "What topics will we cover?",
+    "text": "What topics will we cover?\nThis course will cover (but is not limited to) the following topics:\n\nBayes’ Rule\nInferring a Binomial Probability\nPrior Distributions\nMarkov Chain Monte Carlo\nGibbs Sampler\nAssessing Model Convergence\nJAGS\nSimple Models with JAGS\nHierarchical Models with JAGS\nModel Checking"
+  },
+  {
+    "objectID": "0-Information.html#diversity-inclusion",
+    "href": "0-Information.html#diversity-inclusion",
+    "title": "Bayesian Data Analysis",
+    "section": "Diversity & inclusion",
+    "text": "Diversity & inclusion\nIt is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. I may not always get this right so please let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.\nTo help with this:\n\nIf you have a name that differs from those that appear in your official University records, please let me know!\nPlease let me know your preferred pronouns if you wish to do so.\nI (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it."
   }
 ]
