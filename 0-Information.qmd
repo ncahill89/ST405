@@ -1,0 +1,93 @@
+---
+title: "Bayesian Data Analysis"
+subtitle: "Information"
+author: "Prof. Niamh Cahill (she/her)"
+format: revealjs
+editor: visual
+---
+
+## Information {style="font-size: 80%;"}
+
+**🏢 Office:** Room 223, Logic House
+
+**📧 Email:** [niamh.cahill\@mu.ie](mailto:niamh.cahill@mu.ie){.email}
+
+**📅 Lectures:**
+
+-   📍 Mondays @11am in **TSI125**\
+-   📍 Tuesdays @10am in **Physics Hall (PH)**
+
+**📚 Tutorials:**
+
+-   📍 **Wednesdays** @3pm, 4pm, 5pm in **GFLAB**, starting **Week 4 (Oct 14th)**
+
+## Information {style="font-size: 80%;"}
+
+**📝 Assessment:**
+
+-   4 **Assignments** worth **10%**
+-   1 **Midterm** worth **15%** (November 11th)
+-   **Final Exam** worth **75%** (Date TBC)
+
+**📖 Textbooks:**
+
+-   *Doing Bayesian Data Analysis* by J. K. Kruschke\
+-   *Bayesian Data Analysis* by A. Gelman et al.
+
+**⏰ Office Hours:** By appointment (and please do make an appointment if needed)
+
+## Lecturing Format {style="font-size: 80%;"}
+
+-   📝 **Lecture notes** will be provided, but feel free to take **additional notes** for your understanding.
+
+-   🌐 All course materials will be available on **Moodle** for easy access.
+
+-   **Lectures** will be a mix of **theory** and **practical examples**, to help you apply what you learn.
+
+-   💻 **R code** will be provided along with lecture notes whenever relevant.
+
+-   ❓ **Please ask questions!** Interaction is encouraged to help clarify any doubts.
+
+## What is this Course About? {style="font-size: 80%;"}
+
+-   🎯 The goal of this course is to introduce you to **Bayesian Data Analysis (BDA)**.
+
+-   📚 BDA relies on two foundational ideas:
+
+    -   🔄 The first idea is the **updating of uncertainty** across possibilities through Bayesian inference.
+
+    -   🎲 The second idea is that **parameter values** are given **probability distributions**, known as "prior" distributions.
+
+------------------------------------------------------------------------
+
+> "How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth."\
+> — Sherlock Holmes (fictional character)
+
+![](images/07SHERLOCK-superJumbo.jpg)
+
+## What topics will we cover? {style="font-size: 80%;"}
+
+This course will cover (but is not limited to) the following topics:
+
+-   Bayes' Rule
+-   Inferring a Binomial Probability
+-   Prior Distributions
+-   Markov Chain Monte Carlo
+-   Gibbs Sampler
+-   Assessing Model Convergence
+-   JAGS
+-   Simple Models with JAGS
+-   Hierarchical Models with JAGS
+-   Model Checking
+
+## Diversity & inclusion {style="font-size: 80%;"}
+
+It is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. I may not always get this right so please let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.
+
+To help with this:
+
+-   If you have a name that differs from those that appear in your official University records, please let me know!
+
+-   Please let me know your preferred pronouns if you wish to do so.
+
+-   I (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.

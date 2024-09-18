@@ -1,0 +1,359 @@
+---
+title: "Bayesian Data Analysis"
+subtitle: "Inferring a Binomial Probability"
+author: "Dr Niamh Cahill (she/her)"
+format: revealjs
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Recall: Bayes' rule {style="font-size: 75%;"}
+
+Given a set of observed data points $y$ and a set of parameters $\theta$, we write Bayes' rule as
+
+$$\underset{\text{posterior}}{P(\theta|y)} = \frac{\underset{\text{likelihood}}{P(y|\theta)}\underset{\text{prior}}{P(\theta)}}{\underset{\text{marginal likelihood}}{P(y)}}$$ and as a proportional statement
+
+$$\underset{\text{posterior}}{P(\theta|Y)} \propto \underset{\text{likelihood}}{P(Y|\theta)}\underset{\text{prior}}{P(\theta)}$$
+
+We will now consider an example that will build some intuition for how prior distributions and data interact to produce posterior distributions.
+
+## What proportion of Earth's surface is covered with water? {style="font-size: 75%;"}
+
+![](images/globe.png){fig-align="center" width="600"}
+
+## Estimating the Proportion of Water on Earth {style="font-size: 75%;"}
+
+Imagine you want to estimate how much of the Earth's surface is covered in water. 🌍💧
+
+-   🟢 **The Experiment**: You throw a blow-up globe into the air, and wherever your index finger lands, you record an observation of either:
+
+    -   **Water** 🌊
+    -   **Land** 🌍
+
+-   🔄 **Repeat** this process multiple times, collecting a dataset of **binary outcomes** (water or land).
+
+-   📊 **Your Data**: As you accumulate observations, you’ll begin to estimate the **proportion** of the Earth that’s covered by water based on how often your finger lands on water.
+
+This simple, hands-on experiment can give you an idea of the Earth's water coverage!
+
+## Estimating the Proportion of Water on Earth {style="font-size: 75%;"}
+
+```{r}
+video_path  <- "vid/"
+video_files <- list.files(video_path,
+                         pattern = "\\.mp4$",
+                         recursive = TRUE,
+                         all.files = FALSE,
+                         full.names = TRUE)
+```
+
+<iframe width="720" height="480" src="`r video_files[1]`" align="middle" frameborder="0" allowfullscreen>
+
+</iframe>
+
+## Water on the Globe Example {style="font-size: 70%;"}
+
+**🎯 What is our goal?** Estimate the proportion of water on the globe, denoted as **θ** (theta).
+
+**📊 What data do we have?**
+
+-   **Data Collected**: L, W, L, L, W, W, W, L, W, W
+-   **Total Throws**: **n = 10**
+-   **Water Observations**: **y = 6**
+
+**🔍 How do we perform Bayesian inference for θ?**
+
+1.  **Model the Data**: Choose a descriptive model for the data, known as the **likelihood**, which includes **θ** (the proportion of water).
+
+2.  **Prior Information**: Summarize existing knowledge about **θ** using a **prior probability distribution**.
+
+3.  **Update with Data**: Combine the prior with the collected data using **Bayes' rule** to obtain the **posterior distribution** for **θ**. This refines our estimate of the proportion of water on the globe based on the evidence we’ve gathered!
+
+## Brief Recap: Types of Statistical Distributions {style="font-size: 65%;"}
+
+Different types of distributions are used to describe data (or parameters), here's some examples:
+
+::: columns
+::: {.column width="33%"}
+### Normal Distribution
+
+-   **Description**: Bell-shaped curve, symmetric around the mean.
+-   **Example**: Heights of people, IQ scores.
+
+```{r}
+# Define lambda values and the range of x-values for Poisson distributions
+x_range <- seq(-20,25, by = 0.01)
+
+# Create a data frame for each lambda value with corresponding PMF values
+normal_data <- data.frame(
+  x = rep(x_range, 3),
+  y = c(dnorm(x_range, mean = 1),
+        dnorm(x_range, mean = 5),
+        dnorm(x_range, mean = 10)),
+  mu = factor(rep((c(1,4,10)), each = length(x_range)))
+) %>% filter(x > -6 & x < 24)
+
+# Plot using ggplot2
+ggplot(normal_data, aes(x = x, y = y, color = mu)) +
+  geom_point(size = 0.5) +
+  geom_line(aes(group = mu), size = 0.5) +
+  scale_color_manual(values = c("orange", "purple", "lightblue")) +
+  labs(title = "Normal Distribution PDF",
+       x = "y",
+       y = "Density",
+       color = expression(mu)) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+<!-- ![Normal distribution](images/1*SD4MtJcsheHu5uqH10eyjw.png) -->
+:::
+
+::: {.column width="33%"}
+### Binomial Distribution
+
+-   **Description**: Discrete distribution of the \# of successes in a fixed \# of trials.
+-   **Example**: Presence/absence of a disease
+
+<!-- ![Binomial distribution](images/0*LDz1juH78MkxHmUM.jpg){width="1500"} -->
+
+```{r}
+# Create data for three binomial distributions
+n1 <- 20
+n2 <- 20
+n3 <- 40
+
+p1 <- 0.5
+p2 <- 0.7
+p3 <- 0.5
+
+# Generate random variables for the binomial distributions
+data1 <- data.frame(x = 0:n1, prob = dbinom(0:n1, size = n1, prob = p1), type = "p=0.5 and n=20")
+data2 <- data.frame(x = 0:n2, prob = dbinom(0:n2, size = n2, prob = p2), type = "p=0.7 and n=20")
+data3 <- data.frame(x = 0:n3, prob = dbinom(0:n3, size = n3, prob = p3), type = "p=0.5 and n=40")
+
+# Combine all data
+data_all <- rbind(data1, data2, data3)
+
+# Plot using ggplot2
+ggplot(data_all, aes(x = x, y = prob)) +
+  geom_bar(stat = "identity", aes(fill = type), position = position_dodge(width = 0.9)) +
+  labs(title = "The Binomial Distribution", 
+       x = "y", 
+       y = "Probability") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_manual(values = c("green", "brown", "purple")) +
+   labs(fill = "") +
+  theme_classic()
+```
+:::
+
+::: {.column width="33%"}
+### Poisson Distribution
+
+-   **Description**: Discrete distribution for the \# of events in a fixed interval.
+-   **Example**: \# of emails received in an hour.
+
+```{r}
+# Define lambda values and the range of x-values for Poisson distributions
+lambda_values <- c(1, 4, 10)
+x_range <- 0:20
+
+# Create a data frame for each lambda value with corresponding PMF values
+poisson_data <- data.frame(
+  x = rep(x_range, length(lambda_values)),
+  y = c(dpois(x_range, lambda = 1),
+        dpois(x_range, lambda = 4),
+        dpois(x_range, lambda = 10)),
+  lambda = factor(rep(lambda_values, each = length(x_range)))
+)
+
+# Plot using ggplot2
+ggplot(poisson_data, aes(x = x, y = y, color = lambda)) +
+  geom_point(size = 3) +
+  geom_line(aes(group = lambda), size = 1) +
+  scale_color_manual(values = c("orange", "purple", "lightblue")) +
+  labs(title = "Poisson Distribution PMF",
+       x = "y",
+       y = "Probability",
+       color = expression(lambda)) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+<!-- ![Poisson distribution](images/Poisson_pmf.svg.png) -->
+:::
+:::
+
+## Likelihood Function - $p(y|\theta)$ {style="font-size: 70%;"}
+
+We have **data:** n = 10, y = 6. We now need a **data model**.
+
+We’ll model this particular type of data using a **Binomial Distribution**.
+
+-   **Assumption**: $y$ follows a **Binomial** distribution with parameters $(\theta, n)$, where:
+
+    $$p(y|\theta) = c\theta^y(1-\theta)^{n-y} \text{ with } c = {n \choose y}$$
+
+-   **Explanation**:
+
+    -   $p(y|\theta)$: The likelihood function shows the probability of observing **y** water outcomes out of **n** throws, given the proportion of water **θ**.
+    -   $c$: The combinatorial factor that accounts for the number of ways to choose **y** successes out of **n** trials.
+
+**Why This Matters**: This function tells us how our observed data (water outcomes) relate to the parameter we want to estimate (**θ**).
+
+## Prior distribution - $p(\theta)$ {style="font-size: 70%;"}
+
+Now that we've defined the data model, the next step is to establish a prior distribution over the parameter values.
+
+-   Let's start simple and assume $\theta$ can only take on values k = $0,0.25,0.5,0.75,1$.
+
+-   Suppose that we believe that $\theta$ is most likely to be 0.5 and we assign lower weight to $\theta$ values far above or below 0.5.
+
+-   A prior distribution incorporating these beliefs might look like:
+
+```{r, fig.height= 3, fig.width=6, fig.align='center'}
+n_grid = 5
+theta <- seq(0,1,length = n_grid) # grid of theta values
+Prior <- pmin(theta, 1-theta) # triangular shape
+Prior = Prior/sum(Prior) # make sum to 1
+
+ptheta_dat <- tibble::tibble(theta, Prior)
+
+ggplot(ptheta_dat, aes(x = theta, y = Prior)) +
+  geom_segment(aes(xend=theta,yend=0)) +
+  xlab(expression(theta)) +
+  ylab(expression(p(theta))) +
+  theme_bw()
+
+```
+
+## Likelihood & Prior {style="font-size: 70%;"}
+
+Given that y = 6 and n = 10 with $\frac{y}{n} = 0.6$, which $\theta$ out of $0,0.25,0.5,0.75,1$ do you expect to have the largest value of the likelihood function?
+
+```{r,fig.height= 4, fig.width=6, fig.align='center'}
+Likelihood <- dbinom(6,10,prob = theta)
+ptheta_dat$Likelihood <- Likelihood
+
+
+ptheta_dat2 <- ptheta_dat %>% pivot_longer(cols = Prior:Likelihood,
+                                      names_to = "type",
+                                      values_to = "value") %>%
+  mutate(type = factor(type, levels =c("Prior","Likelihood")))
+
+ggplot(ptheta_dat2, aes(x = theta, y = value)) +
+  geom_segment(aes(xend=theta,yend=0)) +
+  facet_wrap(~type, scales = "free_y", nrow = 2) +
+  xlab(expression(theta)) +
+  ylab("") +
+  theme_bw()
+```
+
+## Posterior distribution - $\underset{\text{posterior}}{P(\theta|Y)} \propto \underset{\text{likelihood}}{P(Y|\theta)}\underset{\text{prior}}{P(\theta)}$ {style="font-size: 70%;"}
+
+```{r, fig.height= 4, fig.width=6, fig.align='center'}
+Posterior <- Likelihood*Prior
+ptheta_dat$Posterior <- Posterior
+
+
+ptheta_dat2 <- ptheta_dat %>% pivot_longer(cols = Prior:Posterior,
+                                      names_to = "type",
+                                      values_to = "value") %>%
+  mutate(type = factor(type, levels =c("Prior","Likelihood","Posterior")))
+
+ggplot(ptheta_dat2, aes(x = theta, y = value)) +
+  geom_segment(aes(xend=theta,yend=0)) +
+  facet_wrap(~type, scales = "free_y", nrow = 3) +
+  xlab(expression(theta)) +
+  ylab("") +
+  theme_bw()
+
+```
+
+## Changing prior assumptions (1) {style="font-size: 70%;"}
+
+Instead of the "triangular" prior let's make a different assumption where we assume 0.75 is most likely and 0.5 is somewhat likely.
+
+```{r, fig.height= 4, fig.width=6, fig.align='center'}
+n_grid = 5
+theta <- seq(0,1,length = n_grid) # grid of theta values
+Prior <- c(0,0,0.25,0.75,0)
+ptheta_dat <- tibble::tibble(theta, Prior)
+
+Likelihood <- dbinom(6,10,prob = theta)
+ptheta_dat$Likelihood <- Likelihood
+
+Posterior <- Likelihood*Prior
+ptheta_dat$Posterior <- Posterior
+
+
+ptheta_dat2 <- ptheta_dat %>% pivot_longer(cols = Prior:Posterior,
+                                      names_to = "type",
+                                      values_to = "value") %>%
+  mutate(type = factor(type, levels =c("Prior","Likelihood","Posterior")))
+
+ggplot(ptheta_dat2, aes(x = theta, y = value)) +
+  geom_segment(aes(xend=theta,yend=0)) +
+  facet_wrap(~type, scales = "free_y", nrow = 3) +
+  xlab(expression(theta)) +
+  ylab("") +
+  theme_bw()
+```
+
+## Changing prior assumptions (2) {style="font-size: 70%;"}
+
+Instead of the "triangular" prior let's make a more uniform assumption. So for $k = 0,0.25,0.5,0.75,1$, $Pr(\theta = k) = 1/5$ (i.e., all are equally likely).
+
+```{r, fig.height= 4, fig.width=6, fig.align='center'}
+n_grid = 5
+theta <- seq(0,1,length = n_grid) # grid of theta values
+Prior <- 1/n_grid
+ptheta_dat <- tibble::tibble(theta, Prior)
+
+Likelihood <- dbinom(6,10,prob = theta)
+ptheta_dat$Likelihood <- Likelihood
+
+Posterior <- Likelihood*Prior
+ptheta_dat$Posterior <- Posterior
+
+
+ptheta_dat2 <- ptheta_dat %>% pivot_longer(cols = Prior:Posterior,
+                                      names_to = "type",
+                                      values_to = "value") %>%
+  mutate(type = factor(type, levels =c("Prior","Likelihood","Posterior")))
+
+ggplot(ptheta_dat2, aes(x = theta, y = value)) +
+  geom_segment(aes(xend=theta,yend=0)) +
+  facet_wrap(~type, scales = "free_y", nrow = 3) +
+  xlab(expression(theta)) +
+  ylab("") +
+  theme_bw()
+```
+
+## Marginal likelihood - $p(y)$ {style="font-size: 70%;"}
+
+Recall: $$\underset{\text{posterior}}{P(\theta|y)} = \frac{\underset{\text{likelihood}}{P(y|\theta)}\underset{\text{prior}}{P(\theta)}}{\underset{\text{marginal likelihood}}{P(y)}}$$
+
+What is $P(y)$?
+
+$$P(y) = \sum_{\theta^*} P(y|\theta^*)P(\theta^*)$$
+
+So for $k = 0,0.25,0.5,0.75,1$, $Pr(\theta = k) = 1/5$ (i.e., all are equally likely)
+
+$P(y) = p(y|\theta = 0)Pr(\theta = 0) + P(y|\theta = 0.25)Pr(\theta = 0.25) + \ldots = 0.073$
+
+**To do this in R:**
+
+```{r, echo = TRUE}
+n_grid = 5
+theta <- seq(0,1,length = n_grid) 
+p_y <- (1/n_grid)*(sum(dbinom(6, 10, prob = theta)))
+```

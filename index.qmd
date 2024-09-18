@@ -1,0 +1,21 @@
+---
+title: "Welcome to Bayesian Data Analysis!"
+format:
+  html:
+    link-external-icon: true
+    link-external-newwindow: true
+---
+
+Welcome to the course website for ST405 (code share ST645) Bayesian Data Analysis!
+
+[Module information](https://ncahill89.github.io/ST405/0-Information.html)
+
+Lecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.
+
+Contact: Niamh Cahill (niamh.cahill\@mu.ie)
+
+## Lecture Slides
+
+### Week 1 
+
+a: [Bayes Rule](https://ncahill89.github.io/ST405/1-BayesRule.html)

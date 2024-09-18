@@ -1,0 +1,219 @@
+[
+  {
+    "objectID": "0-Information.html#information",
+    "href": "0-Information.html#information",
+    "title": "Bayesian Data Analysis",
+    "section": "Information",
+    "text": "Information\n🏢 Office: Room 223, Logic House\n📧 Email: niamh.cahill@mu.ie\n📅 Lectures:\n\n📍 Mondays @11am in TSI125\n\n📍 Tuesdays @10am in Physics Hall (PH)\n\n📚 Tutorials:\n\n📍 Wednesdays @3pm, 4pm, 5pm in GFLAB, starting Week 4 (Oct 14th)"
+  },
+  {
+    "objectID": "0-Information.html#information-1",
+    "href": "0-Information.html#information-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Information",
+    "text": "Information\n📝 Assessment:\n\n4 Assignments worth 10%\n1 Midterm worth 15% (November 11th)\nFinal Exam worth 75% (Date TBC)\n\n📖 Textbooks:\n\nDoing Bayesian Data Analysis by J. K. Kruschke\n\nBayesian Data Analysis by A. Gelman et al.\n\n⏰ Office Hours: By appointment (and please do make an appointment if needed)"
+  },
+  {
+    "objectID": "0-Information.html#lecturing-format",
+    "href": "0-Information.html#lecturing-format",
+    "title": "Bayesian Data Analysis",
+    "section": "Lecturing Format",
+    "text": "Lecturing Format\n\n📝 Lecture notes will be provided, but feel free to take additional notes for your understanding.\n🌐 All course materials will be available on Moodle for easy access.\nLectures will be a mix of theory and practical examples, to help you apply what you learn.\n💻 R code will be provided along with lecture notes whenever relevant.\n❓ Please ask questions! Interaction is encouraged to help clarify any doubts."
+  },
+  {
+    "objectID": "0-Information.html#what-is-this-course-about",
+    "href": "0-Information.html#what-is-this-course-about",
+    "title": "Bayesian Data Analysis",
+    "section": "What is this Course About?",
+    "text": "What is this Course About?\n\n🎯 The goal of this course is to introduce you to Bayesian Data Analysis (BDA).\n📚 BDA relies on two foundational ideas:\n\n🔄 The first idea is the updating of uncertainty across possibilities through Bayesian inference.\n🎲 The second idea is that parameter values are given probability distributions, known as “prior” distributions."
+  },
+  {
+    "objectID": "0-Information.html#what-topics-will-we-cover",
+    "href": "0-Information.html#what-topics-will-we-cover",
+    "title": "Bayesian Data Analysis",
+    "section": "What topics will we cover?",
+    "text": "What topics will we cover?\nThis course will cover (but is not limited to) the following topics:\n\nBayes’ Rule\nInferring a Binomial Probability\nPrior Distributions\nMarkov Chain Monte Carlo\nGibbs Sampler\nAssessing Model Convergence\nJAGS\nSimple Models with JAGS\nHierarchical Models with JAGS\nModel Checking"
+  },
+  {
+    "objectID": "0-Information.html#diversity-inclusion",
+    "href": "0-Information.html#diversity-inclusion",
+    "title": "Bayesian Data Analysis",
+    "section": "Diversity & inclusion",
+    "text": "Diversity & inclusion\nIt is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. I may not always get this right so please let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.\nTo help with this:\n\nIf you have a name that differs from those that appear in your official University records, please let me know!\nPlease let me know your preferred pronouns if you wish to do so.\nI (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it."
+  },
+  {
+    "objectID": "1a-BayesRule.html#bayes-rule",
+    "href": "1a-BayesRule.html#bayes-rule",
+    "title": "Bayesian Data Analysis",
+    "section": "Bayes’ rule",
+    "text": "Bayes’ rule\nThomas Bayes’ famous theorem was published in 1763.\n\nFor events A and B:\n\\[P(A|B) = \\frac{P(B|A)P(A)}{P(B)} \\]\n\nThe branch of statistics that you are probably most familiar with up to now is called frequentist statistics.\nBayesian statistics uses Bayes’ rule for inference and decision making, frequentist statistics does not."
+  },
+  {
+    "objectID": "1a-BayesRule.html#crimes-example",
+    "href": "1a-BayesRule.html#crimes-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Crimes Example",
+    "text": "Crimes Example\n🔍 A Crime Investigation (adapted from Kruschke):\n\nYou are investigating a crime and have 4 suspects: A, B, C, and D.\n\n👤 Suspect A\n\n👤 Suspect B\n\n👤 Suspect C\n\n👤 Suspect D\n\n🕵‍♂️ You are 100% sure the offender is one of these suspects, and initially, each one is considered equally likely to have committed the crime.\n❗ During your investigation, you discover that C did not commit the crime."
+  },
+  {
+    "objectID": "1a-BayesRule.html#crimes-example-1",
+    "href": "1a-BayesRule.html#crimes-example-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Crimes Example",
+    "text": "Crimes Example\nQuestion: Can you apply a Bayesian crime investigation to quantify the “information” about who committed the crime using probability statements?\n\n\nPrior Information\n\n👤 Suspect A\n\n👤 Suspect B\n\n👤 Suspect C\n👤 Suspect D\n\n\nNew Data\n\n👤 Suspect A\n\n👤 Suspect B\n\n❌👤 Suspect C (Ruled out)\n👤 Suspect D\n\n\nGiven what we know about C, what is the probability that A committed the crime?\n\n\nBefore data “all 4 equally likely”: Prob(A) = 1/4\nAfter data “C did not do it”: Prob(A|C did not do it) = 1/3"
+  },
+  {
+    "objectID": "1a-BayesRule.html#crimes-example-2",
+    "href": "1a-BayesRule.html#crimes-example-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Crimes example",
+    "text": "Crimes example\nIs that Bayesian learning? Yes!\n\n\nStep 1: Set prior distribution Prob(A) = Prob(B) = Prob(C) = Prob(D) = 1/4\nStep 2: Update using data “C did not do it” using Bayes’ rule\n\n\\[P(A|\\text{not } C) = \\frac{P(\\text{not } C|A)P(A)}{P(\\text{not } C)} = \\frac{1 \\times 1/4}{3/4}  = 1/3\\]"
+  },
+  {
+    "objectID": "1a-BayesRule.html#sleep-example",
+    "href": "1a-BayesRule.html#sleep-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Sleep example",
+    "text": "Sleep example\nSuppose that you are interested in the probability, that at any given time in the night between 8pm and 4am, you are asleep.\nLet’s assume we already have the following information on your sleep over this time period:\n\nThis is the probability I am asleep taking into account only the time."
+  },
+  {
+    "objectID": "1a-BayesRule.html#sleep-example-1",
+    "href": "1a-BayesRule.html#sleep-example-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Sleep Example",
+    "text": "Sleep Example\n\n\n\n\n\n💡 What if we know the time and have additional evidence?\n\n\n\nImagine this scenario: It’s 11pm, and we have extra evidence — my bedroom light is on. How would this affect the probability that I am asleep? \n\nThis is where we use Bayes’ Rule to update our sleep estimate. If we know information about the light, we can apply Bayes’ equation to refine the probability estimate:\nFor example, at 11pm, we can use the probability of me being asleep (our prior) and then adjust it using Bayes’ Rule based on the light being on: \\[\n  P(\\text{sleep}|\\text{light}) = \\frac{P(\\text{light}|\\text{sleep})P(\\text{sleep})}{P(\\text{light})}\n  \\]"
+  },
+  {
+    "objectID": "1a-BayesRule.html#sleep-example-2",
+    "href": "1a-BayesRule.html#sleep-example-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Sleep Example",
+    "text": "Sleep Example\n💡 We added some information (data) about the light!\n\n\nTo update our sleep probability, we need to know the likelihood of observing this new information, given what we know about sleep habits.\n🔍 Key Probabilities Based on My Habits:\n\nIf I am asleep, the probability that my bedroom light is on is very low (1%):\n\\[P(\\text{light|sleep}) = 0.01\\]\nIf I am awake, the probability that my bedroom light is on is quite high (80%):\n\\[P(\\text{light|−sleep}) = 0.8\\]"
+  },
+  {
+    "objectID": "1a-BayesRule.html#sleep-example-3",
+    "href": "1a-BayesRule.html#sleep-example-3",
+    "title": "Bayesian Data Analysis",
+    "section": "Sleep Example",
+    "text": "Sleep Example\n💡 We had our prior information about sleep and added some information (data) about the light!\n\nThe final piece of the equation is \\(P(\\text{light})\\), representing the total probability my light is on.\nThere are two possible conditions where my light could be on:\n\nI am asleep\n\nI am awake\n\n\nTo calculate the total probability, we use:\n\\[\nP(\\text{light}) = P(\\text{light|sleep})P(\\text{sleep}) + P(\\text{light|−sleep})P(\\text{−sleep})\n\\]"
+  },
+  {
+    "objectID": "1a-BayesRule.html#sleep-example-4",
+    "href": "1a-BayesRule.html#sleep-example-4",
+    "title": "Bayesian Data Analysis",
+    "section": "Sleep Example",
+    "text": "Sleep Example\nNow, let’s put it all together with Bayes’ Rule:\n\\(\\underset{P(A|B)}{P(\\text{sleep}|\\text{light})} =\\)\n\n\n\\[\n\\frac{\\underset{P(B|A)}{P(\\text{light}|\\text{sleep})} \\cdot \\underset{P(A)}{P(\\text{sleep})}}{\\underset{P(B)}{P(\\text{light})}}\n\\]\n\n\\[\n\\frac{\\underset{0.01}{P(\\text{light}|\\text{sleep})} \\cdot \\underset{0.25}{P(\\text{sleep})}}{\\underset{0.5}{P(\\text{light})}}\n\\]\n\n🎯 This allows us to update our belief about the probability that I’m asleep based on the new evidence (the light being on)!"
+  },
+  {
+    "objectID": "1a-BayesRule.html#likelihood-prior-posterior",
+    "href": "1a-BayesRule.html#likelihood-prior-posterior",
+    "title": "Bayesian Data Analysis",
+    "section": "Likelihood, Prior & Posterior",
+    "text": "Likelihood, Prior & Posterior"
+  },
+  {
+    "objectID": "1a-BayesRule.html#bayes-rule-applied-to-parameters-and-data",
+    "href": "1a-BayesRule.html#bayes-rule-applied-to-parameters-and-data",
+    "title": "Bayesian Data Analysis",
+    "section": "Bayes’ rule applied to parameters and data",
+    "text": "Bayes’ rule applied to parameters and data\nGiven a set of observed data points \\(Y\\) and a set of parameters \\(\\theta\\), we write Bayes’ rule as \\[\\underset{\\text{posterior}}{P(\\theta|Y)} = \\frac{\\underset{\\text{likelihood}}{P(Y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}}{\\underset{\\text{marginal likelihood}}{P(Y)}}\\]\nWhere the denominator is\n\n\\(P(Y) = \\sum_{\\theta^*}P(Y|\\theta^*)P(\\theta^*)\\) for discrete-valued variables, or\n\\(P(Y) = \\int P(Y|\\theta^*)P(\\theta^*) d\\theta^*\\) for continuous variables.\n\n\\(P(Y)\\) is often difficult to calculate (more on this later) and Baye’s rule is often written more simply as a proportional statement \\[\\underset{\\text{posterior}}{P(\\theta|Y)} \\propto \\underset{\\text{likelihood}}{P(Y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}\\]"
+  },
+  {
+    "objectID": "1a-BayesRule.html#likelihood-prior-posterior-1",
+    "href": "1a-BayesRule.html#likelihood-prior-posterior-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Likelihood, Prior & Posterior",
+    "text": "Likelihood, Prior & Posterior\n\\[\\underset{\\text{posterior}}{P(\\theta|Y)} \\propto \\underset{\\text{likelihood}}{P(Y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}\\]\n\n\n\n\\(P(Y|\\theta)\\) - the likelihood. The likelihood represents the evidence that we have based on data.\n\\(P(\\theta)\\) - the prior. The prior represents what we know about the parameters before the data are observed.\n\\(P(\\theta|Y)\\) - the posterior. The posterior represents our updated knowledge about parameters after the data are observed."
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#recall-bayes-rule",
+    "href": "1b-InferringBinomialProp.html#recall-bayes-rule",
+    "title": "Bayesian Data Analysis",
+    "section": "Recall: Bayes’ rule",
+    "text": "Recall: Bayes’ rule\nGiven a set of observed data points \\(y\\) and a set of parameters \\(\\theta\\), we write Bayes’ rule as\n\\[\\underset{\\text{posterior}}{P(\\theta|y)} = \\frac{\\underset{\\text{likelihood}}{P(y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}}{\\underset{\\text{marginal likelihood}}{P(y)}}\\] and as a proportional statement\n\\[\\underset{\\text{posterior}}{P(\\theta|Y)} \\propto \\underset{\\text{likelihood}}{P(Y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}\\]\nWe will now consider an example that will build some intuition for how prior distributions and data interact to produce posterior distributions."
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#what-proportion-of-earths-surface-is-covered-with-water",
+    "href": "1b-InferringBinomialProp.html#what-proportion-of-earths-surface-is-covered-with-water",
+    "title": "Bayesian Data Analysis",
+    "section": "What proportion of Earth’s surface is covered with water?",
+    "text": "What proportion of Earth’s surface is covered with water?"
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#estimating-the-proportion-of-water-on-earth",
+    "href": "1b-InferringBinomialProp.html#estimating-the-proportion-of-water-on-earth",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating the Proportion of Water on Earth",
+    "text": "Estimating the Proportion of Water on Earth\nImagine you want to estimate how much of the Earth’s surface is covered in water. 🌍💧\n\n🟢 The Experiment: You throw a blow-up globe into the air, and wherever your index finger lands, you record an observation of either:\n\nWater 🌊\nLand 🌍\n\n🔄 Repeat this process multiple times, collecting a dataset of binary outcomes (water or land).\n📊 Your Data: As you accumulate observations, you’ll begin to estimate the proportion of the Earth that’s covered by water based on how often your finger lands on water.\n\nThis simple, hands-on experiment can give you an idea of the Earth’s water coverage!"
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#estimating-the-proportion-of-water-on-earth-1",
+    "href": "1b-InferringBinomialProp.html#estimating-the-proportion-of-water-on-earth-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating the Proportion of Water on Earth",
+    "text": "Estimating the Proportion of Water on Earth"
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#water-on-the-globe-example",
+    "href": "1b-InferringBinomialProp.html#water-on-the-globe-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Water on the Globe Example",
+    "text": "Water on the Globe Example\n🎯 What is our goal? Estimate the proportion of water on the globe, denoted as θ (theta).\n📊 What data do we have?\n\nData Collected: L, W, L, L, W, W, W, L, W, W\nTotal Throws: n = 10\nWater Observations: y = 6\n\n🔍 How do we perform Bayesian inference for θ?\n\nModel the Data: Choose a descriptive model for the data, known as the likelihood, which includes θ (the proportion of water).\nPrior Information: Summarize existing knowledge about θ using a prior probability distribution.\nUpdate with Data: Combine the prior with the collected data using Bayes’ rule to obtain the posterior distribution for θ. This refines our estimate of the proportion of water on the globe based on the evidence we’ve gathered!"
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#brief-recap-types-of-statistical-distributions",
+    "href": "1b-InferringBinomialProp.html#brief-recap-types-of-statistical-distributions",
+    "title": "Bayesian Data Analysis",
+    "section": "Brief Recap: Types of Statistical Distributions",
+    "text": "Brief Recap: Types of Statistical Distributions\nDifferent types of distributions are used to describe data (or parameters), here’s some examples:\n\n\nNormal Distribution\n\nDescription: Bell-shaped curve, symmetric around the mean.\nExample: Heights of people, IQ scores.\n\n\n\n\n\n\n\n\n\n\n\n\nBinomial Distribution\n\nDescription: Discrete distribution of the # of successes in a fixed # of trials.\nExample: Presence/absence of a disease\n\n\n\n\n\n\n\n\n\n\n\n\nPoisson Distribution\n\nDescription: Discrete distribution for the # of events in a fixed interval.\nExample: # of emails received in an hour."
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#likelihood-function---pytheta",
+    "href": "1b-InferringBinomialProp.html#likelihood-function---pytheta",
+    "title": "Bayesian Data Analysis",
+    "section": "Likelihood Function - \\(p(y|\\theta)\\)",
+    "text": "Likelihood Function - \\(p(y|\\theta)\\)\nWe have data: n = 10, y = 6. We now need a data model.\nWe’ll model this particular type of data using a Binomial Distribution.\n\nAssumption: \\(y\\) follows a Binomial distribution with parameters \\((\\theta, n)\\), where:\n\\[p(y|\\theta) = c\\theta^y(1-\\theta)^{n-y} \\text{ with } c = {n \\choose y}\\]\nExplanation:\n\n\\(p(y|\\theta)\\): The likelihood function shows the probability of observing y water outcomes out of n throws, given the proportion of water θ.\n\\(c\\): The combinatorial factor that accounts for the number of ways to choose y successes out of n trials.\n\n\nWhy This Matters: This function tells us how our observed data (water outcomes) relate to the parameter we want to estimate (θ)."
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#prior-distribution---ptheta",
+    "href": "1b-InferringBinomialProp.html#prior-distribution---ptheta",
+    "title": "Bayesian Data Analysis",
+    "section": "Prior distribution - \\(p(\\theta)\\)",
+    "text": "Prior distribution - \\(p(\\theta)\\)\nNow that we’ve defined the data model, the next step is to establish a prior distribution over the parameter values.\n\nLet’s start simple and assume \\(\\theta\\) can only take on values k = \\(0,0.25,0.5,0.75,1\\).\nSuppose that we believe that \\(\\theta\\) is most likely to be 0.5 and we assign lower weight to \\(\\theta\\) values far above or below 0.5.\nA prior distribution incorporating these beliefs might look like:"
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#likelihood-prior",
+    "href": "1b-InferringBinomialProp.html#likelihood-prior",
+    "title": "Bayesian Data Analysis",
+    "section": "Likelihood & Prior",
+    "text": "Likelihood & Prior\nGiven that y = 6 and n = 10 with \\(\\frac{y}{n} = 0.6\\), which \\(\\theta\\) out of \\(0,0.25,0.5,0.75,1\\) do you expect to have the largest value of the likelihood function?"
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#posterior-distribution---undersettextposteriorpthetay-propto-undersettextlikelihoodpythetaundersettextpriorptheta",
+    "href": "1b-InferringBinomialProp.html#posterior-distribution---undersettextposteriorpthetay-propto-undersettextlikelihoodpythetaundersettextpriorptheta",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior distribution - \\(\\underset{\\text{posterior}}{P(\\theta|Y)} \\propto \\underset{\\text{likelihood}}{P(Y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}\\)",
+    "text": "Posterior distribution - \\(\\underset{\\text{posterior}}{P(\\theta|Y)} \\propto \\underset{\\text{likelihood}}{P(Y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}\\)"
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#changing-prior-assumptions-1",
+    "href": "1b-InferringBinomialProp.html#changing-prior-assumptions-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Changing prior assumptions (1)",
+    "text": "Changing prior assumptions (1)\nInstead of the “triangular” prior let’s make a different assumption where we assume 0.75 is most likely and 0.5 is somewhat likely."
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#changing-prior-assumptions-2",
+    "href": "1b-InferringBinomialProp.html#changing-prior-assumptions-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Changing prior assumptions (2)",
+    "text": "Changing prior assumptions (2)\nInstead of the “triangular” prior let’s make a more uniform assumption. So for \\(k = 0,0.25,0.5,0.75,1\\), \\(Pr(\\theta = k) = 1/5\\) (i.e., all are equally likely)."
+  },
+  {
+    "objectID": "1b-InferringBinomialProp.html#marginal-likelihood---py",
+    "href": "1b-InferringBinomialProp.html#marginal-likelihood---py",
+    "title": "Bayesian Data Analysis",
+    "section": "Marginal likelihood - \\(p(y)\\)",
+    "text": "Marginal likelihood - \\(p(y)\\)\nRecall: \\[\\underset{\\text{posterior}}{P(\\theta|y)} = \\frac{\\underset{\\text{likelihood}}{P(y|\\theta)}\\underset{\\text{prior}}{P(\\theta)}}{\\underset{\\text{marginal likelihood}}{P(y)}}\\]\nWhat is \\(P(y)\\)?\n\\[P(y) = \\sum_{\\theta^*} P(y|\\theta^*)P(\\theta^*)\\]\nSo for \\(k = 0,0.25,0.5,0.75,1\\), \\(Pr(\\theta = k) = 1/5\\) (i.e., all are equally likely)\n\\(P(y) = p(y|\\theta = 0)Pr(\\theta = 0) + P(y|\\theta = 0.25)Pr(\\theta = 0.25) + \\ldots = 0.073\\)\nTo do this in R:\n\nn_grid = 5\ntheta &lt;- seq(0,1,length = n_grid) \np_y &lt;- (1/n_grid)*(sum(dbinom(6, 10, prob = theta)))"
+  }
+]
