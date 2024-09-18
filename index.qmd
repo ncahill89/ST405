@@ -18,4 +18,6 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 ### Week 1 
 
-1a: [Bayes Rule](https://ncahill89.github.io/ST405/1-BayesRule.html)
+1a: [Bayes Rule](https://ncahill89.github.io/ST405/1a-BayesRule.html)
+
+1b: [Inferring a Binomial Probability](https://ncahill89.github.io/ST405/1b-InferringBinomialProp.html)
