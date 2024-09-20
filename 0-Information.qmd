@@ -13,7 +13,7 @@ format: revealjs
 
 **📅 Lectures:**
 
--   📍 Mondays @11am in **TSI125**\
+-   📍 Mondays @11am in **ELT**\
 -   📍 Tuesdays @10am in **Physics Hall (PH)**
 
 **📚 Tutorials:**
