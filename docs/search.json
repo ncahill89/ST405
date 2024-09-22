@@ -102,7 +102,7 @@
     "href": "1a-BayesRule.html#sleep-example-4",
     "title": "Bayesian Data Analysis",
     "section": "Sleep Example",
-    "text": "Sleep Example\nNow, let’s put it all together with Bayes’ Rule:\n\\(\\underset{P(A|B)}{P(\\text{sleep}|\\text{light})} =\\)\n\n\n\\[\n\\frac{\\underset{P(B|A)}{P(\\text{light}|\\text{sleep})} \\cdot \\underset{P(A)}{P(\\text{sleep})}}{\\underset{P(B)}{P(\\text{light})}}\n\\]\n\n\\[\n\\frac{\\underset{0.01}{P(\\text{light}|\\text{sleep})} \\cdot \\underset{0.25}{P(\\text{sleep})}}{\\underset{0.5}{P(\\text{light})}}\n\\]\n\n🎯 This allows us to update our belief about the probability that I’m asleep based on the new evidence (the light being on)!"
+    "text": "Sleep Example\nNow, let’s put it all together with Bayes’ Rule:\n\\(\\underset{P(A|B)}{P(\\text{sleep}|\\text{light})} =\\)\n\n\n\\[\n\\frac{\\underset{P(B|A)}{P(\\text{light}|\\text{sleep})} \\cdot \\underset{P(A)}{P(\\text{sleep})}}{\\underset{P(B)}{P(\\text{light})}}\n\\]\n\n\\[\n\\frac{\\underset{0.01}{P(\\text{light}|\\text{sleep})} \\cdot \\underset{0.27}{P(\\text{sleep})}}{\\underset{0.59}{P(\\text{light})}}\n\\]\n\n🎯 This allows us to update our belief about the probability that I’m asleep based on the new evidence (the light being on)!"
   },
   {
     "objectID": "1a-BayesRule.html#likelihood-prior-posterior",

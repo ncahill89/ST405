@@ -187,7 +187,7 @@ $$
 
 ::: {.column width="50%"}
 $$
- \frac{\underset{0.01}{P(\text{light}|\text{sleep})} \cdot \underset{0.25}{P(\text{sleep})}}{\underset{0.5}{P(\text{light})}}
+ \frac{\underset{0.01}{P(\text{light}|\text{sleep})} \cdot \underset{0.27}{P(\text{sleep})}}{\underset{0.59}{P(\text{light})}}
 $$
 :::
 :::
@@ -218,9 +218,11 @@ $$\underset{\text{posterior}}{P(\theta|Y)} \propto \underset{\text{likelihood}}{
 ::: {.column width="43%"}
 -   $P(Y|\theta)$ - the *likelihood*. The likelihood represents the evidence that we have based on data.
 
--   $P(\theta)$ - the *prior*. The prior represents what we know about the parameters before the data are observed.
+-   $P(\theta)$ - the *prior*. 
+The prior represents what we know about the parameters before the data are observed.
 
--   $P(\theta|Y)$ - the *posterior*. The posterior represents our updated knowledge about parameters after the data are observed.
+-   $P(\theta|Y)$ - the *posterior*. 
+The posterior represents our updated knowledge about parameters after the data are observed.
 :::
 
 ::: {.column width="57%"}
