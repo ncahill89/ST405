@@ -16,8 +16,14 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 ## Lecture Slides
 
-### Week 1 
+### Week 1
 
 1a: [Bayes Rule](https://ncahill89.github.io/ST405/1a-BayesRule.html)
 
 1b: [Inferring a Binomial Probability](https://ncahill89.github.io/ST405/1b-InferringBinomialProp.html)
+
+### Week 2
+
+2a: [Beta Binomial](https://ncahill89.github.io/ST405/2a-BetaBinomial.html)
+
+2b: [Bayesian Inference](https://ncahill89.github.io/ST405/2b-BayesianInference.html)

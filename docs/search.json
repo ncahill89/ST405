@@ -228,6 +228,139 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#scenario",
+    "href": "2a-BetaBinomial.html#scenario",
+    "title": "Bayesian Data Analysis",
+    "section": "Scenario:",
+    "text": "Scenario:\nSuppose females, aged 65+ in a general social survey were asked about being happy.\nIf this is a representative sample of the population of women, what is the probability that a 65+ woman is happy?"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#what-is-our-goal-what-data-do-we-have",
+    "href": "2a-BetaBinomial.html#what-is-our-goal-what-data-do-we-have",
+    "title": "Bayesian Data Analysis",
+    "section": "What is Our Goal? What Data do We Have?",
+    "text": "What is Our Goal? What Data do We Have?\n🎯 Goal:\nTo estimate the probability that a 65+ woman is happy.\n\nThis is an unknown parameter we’ll call \\(\\theta\\).\n\\(\\theta\\) represents the probability of a 65+ woman being happy.\n\n📊 Data:\n\nSample Size (n): 20 women\nReported Happy (y): 14 women reported being happy"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#bayesian-inference-for-theta",
+    "href": "2a-BetaBinomial.html#bayesian-inference-for-theta",
+    "title": "Bayesian Data Analysis",
+    "section": "Bayesian Inference for \\(\\theta\\)",
+    "text": "Bayesian Inference for \\(\\theta\\)\n🔍 Steps in Bayesian Inference:\n\nLikelihood (Model the Data):\n\nWe define a model for the data, describing how the probability \\(\\theta\\) (probability a 65+ woman is happy) fits.\n\nPrior Information:\n\nBefore looking at data, we summarize information about \\(\\theta\\) in a prior distribution.\n\nUpdating with Data:\n\nBayes’ Rule helps us update our prior with the data to obtain the posterior distribution, reflecting what we know about \\(\\theta\\) after considering the data."
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#the-bayesian-formula",
+    "href": "2a-BetaBinomial.html#the-bayesian-formula",
+    "title": "Bayesian Data Analysis",
+    "section": "The Bayesian Formula",
+    "text": "The Bayesian Formula\n\\[\n\\text{Posterior}(\\theta | \\text{data}) \\propto \\text{Likelihood}(\\text{data} | \\theta) \\cdot \\text{Prior}(\\theta)\n\\]\nLater we can visualize the prior, likelihood, and posterior distributions to see how Bayesian updating works in practice, for this example.\nFirst let’s workout what the posterior is, based on assuming an appropriate likelihood and prior.\n❓ Questions:\n\nWhat likelihood would you choose here?\nWhat are some constraints we need to think about when choosing a prior for \\(\\theta\\)?"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#the-happiness-example",
+    "href": "2a-BetaBinomial.html#the-happiness-example",
+    "title": "Bayesian Data Analysis",
+    "section": "The Happiness example",
+    "text": "The Happiness example\nFor the Happiness example:\n\nData: n = 20 women, y = 14 women reported being happy\n\\(y \\sim Binomial(n = 20, \\theta)\\)\n\n\\[p(y|\\theta) = c\\theta^y(1-\\theta)^{n-y} \\text{ with } c = {n \\choose y}\\]\n\nWe want to find the posterior distribution for \\(\\theta\\)\n\nNow we will consider defining the prior, \\(p(\\theta)\\), with a known probability distribution, such that:\n\\[\\theta \\sim Beta(a,b)\\]"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#the-beta-prior",
+    "href": "2a-BetaBinomial.html#the-beta-prior",
+    "title": "Bayesian Data Analysis",
+    "section": "The Beta Prior",
+    "text": "The Beta Prior\nA Beta distribution is defined on the interval [0,1] and has two parameters, \\(a\\) and \\(b\\). The density function is defined as:\n\\[p(\\theta|a,b) = \\frac{1}{B(a,b)}\\theta^{a-1}(1-\\theta)^{b-1}\\]\nwhere \\(B(a,b)\\) is a normalising constant that insures a valid probability density function.\nIf \\(\\theta \\sim Be(a,b)\\) then \\(E(\\theta) = \\frac{a}{a+b}\\) and \\(Var(\\theta) = \\frac{ab}{(a+b)^2(a+b+1)}\\)\nNote \\(B(a,b)\\) is not a function of \\(\\theta\\), so we can write\n\\[p(\\theta|a,b) \\propto \\theta^{a-1}(1-\\theta)^{b-1}\\]\nThis will become useful later."
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#the-beta-prior-with-a1-and-b1",
+    "href": "2a-BetaBinomial.html#the-beta-prior-with-a1-and-b1",
+    "title": "Bayesian Data Analysis",
+    "section": "The Beta Prior with a=1 and b=1",
+    "text": "The Beta Prior with a=1 and b=1\nLet’s use Bayes’ theorem now to find the form of the posterior distribution for \\(\\theta\\) assuming \\(\\theta \\sim Beta(a=1,b=1)\\).\nThis means we’ve assumed a prior mean and variance for \\(\\theta\\) of \\(\\frac{1}{2}\\) and \\(\\frac{1}{12}\\) respectively.\nSo the posterior is\n\\[\\underset{\\text{posterior}}{p(\\theta|y)} \\propto \\underset{\\text{likelihood}}{\\theta^y(1-\\theta)^{n-y} }\\underset{\\text{prior}}{\\theta^{a-1}(1-\\theta)^{b-1}}\\]\nand given a = 1 and b = 1\n\\[\\underset{\\text{posterior}}{p(\\theta|y)} \\propto {\\theta^y(1-\\theta)^{n-y}}\\]\nThis posterior actually takes the form of another Beta distribution with parameters \\(y+1\\) and \\(n-y+1\\). So, \\[\\theta|y \\sim Beta(y+1, n-y +1)\\]"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#what-does-this-look-like-for-the-happiness-example",
+    "href": "2a-BetaBinomial.html#what-does-this-look-like-for-the-happiness-example",
+    "title": "Bayesian Data Analysis",
+    "section": "What does this look like for the Happiness example?",
+    "text": "What does this look like for the Happiness example?\n\nVisualise the PriorVisualise the LikelihoodVisualise the Posteior\n\n\n\n\n# Beta parameters (prior)\na &lt;- 1\nb &lt;- 1\n\nn_grid = 1000 # grid size \ntheta &lt;- seq(0,1,length = n_grid) # grid of theta values\nprior &lt;- dbeta(theta,a,b) # get the prior distribution\n\n# create a dataset\nptheta_dat &lt;- tibble::tibble(theta, prior)\n\n# plot prior\nggplot2::ggplot(ptheta_dat, aes(x = theta, y = prior)) +\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Data\ny &lt;- 14\nn &lt;- 20\n\nn_grid = 1000 # grid size \ntheta &lt;- seq(0,1,length = n_grid) # grid of theta values\nlikelihood &lt;- dbinom(y,n,prob = theta) # get the likelihood distribution\n\n# create a dataset\nltheta_dat &lt;- tibble::tibble(theta, likelihood)\n\n# plot likelihood\nggplot2::ggplot(ltheta_dat, aes(x = theta, y = likelihood)) +\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Data\ny &lt;- 14\nn &lt;- 20\n\n# Beta parameters (posterior)\na_post &lt;- y+1\nb_post &lt;- n-y+1\n\nn_grid = 1000 # grid size \ntheta &lt;- seq(0,1,length = n_grid) # grid of theta values\nposterior &lt;- dbeta(theta,a_post,b_post) # get the posterior distribution\n\n# create a dataset\nposttheta_dat &lt;- tibble::tibble(theta, posterior)\n\n# plot posterior\nggplot2::ggplot(posttheta_dat, aes(x = theta, y = posterior)) +\n  geom_line()"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#what-does-this-look-like-for-the-happiness-example-1",
+    "href": "2a-BetaBinomial.html#what-does-this-look-like-for-the-happiness-example-1",
+    "title": "Bayesian Data Analysis",
+    "section": "What does this look like for the Happiness example?",
+    "text": "What does this look like for the Happiness example?"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#more-on-the-binomial-likelihood-and-the-beta-prior",
+    "href": "2a-BetaBinomial.html#more-on-the-binomial-likelihood-and-the-beta-prior",
+    "title": "Bayesian Data Analysis",
+    "section": "More on the Binomial Likelihood and the Beta Prior",
+    "text": "More on the Binomial Likelihood and the Beta Prior\nIt turns out anytime you use a Binomial likelihood and a Beta prior, such that:\n\\[\\theta \\sim Be(a,b)\\]\n\\[y \\sim Binomal(n,\\theta)\\]\nthen you get a posterior distribution which is also Beta, where\n\\[\\theta|y \\sim Beta(y+a, n-y +b)\\]\nWhen the posterior is the same form as the prior, the prior is said to be a conjugate prior. The Beta prior is a conjugate prior for the Binomial likelihood."
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#expressing-prior-knowledge",
+    "href": "2a-BetaBinomial.html#expressing-prior-knowledge",
+    "title": "Bayesian Data Analysis",
+    "section": "Expressing prior knowledge",
+    "text": "Expressing prior knowledge\nSuppose for the Happiness example, you want to express your underlying belief about \\(\\theta\\) - the probability a woman age 65+ is happy.\n\nYour beliefs may be based on previous studies or perhaps expert opinion.\nSo for example, suppose you want your prior to reflect beliefs that the proportion is 0.6 \\(\\pm\\) 0.1.\nHow do we express this belief in the Beta distribution?\n\n\n\n🛠️ Moment Matching: Our Tool to Match Beliefs to a Distribution\n\nWe use a technique called moment matching to convert these beliefs\n(mean = 0.6, sd = 0.1) into the parameters of a Beta distribution."
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#moment-matching",
+    "href": "2a-BetaBinomial.html#moment-matching",
+    "title": "Bayesian Data Analysis",
+    "section": "Moment Matching",
+    "text": "Moment Matching\nRecall if \\(\\theta \\sim Be(a,b)\\) then \\(E(\\theta) = \\frac{a}{a+b}\\) and \\(Var(\\theta) = \\frac{ab}{(a+b)^2(a+b+1)}\\)\nBased on our prior beliefs we want:\n\\(E(\\theta) = \\frac{a}{a+b} = 0.6\\)\n\\(Var(\\theta) = \\frac{ab}{(a+b)^2(a+b+1)} = 0.1^2\\)\nWe can use these equations to solve for \\(a\\) and \\(b\\), the parameters of the Beta prior.\n\nVisualise the Prior\n\n\n\n\n# Beta parameters (prior)\na &lt;- 23\nb &lt;- 16\n\nn_grid = 1000 # grid size \ntheta &lt;- seq(0,1,length = n_grid) # grid of theta values\nprior &lt;- dbeta(theta,a,b) # get the prior distribution\n\n# create a dataset\nptheta_dat &lt;- tibble::tibble(theta, prior)\n\n# plot prior\nggplot2::ggplot(ptheta_dat, aes(x = theta, y = prior)) +\n  geom_line()"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#how-does-this-prior-impact-the-posterior",
+    "href": "2a-BetaBinomial.html#how-does-this-prior-impact-the-posterior",
+    "title": "Bayesian Data Analysis",
+    "section": "How does this prior impact the posterior?",
+    "text": "How does this prior impact the posterior?"
+  },
+  {
+    "objectID": "2a-BetaBinomial.html#the-posterior-is-a-compromise-of-prior-and-likelihood",
+    "href": "2a-BetaBinomial.html#the-posterior-is-a-compromise-of-prior-and-likelihood",
+    "title": "Bayesian Data Analysis",
+    "section": "The posterior is a compromise of prior and likelihood",
+    "text": "The posterior is a compromise of prior and likelihood\nThe posterior distribution is always a compromise between the prior distribution and the likelihood function.\n\nWe can illustrate this easily with the Beta-Binomial example.\nWe’ve seen that for a \\(Be(a,b)\\) prior and a \\(Binomial(n,\\theta)\\) likelihood that the posterior will be of the form:\n\n\\[\\theta|y \\sim Beta(y+a, n-y +b)\\]\nand so the posterior mean is \\(E(\\theta|y) = \\frac{y+a}{n + a + b}\\).\n\nThis can be written as a weighted sum of the prior mean (\\(\\frac{a}{a+b}\\)) and the data proportion (\\(\\frac{y}{n}\\)), as follows: \\(E(\\theta|y) = \\underbrace{\\small\\frac{y}{n}}_{data}\\underbrace{\\small\\frac{n}{n+a+b}}_{weight} + \\underbrace{\\small\\frac{a}{a+b}}_{prior}\\underbrace{\\small\\frac{a+b}{n+a+b}}_{weight}\\)"
+  },
+  {
+    "objectID": "2b-BayesianInference.html#bayesian-inference",
+    "href": "2b-BayesianInference.html#bayesian-inference",
+    "title": "Bayesian Data Analysis",
+    "section": "Bayesian Inference",
+    "text": "Bayesian Inference\n\nBayesian point estimates are often given by:\n\nthe posterior mean \\(E(\\theta|y)\\)\nor the posterior median \\(\\theta^*\\) with \\(P(\\theta &lt; \\theta^*|y) = 0.5\\)\n\nUncertainty is quantified with credible intervals (CIs)\n\nAn interval is a 95% credible interval if the posterior probability that \\(\\theta\\) is in the interval is 0.95.\nOften quantile based, given by posterior quantiles with \\(P(\\theta &lt; \\theta_{\\alpha/2}|y) = P(\\theta &gt; \\theta_{1-\\alpha/2}|y) = \\alpha/2\\)"
+  },
+  {
+    "objectID": "2b-BayesianInference.html#bayesian-inference-for-the-happiness-example",
+    "href": "2b-BayesianInference.html#bayesian-inference-for-the-happiness-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Bayesian Inference for the Happiness example",
+    "text": "Bayesian Inference for the Happiness example\n\n\\(\\theta|y \\sim Beta(y+a,n-y+b)\\)\nPosterior mean \\(E(\\theta|y) = \\frac{y+a}{n+a+b}\\)\nFor quantile estimates we can use qbeta() in R\n\n\nR Code\n\n\n\n\n## data \nn = 20; y = 14\n\n## prior parameters\na = 1; b = 1\n\n## posterior parameters\na_post = y + a; b_post = n - y + b\n\n## posterior mean\np_mean &lt;- a_post/(a_post + b_post) # (y+a)/(n+a+b)\n\n## quantiles\np_quant &lt;- qbeta(c(0.025,0.5,0.975),a_post,b_post)\n\np_mean; p_quant\n\n\n[1] 0.6818182\n\n\n[1] 0.4782489 0.6874159 0.8541231"
+  },
+  {
+    "objectID": "2b-BayesianInference.html#simulation-based-inference",
+    "href": "2b-BayesianInference.html#simulation-based-inference",
+    "title": "Bayesian Data Analysis",
+    "section": "Simulation-based inference",
+    "text": "Simulation-based inference\n\nThe general idea in simulation-based inference: We can make inference about a parameter \\(\\theta\\) , using a sample \\(\\{\\theta^{(1)}\\ldots\\theta^{(S)}\\}\\) from its probability distribution.\nAssessing the properties of a target (e.g., posterior) distribution by generating representative samples is called Monte Carlo simulation.\nBased on the law of large numbers we know that:\n\\(\\frac{1}{S}\\sum_{s=1}^{S}\\theta^{(s)} = E(\\theta)\\)\nas sample size \\(S \\to \\infty\\)\n\nThe error in the MC approximation goes to zero as \\(S \\to \\infty\\) because \\(\\frac{var(\\theta)}{S} \\to 0\\)\n\nJust about any aspect of the distribution of \\(\\theta\\) can be approximated arbitrarily exactly with a large enough Monte Carlo sample, e.g.\n\nthe \\(\\alpha\\)-percentile of the distribution of \\(\\theta\\)\n\\(Pr(\\theta \\geq x)\\) for any constant \\(x\\)"
+  },
+  {
+    "objectID": "2b-BayesianInference.html#simulation-based-inference-for-the-happiness-example",
+    "href": "2b-BayesianInference.html#simulation-based-inference-for-the-happiness-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Simulation-based inference for the Happiness example",
+    "text": "Simulation-based inference for the Happiness example\nFor the Happiness example, we can approximate the mean and quantiles of \\(\\theta\\) using samples from a \\(Be(y+a,n-y+b)\\) distribution (i.e., the posterior)\n\nR Code\n\n\n\n\n## data \nn = 20; y = 14\n\n## prior parameters\na = 1; b = 1\n\n## posterior parameters\na_post = y + a; b_post = n - y + b\n\n## sample \nsamp_theta &lt;- rbeta(1000,a_post,b_post)\n\n## sample mean and quantiles\np_mean &lt;- mean(samp_theta)\np_quant &lt;- quantile(samp_theta, \n                    probs = c(0.025,0.5,0.975))\n\np_mean; p_quant\n\n\n[1] 0.6795585\n\n\n     2.5%       50%     97.5% \n0.4658872 0.6827372 0.8493420"
+  },
+  {
+    "objectID": "2b-BayesianInference.html#monte-carlo-approximation-some-more-details",
+    "href": "2b-BayesianInference.html#monte-carlo-approximation-some-more-details",
+    "title": "Bayesian Data Analysis",
+    "section": "Monte Carlo approximation: some more details",
+    "text": "Monte Carlo approximation: some more details\n\nWith a simulation, it also becomes very easy to analyze the distributions of any function of your parameter,\n\ne.g. the distribution of the odds \\(\\frac{\\theta}{1-\\theta}\\) by using samples from \\(\\frac{\\theta^{(s)}}{1-\\theta^{(s)}}\\)\n\n\n\nR Code\n\n\n\n\n## sample \nsamp_theta &lt;- rbeta(1000,a_post,b_post)\n\n## get odds based on samples\nsamp_odds &lt;- samp_theta/(1-samp_theta)\n\n## sample mean and quantiles\np_mean_odds &lt;- mean(samp_odds)\np_quant_odds &lt;- quantile(samp_odds, \n                         probs = c(0.025,0.5,0.975))\n\np_mean_odds; p_quant_odds\n\n\n[1] 2.553325\n\n\n     2.5%       50%     97.5% \n0.8895412 2.1687181 6.5592201"
   }
 ]

@@ -1,0 +1,384 @@
+---
+title: "Bayesian Data Analysis"
+subtitle: "Beta-Binomial"
+author: "Dr Niamh Cahill (she/her)"
+format: revealjs
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+# Estimating Happiness in 65+ Women
+
+## Scenario: {style="font-size: 80%;"}
+
+Suppose females, aged 65+ in a general social survey were asked about being happy.\
+If this is a **representative sample** of the population of women, what is the **probability** that a 65+ woman is happy?
+
+![](images/joyful-aged-lady-jumping-air-260nw-1167438136.jpg.webp)
+
+------------------------------------------------------------------------
+
+## What is Our Goal? What Data do We Have? {style="font-size: 80%;"}
+
+### 🎯 **Goal:**
+
+To estimate the **probability** that a 65+ woman is happy.
+
+-   This is an **unknown parameter** we'll call $\theta$.
+-   $\theta$ represents the probability of a 65+ woman being happy.
+
+### 📊 **Data**:
+
+-   **Sample Size (n):** 20 women
+-   **Reported Happy (y):** 14 women reported being happy
+
+------------------------------------------------------------------------
+
+## Bayesian Inference for $\theta$ {style="font-size: 80%;"}
+
+### 🔍 **Steps in Bayesian Inference**:
+
+1.  **Likelihood (Model the Data)**:
+    -   We define a model for the data, describing how the probability $\theta$ (probability a 65+ woman is happy) fits.
+2.  **Prior Information**:
+    -   Before looking at data, we summarize information about $\theta$ in a **prior distribution**.
+3.  **Updating with Data**:
+    -   **Bayes' Rule** helps us update our prior with the data to obtain the **posterior distribution**, reflecting what we know about $\theta$ after considering the data.
+
+------------------------------------------------------------------------
+
+## The Bayesian Formula {style="font-size: 80%;"}
+
+$$
+\text{Posterior}(\theta | \text{data}) \propto \text{Likelihood}(\text{data} | \theta) \cdot \text{Prior}(\theta)
+$$
+
+**Later** we can visualize the prior, likelihood, and posterior distributions to see how Bayesian updating works in practice, for this example.
+
+**First** let's workout what the posterior is, based on assuming an appropriate likelihood and prior.
+
+**❓ Questions:**
+
+-   What likelihood would you choose here?
+
+-   What are some constraints we need to think about when choosing a prior for $\theta$?
+
+## The Happiness example {style="font-size: 70%;"}
+
+For the Happiness example:
+
+-   Data: n = 20 women, y = 14 women reported being happy
+
+-   $y \sim Binomial(n = 20, \theta)$
+
+$$p(y|\theta) = c\theta^y(1-\theta)^{n-y} \text{ with } c = {n \choose y}$$
+
+-   We want to find the posterior distribution for $\theta$
+
+Now we will consider defining the prior, $p(\theta)$, with a known probability distribution, such that:
+
+$$\theta \sim Beta(a,b)$$
+
+## The Beta Prior {style="font-size: 70%;"}
+
+A Beta distribution is defined on the interval \[0,1\] and has two parameters, $a$ and $b$. The density function is defined as:
+
+$$p(\theta|a,b) = \frac{1}{B(a,b)}\theta^{a-1}(1-\theta)^{b-1}$$
+
+where $B(a,b)$ is a normalising constant that insures a valid probability density function.
+
+If $\theta \sim Be(a,b)$ then $E(\theta) = \frac{a}{a+b}$ and $Var(\theta) = \frac{ab}{(a+b)^2(a+b+1)}$
+
+Note $B(a,b)$ is not a function of $\theta$, so we can write
+
+$$p(\theta|a,b) \propto \theta^{a-1}(1-\theta)^{b-1}$$
+
+This will become useful later.
+
+## The Beta Prior with a=1 and b=1 {style="font-size: 70%;"}
+
+Let's use Bayes' theorem now to find the form of the **posterior distribution** for $\theta$ assuming $\theta \sim Beta(a=1,b=1)$.
+
+This means we've assumed a prior mean and variance for $\theta$ of $\frac{1}{2}$ and $\frac{1}{12}$ respectively.
+
+So the posterior is
+
+$$\underset{\text{posterior}}{p(\theta|y)} \propto \underset{\text{likelihood}}{\theta^y(1-\theta)^{n-y} }\underset{\text{prior}}{\theta^{a-1}(1-\theta)^{b-1}}$$
+
+and given a = 1 and b = 1
+
+$$\underset{\text{posterior}}{p(\theta|y)} \propto {\theta^y(1-\theta)^{n-y}}$$
+
+This posterior *actually* takes the form of another Beta distribution with parameters $y+1$ and $n-y+1$. So, $$\theta|y \sim Beta(y+1, n-y +1)$$
+
+## What does this look like for the Happiness example? {style="font-size: 70%;"}
+
+::: panel-tabset
+### Visualise the Prior
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: "1"
+#| output-location: column-fragment
+
+# Beta parameters (prior)
+a <- 1
+b <- 1
+
+n_grid = 1000 # grid size 
+theta <- seq(0,1,length = n_grid) # grid of theta values
+prior <- dbeta(theta,a,b) # get the prior distribution
+
+# create a dataset
+ptheta_dat <- tibble::tibble(theta, prior)
+
+# plot prior
+ggplot2::ggplot(ptheta_dat, aes(x = theta, y = prior)) +
+  geom_line()
+```
+
+### Visualise the Likelihood
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: "1"
+#| output-location: column-fragment
+
+# Data
+y <- 14
+n <- 20
+
+n_grid = 1000 # grid size 
+theta <- seq(0,1,length = n_grid) # grid of theta values
+likelihood <- dbinom(y,n,prob = theta) # get the likelihood distribution
+
+# create a dataset
+ltheta_dat <- tibble::tibble(theta, likelihood)
+
+# plot likelihood
+ggplot2::ggplot(ltheta_dat, aes(x = theta, y = likelihood)) +
+  geom_line()
+```
+
+### Visualise the Posteior
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: "1"
+#| output-location: column-fragment
+
+# Data
+y <- 14
+n <- 20
+
+# Beta parameters (posterior)
+a_post <- y+1
+b_post <- n-y+1
+
+n_grid = 1000 # grid size 
+theta <- seq(0,1,length = n_grid) # grid of theta values
+posterior <- dbeta(theta,a_post,b_post) # get the posterior distribution
+
+# create a dataset
+posttheta_dat <- tibble::tibble(theta, posterior)
+
+# plot posterior
+ggplot2::ggplot(posttheta_dat, aes(x = theta, y = posterior)) +
+  geom_line()
+
+```
+:::
+
+## What does this look like for the Happiness example? {style="font-size: 70%;"}
+
+```{r, fig.width=6, fig.height=4.5, fig.align='center'}
+y <- 14
+n <- 20
+a <- 1
+b <- 1
+
+n_grid = 1000
+theta <- seq(0,1,length = n_grid) # grid of theta values
+prior <- dbeta(theta,a,b)
+
+ptheta_dat <- tibble::tibble(theta, prior)
+
+likelihood <- dbinom(y,n,prob = theta)
+ptheta_dat$likelihood <- likelihood
+
+posterior <- dbeta(theta,y+a,n-y+b)
+ptheta_dat$posterior <- posterior
+
+
+ptheta_dat_long <- 
+  ptheta_dat %>% 
+   pivot_longer(prior:posterior,
+                names_to = "type",
+                values_to = "value") %>%
+   mutate(type = factor(type, 
+                        levels =c("prior","likelihood","posterior"))) %>%    mutate(type = recode_factor(type, 
+                              `prior` = "theta %~% Be(1,1)", 
+                              `likelihood` = "y %~% Binomial(n,theta)",
+                              `posterior` = "theta / y %~% Be(y+1,n-y+1)"))
+
+
+ggplot(ptheta_dat_long, aes(x = theta, y = value)) +
+  geom_line() +
+  facet_wrap(~type, 
+             label = "label_parsed", 
+             nrow = 3, 
+             scales = "free_y") +
+  xlab(expression(theta)) +
+  ylab("") +
+  theme_bw() 
+
+```
+
+## More on the Binomial Likelihood and the Beta Prior {style="font-size: 70%;"}
+
+It turns out anytime you use a Binomial likelihood and a Beta prior, such that:
+
+$$\theta \sim Be(a,b)$$
+
+$$y \sim Binomal(n,\theta)$$
+
+then you get a posterior distribution which is also Beta, where
+
+$$\theta|y \sim Beta(y+a, n-y +b)$$
+
+When the posterior is the same form as the prior, the prior is said to be a **conjugate prior**. The Beta prior is a conjugate prior for the Binomial likelihood.
+
+## Expressing prior knowledge {style="font-size: 70%;"}
+
+Suppose for the Happiness example, you want to express your underlying belief about $\theta$ - the probability a woman age 65+ is happy.
+
+-   Your beliefs may be based on previous studies or perhaps expert opinion.
+
+-   So for example, suppose you want your prior to reflect beliefs that the proportion is 0.6 $\pm$ 0.1.
+
+-   How do we express this belief in the Beta distribution?
+
+::: columns
+::: {.column width="50%"}
+#### 🛠️ Moment Matching: Our Tool to Match Beliefs to a Distribution
+
+-   We use a technique called **moment matching** to convert these beliefs\
+    (mean = 0.6, sd = 0.1) into the parameters of a Beta distribution.
+:::
+
+::: {.column width="50%"}
+```{r, fig.align='center'}
+# Beta parameters (prior)
+a <- 23
+b <- 16
+
+n_grid = 1000 # grid size 
+theta <- seq(0,1,length = n_grid) # grid of theta values
+prior <- dbeta(theta,a,b) # get the prior distribution
+
+# create a dataset
+ptheta_dat <- tibble::tibble(theta, prior)
+
+# plot prior
+ggplot2::ggplot(ptheta_dat, aes(x = theta, y = prior)) +
+  geom_line()+
+  geom_vline(xintercept = 0.6)
+```
+:::
+:::
+
+## Moment Matching {style="font-size: 70%;"}
+
+Recall if $\theta \sim Be(a,b)$ then $E(\theta) = \frac{a}{a+b}$ and $Var(\theta) = \frac{ab}{(a+b)^2(a+b+1)}$
+
+Based on our prior beliefs we want:
+
+$E(\theta) = \frac{a}{a+b} = 0.6$
+
+$Var(\theta) = \frac{ab}{(a+b)^2(a+b+1)} = 0.1^2$
+
+We can use these equations to solve for $a$ and $b$, the parameters of the Beta prior.
+
+::: panel-tabset
+### Visualise the Prior
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: ""
+#| output-location: column-fragment
+
+# Beta parameters (prior)
+a <- 23
+b <- 16
+
+n_grid = 1000 # grid size 
+theta <- seq(0,1,length = n_grid) # grid of theta values
+prior <- dbeta(theta,a,b) # get the prior distribution
+
+# create a dataset
+ptheta_dat <- tibble::tibble(theta, prior)
+
+# plot prior
+ggplot2::ggplot(ptheta_dat, aes(x = theta, y = prior)) +
+  geom_line()
+```
+:::
+
+## How does this prior impact the posterior? {style="font-size: 70%;"}
+
+```{r, fig.width=6, fig.height=4.5, fig.align='center'}
+y <- 14
+n <- 20
+a <- 23
+b <- 16
+
+n_grid = 1000
+theta <- seq(0,1,length = n_grid) # grid of theta values
+prior <- dbeta(theta,a,b)
+
+ptheta_dat <- tibble::tibble(theta, prior)
+
+likelihood <- dbinom(y,n,prob = theta)
+ptheta_dat$likelihood <- likelihood
+
+posterior <- dbeta(theta,y+a,n-y+b)
+ptheta_dat$posterior <- posterior
+
+
+ptheta_dat_long <- 
+  ptheta_dat %>% 
+   pivot_longer(prior:posterior,
+                names_to = "type",
+                values_to = "value") %>%
+   mutate(type = factor(type, 
+                        levels =c("prior","likelihood","posterior"))) %>%    mutate(type = recode_factor(type, 
+                              `prior` = "theta %~% Be(23,16)", 
+                              `likelihood` = "y %~% Binomial(n,theta)",
+                              `posterior` = "theta / y %~% Be(y+1,n-y+1)"))
+
+
+ggplot(ptheta_dat_long, aes(x = theta, y = value)) +
+  geom_line() +
+  facet_wrap(~type, 
+             label = "label_parsed", 
+             nrow = 3, 
+             scales = "free_y") +
+  xlab(expression(theta)) +
+  ylab("") +
+  theme_bw() 
+
+```
+
+## The posterior is a compromise of prior and likelihood {style="font-size: 70%;"}
+
+The posterior distribution is always a compromise between the prior distribution and the likelihood function.
+
+-   We can illustrate this easily with the Beta-Binomial example.
+
+-   We've seen that for a $Be(a,b)$ prior and a $Binomial(n,\theta)$ likelihood that the posterior will be of the form:
+
+$$\theta|y \sim Beta(y+a, n-y +b)$$
+
+and so the posterior mean is $E(\theta|y) = \frac{y+a}{n + a + b}$.
+
+-   This can be written as a weighted sum of the prior mean ($\frac{a}{a+b}$) and the data proportion ($\frac{y}{n}$), as follows: $E(\theta|y) = \underbrace{\small\frac{y}{n}}_{data}\underbrace{\small\frac{n}{n+a+b}}_{weight} + \underbrace{\small\frac{a}{a+b}}_{prior}\underbrace{\small\frac{a+b}{n+a+b}}_{weight}$
