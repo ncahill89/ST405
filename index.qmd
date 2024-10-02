@@ -27,3 +27,9 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 2a: [Beta Binomial](https://ncahill89.github.io/ST405/2a-BetaBinomial.html)
 
 2b: [Bayesian Inference](https://ncahill89.github.io/ST405/2b-BayesianInference.html)
+
+### Week 3
+
+3: [Single Parameter Normal](https://ncahill89.github.io/ST405/3a-SingleParameterNormal.html)
+
+

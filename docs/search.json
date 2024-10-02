@@ -228,7 +228,7 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal"
   },
   {
     "objectID": "2a-BetaBinomial.html#scenario",
@@ -362,5 +362,89 @@
     "title": "Bayesian Data Analysis",
     "section": "Monte Carlo approximation: some more details",
     "text": "Monte Carlo approximation: some more details\n\nWith a simulation, it also becomes very easy to analyze the distributions of any function of your parameter,\n\ne.g. the distribution of the odds \\(\\frac{\\theta}{1-\\theta}\\) by using samples from \\(\\frac{\\theta^{(s)}}{1-\\theta^{(s)}}\\)\n\n\n\nR Code\n\n\n\n\n## sample \nsamp_theta &lt;- rbeta(1000,a_post,b_post)\n\n## get odds based on samples\nsamp_odds &lt;- samp_theta/(1-samp_theta)\n\n## sample mean and quantiles\np_mean_odds &lt;- mean(samp_odds)\np_quant_odds &lt;- quantile(samp_odds, \n                         probs = c(0.025,0.5,0.975))\n\np_mean_odds; p_quant_odds\n\n\n[1] 2.553325\n\n\n     2.5%       50%     97.5% \n0.8895412 2.1687181 6.5592201"
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution",
+    "href": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating \\(\\mu\\) from a Normal Distribution",
+    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 10.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 1)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-1",
+    "href": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating \\(\\mu\\) from a Normal Distribution",
+    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 2)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-2",
+    "href": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating \\(\\mu\\) from a Normal Distribution",
+    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 500.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 1)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-3",
+    "href": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-3",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating \\(\\mu\\) from a Normal Distribution",
+    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 500.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 2)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#estimating-sigma-text-tau-1sigma2-from-a-normal-distribution",
+    "href": "3a-SingleParameterNormal.html#estimating-sigma-text-tau-1sigma2-from-a-normal-distribution",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution",
+    "text": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\tau = 1/\\sigma^2\\) - example in blue with \\(\\tau = 1/\\sigma^2 \\sim gamma(4,1)\\)\nCollect data, \\(y\\), assume y has a standard deviation \\(s = 2, 1/s^2 = 0.5\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\tau\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu = 0, \\sigma^2 = 1/\\tau)\\).\n\nwe’re assuming \\(\\mu\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\tau|y) \\sim gamma(?,?)\\)."
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#estimating-sigma-text-tau-1sigma2-from-a-normal-distribution-1",
+    "href": "3a-SingleParameterNormal.html#estimating-sigma-text-tau-1sigma2-from-a-normal-distribution-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution",
+    "text": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\tau = 1/\\sigma^2\\) - example in blue with \\(\\tau = 1/\\sigma^2 \\sim gamma(4,1)\\)\nCollect data, \\(y\\), assume y has a standard deviation \\(s = 2, 1/s^2 = 0.5\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\tau\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu = 0, \\sigma^2 = 1/\\tau)\\).\n\nwe’re assuming \\(\\mu\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\tau|y) \\sim gamma(?,?)\\)."
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#example-cognitive-test-scores",
+    "href": "3a-SingleParameterNormal.html#example-cognitive-test-scores",
+    "title": "Bayesian Data Analysis",
+    "section": "Example: Cognitive Test Scores",
+    "text": "Example: Cognitive Test Scores\nData (y) are available on the cognitive test scores of three- and four-year-old children in the USA. The sample contains \\(n=434\\) observations."
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#normal-distribution-with-known-variance",
+    "href": "3a-SingleParameterNormal.html#normal-distribution-with-known-variance",
+    "title": "Bayesian Data Analysis",
+    "section": "Normal distribution with known variance",
+    "text": "Normal distribution with known variance\nWe will assume a normal model for the data where \\(y_i|\\mu,\\sigma^2 \\sim N(\\mu, \\sigma^2)\\). Assume \\(\\sigma^2\\) is known.\n\nSpecify the likelihood for \\(\\mu\\)\n\n\\(p(y|\\mu, \\sigma^2) = \\prod_{i=1}^{n} \\frac{1}{\\sqrt {2\\pi\\sigma^2}}exp \\bigg(-\\frac{1}{2\\sigma^2}(y_i - \\mu)^2\\bigg)\\)\n\nSpecify a prior for \\(\\mu\\)\n\n\\(\\mu \\sim N(\\mu_0, \\sigma^2_{0})\\)\n\nUse Bayes’ rule to obtain the posterior distribution\n\n\\(p(\\mu|y) \\propto p(y|\\mu)p(\\mu)\\)"
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#normal-distribution-with-known-variance-1",
+    "href": "3a-SingleParameterNormal.html#normal-distribution-with-known-variance-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Normal distribution with known variance",
+    "text": "Normal distribution with known variance\n\nAs it turns out, the posterior is also a normal distribution\n\n\\[\\mu|y \\sim N \\bigg(\\frac{n\\bar{y}/\\sigma^2 + \\mu_0/\\sigma^2_{0}}{n/\\sigma^2 + 1/\\sigma^2_{0}}, {\\frac{1}{n/\\sigma^2 + 1/\\sigma^2_{0}}}\\bigg)\\]\n\nFor the Kid IQ example, assuming \\(\\mu \\sim N(\\mu_0 = 80, \\sigma_0 = 10)\\), then \\(\\mu|y \\sim N(86.7, 0.97)\\)"
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#normal-distribution-with-known-mean",
+    "href": "3a-SingleParameterNormal.html#normal-distribution-with-known-mean",
+    "title": "Bayesian Data Analysis",
+    "section": "Normal distribution with known mean",
+    "text": "Normal distribution with known mean\nWe will assume a normal model for the data where \\(y_i|\\mu,\\sigma^2 \\sim N(\\mu, \\sigma^2)\\). Assume \\(\\mu\\) is known.\n\nUsually work with precision i.e., \\(\\tau = 1/\\sigma^2\\)\nSpecify a prior for \\(\\tau\\)\n\nPopular prior for the precision of a normal distribution is a gamma prior e.g., \\(\\tau \\sim Gamma(a, b)\\) where \\(E[\\tau] = \\frac{a}{b}\\) and \\(Var[\\tau] = \\frac{a}{b^2}\\)\n\\(p(\\tau|a,b) = \\frac{b^a}{\\Gamma(a)}\\tau^{a-1}e^{-b\\tau}\\) for \\(\\tau &gt;0\\) and \\(a,b &gt; 0\\)\n\nUse Bayes’ rule to obtain the posterior distribution\n\n\\(p(\\tau|y) \\propto p(y|\\tau)p(\\tau)\\)"
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#normal-distribution-with-known-mean-1",
+    "href": "3a-SingleParameterNormal.html#normal-distribution-with-known-mean-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Normal distribution with known mean",
+    "text": "Normal distribution with known mean\n\nAs it turns out, the posterior is also a gamma distribution\n\n\\(\\tau|y \\sim Gamma \\bigg(a + n/2, b + 1/2\\sum_{i=1}^n (y_i - \\mu)^2\\bigg)\\)\n\nFor the Kid IQ example, assuming \\(\\tau \\sim gamma(a = 1, b = 1)\\), then \\(\\tau|y \\sim gamma(218, 90203)\\)."
+  },
+  {
+    "objectID": "3a-SingleParameterNormal.html#normal-distribution-with-known-mean-2",
+    "href": "3a-SingleParameterNormal.html#normal-distribution-with-known-mean-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Normal distribution with known mean",
+    "text": "Normal distribution with known mean\n\nConverting back from the precision to the standard deviation, the posterior for \\(\\sigma\\) for this example will look more like:"
   }
 ]

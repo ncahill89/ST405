@@ -1,0 +1,742 @@
+---
+title: "Bayesian Data Analysis"
+subtitle: "Single Parameter Normal"
+author: "Dr Niamh Cahill (she/her)"
+format: revealjs
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(rstanarm)
+data(kidiq)
+```
+
+## Estimating $\mu$ from a Normal Distribution {style="font-size: 70%;"}
+
+::: columns
+::: {.column width="50%"}
+We do Bayesian inference:
+
+-   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$
+
+-   Collect data, $y$, assume y has a mean $\bar{y} = 0$ and that n = 10.
+
+-   Define the relationship between $y$ and $\mu$ through the likelihood function - example in red with $y_i \sim N(\mu, \sigma = 1)$.
+
+    -   we're assuming $\sigma$ is known here.
+
+-   Use Bayes’ rule to update the prior into the posterior distribution $p(\mu|y) \sim N(?,?)$.
+:::
+
+::: {.column width="50%"}
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+y <- 0
+n <- 10
+#-------------------
+# exact solutions
+
+sd.y<- 1
+
+# prior parameters
+mu0 <- 4
+sigma0 <- 0.5
+
+# Posterior of mu, assuming sigma = sd.y (sample SD)
+mupost.mean = (n*mean(y)/(sd.y^2) + mu0/(sigma0^2))/(n/(sd.y^2) + 1/(sigma0^2))
+mupost.sd = sqrt(1/(n/(sd.y^2) + 1/(sigma0^2)))
+
+# Create a sequence of x values (range of the distributions)
+x <- seq(-10,10, length.out = 100)
+
+# Define the parameters for the prior, likelihood, and posterior
+# These are just example values, modify as needed
+prior_mean <- mu0
+prior_sd <- sigma0
+likelihood_mean <- mean(kidiq$kid_score)
+likelihood_sd <- sd(kidiq$kid_score)/sqrt(length(kidiq$kid_score))
+posterior_mean <- mupost.mean
+posterior_sd <- mupost.sd
+
+# Create a data frame containing the x values and densities for each distribution
+df <- data.frame(
+  x = x,
+  Prior = dnorm(x, mean = prior_mean, sd = prior_sd),
+  Likelihood = dnorm(y, mean = x, sd = sd.y/sqrt(n)),
+  Posterior = dnorm(x, mean = posterior_mean, sd = posterior_sd)
+)
+
+max_posterior <- max(df$Posterior)
+max_prior <- max(df$Prior)
+max_likelihood <- max(df$Likelihood)
+scaling_factor1 <- max_likelihood / max_posterior
+scaling_factor2 <- max_likelihood  / max_prior
+
+df <- df %>% mutate(Prior = Prior*scaling_factor2,
+                    Posterior = Posterior*scaling_factor1)
+
+# Reshape the data frame to long format for ggplot
+df_long <- tidyr::pivot_longer(df, cols = c("Prior", "Likelihood", "Posterior"), 
+                               names_to = "Distribution", values_to = "Density")
+
+# Plot the densities with ggplot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1, alpha  = 0.7) +  # Plot the densities as lines
+  labs(title = "",
+       x = "mu", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Prior" = "blue", 
+                                "Likelihood" = "red", 
+                                "Posterior" = "green")) +  # Assign custom colors
+  theme(legend.title = element_blank())  # Remove the legend title
+
+```
+:::
+:::
+
+## Estimating $\mu$ from a Normal Distribution {style="font-size: 70%;"}
+
+::: columns
+::: {.column width="50%"}
+We do Bayesian inference:
+
+-   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$
+
+-   Collect data, $y$, assume y has a mean $\bar{y} = 0$ and that n = 10.\
+
+-   Define the relationship between $y$ and $\mu$ through the likelihood function - example in red with $y_i \sim N(\mu, \sigma = 2)$.
+
+    -   we're assuming $\sigma$ is known here.
+
+-   Use Bayes’ rule to update the prior into the posterior distribution $p(\mu|y) \sim N(?,?)$.
+:::
+
+::: {.column width="50%"}
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+y <- 0
+n <- 10
+#-------------------
+# exact solutions
+
+sd.y<- 2
+
+# prior parameters
+mu0 <- 4
+sigma0 <- 0.5
+
+# Posterior of mu, assuming sigma = sd.y (sample SD)
+mupost.mean = (n*mean(y)/(sd.y^2) + mu0/(sigma0^2))/(n/(sd.y^2) + 1/(sigma0^2))
+mupost.sd = sqrt(1/(n/(sd.y^2) + 1/(sigma0^2)))
+
+# Create a sequence of x values (range of the distributions)
+x <- seq(-8,8, length.out = 100)
+
+# Define the parameters for the prior, likelihood, and posterior
+# These are just example values, modify as needed
+prior_mean <- mu0
+prior_sd <- sigma0
+likelihood_mean <- mean(kidiq$kid_score)
+likelihood_sd <- sd(kidiq$kid_score)/sqrt(length(kidiq$kid_score))
+posterior_mean <- mupost.mean
+posterior_sd <- mupost.sd
+
+# Create a data frame containing the x values and densities for each distribution
+df <- data.frame(
+  x = x,
+  Prior = dnorm(x, mean = prior_mean, sd = prior_sd),
+  Likelihood = dnorm(y, mean = x, sd = sd.y/sqrt(n)),
+  Posterior = dnorm(x, mean = posterior_mean, sd = posterior_sd)
+)
+
+max_posterior <- max(df$Posterior)
+max_prior <- max(df$Prior)
+max_likelihood <- max(df$Likelihood)
+scaling_factor1 <- max_likelihood / max_posterior
+scaling_factor2 <- max_likelihood  / max_prior
+
+df <- df %>% mutate(Prior = Prior*scaling_factor2,
+                    Posterior = Posterior*scaling_factor1)
+
+
+# Reshape the data frame to long format for ggplot
+df_long <- tidyr::pivot_longer(df, cols = c("Prior", "Likelihood", "Posterior"), 
+                               names_to = "Distribution", values_to = "Density")
+
+# Plot the densities with ggplot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1, alpha  = 0.7) +  # Plot the densities as lines
+  labs(title = "",
+       x = "mu", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Prior" = "blue", 
+                                "Likelihood" = "red", 
+                                "Posterior" = "green")) +  # Assign custom colors
+  theme(legend.title = element_blank())  # Remove the legend title
+
+```
+:::
+:::
+
+## Estimating $\mu$ from a Normal Distribution {style="font-size: 70%;"}
+
+::: columns
+::: {.column width="50%"}
+We do Bayesian inference:
+
+-   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$
+
+-   Collect data, $y$, assume y has a mean $\bar{y} = 0$ and that n = 500.
+
+-   Define the relationship between $y$ and $\mu$ through the likelihood function - example in red with $y_i \sim N(\mu, \sigma = 1)$.
+
+    -   we're assuming $\sigma$ is known here.
+
+-   Use Bayes’ rule to update the prior into the posterior distribution $p(\mu|y) \sim N(?,?)$.
+:::
+
+::: {.column width="50%"}
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+y <- 0
+n <- 500
+#-------------------
+# exact solutions
+
+sd.y<- 1
+
+# prior parameters
+mu0 <- 4
+sigma0 <- 0.5
+
+# Posterior of mu, assuming sigma = sd.y (sample SD)
+mupost.mean = (n*mean(y)/(sd.y^2) + mu0/(sigma0^2))/(n/(sd.y^2) + 1/(sigma0^2))
+mupost.sd = sqrt(1/(n/(sd.y^2) + 1/(sigma0^2)))
+
+# Create a sequence of x values (range of the distributions)
+x <- seq(-10,10, length.out = 100)
+
+# Define the parameters for the prior, likelihood, and posterior
+# These are just example values, modify as needed
+prior_mean <- mu0
+prior_sd <- sigma0
+likelihood_mean <- mean(kidiq$kid_score)
+likelihood_sd <- sd(kidiq$kid_score)/sqrt(length(kidiq$kid_score))
+posterior_mean <- mupost.mean
+posterior_sd <- mupost.sd
+
+# Create a data frame containing the x values and densities for each distribution
+df <- data.frame(
+  x = x,
+  Prior = dnorm(x, mean = prior_mean, sd = prior_sd),
+  Likelihood = dnorm(y, mean = x, sd = sd.y/sqrt(n)),
+  Posterior = dnorm(x, mean = posterior_mean, sd = posterior_sd)
+)
+
+max_posterior <- max(df$Posterior)
+max_prior <- max(df$Prior)
+max_likelihood <- max(df$Likelihood)
+scaling_factor1 <- max_likelihood / max_posterior
+scaling_factor2 <- max_likelihood  / max_prior
+
+df <- df %>% mutate(Prior = Prior*scaling_factor2,
+                    Posterior = Posterior*scaling_factor1)
+
+
+# Reshape the data frame to long format for ggplot
+df_long <- tidyr::pivot_longer(df, cols = c("Prior", "Likelihood", "Posterior"), 
+                               names_to = "Distribution", values_to = "Density")
+
+# Plot the densities with ggplot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1, alpha  = 0.7) +  # Plot the densities as lines
+  labs(title = "",
+       x = "mu", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Prior" = "blue", 
+                                "Likelihood" = "red", 
+                                "Posterior" = "green")) +  # Assign custom colors
+  theme(legend.title = element_blank())  # Remove the legend title
+
+```
+:::
+:::
+
+## Estimating $\mu$ from a Normal Distribution {style="font-size: 70%;"}
+
+::: columns
+::: {.column width="50%"}
+We do Bayesian inference:
+
+-   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$
+
+-   Collect data, $y$, assume y has a mean $\bar{y} = 0$ and that n = 500.
+
+-   Define the relationship between $y$ and $\mu$ through the likelihood function - example in red with $y_i \sim N(\mu, \sigma = 2)$.
+
+    -   we're assuming $\sigma$ is known here.
+
+-   Use Bayes’ rule to update the prior into the posterior distribution $p(\mu|y) \sim N(?,?)$.
+:::
+
+::: {.column width="50%"}
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+y <- 0
+n <- 500
+#-------------------
+# exact solutions
+
+sd.y<- 2
+
+# prior parameters
+mu0 <- 4
+sigma0 <- 0.5
+
+# Posterior of mu, assuming sigma = sd.y (sample SD)
+mupost.mean = (n*mean(y)/(sd.y^2) + mu0/(sigma0^2))/(n/(sd.y^2) + 1/(sigma0^2))
+mupost.sd = sqrt(1/(n/(sd.y^2) + 1/(sigma0^2)))
+
+# Create a sequence of x values (range of the distributions)
+x <- seq(-10,10, length.out = 100)
+
+# Define the parameters for the prior, likelihood, and posterior
+# These are just example values, modify as needed
+prior_mean <- mu0
+prior_sd <- sigma0
+likelihood_mean <- mean(kidiq$kid_score)
+likelihood_sd <- sd(kidiq$kid_score)/sqrt(length(kidiq$kid_score))
+posterior_mean <- mupost.mean
+posterior_sd <- mupost.sd
+
+# Create a data frame containing the x values and densities for each distribution
+df <- data.frame(
+  x = x,
+  Prior = dnorm(x, mean = prior_mean, sd = prior_sd),
+  Likelihood = dnorm(y, mean = x, sd = sd.y/sqrt(n)),
+  Posterior = dnorm(x, mean = posterior_mean, sd = posterior_sd)
+)
+
+max_posterior <- max(df$Posterior)
+max_prior <- max(df$Prior)
+max_likelihood <- max(df$Likelihood)
+scaling_factor1 <- max_likelihood / max_posterior
+scaling_factor2 <- max_likelihood  / max_prior
+
+df <- df %>% mutate(Prior = Prior*scaling_factor2,
+                    Posterior = Posterior*scaling_factor1)
+
+
+# Reshape the data frame to long format for ggplot
+df_long <- tidyr::pivot_longer(df, cols = c("Prior", "Likelihood", "Posterior"), 
+                               names_to = "Distribution", values_to = "Density")
+
+# Plot the densities with ggplot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1, alpha  = 0.7) +  # Plot the densities as lines
+  labs(title = "",
+       x = "mu", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Prior" = "blue", 
+                                "Likelihood" = "red", 
+                                "Posterior" = "green")) +  # Assign custom colors
+  theme(legend.title = element_blank())  # Remove the legend title
+
+```
+:::
+:::
+
+## Estimating $\sigma \text{ } (\tau = 1/\sigma^2)$ from a Normal Distribution {style="font-size: 70%;"}
+
+::: columns
+::: {.column width="50%"}
+We do Bayesian inference:
+
+-   Start off with prior probability distribution to quantify information related to $\tau = 1/\sigma^2$ - example in blue with $\tau = 1/\sigma^2 \sim gamma(4,1)$
+
+-   Collect data, $y$, assume y has a standard deviation $s = 2, 1/s^2 = 0.5$ and that n = 10.\
+
+-   Define the relationship between $y$ and $\tau$ through the likelihood function - example in red with $y_i \sim N(\mu = 0, \sigma^2 = 1/\tau)$.
+
+    -   we're assuming $\mu$ is known here.
+
+-   Use Bayes’ rule to update the prior into the posterior distribution $p(\tau|y) \sim gamma(?,?)$.
+:::
+
+::: {.column width="50%"}
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+sd.y <- 2
+mu.y <- 0
+n <- 10
+set.seed(608543)
+y <- rnorm(n, mu.y, sd.y)
+
+#-------------------
+# exact solutions
+
+# prior parameters
+a <- 2
+b <- 1
+
+# Posterior of tau
+post.a = a + n/2
+post.b = b + 1/2*(sum((y-mu.y)^2))
+
+x <- seq(0,5, length.out = 100)
+
+# Create a data frame containing the x values and densities for each distribution
+df <- data.frame(
+  x = x,
+  Prior = dgamma(x, a, b),
+  Likelihood = dnorm(1/(sd.y^2), mean = x, sd = (sqrt(2) * (1/(sd.y^2)) / sqrt(n))),
+  Posterior = dgamma(x, post.a, post.b)
+)
+
+max_posterior <- max(df$Posterior)
+max_prior <- max(df$Prior)
+max_likelihood <- max(df$Likelihood)
+scaling_factor1 <- max_likelihood / max_posterior
+scaling_factor2 <- max_likelihood  / max_prior
+
+df <- df %>% mutate(Prior = Prior*scaling_factor2,
+                    Posterior = Posterior*scaling_factor1)
+
+
+
+# Reshape the data frame to long format for ggplot
+df_long <- tidyr::pivot_longer(df, cols = c("Prior", "Likelihood", "Posterior"), 
+                               names_to = "Distribution", values_to = "Density")
+
+# Plot the densities with ggplot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1, alpha  = 0.7) +  # Plot the densities as lines
+  labs(title = "",
+       x = "1/sigma", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Prior" = "blue", 
+                                "Likelihood" = "red", 
+                                "Posterior" = "green")) +  # Assign custom colors
+  theme(legend.title = element_blank())  # Remove the legend title
+
+```
+:::
+:::
+
+## Estimating $\sigma \text{ } (\tau = 1/\sigma^2)$ from a Normal Distribution {style="font-size: 70%;"}
+
+::: columns
+::: {.column width="50%"}
+We do Bayesian inference:
+
+-   Start off with prior probability distribution to quantify information related to $\tau = 1/\sigma^2$ - example in blue with $\tau = 1/\sigma^2 \sim gamma(4,1)$
+
+-   Collect data, $y$, assume y has a standard deviation $s = 2, 1/s^2 = 0.5$ and that n = 10.\
+
+-   Define the relationship between $y$ and $\tau$ through the likelihood function - example in red with $y_i \sim N(\mu = 0, \sigma^2 = 1/\tau)$.
+
+    -   we're assuming $\mu$ is known here.
+
+-   Use Bayes’ rule to update the prior into the posterior distribution $p(\tau|y) \sim gamma(?,?)$.
+:::
+
+::: {.column width="50%"}
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+sd.y <- 2
+mu.y <- 0
+n <- 10
+set.seed(608543)
+y <- rnorm(n, mu.y, sd.y)
+
+#-------------------
+# exact solutions
+
+# prior parameters
+a <- 8
+b <- 4
+
+# Posterior of tau
+post.a = a + n/2
+post.b = b + 1/2*(sum((y-mu.y)^2))
+
+x <- seq(0,5, length.out = 100)
+
+# Create a data frame containing the x values and densities for each distribution
+df <- data.frame(
+  x = x,
+  Prior = dgamma(x, a, b),
+  Likelihood = dnorm(1/(sd.y^2), mean = x, sd = (sqrt(2) * (1/(sd.y^2)) / sqrt(n))),
+  Posterior = dgamma(x, post.a, post.b)
+)
+
+max_posterior <- max(df$Posterior)
+max_prior <- max(df$Prior)
+max_likelihood <- max(df$Likelihood)
+scaling_factor1 <- max_likelihood / max_posterior
+scaling_factor2 <- max_likelihood  / max_prior
+
+df <- df %>% mutate(Prior = Prior*scaling_factor2,
+                    Posterior = Posterior*scaling_factor1)
+
+
+
+# Reshape the data frame to long format for ggplot
+df_long <- tidyr::pivot_longer(df, cols = c("Prior", "Likelihood", "Posterior"), 
+                               names_to = "Distribution", values_to = "Density")
+
+# Plot the densities with ggplot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1, alpha  = 0.7) +  # Plot the densities as lines
+  labs(title = "",
+       x = "1/sigma", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Prior" = "blue", 
+                                "Likelihood" = "red", 
+                                "Posterior" = "green")) +  # Assign custom colors
+  theme(legend.title = element_blank())  # Remove the legend title
+
+```
+:::
+:::
+
+## Example: Cognitive Test Scores {style="font-size: 70%;"}
+
+Data (y) are available on the cognitive test scores of three- and four-year-old children in the USA. The sample contains $n=434$ observations.
+
+```{r, fig.height=2.5, fig.width=4}
+ggplot(kidiq, aes(x = kid_score)) +
+  geom_histogram(bins = 30,colour = "blue")
+```
+
+## Normal distribution with known variance {style="font-size: 70%;"}
+
+We will assume a normal model for the data where $y_i|\mu,\sigma^2 \sim N(\mu, \sigma^2)$. Assume $\sigma^2$ is known.
+
+-   Specify the likelihood for $\mu$
+
+$p(y|\mu, \sigma^2) = \prod_{i=1}^{n} \frac{1}{\sqrt {2\pi\sigma^2}}exp \bigg(-\frac{1}{2\sigma^2}(y_i - \mu)^2\bigg)$
+
+-   Specify a prior for $\mu$
+
+$\mu \sim N(\mu_0, \sigma^2_{0})$
+
+-   Use Bayes' rule to obtain the posterior distribution
+
+$p(\mu|y) \propto p(y|\mu)p(\mu)$
+
+## Normal distribution with known variance {style="font-size: 70%;"}
+
+-   As it turns out, the posterior is also a normal distribution
+
+$$\mu|y \sim N \bigg(\frac{n\bar{y}/\sigma^2 + \mu_0/\sigma^2_{0}}{n/\sigma^2 + 1/\sigma^2_{0}}, {\frac{1}{n/\sigma^2 + 1/\sigma^2_{0}}}\bigg)$$
+
+-   For the Kid IQ example, assuming $\mu \sim N(\mu_0 = 80, \sigma_0 = 10)$, then $\mu|y \sim N(86.7, 0.97)$
+
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+y <- kidiq$kid_score
+n <- length(y)
+
+#-------------------
+# exact solutions
+# prior and posterior for mu, conditional on sigma (assuming sigma = sd.y)
+sd.y<- 20.4
+
+# prior parameters
+mu0 <- 80
+sigma0 <- 10
+
+# Posterior of mu, assuming sigma = sd.y (sample SD)
+mupost.mean = (n*mean(y)/(sd.y^2) + mu0/(sigma0^2))/(n/(sd.y^2) + 1/(sigma0^2))
+mupost.sd = sqrt(1/(n/(sd.y^2) + 1/(sigma0^2)))
+
+# Create a sequence of x values (range of the distributions)
+x <- seq(30,140)
+
+# Define the parameters for the prior, likelihood, and posterior
+# These are just example values, modify as needed
+prior_mean <- mu0
+prior_sd <- sigma0
+likelihood_mean <- mean(kidiq$kid_score)
+likelihood_sd <- sd(kidiq$kid_score)/sqrt(length(kidiq$kid_score))
+posterior_mean <- mupost.mean
+posterior_sd <- mupost.sd
+
+# Create a data frame containing the x values and densities for each distribution
+df <- data.frame(
+  x = x,
+  Prior = dnorm(x, mean = prior_mean, sd = prior_sd),
+  Likelihood = dnorm(x, mean = likelihood_mean, sd = likelihood_sd),
+  Posterior = dnorm(x, mean = posterior_mean, sd = posterior_sd)
+)
+
+max_posterior <- max(df$Posterior)
+max_prior <- max(df$Prior)
+max_likelihood <- max(df$Likelihood)
+scaling_factor1 <- max_likelihood / max_posterior
+scaling_factor2 <- max_likelihood  / max_prior
+
+df <- df %>% mutate(Prior = Prior*scaling_factor2,
+                    Posterior = Posterior*scaling_factor1)
+
+
+# Reshape the data frame to long format for ggplot
+df_long <- tidyr::pivot_longer(df, cols = c("Prior", "Likelihood", "Posterior"), 
+                               names_to = "Distribution", values_to = "Density")
+
+# Plot the densities with ggplot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1, alpha  = 0.7) +  # Plot the densities as lines
+  labs(title = "",
+       x = "mu", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Prior" = "blue", 
+                                "Likelihood" = "red", 
+                                "Posterior" = "green")) +  # Assign custom colors
+  theme(legend.title = element_blank())  # Remove the legend title
+
+```
+
+## Normal distribution with known mean {style="font-size: 70%;"}
+
+We will assume a normal model for the data where $y_i|\mu,\sigma^2 \sim N(\mu, \sigma^2)$. Assume $\mu$ is known.
+
+-   Usually work with precision i.e., $\tau = 1/\sigma^2$
+
+-   Specify a prior for $\tau$
+
+    -   Popular prior for the precision of a normal distribution is a gamma prior e.g., $\tau \sim Gamma(a, b)$ where $E[\tau] = \frac{a}{b}$ and $Var[\tau] = \frac{a}{b^2}$
+
+    -   $p(\tau|a,b) = \frac{b^a}{\Gamma(a)}\tau^{a-1}e^{-b\tau}$ for $\tau >0$ and $a,b > 0$
+
+-   Use Bayes' rule to obtain the posterior distribution
+
+$p(\tau|y) \propto p(y|\tau)p(\tau)$
+
+## Normal distribution with known mean {style="font-size: 70%;"}
+
+-   As it turns out, the posterior is also a gamma distribution
+
+$\tau|y \sim Gamma \bigg(a + n/2, b + 1/2\sum_{i=1}^n (y_i - \mu)^2\bigg)$
+
+-   For the Kid IQ example, assuming $\tau \sim gamma(a = 1, b = 1)$, then $\tau|y \sim gamma(218, 90203)$.
+
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+y <- kidiq$kid_score
+n <- length(y)
+
+sd.y <- sd(y)
+mu.y <- mean(y)
+
+#-------------------
+# exact solutions
+
+# prior parameters
+a <- 1
+b <- 1
+
+# Posterior of tau
+post.a = a + n/2
+post.b = b + 1/2*(sum((y-mu.y)^2))
+
+x <- seq(0,4, length.out = 100)
+
+# Create a data frame containing the x values and densities for each distribution
+df <- data.frame(
+  x = x,
+  Prior = dgamma(x, a, b),
+  Likelihood = dnorm(1/(sd.y^2), mean = x, sd = (sqrt(2) * (1/(sd.y^2)) / sqrt(n))),
+  Posterior = dgamma(x, post.a, post.b)
+)
+
+max_posterior <- max(df$Posterior)
+max_prior <- max(df$Prior)
+max_likelihood <- max(df$Likelihood)
+scaling_factor1 <- max_likelihood / max_posterior
+scaling_factor2 <- max_likelihood  / max_prior
+
+df <- df %>% mutate(Prior = Prior*scaling_factor2,
+                    Posterior = Posterior*scaling_factor1)
+
+
+
+# Reshape the data frame to long format for ggplot
+df_long <- tidyr::pivot_longer(df, cols = c("Prior", "Likelihood", "Posterior"), 
+                               names_to = "Distribution", values_to = "Density")
+
+# Plot the densities with ggplot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1, alpha  = 0.7) +  # Plot the densities as lines
+  labs(title = "",
+       x = "1/sigma", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Prior" = "blue", 
+                                "Likelihood" = "red", 
+                                "Posterior" = "green")) +  # Assign custom colors
+  theme(legend.title = element_blank())  # Remove the legend title
+
+```
+
+## Normal distribution with known mean {style="font-size: 70%;"}
+
+-   Converting back from the precision to the standard deviation, the posterior for $\sigma$ for this example will look more like:
+
+```{r, echo = FALSE, include=TRUE, fig.align='center'}
+# Load necessary libraries
+library(ggplot2)
+
+y <- kidiq$kid_score
+n <- length(y)
+
+sd.y <- sd(y)
+mu.y <- mean(y)
+
+#-------------------
+# exact solutions
+
+# prior parameters
+a <- 1
+b <- 1
+
+# Posterior of tau
+post.a = a + n/2
+post.b = b + 1/2*(sum((y-mu.y)^2))
+
+post_sigma <- data.frame(x = sqrt(1/rgamma(1000000, post.a, post.b)))
+
+# Create the density plot
+ggplot(post_sigma, aes(x = x)) + 
+  geom_density(fill = "blue", alpha = 0.5) +
+  labs(title = "Posterior for sigma",
+       x = "sigma",
+       y = "Density") +
+  theme_minimal()
+```
