@@ -1,0 +1,144 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Tutorial Questions (1)"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+## **Introduction**
+
+This tutorial explores Bayesian inference using binomial and Poisson models, focusing on deriving posterior distributions, credible intervals, and the impact of prior assumptions. You will also perform simulations and compare posterior results with analytical calculations.
+
+------------------------------------------------------------------------
+
+### **Question 1: Posterior Distribution for Placenta Previa Birth Data**
+
+Consider the maternal condition known as *placenta previa*, an uncommon condition where the placenta obstructs the fetus, leading to possible complications during delivery.
+
+An early study in Germany collected data on placenta previa births, finding that out of 980 births, 437 were female.
+
+#### Tasks:
+
+1.  **Posterior Distribution**\
+    Assuming a Binomial likelihood for the data and a Beta(1,1) prior distribution for the probability of a female birth, derive the posterior distribution.
+
+2.  **Posterior Mean**\
+    Calculate the posterior mean for the probability of a girl birth in placenta previa pregnancies.
+
+3.  **95% Credible Interval**\
+    Compute the 95% credible interval for the probability of a girl birth in placenta previa pregnancies.
+
+------------------------------------------------------------------------
+
+### **Question 2: Simulation of the Posterior Distribution**
+
+In many cases, direct calculation of the posterior density function may not be feasible. Simulation offers a practical solution for obtaining inference from the posterior distribution.
+
+#### Tasks:
+
+1.  **Simulating 1000 Samples**\
+    Simulate 1000 samples from the posterior distribution derived in **Question 1**.
+
+2.  **Histogram**\
+    Create a histogram of the simulated samples.
+
+3.  **95% Credible Interval from Simulated Data**\
+    Calculate the 95% credible interval based on the simulated samples.
+
+4.  **Comparison with Analytical Interval**\
+    Compare the credible interval obtained from the simulation to the one calculated analytically in **Question 1**.
+
+------------------------------------------------------------------------
+
+### **Question 3: Sensitivity to Prior Assumptions**
+
+Now, assume we change the prior distribution. Suppose the prior distribution is Beta(6,20) instead of Beta(1,1).
+
+#### Tasks:
+
+1.  **New Posterior Distribution**\
+    Derive the new posterior distribution given the updated Beta(6,20) prior.
+
+2.  **Posterior Mean and Credible Interval**\
+    Compute the new posterior mean and 95% credible interval for the probability of a girl birth in placenta previa pregnancies.
+
+------------------------------------------------------------------------
+
+### **Additional Question: Bayesian Estimation for Poisson Data**
+
+Assume you are modeling data $y_{i},\; i=1,\ldots,n$ that arise from a Poisson distribution with rate parameter $\lambda$. (Note: Poisson distributions are often used for count data.) Use Bayesian methods to estimate $\lambda$, with a Gamma($a$, $b$) distribution as the prior for $\lambda$.
+
+#### Tasks:
+
+1.  **Likelihood Function**\
+    Write down the likelihood for the Poisson model (up to the constant of proportionality).
+
+2.  **Appropriateness of Gamma Prior**\
+    Why is the Gamma distribution an appropriate prior to use for the rate parameter $\lambda$ in this case?
+
+3.  **Determining Parameters of the Gamma Prior**\
+    Find the values of $a$ and $b$ for the Gamma prior that reflect the belief that $\lambda$ is $10 \pm 1$ (i.e., has mean = 10 and standard deviation = 1).
+
+4.  **Posterior Distribution**\
+    Derive the posterior distribution for $\lambda$.
+
+5.  **Posterior Mean Estimate**\
+    If the observed data are $\mathbf{y} = (17, 25, 25, 21, 13, 22, 23)$, find the posterior mean estimate for $\lambda$.
+
+6.  **Conjugacy of the Prior**\
+    Is the Gamma prior a conjugate prior for the Poisson likelihood? Explain your answer.
+
+7.  **Comparing Posterior, Prior, and Data Means**\
+    Comment on how the posterior mean estimate compares to the prior mean and the mean of the observed data. What insights do you gain from this comparison?
+
+------------------------------------------------------------------------
+
+### **Summary**
+
+Through these exercises, you will explore how prior beliefs shape posterior distributions, utilize simulation techniques to derive credible intervals, and understand the impact of different priors on Bayesian inference. The additional question introduces a new distribution, expanding your skills in Bayesian data analysis using Poisson likelihoods and Gamma priors.
+
+------------------------------------------------------------------------
+
+### **Notes**
+
+-   You can use the following information about the Binomial, Beta, Poisson and Gamma distributions to help you with the questions
+
+```{r, echo = FALSE}
+library(knitr)
+
+# Create the data for the table
+data <- data.frame(
+  `Probability Distribution` = c("Binomial", "Beta", "Poisson", "Gamma"),
+  `PMF/PDF` = c(
+    "$${n \\choose x}\\theta^x(1-\\theta)^{n-x},\\ x \\in \\{0,1,2,\\ldots, n\\}$$",
+    "$$\\frac{1}{B(a,b)}x^{a-1}(1-x)^{b-1},\\ x \\in (0,1)$$",
+    "$$\\lambda^x \\frac{e^{-\\lambda}}{x!},\\ x = 0,1,\\ldots$$",
+    "$$\\frac{b^a}{\\Gamma(a)}x^{a-1}e^{-bx},\\ x\\geq 0$$"
+  ),
+  `E(X)` = c(
+    "$$n\\theta$$",
+    "$$\\frac{a}{a+b}$$",
+    "$$\\lambda$$",
+    "$$\\frac{a}{b}$$"
+  ),
+  `Var(X)` = c(
+    "$$n\\theta(1-\\theta)$$",
+    "$$\\frac{ab}{(a+b)^2(a+b+1)}$$",
+    "$$\\lambda$$",
+    "$$\\frac{a}{b^2}$$"
+  )
+)
+
+# Render the table using knitr::kable
+kable(data, col.names = c("Probability Distribution", "PMF/PDF", "E(X)", "Var(X)"), escape = FALSE)
+
+```
+
+-   For simulations, use `rbeta()` in R for Beta-distributed samples.
+-   For plotting histograms and posterior distributions, use `ggplot2` or base R (`hist()`) plotting functions.
+
+------------------------------------------------------------------------

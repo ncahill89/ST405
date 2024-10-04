@@ -1,0 +1,182 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Tutorial Questions (1)"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+## **Solutions**
+
+### **Question 1: Posterior Distribution for Placenta Previa Birth Data**
+
+Given:\
+- The number of placenta previa births: $n = 980$\
+- The number of female births: $x = 437$\
+- Prior distribution: $\theta \sim \text{Beta}(1,1)$ (which is equivalent to a uniform prior).
+
+#### Solution:
+
+1.  **Posterior Distribution**\
+    The binomial likelihood for the number of female births $x$ out of $n$ total births is:
+
+    $$p(\theta | y) = {n \choose y} \theta^x (1 - \theta)^{n - y}$$
+
+    The prior distribution is $\theta \sim \text{Beta}(1,1)$. The Beta-Binomial conjugacy allows us to combine the likelihood and the prior to get the posterior distribution:
+
+    $$\theta | y \sim \text{Beta}(437 + 1, 980 - 437 + 1) = \text{Beta}(438, 544)$$
+
+2.  **Posterior Mean**\
+    The mean of a Beta distribution $\text{Beta}(\alpha, \beta)$ is given by:
+
+    $$E(\theta | x) = \frac{\alpha}{\alpha + \beta}$$
+
+    Substituting $\alpha = 438$ and $\beta = 544$:
+
+    $$E(\theta | x) = \frac{438}{438 + 544} = \frac{438}{982} \approx 0.446$$
+
+3.  **95% Credible Interval**\
+    The 95% credible interval for $\theta$ can be obtained using the quantiles of the Beta distribution. In R, you can use:
+
+    ``` r
+    qbeta(c(0.025, 0.975), 438, 544)
+    ```
+
+    This gives the interval $[0.415, 0.478]$, meaning that with 95% probability, the true value of $\theta$ lies between 0.415 and 0.478.
+
+------------------------------------------------------------------------
+
+### **Question 2: Simulation of the Posterior Distribution**
+
+#### Solution:
+
+1.  **Simulating 1000 Samples**\
+    To simulate 1000 samples from the posterior $\text{Beta}(438, 544)$ distribution, you can use the `rbeta()` function in R:
+
+    ``` r
+    samples <- rbeta(1000, 438, 544)
+    ```
+
+2.  **Histogram**\
+    You can create a histogram of the samples to visualize the posterior distribution:
+
+    ``` r
+    hist(samples, main = "Posterior Distribution", xlab = "Theta", col = "lightblue", border = "black")
+    ```
+
+```{r, echo = FALSE}
+samples <- rbeta(1000, 438, 544)
+
+hist(samples, main = "Posterior Distribution", xlab = "Theta", col = "lightblue", border = "black")
+
+```
+
+3.  **95% Credible Interval from Simulated Data**\
+    The 95% credible interval based on the samples can be calculated as:
+
+    ``` r
+    quantile(samples, c(0.025, 0.975))
+    ```
+
+    This should give an interval close to $[0.415, 0.478]$ obtained from Q1.
+
+4.  **Comparison with Analytical Interval**\
+    The credible interval from the simulation should closely match the analytical interval obtained in Question 1. This shows that the simulation provides a good approximation of the posterior distribution.
+
+------------------------------------------------------------------------
+
+### **Question 3: Sensitivity to Prior Assumptions**
+
+Now, assume the prior distribution is $\theta \sim \text{Beta}(6,20)$.
+
+#### Solution:
+
+1.  **New Posterior Distribution**\
+    The prior is $\text{Beta}(6,20)$, and the likelihood is still binomial. Using the conjugacy property of the Beta distribution, the posterior becomes:
+
+    $$\theta | x \sim \text{Beta}(437 + 6, 980 - 437 + 20) = \text{Beta}(443, 563)$$
+
+2.  **Posterior Mean and Credible Interval**\
+    The posterior mean is:
+
+    $$E(\theta | x) = \frac{443}{443 + 563} = \frac{443}{1006} \approx 0.440$$
+
+    The 95% credible interval can be obtained similarly using R:
+
+    ``` r
+    qbeta(c(0.025, 0.975), 443, 563)
+    ```
+
+    This gives the interval $[0.408, 0.473]$.
+
+    Comparing this to the result from the prior $\text{Beta}(1,1)$, we observe that using the Beta(6,20) prior shifts the posterior slightly, reflecting the stronger prior information.
+
+------------------------------------------------------------------------
+
+### **Additional Question: Bayesian Estimation for Poisson Data**
+
+Note: Students have **not** seen an example of using these distributions in class.
+
+#### Solution:
+
+Given:\
+- Data $\mathbf{y} = (17, 25, 25, 21, 13, 22, 23)$, and\
+- Prior $\lambda \sim \text{Gamma}(100,10)$ with shape $\alpha = 100$ and rate $\beta = 10$.
+
+1.  **Likelihood Function**\
+    The likelihood for a Poisson model is:
+
+    $$p(\lambda | \mathbf{y}) = \prod_{i=1}^n \frac{\lambda^{y_i} e^{-\lambda}}{y_i!}$$ Ignoring constants, the likelihood is proportional to:
+
+    $$p(\lambda | \mathbf{y}) \propto \lambda^{\sum y_i} e^{-n \lambda}$$
+
+2.  **Appropriateness of Gamma Prior**\
+    The Gamma distribution is a conjugate prior for the Poisson likelihood because the posterior distribution remains in the Gamma family. This simplifies computation and provides an intuitive interpretation of the prior parameters.
+
+3.  **Finding** $a$ and $b$ for Prior\
+    The mean and standard deviation of the Gamma distribution are given by:
+
+    $$\mu = \frac{\alpha}{\beta}, \quad \sigma^2 = \frac{\alpha}{\beta^2}$$ Given that $\mu = 10$ and $\sigma = 1$, solve for $\alpha$ and $\beta$:
+
+    $$\alpha = \frac{10^2}{1^2} = 100, \quad \beta = \frac{10}{1^2} = 10$$ Hence, $\lambda \sim \text{Gamma}(100,10)$.
+
+4.  **Posterior Distribution**
+
+$p(\lambda|y) \propto p(y|\lambda)p(\lambda)$
+
+*The prior:* $p(\lambda) \propto \lambda^{a-1}e^{-b\lambda}$
+
+(note: the $\frac{b^a}{\Gamma(a)}$ can be removed under the proportionality)
+
+*The posterior:* $p(\lambda|y) \propto \lambda^{a-1}e^{-b\lambda}\lambda^{\sum{y_i}}e^{-n\lambda} = \lambda^{\boxed{a + \sum{y_i}}-1}e^{-\boxed{(b+n)}\lambda}$
+
+(note: this has the same form as a gamma distribution with $a_{new} = a + \sum{y_i}$ and $b_{new} = b+n$)
+
+Therefore $\lambda|y \sim gamma(a + \sum{y_i},b+n)$
+
+With the data $\mathbf{y} = (17, 25, 25, 21, 13, 22, 23)$, we have $\sum y_i = 146$, $n = 7$. So, the posterior is $\lambda | \mathbf{y} \sim \text{Gamma}(246, 17)$
+
+5.  **Posterior Mean Estimate**\
+    The posterior mean is:
+
+    $$E(\lambda | \mathbf{y}) = \frac{246}{17} \approx 14.47$$
+
+6.  **Conjugacy of the Prior**\
+    Yes, the Gamma distribution is a conjugate prior for the Poisson likelihood, as the posterior distribution remains a Gamma distribution.
+
+7.  **Comparison of Posterior, Prior, and Data Means**
+
+    -   The prior mean was 10.
+
+    -   The posterior mean is $14.47$.
+
+    -   The sample mean of the observed data $\mathbf{y}$ is:
+
+        $$\bar{y} = \frac{146}{7} \approx 20.86$$
+
+    The posterior mean is a compromise between the prior mean (10) and the sample mean (20.86), indicating that the data has moved the posterior away from the prior, but not completely to the observed sample mean. This reflects the influence of both the prior belief and the observed data.
+
+------------------------------------------------------------------------
