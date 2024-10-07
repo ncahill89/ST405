@@ -366,7 +366,7 @@ ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
 ::: {.column width="50%"}
 We do Bayesian inference:
 
--   Start off with prior probability distribution to quantify information related to $\tau = 1/\sigma^2$ - example in blue with $\tau = 1/\sigma^2 \sim gamma(4,1)$
+-   Start off with prior probability distribution to quantify information related to $\tau = 1/\sigma^2$ - example in blue with $\tau = 1/\sigma^2 \sim gamma(2,1)$
 
 -   Collect data, $y$, assume y has a standard deviation $s = 2, 1/s^2 = 0.5$ and that n = 10.\
 
@@ -446,7 +446,7 @@ ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
 ::: {.column width="50%"}
 We do Bayesian inference:
 
--   Start off with prior probability distribution to quantify information related to $\tau = 1/\sigma^2$ - example in blue with $\tau = 1/\sigma^2 \sim gamma(4,1)$
+-   Start off with prior probability distribution to quantify information related to $\tau = 1/\sigma^2$ - example in blue with $\tau = 1/\sigma^2 \sim gamma(8,4)$
 
 -   Collect data, $y$, assume y has a standard deviation $s = 2, 1/s^2 = 0.5$ and that n = 10.\
 

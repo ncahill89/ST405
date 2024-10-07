@@ -122,10 +122,6 @@ Note: Students have **not** seen an example of using these distributions in clas
 
 #### Solution:
 
-Given:\
-- Data $\mathbf{y} = (17, 25, 25, 21, 13, 22, 23)$, and\
-- Prior $\lambda \sim \text{Gamma}(100,10)$ with shape $\alpha = 100$ and rate $\beta = 10$.
-
 1.  **Likelihood Function**\
     The likelihood for a Poisson model is:
 
