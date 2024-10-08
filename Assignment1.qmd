@@ -1,0 +1,71 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Assignment 1: Bayesian Inference on Particle Emission Energy"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Instructions
+
+Please submit your answers to this assignment by October 23rd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers.
+
+## Question
+
+The energy of eight(8) particles being emitted form a radioactive source was recorded as:
+
+$y = 50, 60, 60, 80, 40, 40, 80, 70\text{ MeV}$.
+
+We assume the particles have the following data model:
+
+$y_i \sim N(\mu,\rho \mu^2)$,
+
+where $\rho = 1$
+
+A nuclear physicist provides an expert opinion that particles will be emitted with an average energy of 80 MeV. However, she acknowledges uncertainty in this value and suggests the average energy could lie anywhere between 50 MeV and 110 MeV.
+
+(a) Show that the likelihood for ${\bf y}$ is of the form:
+
+$$p({\bf y}|\mu) \propto \frac{1}{\mu^8} \exp \left[ -\frac{15300}{\mu^2} + \frac{480}{\mu} \right]$$
+
+(b) Assume a prior for $\mu$, such that $\mu \sim gamma(a,b)$. Use moment matching to determine the values of $a$ and $b$ such that this prior reflects the nuclear physicist's opinions about the average energy of the particles. Specifically, assume that the range she provided (50 MeV to 110 MeV) is $\pm$ 3 standard deviations from the mean.
+
+(c) Write down the prior probability density function $p(\mu)$, up to a constant.
+
+(d) Write down the posterior probability density function $p(\mu |y)$, up to a constant.
+
+### **Distribution Information**
+
+-   You can use the following information about the Normal and Gamma distributions to help you with the question:
+
+```{r, echo = FALSE}
+library(knitr)
+
+# Create the data for the table
+data <- data.frame(
+  `Probability Distribution` = c("Normal", "Gamma"),
+  `PMF/PDF` = c(
+    "$$\\frac{1}{\\sqrt{2\\pi} \\sigma} \\exp\\left(-\\frac{1}{2\\sigma^2}(x_i - \\mu)^2\\right)$$",
+    "$$\\frac{b^a}{\\Gamma(a)}x^{a-1}e^{-b x},\\ x \\geq 0$$"
+  ),
+  `E(X)` = c(
+    "$$\\mu$$",
+    "$$\\frac{a}{b}$$"
+  ),
+  `Var(X)` = c(
+    "$$\\sigma^2$$",
+    "$$\\frac{a}{b^2}$$"
+  )
+)
+
+# Render the table using knitr::kable
+kable(data, col.names = c("Probability Distribution", "PMF/PDF", "E(X)", "Var(X)"), escape = FALSE)
+```

@@ -35,3 +35,7 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 ## Tutorials
 
 [Tutorial Sheet 1: Bayesian inference using binomial and Poisson models](https://ncahill89.github.io/ST405/Tutorial1.html)
+
+## Assignments
+
+[Assignment 1: Bayesian Inference on Particle Emission Energy](https://ncahill89.github.io/ST405/Assignment1.html)

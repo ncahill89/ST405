@@ -332,15 +332,15 @@
     "objectID": "2b-BayesianInference.html#bayesian-inference",
     "href": "2b-BayesianInference.html#bayesian-inference",
     "title": "Bayesian Data Analysis",
-    "section": "Bayesian Inference",
-    "text": "Bayesian Inference\n\nBayesian point estimates are often given by:\n\nthe posterior mean \\(E(\\theta|y)\\)\nor the posterior median \\(\\theta^*\\) with \\(P(\\theta &lt; \\theta^*|y) = 0.5\\)\n\nUncertainty is quantified with credible intervals (CIs)\n\nAn interval is a 95% credible interval if the posterior probability that \\(\\theta\\) is in the interval is 0.95.\nOften quantile based, given by posterior quantiles with \\(P(\\theta &lt; \\theta_{\\alpha/2}|y) = P(\\theta &gt; \\theta_{1-\\alpha/2}|y) = \\alpha/2\\)"
+    "section": "",
+    "text": "Bayesian point estimates are often given by:\n\nthe posterior mean \\(E(\\theta|y)\\)\nor the posterior median \\(\\theta^*\\) with \\(P(\\theta &lt; \\theta^*|y) = 0.5\\)\n\nUncertainty is quantified with credible intervals (CIs)\n\nAn interval is a 95% credible interval if the posterior probability that \\(\\theta\\) is in the interval is 0.95.\nOften quantile based, given by posterior quantiles with \\(P(\\theta &lt; \\theta_{\\alpha/2}|y) = P(\\theta &gt; \\theta_{1-\\alpha/2}|y) = \\alpha/2\\)"
   },
   {
     "objectID": "2b-BayesianInference.html#bayesian-inference-for-the-happiness-example",
     "href": "2b-BayesianInference.html#bayesian-inference-for-the-happiness-example",
     "title": "Bayesian Data Analysis",
     "section": "Bayesian Inference for the Happiness example",
-    "text": "Bayesian Inference for the Happiness example\n\n\\(\\theta|y \\sim Beta(y+a,n-y+b)\\)\nPosterior mean \\(E(\\theta|y) = \\frac{y+a}{n+a+b}\\)\nFor quantile estimates we can use qbeta() in R\n\n\nR Code\n\n\n\n\n## data \nn = 20; y = 14\n\n## prior parameters\na = 1; b = 1\n\n## posterior parameters\na_post = y + a; b_post = n - y + b\n\n## posterior mean\np_mean &lt;- a_post/(a_post + b_post) # (y+a)/(n+a+b)\n\n## quantiles\np_quant &lt;- qbeta(c(0.025,0.5,0.975),a_post,b_post)\n\np_mean; p_quant\n\n\n[1] 0.6818182\n\n\n[1] 0.4782489 0.6874159 0.8541231"
+    "text": "Bayesian Inference for the Happiness example\n\n\\(\\theta|y \\sim Beta(y+a,n-y+b)\\)\nPosterior mean \\(E(\\theta|y) = \\frac{y+a}{n+a+b}\\)\nFor quantile estimates we can use qbeta() in R\n\n\nR Code\n\n\n\n## data \nn = 20; y = 14\n\n## prior parameters\na = 1; b = 1\n\n## posterior parameters\na_post = y + a; b_post = n - y + b\n\n## posterior mean\np_mean &lt;- a_post/(a_post + b_post) # (y+a)/(n+a+b)\n\n## quantiles\np_quant &lt;- qbeta(c(0.025,0.5,0.975),a_post,b_post)\n\np_mean; p_quant\n\n[1] 0.6818182\n\n\n[1] 0.4782489 0.6874159 0.8541231"
   },
   {
     "objectID": "2b-BayesianInference.html#simulation-based-inference",
@@ -354,14 +354,14 @@
     "href": "2b-BayesianInference.html#simulation-based-inference-for-the-happiness-example",
     "title": "Bayesian Data Analysis",
     "section": "Simulation-based inference for the Happiness example",
-    "text": "Simulation-based inference for the Happiness example\nFor the Happiness example, we can approximate the mean and quantiles of \\(\\theta\\) using samples from a \\(Be(y+a,n-y+b)\\) distribution (i.e., the posterior)\n\nR Code\n\n\n\n\n## data \nn = 20; y = 14\n\n## prior parameters\na = 1; b = 1\n\n## posterior parameters\na_post = y + a; b_post = n - y + b\n\n## sample \nsamp_theta &lt;- rbeta(1000,a_post,b_post)\n\n## sample mean and quantiles\np_mean &lt;- mean(samp_theta)\np_quant &lt;- quantile(samp_theta, \n                    probs = c(0.025,0.5,0.975))\n\np_mean; p_quant\n\n\n[1] 0.6795585\n\n\n     2.5%       50%     97.5% \n0.4658872 0.6827372 0.8493420"
+    "text": "Simulation-based inference for the Happiness example\nFor the Happiness example, we can approximate the mean and quantiles of \\(\\theta\\) using samples from a \\(Be(y+a,n-y+b)\\) distribution (i.e., the posterior)\n\nR Code\n\n\n\n## data \nn = 20; y = 14\n\n## prior parameters\na = 1; b = 1\n\n## posterior parameters\na_post = y + a; b_post = n - y + b\n\n## sample \nsamp_theta &lt;- rbeta(1000,a_post,b_post)\n\n## sample mean and quantiles\np_mean &lt;- mean(samp_theta)\np_quant &lt;- quantile(samp_theta, \n                    probs = c(0.025,0.5,0.975))\n\np_mean; p_quant\n\n[1] 0.6795585\n\n\n     2.5%       50%     97.5% \n0.4658872 0.6827372 0.8493420"
   },
   {
     "objectID": "2b-BayesianInference.html#monte-carlo-approximation-some-more-details",
     "href": "2b-BayesianInference.html#monte-carlo-approximation-some-more-details",
     "title": "Bayesian Data Analysis",
     "section": "Monte Carlo approximation: some more details",
-    "text": "Monte Carlo approximation: some more details\n\nWith a simulation, it also becomes very easy to analyze the distributions of any function of your parameter,\n\ne.g. the distribution of the odds \\(\\frac{\\theta}{1-\\theta}\\) by using samples from \\(\\frac{\\theta^{(s)}}{1-\\theta^{(s)}}\\)\n\n\n\nR Code\n\n\n\n\n## sample \nsamp_theta &lt;- rbeta(1000,a_post,b_post)\n\n## get odds based on samples\nsamp_odds &lt;- samp_theta/(1-samp_theta)\n\n## sample mean and quantiles\np_mean_odds &lt;- mean(samp_odds)\np_quant_odds &lt;- quantile(samp_odds, \n                         probs = c(0.025,0.5,0.975))\n\np_mean_odds; p_quant_odds\n\n\n[1] 2.553325\n\n\n     2.5%       50%     97.5% \n0.8895412 2.1687181 6.5592201"
+    "text": "Monte Carlo approximation: some more details\n\nWith a simulation, it also becomes very easy to analyze the distributions of any function of your parameter,\n\ne.g. the distribution of the odds \\(\\frac{\\theta}{1-\\theta}\\) by using samples from \\(\\frac{\\theta^{(s)}}{1-\\theta^{(s)}}\\)\n\n\n\nR Code\n\n\n\n## sample \nsamp_theta &lt;- rbeta(1000,a_post,b_post)\n\n## get odds based on samples\nsamp_odds &lt;- samp_theta/(1-samp_theta)\n\n## sample mean and quantiles\np_mean_odds &lt;- mean(samp_odds)\np_quant_odds &lt;- quantile(samp_odds, \n                         probs = c(0.025,0.5,0.975))\n\np_mean_odds; p_quant_odds\n\n[1] 2.553325\n\n\n     2.5%       50%     97.5% \n0.8895412 2.1687181 6.5592201"
   },
   {
     "objectID": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution",
@@ -481,5 +481,40 @@
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Tutorials",
     "text": "Tutorials\nTutorial Sheet 1: Bayesian inference using binomial and Poisson models"
+  },
+  {
+    "objectID": "Assignment1.html",
+    "href": "Assignment1.html",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "Please submit your answers to this assignment by October 23rd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers."
+  },
+  {
+    "objectID": "Assignment1.html#instructions",
+    "href": "Assignment1.html#instructions",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "Please submit your answers to this assignment by October 23rd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers."
+  },
+  {
+    "objectID": "Assignment1.html#question",
+    "href": "Assignment1.html#question",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "Question",
+    "text": "Question\nThe energy of eight(8) particles being emitted form a radioactive source was recorded as:\n\\(y = 50, 60, 60, 80, 40, 40, 80, 70\\text{ MeV}\\).\nWe assume the particles have the following data model:\n\\(y_i \\sim N(\\mu,\\rho \\mu^2)\\),\nwhere \\(\\rho = 1\\)\nA nuclear physicist provides an expert opinion that particles will be emitted with an average energy of 80 MeV. However, she acknowledges uncertainty in this value and suggests the average energy could lie anywhere between 50 MeV and 110 MeV.\n\nShow that the likelihood for \\({\\bf y}\\) is of the form:\n\n\\[p({\\bf y}|\\mu) \\propto \\frac{1}{\\mu^8} \\exp \\left[ -\\frac{15300}{\\mu^2} + \\frac{480}{\\mu} \\right]\\]\n\nAssume a prior for \\(\\mu\\), such that \\(\\mu \\sim gamma(a,b)\\). Use moment matching to determine the values of \\(a\\) and \\(b\\) such that this prior reflects the nuclear physicist’s opinions about the average energy of the particles. Specifically, assume that the range she provided (50 MeV to 110 MeV) is \\(\\pm\\) 3 standard deviations from the mean.\nWrite down the prior probability density function \\(p(\\mu)\\), up to a constant.\nWrite down the posterior probability density function \\(p(\\mu |y)\\), up to a constant.\n\n\nDistribution Information\n\nYou can use the following information about the Normal and Gamma distributions to help you with the question:\n\n\n\n\n\n\n\n\n\n\n\n\nProbability Distribution\nPMF/PDF\nE(X)\nVar(X)\n\n\n\n\nNormal\n\\[\\frac{1}{\\sqrt{2\\pi} \\sigma} \\exp\\left(-\\frac{1}{2\\sigma^2}(x_i - \\mu)^2\\right)\\]\n\\[\\mu\\]\n\\[\\sigma^2\\]\n\n\nGamma\n\\[\\frac{b^a}{\\Gamma(a)}x^{a-1}e^{-b x},\\ x \\geq 0\\]\n\\[\\frac{a}{b}\\]\n\\[\\frac{a}{b^2}\\]"
+  },
+  {
+    "objectID": "2b-BayesianInference.html",
+    "href": "2b-BayesianInference.html",
+    "title": "Bayesian Data Analysis",
+    "section": "",
+    "text": "Bayesian point estimates are often given by:\n\nthe posterior mean \\(E(\\theta|y)\\)\nor the posterior median \\(\\theta^*\\) with \\(P(\\theta &lt; \\theta^*|y) = 0.5\\)\n\nUncertainty is quantified with credible intervals (CIs)\n\nAn interval is a 95% credible interval if the posterior probability that \\(\\theta\\) is in the interval is 0.95.\nOften quantile based, given by posterior quantiles with \\(P(\\theta &lt; \\theta_{\\alpha/2}|y) = P(\\theta &gt; \\theta_{1-\\alpha/2}|y) = \\alpha/2\\)"
+  },
+  {
+    "objectID": "index.html#assignments",
+    "href": "index.html#assignments",
+    "title": "Welcome to Bayesian Data Analysis!",
+    "section": "Assignments",
+    "text": "Assignments\nAssignment 1: Bayesian Inference on Particle Emission Energy"
   }
 ]
