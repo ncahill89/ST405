@@ -509,7 +509,7 @@ p3;p4
 
 We can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.
 
-```{r, echo = TRUE, include=TRUE}
+```{r, echo = TRUE, include=TRUE, fig.height=4}
 #| output-location: column-fragment
 
 # Density plot for posterior samples of mu
@@ -526,7 +526,7 @@ mu_ci <- quantile(mu_s, probs = c(0.025, 0.975))
 p5;cat("Mean of Mu:", mu_mean, "\n");cat("95% Credible Interval for Mu:", mu_ci, "\n")
 ```
 
-```{r, echo = TRUE, include=TRUE}
+```{r, echo = TRUE, include=TRUE,fig.height=4}
 #| output-location: column-fragment
 
 p6 <- ggplot(post_samps, aes(x = sigma_s)) +
