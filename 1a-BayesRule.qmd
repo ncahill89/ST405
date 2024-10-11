@@ -1,7 +1,7 @@
 ---
 title: "Bayesian Data Analysis"
 subtitle: "Bayes' Rule"
-author: "Dr Niamh Cahill (she/her)"
+author: "Prof. Niamh Cahill (she/her)"
 format: revealjs
 editor: visual
 ---
