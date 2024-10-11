@@ -228,7 +228,7 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling"
   },
   {
     "objectID": "2a-BetaBinomial.html#scenario",
@@ -516,5 +516,145 @@
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Assignments",
     "text": "Assignments\nAssignment 1: Bayesian Inference on Particle Emission Energy"
+  },
+  {
+    "objectID": "4-MCMC.html#what-do-we-know-so-far",
+    "href": "4-MCMC.html#what-do-we-know-so-far",
+    "title": "Bayesian Data Analysis",
+    "section": "What do we know so far?",
+    "text": "What do we know so far?\nWe can use Bayes’ rule to get posterior densities\n\nExample for single parameter Normal - \\(\\mu\\)\n\n\\(p(\\mu|y) \\propto p(y|\\mu)p(\\mu)\\)\n\nExample for single parameter Normal - \\(\\tau\\)\n\n\\(p(\\tau|y) \\propto p(y|\\tau)p(\\tau)\\)\n\nWe could also do this for multiple parameters\n\n\\(p(\\mu, \\tau|y) \\propto p(y|\\mu,\\tau)p(\\mu,\\tau)\\)\n\n\nBUT…\n\nRealistic problems with multiple parameters, data points, and common choices of priors don’t get a closed-form expression for \\(p(\\mu, \\tau|y)\\)\nSampling to the rescue!!"
+  },
+  {
+    "objectID": "4-MCMC.html#simulation-based-inference-recap",
+    "href": "4-MCMC.html#simulation-based-inference-recap",
+    "title": "Bayesian Data Analysis",
+    "section": "Simulation-based inference (recap)",
+    "text": "Simulation-based inference (recap)\n\nThe general idea in simulation-based inference: We can make inference about a parameter \\(\\theta\\) or \\(\\mu\\) or \\(\\tau\\) , using a sample e.g., \\(\\{\\theta^{(1)}\\ldots\\theta^{(S)}\\}\\), from its probability distribution.\nAssessing the properties of a target (e.g., posterior) distribution by generating representative samples is called Monte Carlo simulation.\nBased on the law of large numbers we know that:\n\\(\\frac{1}{S}\\sum_{s=1}^{S}\\theta^{(s)} = E(\\theta)\\)\nas sample size \\(S \\to \\infty\\)\n\nThe error in the MC approximation goes to zero as \\(S \\to \\infty\\) because \\(\\frac{var(\\theta)}{S} \\to 0\\)\n\nJust about any aspect of the distribution of \\(\\theta\\) can be approximated arbitrarily exactly with a large enough Monte Carlo sample, e.g.,\n\nthe \\(\\alpha\\)-percentile of the distribution of \\(\\theta\\)\n\\(Pr(\\theta \\geq x)\\) for any constant \\(x\\)"
+  },
+  {
+    "objectID": "4-MCMC.html#markov-chain-monte-carlo-mcmc",
+    "href": "4-MCMC.html#markov-chain-monte-carlo-mcmc",
+    "title": "Bayesian Data Analysis",
+    "section": "Markov Chain Monte Carlo (MCMC)",
+    "text": "Markov Chain Monte Carlo (MCMC)\nWe’ve already discussed Monte Carlo sampling. Now we’re going to consider Markov Chain Monte Carlo (MCMC) sampling. MCMC algorithms are used for sampling from a target distribution.\n\n\n\n\n\n\nMarkov Chain\n\n\n\nAny process in which each step has no memory of states before the current state is called a (first-order) Markov process and a sucession of such steps is a Markov chain.\nThe stationary distribution of the Markov chain is the target distribution.\n\n\n\n\nUsing MCMC we can construct a set of samples from an unknown target (e.g., posterior) distribution."
+  },
+  {
+    "objectID": "4-MCMC.html#a-simple-markov-chain-example",
+    "href": "4-MCMC.html#a-simple-markov-chain-example",
+    "title": "Bayesian Data Analysis",
+    "section": "A simple Markov chain example",
+    "text": "A simple Markov chain example\nWhat is the probability of sunny \\(P(S)\\) and rainy \\(P(R)\\) weather?\n\n\n\n\nAssume we have the following “transition” probabilities:\n\\(P(S_{t+1}|R_t) = 0.5\\)\n\\(P(R_{t+1}|R_t) = 0.5\\)\n\\(P(R_{t+1}|S_t) = 0.1\\)\n\\(P(S_{t+1}|S_t) = 0.9\\)\nNote the future state of the weather only depends on the current state."
+  },
+  {
+    "objectID": "4-MCMC.html#creating-the-markov-chain",
+    "href": "4-MCMC.html#creating-the-markov-chain",
+    "title": "Bayesian Data Analysis",
+    "section": "Creating the Markov chain",
+    "text": "Creating the Markov chain\n\n\nThe “algorithm”\n\nWe have to initialize i.e., a randomly chosen start point of sunny or rainy.\nWe can sample the weather, W, (coded as 1 for sunny and 0 for rainy) from a Bernoulli distribution (Binomial with \\(n=1\\)).\n\n\nThe probability distribution will change depending on the current state of the chain, i.e., if W = 1, or W =0.\n\n\nBased on the samples of \\(W\\) we can estimate \\(P(W=1) = P(S)\\) and \\(P(W=0) = P(R)\\).\n\nWe find after enough iterations (samples) \\(P(S) = 0.83\\).\n\nR code\n\n# 0 = rainy, 1 = sunny\n\n# 1. initialize\nW_current &lt;- rbinom(1,1,0.5) \n\n# 2. run the Markov Chain\n# number of Monte Carlo sampling interations\nn_iter &lt;- 10000\n# save the samples\nW_new &lt;- p_sunny &lt;- rep(NA, n_iter)\n\nfor(i in 1:n_iter)\n{\nW_new[i] &lt;- ifelse(W_current == 0,\n       rbinom(1,1,0.5),\n       rbinom(1,1,0.9))\n\nW_current = W_new[i]\n\n# 3. get the probability of sunny\np_sunny[i] &lt;- sum(W_new, na.rm = TRUE)/i\n\n}\n\nplot(p_sunny, type = \"l\", xlab = \"Iteration\", ylab = \"P(S)\")"
+  },
+  {
+    "objectID": "4-MCMC.html#stationary-distribution",
+    "href": "4-MCMC.html#stationary-distribution",
+    "title": "Bayesian Data Analysis",
+    "section": "Stationary Distribution",
+    "text": "Stationary Distribution\nAs we progress through time, the probability of being in certain states (e.g., rainy or sunny) are more likely than others. Over the long run, the distribution will reach an equilibrium with an associated probability of being in each state.\nThis is known as the Stationary Distribution.\n\n\n\n\n\n\nThe stationary distribution of a Markov chain\n\n\nThe stationary distribution of a Markov chain is a probability distribution over the states of the chain that remains unchanged as time progresses.\nMathematically, if \\(\\pi\\) represents the stationary distribution (a row vector of probabilities) and \\(P\\) is the transition matrix of the Markov chain, the stationary distribution satisfies the equation:\n\\[\\pi = \\pi P\\]\nThis means that when the transition matrix \\(P\\) is applied to \\(\\pi\\), the result is still \\(\\pi\\), indicating that the distribution has stabilized and doesn’t change over time."
+  },
+  {
+    "objectID": "4-MCMC.html#the-metropolis-algorithm",
+    "href": "4-MCMC.html#the-metropolis-algorithm",
+    "title": "Bayesian Data Analysis",
+    "section": "The Metropolis Algorithm",
+    "text": "The Metropolis Algorithm\n\nSuppose we have a target distribution \\(p(\\theta|y)\\) from which we would like to generate a representative sample.\nSample values from the target distribution can be generated by taking a random walk through the parameter space.\n\n\n\n\n\n\n\nThe metropolis algorithm\n\n\n\nStart at some arbitrary parameter value (initial value).\nPropose a move to a new value in the parameter space.\nCalculate the acceptance ratio \\(r = min \\bigg(1, \\frac{ p(y|\\theta_{pro})p(\\theta_{pro})}{p(y|\\theta_{cur})p(\\theta_{cur})}\\bigg)\\).\nDraw a random number, \\(u\\) between 0 and 1. If \\(u &lt; r\\) then the move is accepted.\nRepeat until a representative sample from the target distribution has been generated (more on this later)."
+  },
+  {
+    "objectID": "4-MCMC.html#metropolis-algorithm-for-the-happiness-example",
+    "href": "4-MCMC.html#metropolis-algorithm-for-the-happiness-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Metropolis Algorithm for the Happiness example",
+    "text": "Metropolis Algorithm for the Happiness example\nRecall for the Happiness example: n = 20 women, y = 14 women reported being happy.\n\n\nThe Metropolis algorithm\n\\(y \\sim Binomial(n = 20, \\theta)\\)\n\\(\\theta|a,b \\sim Beta(a = 1 ,b = 1)\\)\n\nLet’s initialise using \\(\\theta_{cur}\\) = 0.5\nPropose a new move using a Normal proposal distribution such that \\(\\theta_{pro} = \\theta_{cur} + N(0,\\sigma)\\)\n\\(r = \\text{min} \\bigg(1, \\frac{ dbinom(y,n,\\theta_{pro})dbeta(\\theta_{pro},1,1)}{dbinom(y,n,\\theta_{cur})dbeta(\\theta_{cur},1,1)}\\bigg)\\)\nCompare \\(u \\sim Uniform(0,1)\\) with \\(r\\) and accept move if \\(u &lt; r\\)\nRepeat\n\nVisualise the samples and look for a “fuzzy caterpiller” 🐛\n\nR code\n\n# data \ny &lt;- 14; N &lt;- 20\n# beta prior parameters\na &lt;- 1; b &lt;- 1\n# number of samples to generate\nn_iter &lt;- 10000\n\n# 0. \ntheta_cur &lt;- rep(NA, n_iter)\ntheta_cur[1] &lt;- 0.5\n\nfor(i in 1:(n_iter-1)){\n# 1.\ntheta_pro &lt;- theta_cur[i] + rnorm(1,0,sd = 0.2)\n# 2. \nif(theta_pro&lt;0|theta_pro&gt;1){r &lt;- 0 } # set to zero if theta outside [0,1]\nelse {\n  r &lt;- \nmin(1,dbinom(14,20,theta_pro)*dbeta(theta_pro,a,b)/\n      dbinom(14,20,theta_cur[i])*dbeta(theta_cur[i],a,b))\n  }\n# 3. \nu &lt;- runif(1,0,1)\naccept &lt;- u &lt; r\ntheta_cur[i+1]&lt;- ifelse(accept,theta_pro,theta_cur[i])\n} # end i loop\n\nplot(theta_cur, type = \"l\")"
+  },
+  {
+    "objectID": "4-MCMC.html#trace-plot-and-chains-for-theta",
+    "href": "4-MCMC.html#trace-plot-and-chains-for-theta",
+    "title": "Bayesian Data Analysis",
+    "section": "Trace plot and chains for \\(\\theta\\)",
+    "text": "Trace plot and chains for \\(\\theta\\)\n\nTraceplots provide a visual tool for monitoring convergence of an MCMC chain towards a target distribution (i.e., the posterior).\nIn general we look for a stationary plot where the sample values display a random scatter around a mean value.\nWe typically initialise MCMC algorithms at 3 different start points to see if all chains end up in (converge to) the same place."
+  },
+  {
+    "objectID": "4-MCMC.html#metropolis-algorithm-for-the-kid-iq-example",
+    "href": "4-MCMC.html#metropolis-algorithm-for-the-kid-iq-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Metropolis algorithm for the Kid IQ example",
+    "text": "Metropolis algorithm for the Kid IQ example\nRecall that data (y) are available on the cognitive test scores of three- and four-year-old children in the USA. The sample contains 434 observations.\n\\(y_i|\\mu,\\sigma^2 \\sim N(\\mu, \\sigma^2)\\). Assume \\(\\sigma^2\\) is known where \\(\\sigma = 20.4\\)\n\\(\\mu|\\mu_0,\\sigma_0 \\sim N(\\mu_0 = 80, \\sigma^2_{_0} = 10^2)\\)\n\nLet’s initialise using \\(\\mu_{cur}\\) = 80.\nPropose a new move using a Normal proposal distribution such that \\(\\mu_{pro} = \\mu_{cur} + N(0,1)\\).\nCalculate the acceptance ratio on the log scale (avoids numerical instability).\n\n\\(log(r) = \\text{min}(0, \\sum_i log(dnorm(y_i,\\mu_{pro},20.4)) + log(dnorm(\\mu_{pro},80,10))\\) \\(- \\sum_i log(dnorm(y_i,\\mu_{cur},20.4)) - log(dnorm(\\mu_{cur},80,10)))\\)\n\nCompare \\(u \\sim Uniform(0,1)\\) with \\(r\\) and accept move if \\(log(u) &lt; r\\).\n\nTask: Code this in R and produce a trace plot for \\(\\mu\\)."
+  },
+  {
+    "objectID": "4-MCMC.html#bayesian-inference-for-mu-and-sigma-the-kid-iq-example",
+    "href": "4-MCMC.html#bayesian-inference-for-mu-and-sigma-the-kid-iq-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Bayesian Inference for \\(\\mu\\) and \\(\\sigma\\) (the Kid IQ example)",
+    "text": "Bayesian Inference for \\(\\mu\\) and \\(\\sigma\\) (the Kid IQ example)\n\nIt is more realistic to assume \\(\\mu\\) and \\(\\sigma\\) are unknown.\nIn this case we need priors for both parameters and we think about them jointly.\nThen from Bayes’ rule we can get the joint posterior \\(p(\\mu, \\sigma |y) \\propto p(y|\\mu, \\sigma)p(\\mu,\\sigma)\\)\nProblem: most choices of prior will not result in a closed from expression for the posterior.\nSolution: If we can sample from the target (posterior) distribution we can still do inference.\nThe Metropolis method is very useful but can be inefficient. Another sampling method that’s often used for models with multiple parameters is Gibbs sampling."
+  },
+  {
+    "objectID": "4-MCMC.html#the-gibbs-sampler",
+    "href": "4-MCMC.html#the-gibbs-sampler",
+    "title": "Bayesian Data Analysis",
+    "section": "The Gibbs Sampler",
+    "text": "The Gibbs Sampler\nWe can use Gibbs Sampling when we can sample directly from the conditional posterior distributions for each model parameter.\nSo instead of trying to sample directly from a joint posterior distribution, we sample parameters sequentially from their complete conditional distributions (conditioning on data as well as all other model parameters).\n\n\n\n\n\n\nThe Gibbs sampling algorithm for \\(\\mu\\) and \\(\\tau\\)\n\n\n\nAssign initial values to the parameters \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\)\nGiven starting values \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\), draw samples s = 2, 3,….,`some large number’ as follows:\n1.1. sample \\(\\tau^{(s)}\\) from \\(p(\\tau|y,\\mu^{(s-1)})\\).\n1.2. sample \\(\\mu^{(s)}\\) from \\(p(\\mu|y,\\tau^{(s)})\\)\nRepeat and this will (eventually) generate samples from \\(p(\\mu,\\sigma|y)\\), which is what we want!"
+  },
+  {
+    "objectID": "4-MCMC.html#remember-those-complete-conditional-distributions",
+    "href": "4-MCMC.html#remember-those-complete-conditional-distributions",
+    "title": "Bayesian Data Analysis",
+    "section": "Remember those complete conditional distributions?",
+    "text": "Remember those complete conditional distributions?\nRecall for the Normal likelihood \\(y_i|\\mu,\\sigma^2 \\sim N(\\mu, \\sigma^2)\\) where \\(\\sigma\\) is known and a Normal prior \\(\\mu \\sim N(\\mu_0, \\sigma^2_{_0})\\), we get a posterior for \\(\\mu\\) that is also a normal distribution (i.e., we used a conjugate prior)\n\\[\\mu|y \\sim N \\bigg(\\frac{\\mu_0/\\sigma^2_{0}+ n\\bar{y}/\\sigma^2}{1/\\sigma^2_{0}+n/\\sigma^2}, {\\frac{1}{1/\\sigma^2_{0}+n/\\sigma^2}}\\bigg)\\]\nRecall for the Normal likelihood \\(y_i|\\mu,\\sigma^2 \\sim N(\\mu, \\sigma^2)\\) where \\(\\mu\\) is known and a Gamma prior \\(\\frac{1}{\\sigma^2} = \\tau \\sim Gamma(a, b)\\) we get a posterior for \\(\\tau\\) that will also be a gamma distribution\n\\[\\tau|y \\sim Gamma \\bigg(a + n/2, b + 1/2\\sum_{i=1}^n (y_i - \\mu)^2\\bigg)\\]\nThese are the complete conditionals. We know the posterior distribution for one parameter conditional on knowning the other parameter(s). Now we can use Gibbs sampling."
+  },
+  {
+    "objectID": "4-MCMC.html#gibbs-sampling-algorithm-for-the-kid-iq-example",
+    "href": "4-MCMC.html#gibbs-sampling-algorithm-for-the-kid-iq-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Gibbs Sampling Algorithm for the Kid IQ example",
+    "text": "Gibbs Sampling Algorithm for the Kid IQ example\nRecall data (y) are available on the cognitive test scores of three- and four-year-old children in the USA. The sample contains \\(n=434\\) observations.\n\n\n\\(y \\sim Normal(\\mu, \\sigma^2)\\)\n\\(\\mu \\sim Normal(80 ,10)\\) \\(1/\\sigma^2 = \\tau \\sim gamma(1 ,1)\\)\n\nLet’s initialise using \\(\\mu^{(1)} = 80, \\tau^{(1)} = 1\\)\nGiven starting values \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\), draw samples s = 2, 3,….,`some large number’ as follows:\n1.1. sample \\(\\tau^{(s)}\\) from \\(p(\\tau|y,\\mu^{(s-1)})\\).\n1.2. sample \\(\\mu^{(s)}\\) from \\(p(\\mu|y,\\tau^{(s)})\\)\nRepeat and this will (eventually) generate samples from \\(p(\\mu,\\sigma|y)\\), which is what we want!\n\n\n\n## Data\ny &lt;- kidiq$kid_score\nn &lt;- length(y)\n\n## Prior parameters \nmu0 &lt;- 80; sigma.mu0 &lt;- 10 # for normal prior (for mu)\na &lt;- 1; b &lt;- 1 # for gamma prior (for tau)\n\nn_iter &lt;- 10000 ## choose # iter\n## create objects to store results\nmu_s &lt;- tau_s &lt;- sigma_s &lt;- rep(NA, n_iter)\n\n## 0. Initialise \nmu_s[1] &lt;- 80; tau_s[1] &lt;- 1; sigma_s[1] &lt;- 1\n## define parameters for gamma posterior on tau\npost.a = a + n/2; post.b = 1/2*(sum((y-mu_s[1])^2))\n\n## 1.\nfor(s in 2:n_iter){\n## 1.1 sample from complete conditional for tau\ntau_s[s] &lt;- rgamma(1,post.a,post.b)\nsigma_s[s] &lt;- sqrt(1/tau_s[s]) # transform to sigma\n## update posterior parameters for mu\nmupost.mean = (mu0/(sigma.mu0^2) + tau_s[s]*n*mean(y))/(1/(sigma.mu0^2) + tau_s[s]*n)\nmupost.sd = sqrt(1/(1/(sigma.mu0^2)+tau_s[s]*n))\n## 1.2 sample from complete conditional for mu\nmu_s[s] &lt;- rnorm(1,mupost.mean,mupost.sd)\n## update posterior parameters for tau\npost.a = a + n/2\npost.b = b + 1/2*(sum((y-mu_s[s])^2))\n} # end s loop"
+  },
+  {
+    "objectID": "4-MCMC.html#output-from-mcmc",
+    "href": "4-MCMC.html#output-from-mcmc",
+    "title": "Bayesian Data Analysis",
+    "section": "Output from MCMC",
+    "text": "Output from MCMC\nMCMC samples are not independent draws from a target distribution:\n\nThe first draw is not a random draw from the target distribution and tuning of MCMC parameters may occur at the start of a chain.\nSubsequently, draw s + 1 depends on draw s: the samples may be autocorrelated.\n\nWe can use samples from an MCMC algorithm to do inference but ONLY IF\n\nWe exclude samples from the initial period (burn-in).\nWe “wait long enough” to get a set of samples that are representative of the target (posterior). distribution.\n\n\n\n# Create a dataset (tibble) of samples\n# chose a \"burn-in\" \nn_burnin &lt;- 100\n# Remove the first sample from mu_s and sigma_s\npost_samps &lt;- tibble(sample_index = 1:(n_iter-n_burnin),\n                     mu_s = mu_s[-(1:n_burnin)], \n                     sigma_s = sigma_s[-(1:n_burnin)])\npost_samps\n\n\n# A tibble: 9,900 × 3\n   sample_index  mu_s sigma_s\n          &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1            1  86.1    20.2\n 2            2  86.3    20.9\n 3            3  87.3    19.6\n 4            4  87.2    20.7\n 5            5  87.5    20.0\n 6            6  88.4    20.3\n 7            7  84.9    20.9\n 8            8  86.5    19.8\n 9            9  87.8    20.3\n10           10  88.5    20.4\n# ℹ 9,890 more rows"
+  },
+  {
+    "objectID": "4-MCMC.html#output-from-mcmc-trace-plots",
+    "href": "4-MCMC.html#output-from-mcmc-trace-plots",
+    "title": "Bayesian Data Analysis",
+    "section": "Output from MCMC: trace plots",
+    "text": "Output from MCMC: trace plots\nWe can use trace plots to investigate the MCMC samples/chains for the parameters.\n\n\nlibrary(ggplot2)\n\n# Trace plot for mu\np1 &lt;- ggplot(post_samps, aes(x = sample_index, mu_s)) +\n        geom_line(colour = \"blue\") +\n        ggtitle(\"Posterior Samples of mu\")\n\n# Trace plot for sigma\np2 &lt;- ggplot(post_samps, aes(x = sample_index, sigma_s)) +\n        geom_line(colour = \"blue\") +\n        ggtitle(\"Posterior Samples of sigma\")\n\np1;p2"
+  },
+  {
+    "objectID": "4-MCMC.html#output-from-mcmc-joint-parameter-plots",
+    "href": "4-MCMC.html#output-from-mcmc-joint-parameter-plots",
+    "title": "Bayesian Data Analysis",
+    "section": "Output from MCMC: joint parameter plots",
+    "text": "Output from MCMC: joint parameter plots\nWe can visualise the joint posterior distribution of the parameters based on the MCMC samples.\n\n\n# Scatter plot of mu_s vs. sd_s\np3 &lt;- ggplot(post_samps, aes(x = sigma_s, mu_s)) +\n        geom_point(colour = \"blue\") \n\n# Contour plot of joint density\np4 &lt;- ggplot(post_samps, aes(x = sigma_s, y = mu_s)) + \n  geom_density_2d(colour = \"blue\")    \n\np3;p4"
+  },
+  {
+    "objectID": "4-MCMC.html#output-from-mcmc-density-plots-and-summaries",
+    "href": "4-MCMC.html#output-from-mcmc-density-plots-and-summaries",
+    "title": "Bayesian Data Analysis",
+    "section": "Output from MCMC: density plots and summaries",
+    "text": "Output from MCMC: density plots and summaries\nWe can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.\n\n\n# Density plot for posterior samples of mu\np5 &lt;- ggplot(post_samps, aes(x = mu_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of mu\") \n\n# Mean and credible interval for mu\nmu_mean &lt;- mean(mu_s)\nmu_ci &lt;- quantile(mu_s, probs = c(0.025, 0.975))\n\np5;cat(\"Mean of Mu:\", mu_mean, \"\\n\");cat(\"95% Credible Interval for Mu:\", mu_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Mu: 86.72713 \n\n\n95% Credible Interval for Mu: 84.83755 88.63397 \n\n\n\n\np6 &lt;- ggplot(post_samps, aes(x = sigma_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of sigma\") \n\n# Mean and credible interval for sigma\nsigma_mean &lt;- mean(sigma_s)\nsigma_ci &lt;- quantile(sigma_s, probs = c(0.025, 0.975))\n\np6;cat(\"Mean of Sigma:\", sigma_mean, \"\\n\");cat(\"95% Credible Interval for Sigma:\", sigma_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Sigma: 20.39639 \n\n\n95% Credible Interval for Sigma: 19.11987 21.81362"
+  },
+  {
+    "objectID": "4-MCMC.html#stationary-distributions",
+    "href": "4-MCMC.html#stationary-distributions",
+    "title": "Bayesian Data Analysis",
+    "section": "Stationary Distributions",
+    "text": "Stationary Distributions\nAs we progress through time, the probability of being in certain states (e.g., rainy or sunny) are more likely than others. Over the long run, the distribution will reach an equilibrium with an associated probability of being in each state.\nThis is known as the Stationary Distribution.\n\n\n\n\n\n\nThe stationary distribution of a Markov chain\n\n\nThe stationary distribution of a Markov chain is a probability distribution over the states of the chain that remains unchanged as time progresses.\nMathematically, if \\(\\pi\\) represents the stationary distribution (a row vector of probabilities) and \\(P\\) is the transition matrix of the Markov chain, the stationary distribution satisfies the equation:\n\\[\\pi = \\pi P\\]\nThis means that when the transition matrix \\(P\\) is applied to \\(\\pi\\), the result is still \\(\\pi\\), indicating that the distribution has stabilized and doesn’t change over time."
+  },
+  {
+    "objectID": "4-MCMC.html#gibbs-aampling-algorithm-for-the-kid-iq-example",
+    "href": "4-MCMC.html#gibbs-aampling-algorithm-for-the-kid-iq-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Gibbs aampling algorithm for the Kid IQ example",
+    "text": "Gibbs aampling algorithm for the Kid IQ example\nRecall data (y) are available on the cognitive test scores of three- and four-year-old children in the USA. The sample contains \\(n=434\\) observations.\n\n\n\\(y \\sim Normal(\\mu, \\sigma^2)\\)\n\\(\\mu \\sim Normal(80 ,10)\\) \\(1/\\sigma^2 = \\tau \\sim gamma(1 ,1)\\)\n\nLet’s initialise using \\(\\mu^{(1)} = 80, \\tau^{(1)} = 1\\)\nGiven starting values \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\), draw samples s = 2, 3,….,`some large number’ as follows:\n1.1. sample \\(\\tau^{(s)}\\) from \\(p(\\tau|y,\\mu^{(s-1)})\\).\n1.2. sample \\(\\mu^{(s)}\\) from \\(p(\\mu|y,\\tau^{(s)})\\)\nRepeat and this will (eventually) generate samples from \\(p(\\mu,\\sigma|y)\\), which is what we want!\n\n\n\n## Data\ny &lt;- kidiq$kid_score\nn &lt;- length(y)\n\n## Prior parameters \nmu0 &lt;- 80; sigma.mu0 &lt;- 10 # for normal prior (for mu)\na &lt;- 1; b &lt;- 1 # for gamma prior (for tau)\n\nn_iter &lt;- 10000 ## choose # iter\n## create objects to store results\nmu_s &lt;- tau_s &lt;- sigma_s &lt;- rep(NA, n_iter)\n\n## 0. Initialise \nmu_s[1] &lt;- 80; tau_s[1] &lt;- 1; sigma_s[1] &lt;- 1\n## define parameters for gamma posterior on tau\npost.a = a + n/2; post.b = 1/2*(sum((y-mu_s[1])^2))\n\n## 1.\nfor(s in 2:n_iter){\n## 1.1 sample from complete conditional for tau\ntau_s[s] &lt;- rgamma(1,post.a,post.b)\nsigma_s[s] &lt;- sqrt(1/tau_s[s]) # transform to sigma\n## update posterior parameters for mu\nmupost.mean = (mu0/(sigma.mu0^2) + tau_s[s]*n*mean(y))/(1/(sigma.mu0^2) + tau_s[s]*n)\nmupost.sd = sqrt(1/(1/(sigma.mu0^2)+tau_s[s]*n))\n## 1.2 sample from complete conditional for mu\nmu_s[s] &lt;- rnorm(1,mupost.mean,mupost.sd)\n## update posterior parameters for tau\npost.a = a + n/2\npost.b = b + 1/2*(sum((y-mu_s[s])^2))\n} # end s loop"
   }
 ]

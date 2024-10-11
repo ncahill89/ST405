@@ -32,6 +32,10 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 3: [Single Parameter Normal](https://ncahill89.github.io/ST405/3a-SingleParameterNormal.html)
 
+### Week 4
+4: [MCMC Sampling](https://ncahill89.github.io/ST405/4-MCMC.html)
+
+
 ## Tutorials
 
 [Tutorial Sheet 1: Bayesian inference using binomial and Poisson models](https://ncahill89.github.io/ST405/Tutorial1.html)
