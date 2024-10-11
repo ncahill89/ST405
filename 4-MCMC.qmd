@@ -464,7 +464,7 @@ post_samps <- tibble(sample_index = 1:(n_iter-n_burnin),
 post_samps
 ```
 
-## Output from MCMC: trace plots {style="font-size: 70%;"}
+## Output from MCMC: trace plots {style="font-size: 60%;"}
 
 We can use trace plots to investigate the MCMC samples/chains for the parameters.
 
@@ -486,7 +486,7 @@ p2 <- ggplot(post_samps, aes(x = sample_index, sigma_s)) +
 p1;p2
 ```
 
-## Output from MCMC: joint parameter plots {style="font-size: 70%;"}
+## Output from MCMC: joint parameter plots {style="font-size: 60%;"}
 
 We can visualise the joint posterior distribution of the parameters based on the MCMC samples.
 
