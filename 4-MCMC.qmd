@@ -112,7 +112,7 @@ We find after enough iterations (samples) $P(S) = 0.83$.
 ::: {.column width="50%"}
 ### R code
 
-```{r, echo = TRUE, include=TRUE}
+```{r, echo = TRUE, include=TRUE, eval = FALSE}
 #| code-line-numbers: "1-4|5-19|20-22|12,13,23,25"
 
 # 0 = rainy, 1 = sunny
@@ -437,7 +437,7 @@ post.b = b + 1/2*(sum((y-mu_s[s])^2))
 :::
 :::
 
-## Output from MCMC {style="font-size: 70%;"}
+## Output from MCMC {style="font-size: 60%;"}
 
 MCMC samples are not *independent* draws from a target distribution:
 
@@ -505,7 +505,7 @@ p4 <- ggplot(post_samps, aes(x = sigma_s, y = mu_s)) +
 p3;p4
 ```
 
-## Output from MCMC: density plots and summaries {style="font-size: 70%;"}
+## Output from MCMC: density plots and summaries {style="font-size: 60%;"}
 
 We can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.
 
