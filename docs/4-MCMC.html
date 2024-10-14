@@ -501,8 +501,8 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 </section>
-<section id="using-mcmc-sampling-to-find-the-stationary-distribution" class="slide level2" style="font-size: 65%;">
-<h2>Using MCMC sampling to find the stationary distribution</h2>
+<section id="creating-the-markov-chain" class="slide level2" style="font-size: 65%;">
+<h2>Creating the Markov Chain</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <h3 id="the-algorithm">The “algorithm”</h3>
@@ -769,16 +769,16 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <pre><code># A tibble: 9,900 × 3
    sample_index  mu_s sigma_s
           &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
- 1            1  87.2    20.7
- 2            2  86.9    20.3
- 3            3  85.9    19.5
- 4            4  87.9    20.2
- 5            5  86.8    20.9
- 6            6  87.2    21.0
- 7            7  86.0    19.7
- 8            8  84.4    20.0
- 9            9  86.7    20.0
-10           10  84.4    20.7
+ 1            1  88.3    19.7
+ 2            2  87.0    19.8
+ 3            3  87.2    20.5
+ 4            4  85.8    20.1
+ 5            5  86.6    21.3
+ 6            6  84.8    21.0
+ 7            7  87.8    21.7
+ 8            8  87.6    21.1
+ 9            9  85.9    20.6
+10           10  88.0    21.1
 # ℹ 9,890 more rows</code></pre>
 </div>
 </div></div>
@@ -875,10 +875,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Mu: 86.7247 </code></pre>
+<pre><code>Mean of Mu: 86.72426 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Mu: 84.73527 88.63879 </code></pre>
+<pre><code>95% Credible Interval for Mu: 84.81267 88.60455 </code></pre>
 </div>
 </div></div>
 <div class="cell columns column-output-location">
@@ -903,10 +903,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Sigma: 20.39542 </code></pre>
+<pre><code>Mean of Sigma: 20.39677 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Sigma: 19.08624 21.84701 </code></pre>
+<pre><code>95% Credible Interval for Sigma: 19.07643 21.82497 </code></pre>
 </div>
 </div></div>
 

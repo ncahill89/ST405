@@ -111,7 +111,7 @@ This means that when the transition matrix $P$ is applied to $\pi$, the result i
 :::
 
 
-## Using MCMC sampling to find the stationary distribution {style="font-size: 65%;"}
+## Creating the Markov Chain {style="font-size: 65%;"}
 
 ::: columns
 ::: {.column width="50%"}
