@@ -164,7 +164,7 @@ plot(p_sunny, type = "l", xlab = "Iteration", ylab = "P(S)")
 :::
 
 
-## The Metropolis Algorithm {style="font-size: 70%;"}
+## MCMC: The Metropolis Algorithm {style="font-size: 70%;"}
 
 -   Suppose we have a target distribution $p(\theta|y)$ from which we would like to generate a representative sample.
 
@@ -346,7 +346,7 @@ lines(mu_samps, col = "red")
 
 -   The Metropolis method is very useful but can be inefficient. Another sampling method that's often used for models with multiple parameters is **Gibbs sampling.**
 
-## The Gibbs Sampler {style="font-size: 70%;"}
+## MCMC: The Gibbs Sampler {style="font-size: 70%;"}
 
 We can use Gibbs Sampling when we can sample directly from the **conditional posterior distributions** for each model parameter.
 
@@ -378,7 +378,7 @@ $$\tau|y \sim Gamma \bigg(a + n/2, b + 1/2\sum_{i=1}^n (y_i - \mu)^2\bigg)$$
 
 These are the **complete conditionals**. We know the posterior distribution for one parameter conditional on knowning the other parameter(s). Now we can use Gibbs sampling.
 
-## Gibbs aampling algorithm for the Kid IQ example {style="font-size: 70%;"}
+## Gibbs sampling algorithm for the Kid IQ example {style="font-size: 70%;"}
 
 Recall data (y) are available on the cognitive test scores of three- and four-year-old children in the USA. The sample contains $n=434$ observations.
 
