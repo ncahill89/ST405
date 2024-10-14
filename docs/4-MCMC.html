@@ -480,8 +480,29 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <p>Note the future state of the weather only depends on the current state.</p>
 </div></div>
 </section>
-<section id="creating-the-markov-chain" class="slide level2" style="font-size: 65%;">
-<h2>Creating the Markov chain</h2>
+<section id="stationary-distributions" class="slide level2" style="font-size: 70%;">
+<h2>Stationary Distributions</h2>
+<p>As we progress through time, the probability of being in certain states (e.g., rainy or sunny) are more likely than others. Over the long run, the distribution will reach an equilibrium with an associated probability of being in each state.</p>
+<p>This is known as the <strong>Stationary Distribution</strong>.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>The <strong>stationary distribution</strong> of a Markov chain</strong></p>
+</div>
+<div class="callout-content">
+<p>The <strong>stationary distribution</strong> of a Markov chain is a probability distribution over the states of the chain that remains unchanged as time progresses.</p>
+<p>Mathematically, if <span class="math inline">\(\pi\)</span> represents the stationary distribution (a row vector of probabilities) and <span class="math inline">\(P\)</span> is the transition matrix of the Markov chain, the stationary distribution satisfies the equation:</p>
+<p><span class="math display">\[\pi = \pi P\]</span></p>
+<p>This means that when the transition matrix <span class="math inline">\(P\)</span> is applied to <span class="math inline">\(\pi\)</span>, the result is still <span class="math inline">\(\pi\)</span>, indicating that the distribution has stabilized and doesn’t change over time.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-mcmc-sampling-to-find-the-stationary-distribution" class="slide level2" style="font-size: 65%;">
+<h2>Using MCMC sampling to find the stationary distribution</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <h3 id="the-algorithm">The “algorithm”</h3>
@@ -526,27 +547,6 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <span id="cb1-25"><a></a><span class="fu">plot</span>(p_sunny, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">xlab =</span> <span class="st">"Iteration"</span>, <span class="at">ylab =</span> <span class="st">"P(S)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
-</section>
-<section id="stationary-distributions" class="slide level2" style="font-size: 70%;">
-<h2>Stationary Distributions</h2>
-<p>As we progress through time, the probability of being in certain states (e.g., rainy or sunny) are more likely than others. Over the long run, the distribution will reach an equilibrium with an associated probability of being in each state.</p>
-<p>This is known as the <strong>Stationary Distribution</strong>.</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>The <strong>stationary distribution</strong> of a Markov chain</strong></p>
-</div>
-<div class="callout-content">
-<p>The <strong>stationary distribution</strong> of a Markov chain is a probability distribution over the states of the chain that remains unchanged as time progresses.</p>
-<p>Mathematically, if <span class="math inline">\(\pi\)</span> represents the stationary distribution (a row vector of probabilities) and <span class="math inline">\(P\)</span> is the transition matrix of the Markov chain, the stationary distribution satisfies the equation:</p>
-<p><span class="math display">\[\pi = \pi P\]</span></p>
-<p>This means that when the transition matrix <span class="math inline">\(P\)</span> is applied to <span class="math inline">\(\pi\)</span>, the result is still <span class="math inline">\(\pi\)</span>, indicating that the distribution has stabilized and doesn’t change over time.</p>
-</div>
-</div>
-</div>
 </section>
 <section id="the-metropolis-algorithm" class="slide level2" style="font-size: 70%;">
 <h2>The Metropolis Algorithm</h2>
@@ -769,16 +769,16 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <pre><code># A tibble: 9,900 × 3
    sample_index  mu_s sigma_s
           &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
- 1            1  86.6    19.7
- 2            2  86.4    20.4
- 3            3  86.9    20.1
- 4            4  85.9    19.7
- 5            5  88.1    20.5
- 6            6  85.3    21.6
- 7            7  85.3    19.8
- 8            8  86.6    20.6
- 9            9  86.4    19.8
-10           10  87.5    21.3
+ 1            1  87.2    20.7
+ 2            2  86.9    20.3
+ 3            3  85.9    19.5
+ 4            4  87.9    20.2
+ 5            5  86.8    20.9
+ 6            6  87.2    21.0
+ 7            7  86.0    19.7
+ 8            8  84.4    20.0
+ 9            9  86.7    20.0
+10           10  84.4    20.7
 # ℹ 9,890 more rows</code></pre>
 </div>
 </div></div>
@@ -875,10 +875,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Mu: 86.73422 </code></pre>
+<pre><code>Mean of Mu: 86.7247 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Mu: 84.82382 88.63097 </code></pre>
+<pre><code>95% Credible Interval for Mu: 84.73527 88.63879 </code></pre>
 </div>
 </div></div>
 <div class="cell columns column-output-location">
@@ -903,10 +903,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Sigma: 20.39525 </code></pre>
+<pre><code>Mean of Sigma: 20.39542 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Sigma: 19.11789 21.79996 </code></pre>
+<pre><code>95% Credible Interval for Sigma: 19.08624 21.84701 </code></pre>
 </div>
 </div></div>
 

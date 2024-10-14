@@ -92,7 +92,26 @@ Note the future state of the weather only depends on the current state.
 :::
 :::
 
-## Creating the Markov chain {style="font-size: 65%;"}
+## Stationary Distributions {style="font-size: 70%;"}
+
+As we progress through time, the probability of being in certain states (e.g., rainy or sunny) are more likely than others. Over the long run, the distribution will reach an equilibrium with an associated probability of being in each state.
+
+This is known as the **Stationary Distribution**.
+
+::: callout-note
+## The **stationary distribution** of a Markov chain
+
+The **stationary distribution** of a Markov chain is a probability distribution over the states of the chain that remains unchanged as time progresses.
+
+Mathematically, if $\pi$ represents the stationary distribution (a row vector of probabilities) and $P$ is the transition matrix of the Markov chain, the stationary distribution satisfies the equation:
+
+$$\pi = \pi P$$
+
+This means that when the transition matrix $P$ is applied to $\pi$, the result is still $\pi$, indicating that the distribution has stabilized and doesn't change over time.
+:::
+
+
+## Using MCMC sampling to find the stationary distribution {style="font-size: 65%;"}
 
 ::: columns
 ::: {.column width="50%"}
@@ -144,23 +163,6 @@ plot(p_sunny, type = "l", xlab = "Iteration", ylab = "P(S)")
 :::
 :::
 
-## Stationary Distributions {style="font-size: 70%;"}
-
-As we progress through time, the probability of being in certain states (e.g., rainy or sunny) are more likely than others. Over the long run, the distribution will reach an equilibrium with an associated probability of being in each state.
-
-This is known as the **Stationary Distribution**.
-
-::: callout-note
-## The **stationary distribution** of a Markov chain
-
-The **stationary distribution** of a Markov chain is a probability distribution over the states of the chain that remains unchanged as time progresses.
-
-Mathematically, if $\pi$ represents the stationary distribution (a row vector of probabilities) and $P$ is the transition matrix of the Markov chain, the stationary distribution satisfies the equation:
-
-$$\pi = \pi P$$
-
-This means that when the transition matrix $P$ is applied to $\pi$, the result is still $\pi$, indicating that the distribution has stabilized and doesn't change over time.
-:::
 
 ## The Metropolis Algorithm {style="font-size: 70%;"}
 
