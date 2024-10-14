@@ -585,7 +585,7 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <ol start="0" type="1">
 <li><p>Let’s initialise using <span class="math inline">\(\theta_{cur}\)</span> = 0.5</p></li>
 <li><p>Propose a new move using a Normal proposal distribution such that <span class="math inline">\(\theta_{pro} = \theta_{cur} + N(0,\sigma)\)</span></p></li>
-<li><p><span class="math inline">\(r = \text{min} \bigg(1, \frac{ dbinom(y,n,\theta_{pro})dbeta(\theta_{pro},1,1)}{dbinom(y,n,\theta_{cur})dbeta(\theta_{cur},1,1)}\bigg)\)</span></p></li>
+<li><p><span class="math inline">\(r = \text{min} \bigg(1, \frac{ dbinom(y,n,\theta_{pro})dbeta(\theta_{pro},a,b)}{dbinom(y,n,\theta_{cur})dbeta(\theta_{cur},a,b)}\bigg)\)</span></p></li>
 <li><p>Compare <span class="math inline">\(u \sim Uniform(0,1)\)</span> with <span class="math inline">\(r\)</span> and accept move if <span class="math inline">\(u &lt; r\)</span></p></li>
 <li><p>Repeat</p></li>
 </ol>
@@ -769,16 +769,16 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <pre><code># A tibble: 9,900 × 3
    sample_index  mu_s sigma_s
           &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
- 1            1  86.8    19.4
- 2            2  86.8    21.5
- 3            3  88.2    20.7
- 4            4  86.2    21.3
- 5            5  88.2    20.8
- 6            6  87.4    19.8
- 7            7  86.1    20.8
- 8            8  86.6    20.6
- 9            9  84.4    20.2
-10           10  86.0    20.7
+ 1            1  86.2    21.7
+ 2            2  87.7    20.3
+ 3            3  87.0    19.4
+ 4            4  88.0    21.4
+ 5            5  86.7    19.7
+ 6            6  86.9    19.4
+ 7            7  87.2    20.1
+ 8            8  87.2    20.2
+ 9            9  89.0    19.8
+10           10  86.8    19.8
 # ℹ 9,890 more rows</code></pre>
 </div>
 </div></div>
@@ -875,10 +875,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Mu: 86.72991 </code></pre>
+<pre><code>Mean of Mu: 86.73501 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Mu: 84.77611 88.66709 </code></pre>
+<pre><code>95% Credible Interval for Mu: 84.84479 88.63388 </code></pre>
 </div>
 </div></div>
 <div class="cell columns column-output-location">
@@ -903,10 +903,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Sigma: 20.3956 </code></pre>
+<pre><code>Mean of Sigma: 20.38773 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Sigma: 19.11056 21.82009 </code></pre>
+<pre><code>95% Credible Interval for Sigma: 19.1062 21.77268 </code></pre>
 </div>
 </div></div>
 

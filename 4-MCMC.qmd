@@ -200,7 +200,7 @@ $\theta|a,b \sim Beta(a = 1 ,b = 1)$
 
 1.  Propose a new move using a Normal proposal distribution such that $\theta_{pro} = \theta_{cur} + N(0,\sigma)$
 
-2.  $r = \text{min} \bigg(1, \frac{ dbinom(y,n,\theta_{pro})dbeta(\theta_{pro},1,1)}{dbinom(y,n,\theta_{cur})dbeta(\theta_{cur},1,1)}\bigg)$
+2.  $r = \text{min} \bigg(1, \frac{ dbinom(y,n,\theta_{pro})dbeta(\theta_{pro},a,b)}{dbinom(y,n,\theta_{cur})dbeta(\theta_{cur},a,b)}\bigg)$
 
 3.  Compare $u \sim Uniform(0,1)$ with $r$ and accept move if $u < r$
 
