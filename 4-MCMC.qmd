@@ -247,6 +247,84 @@ plot(theta_cur, type = "l")
 :::
 :::
 
+## Metropolis Algorithm for the Happiness example {style="font-size: 60%;"}
+
+```{r}
+library(ggplot2)
+library(gganimate)
+library(dplyr)
+library(ggforce)
+
+# Parameters
+n <- 20 
+y <- 14
+a <- 1
+b <- 1
+
+# Grid for theta
+theta_grid <- seq(0, 1, by = 0.01)
+theta_dens <- dbeta(theta_grid, y + a, n - y + b)
+
+# Function to calculate the acceptance probability
+get_acceptance <- function(theta_cur, theta_pro, y, n, a, b) {
+  if (theta_pro < 0 | theta_pro > 1) {
+    return(0)
+  } else {
+    r <- min(1, dbinom(y, n, theta_pro) * dbeta(theta_pro, a, b) / 
+               (dbinom(y, n, theta_cur) * dbeta(theta_cur, a, b)))
+    return(r)
+  }
+}
+
+# Initialize the current theta value
+theta_cur <- 0.5
+
+# Number of iterations for animation
+iterations <- 50
+
+# Data storage for plotting each step
+data_list <- list()
+
+for (i in 1:iterations) {
+  # Step 1: Propose a new theta
+  theta_pro <- theta_cur + rnorm(1, 0, 0.1)
+  
+  # Calculate acceptance probability
+  r <- get_acceptance(theta_cur, theta_pro, y, n, a, b)
+  
+  # Generate a random uniform value
+  u <- runif(1, 0, 1)
+  
+  # Accept or reject the proposal
+  accept <- u < r
+  theta_cur <- ifelse(accept, theta_pro, theta_cur)
+  
+  # Store data for animation
+  data_list[[i]] <- data.frame(
+    theta_cur = theta_cur,
+    theta_pro = theta_pro,
+    accept = accept,
+    iter = i
+  )
+}
+
+# Combine data into a single data frame
+animation_data <- do.call(rbind, data_list)
+
+# Create the plot with gganimate
+p <- ggplot() +
+  geom_line(aes(x = theta_grid, y = theta_dens), color = "black") +
+  geom_point(data = animation_data, aes(x = theta_cur, y = 0, color = as.factor(accept)), size = 3) +
+  theme_minimal() +
+  labs(x = expression(theta), y = "Density", color = "Accept") +
+  transition_states(iter, transition_length = 2, state_length = 1) +
+  ease_aes('linear')
+
+
+p
+```
+
+
 ## Trace plot and chains for $\theta$ {style="font-size: 70%;"}
 
 -   Traceplots provide a visual tool for monitoring convergence of an MCMC chain towards a target distribution (i.e., the posterior).
