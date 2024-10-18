@@ -228,7 +228,7 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler"
   },
   {
     "objectID": "2a-BetaBinomial.html#scenario",
@@ -698,5 +698,201 @@
     "title": "Bayesian Data Analysis",
     "section": "Metropolis Algorithm for the Happiness example",
     "text": "Metropolis Algorithm for the Happiness example"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#recap-gibbs-sampling-algorithm-for-the-kid-iq-example",
+    "href": "5a-Diagnostics.html#recap-gibbs-sampling-algorithm-for-the-kid-iq-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Recap: Gibbs Sampling Algorithm for the Kid IQ example",
+    "text": "Recap: Gibbs Sampling Algorithm for the Kid IQ example\nRecall data (y) are available on the cognitive test scores of three- and four-year-old children in the USA. The sample contains \\(n=434\\) observations.\n\n\n\\(y \\sim Normal(\\mu, \\sigma^2)\\)\n\\(\\mu \\sim Normal(80 ,10)\\) \\(1/\\sigma^2 = \\tau \\sim gamma(1 ,1)\\)\n\nLet’s initialise using \\(\\mu^{(1)} = 80, \\tau^{(1)} = 1\\)\nGiven starting values \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\), draw samples s = 2, 3,….,`some large number’ as follows:\n1.1. sample \\(\\tau^{(s)}\\) from \\(p(\\tau|y,\\mu^{(s-1)})\\).\n1.2. sample \\(\\mu^{(s)}\\) from \\(p(\\mu|y,\\tau^{(s)})\\)\nRepeat and this will (eventually) generate samples from \\(p(\\mu,\\sigma|y)\\), which is what we want!\n\n\n\n## Data\ny &lt;- kidiq$kid_score\nn &lt;- length(y)\n\n## Prior parameters \nmu0 &lt;- 80; sigma.mu0 &lt;- 10 # for normal prior (for mu)\na &lt;- 1; b &lt;- 1 # for gamma prior (for tau)\n\nn_iter &lt;- 10000 ## choose # iter\n## create objects to store results\nmu_s &lt;- tau_s &lt;- sigma_s &lt;- rep(NA, n_iter)\n\n## 0. Initialise \nmu_s[1] &lt;- 80; tau_s[1] &lt;- 1; sigma_s[1] &lt;- 1\n## define parameters for gamma posterior on tau\npost.a = a + n/2; post.b = 1/2*(sum((y-mu_s[1])^2))\n\n## 1.\nfor(s in 2:n_iter){\n## 1.1 sample from complete conditional for tau\ntau_s[s] &lt;- rgamma(1,post.a,post.b)\nsigma_s[s] &lt;- sqrt(1/tau_s[s]) # transform to sigma\n## update posterior parameters for mu\nmupost.mean = (mu0/(sigma.mu0^2) + tau_s[s]*n*mean(y))/(1/(sigma.mu0^2) + tau_s[s]*n)\nmupost.sd = sqrt(1/(1/(sigma.mu0^2)+tau_s[s]*n))\n## 1.2 sample from complete conditional for mu\nmu_s[s] &lt;- rnorm(1,mupost.mean,mupost.sd)\n## update posterior parameters for tau\npost.a = a + n/2\npost.b = b + 1/2*(sum((y-mu_s[s])^2))\n} # end s loop"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#recap-output-from-mcmc",
+    "href": "5a-Diagnostics.html#recap-output-from-mcmc",
+    "title": "Bayesian Data Analysis",
+    "section": "Recap: Output from MCMC",
+    "text": "Recap: Output from MCMC\nMCMC samples are not independent draws from a target distribution:\n\nThe first draw is not a random draw from the target distribution and tuning of MCMC parameters may occur at the start of a chain.\nSubsequently, draw s + 1 depends on draw s: the samples may be autocorrelated.\n\nWe can use samples from an MCMC algorithm to do inference but ONLY IF\n\nWe exclude samples from the initial period (burn-in).\nWe “wait long enough” to get a set of samples that are representative of the target (posterior). distribution.\n\n\n\n# Create a dataset (tibble) of samples\n# chose a \"burn-in\" \nn_burnin &lt;- 100\n# Remove the first sample from mu_s and sigma_s\npost_samps &lt;- tibble(sample_index = 1:(n_iter-n_burnin),\n                     mu_s = mu_s[-(1:n_burnin)], \n                     sigma_s = sigma_s[-(1:n_burnin)])\npost_samps\n\n\n# A tibble: 9,900 × 3\n   sample_index  mu_s sigma_s\n          &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1            1  86.1    19.7\n 2            2  86.0    20.3\n 3            3  87.4    20.1\n 4            4  85.1    20.6\n 5            5  86.8    19.7\n 6            6  87.2    20.2\n 7            7  85.4    22.5\n 8            8  85.2    20.9\n 9            9  85.4    19.3\n10           10  86.3    20.3\n# ℹ 9,890 more rows"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#recap-trace-plots",
+    "href": "5a-Diagnostics.html#recap-trace-plots",
+    "title": "Bayesian Data Analysis",
+    "section": "Recap: Trace Plots",
+    "text": "Recap: Trace Plots\nWe can use trace plots to investigate the MCMC samples/chains for the parameters.\n\n\nlibrary(ggplot2)\n\n# Trace plot for mu\np1 &lt;- ggplot(post_samps, aes(x = sample_index, mu_s)) +\n        geom_line(colour = \"blue\") +\n        ggtitle(\"Posterior Samples of mu\")\n\n# Trace plot for sigma\np2 &lt;- ggplot(post_samps, aes(x = sample_index, sigma_s)) +\n        geom_line(colour = \"blue\") +\n        ggtitle(\"Posterior Samples of sigma\")\n\np1;p2"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#recap-density-plots-and-summaries",
+    "href": "5a-Diagnostics.html#recap-density-plots-and-summaries",
+    "title": "Bayesian Data Analysis",
+    "section": "Recap: Density plots and summaries",
+    "text": "Recap: Density plots and summaries\nWe can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.\n\n\n# Density plot for posterior samples of mu\np5 &lt;- ggplot(post_samps, aes(x = mu_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of mu\") \n\n# Mean and credible interval for mu\nmu_mean &lt;- mean(mu_s)\nmu_ci &lt;- quantile(mu_s, probs = c(0.025, 0.975))\n\np5;cat(\"Mean of Mu:\", mu_mean, \"\\n\");cat(\"95% Credible Interval for Mu:\", mu_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Mu: 86.73196 \n\n\n95% Credible Interval for Mu: 84.84126 88.64997 \n\n\n\n\np6 &lt;- ggplot(post_samps, aes(x = sigma_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of sigma\") \n\n# Mean and credible interval for sigma\nsigma_mean &lt;- mean(sigma_s)\nsigma_ci &lt;- quantile(sigma_s, probs = c(0.025, 0.975))\n\np6;cat(\"Mean of Sigma:\", sigma_mean, \"\\n\");cat(\"95% Credible Interval for Sigma:\", sigma_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Sigma: 20.39999 \n\n\n95% Credible Interval for Sigma: 19.11762 21.7939"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-reprentativeness-accuracy-and-efficiency",
+    "href": "5a-Diagnostics.html#mcmc-reprentativeness-accuracy-and-efficiency",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC Reprentativeness, Accuracy and Efficiency",
+    "text": "MCMC Reprentativeness, Accuracy and Efficiency\nWe have 3 main goals in generating an MCMC sample from the target (posterior) distribution.\n\nThe values must be representative of the posterior distribution. They shouldn’t be influenced by the initial values of the chain. They should explore the full range of the parameter space.\nThe chain should be a sufficient size so that estimates are accurate and stable. Estimates and uncertainty intervals should not be much different if the MCMC is run again.\nThe chain should be generated as efficiently as possible.\n\nWe cannot run chains for an infinitely long time so we must check the quality based on a set of finite samples from the chain.\nWe use a set of convergence diagnostics to check the quality."
+  },
+  {
+    "objectID": "5a-Diagnostics.html#burn-in-and-mixing",
+    "href": "5a-Diagnostics.html#burn-in-and-mixing",
+    "title": "Bayesian Data Analysis",
+    "section": "Burn-in and Mixing",
+    "text": "Burn-in and Mixing\n\nBurn in phase = initial phase of an MCMC chain, when the chain converges away from initial values towards the target (posterior) distribution.\n\nSamples from the burn-in should be completely ignored.\n\nMixing refers to how well and how quickly a Markov chain explores and converges to the target probability distribution.\n\nWe can never be sure that a chain has converged but we can detect a lack of convergence i.e., if chains don’t overlap (don’t mix).\n\n\n\n\nHow many samples would you “burn in”?\n\n\n\n\n\n\n\n\n\n\nWhich chains are mixing well?"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-potential-scale-reduction-factor-hatr",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-potential-scale-reduction-factor-hatr",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Potential Scale Reduction Factor (\\(\\hat{R}\\))",
+    "text": "MCMC diagnostics: Potential Scale Reduction Factor (\\(\\hat{R}\\))\nThe Potential Scale Reduction Factor (R-hat), also called the Gelman-Rubin diagnostic, is used to assess the convergence of multiple MCMC chains in Bayesian analysis. It compares the variance within each chain to the variance between chains, indicating whether the chains have converged to the same target distribution.\nHow R-hat Works:\n\nWithin-Chain Variance (W): Measures the variability of samples within a single chain.\nBetween-Chain Variance (B): Measures the variability between the means of multiple chains.\nIf the chains are converging well, the within-chain and between-chain variances should be similar.\n\nInterpretation:\n\nR-hat close to 1: Indicates convergence; the chains are mixing well.\nR-hat &gt; 1: Suggests that the chains have not yet converged, and more sampling may be needed."
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-potential-scale-reduction-factor-hatr-1",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-potential-scale-reduction-factor-hatr-1",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Potential Scale Reduction Factor (\\(\\hat{R}\\))",
+    "text": "MCMC diagnostics: Potential Scale Reduction Factor (\\(\\hat{R}\\))\nThe graph above shows trace plots for three MCMC chains with an R-hat value close to 1, indicating good convergence. Each chain explores similar regions of the parameter space, reflecting similar means and variances. As a result, R-hat suggests that the chains are sampling from the same distribution effectively"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-potential-scale-reduction-factor-hatr-2",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-potential-scale-reduction-factor-hatr-2",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Potential Scale Reduction Factor (\\(\\hat{R}\\))",
+    "text": "MCMC diagnostics: Potential Scale Reduction Factor (\\(\\hat{R}\\))\nThe R-hat value signals that the chains haven’t converged."
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-potential-scale-reduction-factor-hatr-3",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-potential-scale-reduction-factor-hatr-3",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Potential Scale Reduction Factor (\\(\\hat{R}\\))",
+    "text": "MCMC diagnostics: Potential Scale Reduction Factor (\\(\\hat{R}\\))\nThe R-hat value signals that the chains haven’t fully converged, even though the differences between them aren’t extreme."
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-autocorrelation",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-autocorrelation",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Autocorrelation",
+    "text": "MCMC diagnostics: Autocorrelation\n\nMont Carlo samples are direct/random/independent draws from a target distribution.\nMCMC samples are NOT independent draws from a target distribution, because:\n\nThe first draw is set by the user and thus not a random draw from the target distribution.\nSubsequently, draw \\(s+1\\) depends on draw \\(s\\) - samples are autocorrelated\n\n\nIn Bayesian analysis, autocorrelation measures how correlated samples from a Markov Chain Monte Carlo (MCMC) chain are with their past values. High autocorrelation indicates that the samples are not exploring the parameter space effectively, which can lead to inefficient sampling and slow convergence."
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-autocorrelation-1",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-autocorrelation-1",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Autocorrelation",
+    "text": "MCMC diagnostics: Autocorrelation\nWhy Autocorrelation Matters:\n\nEffective Sample Size: High autocorrelation reduces the effective sample size of the chain, meaning that even though you have a lot of samples, they may not provide much new information.\nMixing: It helps assess the mixing of the chains. Good mixing results in low autocorrelation, indicating that the chains are moving freely through the parameter space.\n\nHow to Compute Autocorrelation:\n\nAutocorrelation Function (ACF): You can compute the autocorrelation for different lags (how far back in the chain you want to look) and visualize it to assess the behavior of the MCMC chain.\nVisual Representation: The autocorrelation plot (ACF plot) displays the autocorrelation coefficients for various lags, helping visualize how quickly the chain becomes uncorrelated."
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-autocorrelation-2",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-autocorrelation-2",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Autocorrelation",
+    "text": "MCMC diagnostics: Autocorrelation\nWe can use autocorrelation function (ACF) plots to help us diagnose autocorrelation issues.\nHigh autocorrelation"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-autocorrelation-3",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-autocorrelation-3",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Autocorrelation",
+    "text": "MCMC diagnostics: Autocorrelation\nWe can use autocorrelation function (ACF) plots to help us diagnose autocorrelation issues.\nReduced autocorrelation"
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-effective-sample-size-ess",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-effective-sample-size-ess",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: effective sample size (ESS)",
+    "text": "MCMC diagnostics: effective sample size (ESS)\nWe want to know what the sample size of a non-autocorrelated chain, that yields the same information, would be. An answer to this question can be provided with a measure called effective sample size (ESS)\nThe effective sample size (ESS) divides the actual sample size by the amount of autocorrelation.\n\\[ESS = \\frac{N}{1 + 2\\sum_{k=1}^\\infty\\rho_k}\\]\nwhere \\(\\rho_k\\) is the autocorrelation of the chain at lag \\(k\\). A good rule of thumb for the ESS is for it to be 10% of the total number of samples."
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-diagnostics-monte-carlo-standard-error-mcse",
+    "href": "5a-Diagnostics.html#mcmc-diagnostics-monte-carlo-standard-error-mcse",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC diagnostics: Monte Carlo Standard Error (MCSE)",
+    "text": "MCMC diagnostics: Monte Carlo Standard Error (MCSE)\nAnother useful measure for the effective accuracy of the chain is the Monte Carlo standard error (MCSE).\n\nThe standard deviation (SD) of the sample mean accross many replications is called the standard error and is estimated as SE = SD/\\(\\sqrt{N}\\)\nSo as the sample size \\(N\\) increases the SE decreases. In other words the bigger the sample, the more precise the estimate.\n\nExtending this to MCMC chains, we substitute the sample size N with the ESS to get\nMCSE = SD/\\(\\sqrt{\\text{ESS}}\\)\nwhere SD is the standard deviation of the chain."
+  },
+  {
+    "objectID": "5a-Diagnostics.html#mcmc-efficiency",
+    "href": "5a-Diagnostics.html#mcmc-efficiency",
+    "title": "Bayesian Data Analysis",
+    "section": "MCMC efficiency",
+    "text": "MCMC efficiency\nThere are a number of ways to attempt to improve efficiency in the MCMC process\n\nRun chains in parallel\nAdjust the sampling algorithm e.g., use Gibbs instead of Metropolis\nChange model parameterisation (e.g., mean center the data for regression analysis)"
+  },
+  {
+    "objectID": "5b-JAGS.html#just-another-gibbs-sampler---jags",
+    "href": "5b-JAGS.html#just-another-gibbs-sampler---jags",
+    "title": "Bayesian Data Analysis",
+    "section": "Just Another Gibbs Sampler - JAGS",
+    "text": "Just Another Gibbs Sampler - JAGS\n\nJAGS is a system that automatically builds Markov chain Monte Carlo (MCMC) samplers for Bayesian Models. It was developed by Martin Plummer.\nJAGS takes a user’s description of a Bayesian model and returns an MCMC sample of the posterior distribution for the monitored parameters.\nIt’s very easy to implement (m)any Bayesian models as long as you can write down the model specification. The user does not need to worry about the MCMC algorithm (you just have to check MCMC output for convergence/mixing).\nConveniently, there are R packages that let users run JAGS from R.\nAs a simple example we’ve considered the estimation of a Binomial probability (with the happiness example). Now we’ll implement this simple example using JAGS."
+  },
+  {
+    "objectID": "5b-JAGS.html#how-to-use-jags",
+    "href": "5b-JAGS.html#how-to-use-jags",
+    "title": "Bayesian Data Analysis",
+    "section": "How to use JAGS?",
+    "text": "How to use JAGS?\n\nInstall JAGS and the R packages rjags and R2jags.\nMinimum things to do:\n\n\n\nWrite down your model specification and its corresponding JAGS model.\nSpecify data list and the names of the parameters for which you want to save the posterior samples.\nGO: Run JAGS!\nGet the posterior MCMC samples and use those for further analysis."
+  },
+  {
+    "objectID": "5b-JAGS.html#step-1---model-specification",
+    "href": "5b-JAGS.html#step-1---model-specification",
+    "title": "Bayesian Data Analysis",
+    "section": "Step 1 - Model Specification",
+    "text": "Step 1 - Model Specification\nRecall for the Happiness example out of n = 20 women, y = 14 women reported being happy.\n\n\n\nModel specification (data model and priors): \\[\\begin{align*}\ny|\\theta &\\sim   Binomial(\\theta, N = 20) \\\\\n\\theta &\\sim Be(1,1)\\\\\n\\end{align*}\\]\n\n\n\nJAGS model specification:\n\n\nbinomialmodel = \"\nmodel{\n\n # data model (likelihood)\n    y ~ dbinom(theta, N) \n \n # prior\n theta ~ dbeta(1, 1) \n }\n \""
+  },
+  {
+    "objectID": "5b-JAGS.html#step-2---jags-data",
+    "href": "5b-JAGS.html#step-2---jags-data",
+    "title": "Bayesian Data Analysis",
+    "section": "Step 2 - JAGS Data",
+    "text": "Step 2 - JAGS Data\n\n\n\nJAGS model specification:\n\n\nbinomialmodel = \"\nmodel{\n\n # data model (likelihood)\n    y ~ dbinom(theta, N) \n \n # prior\n theta ~ dbeta(1, 1) \n }\n \"\n\n\n\nInput data:\n\n\njags.data &lt;- list(y = 14, \n                  N = 20)\n\n\nSpecify the names of the parameters for which you want to save the posterior samples:\n\n\nparnames &lt;- c(\"theta\")"
+  },
+  {
+    "objectID": "5b-JAGS.html#step-3---run-jags",
+    "href": "5b-JAGS.html#step-3---run-jags",
+    "title": "Bayesian Data Analysis",
+    "section": "Step 3 - Run JAGS",
+    "text": "Step 3 - Run JAGS\n\nlibrary(rjags)\nlibrary(R2jags)\nmod &lt;- jags(data = jags.data, \n            parameters.to.save = parnames, \n            model.file = textConnection(binomialmodel))\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 1\n   Unobserved stochastic nodes: 1\n   Total graph size: 4\n\nInitializing model\n\n\n\nBy default, JAGS runs 3 chains with 2,000 iterations per chain of which 1,000 iterations are excluded as burnin."
+  },
+  {
+    "objectID": "5b-JAGS.html#step-4---output",
+    "href": "5b-JAGS.html#step-4---output",
+    "title": "Bayesian Data Analysis",
+    "section": "Step 4 - Output",
+    "text": "Step 4 - Output\n\nMCMC samples can be obtained as follows:\n\n\nmcmc.array &lt;- mod$BUGSoutput$sims.array\nmcmc.array %&gt;% dim() \n\n[1] 1000    3    2\n\n\nwhere the dimension of the mcmc.array is given by niterations x nchains x (nparameters+deviance).\n\nmcmc.list &lt;- mod$BUGSoutput$sims.list\nmcmc.list$theta %&gt;% dim()\n\n[1] 3000    1\n\n\n\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% dim()\n\n[1] 3000    2\n\n\n\nWe can also get output summaries\n\n\nmod$BUGSoutput$summary\n\n              mean         sd      2.5%       25%       50%       75%     97.5%\ndeviance 4.1858205 1.21680074 3.3051185 3.3986425 3.7179201 4.4911433 7.6242747\ntheta    0.6821157 0.09427691 0.4849151 0.6191459 0.6870287 0.7503312 0.8513724\n             Rhat n.eff\ndeviance 1.002564   970\ntheta    1.000765  3000"
+  },
+  {
+    "objectID": "5b-JAGS.html#more-on-outout---basics",
+    "href": "5b-JAGS.html#more-on-outout---basics",
+    "title": "Bayesian Data Analysis",
+    "section": "More on outout - basics",
+    "text": "More on outout - basics\n\nQuick viewParameter inference\n\n\n\n\n## plot output (quick plot)\nplot(mod)\n\n\n\n\n\n\n\n\n\n\n\n\n\n## look at parameters\ntheta_s &lt;- mcmc.list$theta\n\n# plot\nplot(theta_s, type = \"l\")\n\n\n\n\n\n\n\n\n\n\n\n# plot\nplot(density(theta_s))\n\n\n\n\n\n\n\n\n\n\n\n# get quantiles\nquantile(theta_s, probs=c(0.025,0.5, 0.975))\n\n\n     2.5%       50%     97.5% \n0.4849151 0.6870287 0.8513724"
+  },
+  {
+    "objectID": "5b-JAGS.html#trace-plots-and-density-plots-with-the-coda-package",
+    "href": "5b-JAGS.html#trace-plots-and-density-plots-with-the-coda-package",
+    "title": "Bayesian Data Analysis",
+    "section": "Trace plots and density plots with the coda package",
+    "text": "Trace plots and density plots with the coda package\nHere’s some useful functions from the coda package.\n\nlibrary(coda)\n\n# turn the model into an mcmc object\nmod_mcmc &lt;- as.mcmc(mod)\n\n# get trace plot and density\nplot(mod_mcmc)"
+  },
+  {
+    "objectID": "5b-JAGS.html#autocorrelation-plots",
+    "href": "5b-JAGS.html#autocorrelation-plots",
+    "title": "Bayesian Data Analysis",
+    "section": "Autocorrelation plots",
+    "text": "Autocorrelation plots\n\nautocorr.plot(mod_mcmc) # get autocorrelation plot"
+  },
+  {
+    "objectID": "5b-JAGS.html#tidybayes",
+    "href": "5b-JAGS.html#tidybayes",
+    "title": "Bayesian Data Analysis",
+    "section": "Tidybayes",
+    "text": "Tidybayes\nThe tidybayes package facilitates the use of tidy data (one observation per row) with Bayesian models in R.\n\nYou can use the output from JAGS in matrix format to work with tidybayes\nThe spread_draws function lets us extract draws into a data frame in tidy format\n\n\n\nlibrary(tidybayes)\n\n## look at samples for individual parameters (similar to sims.list but puts it in a tibble)\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% spread_draws(theta) \n\n\n# A tibble: 3,000 × 4\n   .chain .iteration .draw theta\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1      1          1     1 0.800\n 2      1          2     2 0.656\n 3      1          3     3 0.783\n 4      1          4     4 0.708\n 5      1          5     5 0.656\n 6      1          6     6 0.699\n 7      1          7     7 0.784\n 8      1          8     8 0.635\n 9      1          9     9 0.823\n10      1         10    10 0.716\n# ℹ 2,990 more rows"
+  },
+  {
+    "objectID": "5b-JAGS.html#tidybayes-1",
+    "href": "5b-JAGS.html#tidybayes-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Tidybayes",
+    "text": "Tidybayes\n\ntidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme [median|mean|mode]_[qi|hdi], for example, median_qi, mean_qi, mode_hdi, and so on.\n\n\n## summary for parameters\nmcmc.matrix %&gt;% \n  gather_rvars(theta) %&gt;% \n  median_qi(.value, .width = c(.95,0.9))\n\n# A tibble: 2 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 theta      0.687  0.485  0.851   0.95 median qi       \n2 theta      0.687  0.518  0.828   0.9  median qi       \n\n\n\nThe ggdist::stat_halfeye() geom provides a shortcut to generating “half-eye plots” (combinations of intervals and densities).\n\n\n\n## plots\nmcmc.matrix %&gt;%\n  spread_draws(theta) %&gt;% \n  ggplot(aes(x = theta)) +\n  stat_halfeye()"
   }
 ]
