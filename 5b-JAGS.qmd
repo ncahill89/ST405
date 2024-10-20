@@ -150,7 +150,7 @@ mcmc.matrix %>% dim()
 mod$BUGSoutput$summary
 ```
 
-## More on outout - basics
+## More on outout - basics {style="font-size: 70%;"}
 
 ::: panel-tabset
 ### Quick view

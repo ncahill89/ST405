@@ -403,7 +403,7 @@ Dr Niamh Cahill (she/her)
 </div>
 
 </section>
-<section id="recap-gibbs-sampling-algorithm-for-the-kid-iq-example" class="slide level2" style="font-size: 70%;">
+<section id="recap-gibbs-sampling-algorithm-for-the-kid-iq-example" class="slide level2" style="font-size: 65%;">
 <h2>Recap: Gibbs Sampling Algorithm for the Kid IQ example</h2>
 <p>Recall data (y) are available on the cognitive test scores of three- and four-year-old children in the USA. The sample contains <span class="math inline">\(n=434\)</span> observations.</p>
 <div class="columns">
@@ -453,7 +453,7 @@ Dr Niamh Cahill (she/her)
 </div>
 </div></div>
 </section>
-<section id="recap-output-from-mcmc" class="slide level2" style="font-size: 70%;">
+<section id="recap-output-from-mcmc" class="slide level2" style="font-size: 65%;">
 <h2>Recap: Output from MCMC</h2>
 <p>MCMC samples are not <em>independent</em> draws from a target distribution:</p>
 <ul>
@@ -480,21 +480,21 @@ Dr Niamh Cahill (she/her)
 <pre><code># A tibble: 9,900 × 3
    sample_index  mu_s sigma_s
           &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
- 1            1  86.1    19.7
- 2            2  86.0    20.3
- 3            3  87.4    20.1
- 4            4  85.1    20.6
- 5            5  86.8    19.7
- 6            6  87.2    20.2
- 7            7  85.4    22.5
- 8            8  85.2    20.9
- 9            9  85.4    19.3
-10           10  86.3    20.3
+ 1            1  86.6    19.3
+ 2            2  87.4    19.2
+ 3            3  86.4    21.0
+ 4            4  85.8    21.5
+ 5            5  86.3    21.5
+ 6            6  87.7    20.5
+ 7            7  86.3    19.9
+ 8            8  86.4    20.3
+ 9            9  88.3    20.8
+10           10  85.8    19.6
 # ℹ 9,890 more rows</code></pre>
 </div>
 </div></div>
 </section>
-<section id="recap-trace-plots" class="slide level2" style="font-size: 70%;">
+<section id="recap-trace-plots" class="slide level2" style="font-size: 65%;">
 <h2>Recap: Trace Plots</h2>
 <p>We can use trace plots to investigate the MCMC samples/chains for the parameters.</p>
 <div class="cell columns column-output-location">
@@ -529,8 +529,8 @@ Dr Niamh Cahill (she/her)
 </div>
 </div></div>
 </section>
-<section id="recap-density-plots-and-summaries" class="slide level2" style="font-size: 70%;">
-<h2>Recap: Density plots and summaries</h2>
+<section id="recap-density-plots-and-summaries" class="slide level2" style="font-size: 65%;">
+<h2>Recap: Density Plots and Summaries</h2>
 <p>We can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.</p>
 <div class="cell columns column-output-location">
 <div class="column">
@@ -555,10 +555,10 @@ Dr Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Mu: 86.73196 </code></pre>
+<pre><code>Mean of Mu: 86.7245 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Mu: 84.84126 88.64997 </code></pre>
+<pre><code>95% Credible Interval for Mu: 84.79848 88.64757 </code></pre>
 </div>
 </div></div>
 <div class="cell columns column-output-location">
@@ -583,10 +583,10 @@ Dr Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Sigma: 20.39999 </code></pre>
+<pre><code>Mean of Sigma: 20.40205 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Sigma: 19.11762 21.7939 </code></pre>
+<pre><code>95% Credible Interval for Sigma: 19.09735 21.85142 </code></pre>
 </div>
 </div></div>
 </section>
@@ -650,8 +650,8 @@ Dr Niamh Cahill (she/her)
 <p>The <strong>Potential Scale Reduction Factor (R-hat)</strong>, also called the <strong>Gelman-Rubin diagnostic</strong>, is used to assess the convergence of multiple MCMC chains in Bayesian analysis. It compares the variance within each chain to the variance between chains, indicating whether the chains have converged to the same target distribution.</p>
 <h3 id="how-r-hat-works">How R-hat Works:</h3>
 <ul>
-<li><strong>Within-Chain Variance (W)</strong>: Measures the variability of samples within a single chain.</li>
-<li><strong>Between-Chain Variance (B)</strong>: Measures the variability between the means of multiple chains.</li>
+<li><strong>Within-Chain Variance</strong>: Measures the variability of samples within a single chain.</li>
+<li><strong>Between-Chain Variance</strong>: Measures the variability between the means of multiple chains.</li>
 <li>If the chains are converging well, the within-chain and between-chain variances should be similar.</li>
 </ul>
 <h3 id="interpretation">Interpretation:</h3>
@@ -678,14 +678,14 @@ Dr Niamh Cahill (she/her)
 <section id="mcmc-diagnostics-autocorrelation" class="slide level2" style="font-size: 70%;">
 <h2>MCMC diagnostics: Autocorrelation</h2>
 <ul>
-<li><p>Mont Carlo samples are direct/random/independent draws from a target distribution.</p></li>
-<li><p>MCMC samples are NOT independent draws from a target distribution, because:</p>
+<li><p>Mont Carlo samples <em>are</em> independent draws from a target distribution.</p></li>
+<li><p>MCMC samples <em>are NOT</em> independent draws from a target distribution, because:</p>
 <ol type="1">
 <li>The first draw is set by the user and thus not a random draw from the target distribution.</li>
 <li>Subsequently, draw <span class="math inline">\(s+1\)</span> depends on draw <span class="math inline">\(s\)</span> - samples are autocorrelated</li>
 </ol></li>
 </ul>
-<p>In Bayesian analysis, <strong>autocorrelation</strong> measures how correlated samples from a Markov Chain Monte Carlo (MCMC) chain are with their past values. High autocorrelation indicates that the samples are not exploring the parameter space effectively, which can lead to inefficient sampling and slow convergence.</p>
+<p>In Bayesian analysis, <strong>autocorrelation</strong> measures how correlated samples from a MCMC chain are with their past values. High autocorrelation indicates that the samples are not exploring the parameter space effectively, which can lead to inefficient sampling and slow convergence.</p>
 </section>
 <section id="mcmc-diagnostics-autocorrelation-1" class="slide level2" style="font-size: 70%;">
 <h2>MCMC diagnostics: Autocorrelation</h2>
@@ -718,6 +718,27 @@ Dr Niamh Cahill (she/her)
 <p>The effective sample size (ESS) divides the actual sample size by the amount of autocorrelation.</p>
 <p><span class="math display">\[ESS = \frac{N}{1 + 2\sum_{k=1}^\infty\rho_k}\]</span></p>
 <p>where <span class="math inline">\(\rho_k\)</span> is the autocorrelation of the chain at lag <span class="math inline">\(k\)</span>. A good rule of thumb for the ESS is for it to be 10% of the total number of samples.</p>
+</section>
+<section id="thinning" class="slide level2" style="font-size: 70%;">
+<h2>Thinning</h2>
+<ul>
+<li><p><strong>Thinning</strong> is the practice of <strong>retaining only every <em>k-th</em> sample</strong> from a Markov Chain in MCMC sampling.</p>
+<ul>
+<li>Typically used to <strong>reduce autocorrelation</strong> in the chain or manage <strong>large storage</strong> demands.</li>
+</ul></li>
+</ul>
+<p><strong>How Thinning Works</strong></p>
+<ul>
+<li><p>Given a sequence of samples: [ x_1, x_2, x_3, …, x_N ]</p></li>
+<li><p>Thinning by a factor of <em>k</em>: Retain [ x_k, x_{2k}, x_{3k}, … ]</p></li>
+<li><p>Thinning factor (k): Number of iterations between successive retained samples.</p></li>
+</ul>
+<p><strong>Best Practices</strong></p>
+<ol type="1">
+<li><p><strong>Avoid thinning if possible</strong>: It can unnecessarily discard valuable samples.</p></li>
+<li><p>Use <strong>diagnostics</strong> like autocorrelation plots and the <strong>effective sample size</strong> (which we’ll talk about next) to decide whether thinning is needed.</p></li>
+<li><p>If using, choose a thinning factor based on the <strong>autocorrelation time</strong> of the chain.</p></li>
+</ol>
 </section>
 <section id="mcmc-diagnostics-monte-carlo-standard-error-mcse" class="slide level2" style="font-size: 70%;">
 <h2>MCMC diagnostics: Monte Carlo Standard Error (MCSE)</h2>
