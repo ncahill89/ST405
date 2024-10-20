@@ -268,3 +268,100 @@ mcmc.matrix %>%
   ggplot(aes(x = theta)) +
   stat_halfeye()
 ```
+
+
+## Another Happiness Example {style="font-size: 70%;"}
+
+Assume we have survey data from 5 countries related to the happiness of women aged 65+ and we want to compare the proportions accross countries. 
+
+```{r}
+# Set seed for reproducibility
+set.seed(42)
+
+# Parameters
+countries <- c('Germany', 'France', 'Italy', 'Spain', 'Netherlands')
+total_surveyed <- c(200, 150, 180, 170, 160)  # Total surveyed in each country
+happiness_probs <- c(0.75, 0.60, 0.70, 0.65, 0.80)  # Probability of being happy in each country
+
+# Generating binomial data
+# N is the total surveyed, Y is the number reporting being happy
+Y <- rbinom(length(countries), total_surveyed, happiness_probs)
+
+# Creating the data frame
+survey_data <- data.frame(Country = countries, N = total_surveyed, Y = Y)
+knitr::kable(survey_data)
+#saveRDS(survey_data, "happiness_survey.rds")
+```
+
+::: columns
+::: {.column width="50%"}
+-   Model specification (data model and priors): \begin{align*}
+     y_i|\theta_i &\sim   Binomial(\theta_i, N_i) \\
+     \theta_i &\sim Be(1,1)\\
+     \end{align*}
+:::
+
+::: {.column width="50%"}
+-   JAGS model specification:
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: "5-6|8-9|3,10|1,2,11,12"
+
+binomialmodel = "
+model{
+ for(i in 1:n_country)
+{
+ # data model (likelihood)
+ 	y[i] ~ dbinom(theta[i], N[i]) 
+ 	
+ # prior
+ theta[i] ~ dbeta(1, 1) 
+}
+ }
+ "
+
+```
+:::
+:::
+
+
+## Another Happiness Example: Rcode {style="font-size: 70%;"}
+
+```{r, echo = TRUE, include=TRUE, eval = FALSE}
+jags.data <- list(y = survey_data$Y, 
+                  N = survey_data$N,
+                  n_country = length(survey_data$Country))
+parnames <- c("theta")
+
+library(rjags)
+library(R2jags)
+mod <- jags(data = jags.data, 
+            parameters.to.save = parnames, 
+            model.file = textConnection(binomialmodel))
+```
+
+
+```{r, echo = TRUE, include=TRUE, eval = FALSE}
+## quick look output
+mod_mcmc <- as.mcmc(mod)
+mod$BUGSoutput$summary
+plot(mod_mcmc)
+
+## tidybayes outptut
+library(tidybayes)
+mcmc.matrix <- mod$BUGSoutput$sims.matrix
+country <- survey_data$Country
+
+## summary
+mcmc.matrix %>%
+  spread_draws(theta[country]) %>% 
+  summarise_draws() 
+
+## plot
+mcmc.matrix %>%
+  spread_draws(theta[country]) %>% 
+  ggplot(aes(y = factor(country, labels = survey_data$Country), x = theta)) +
+  stat_halfeye() +
+  ylab("")
+```
+

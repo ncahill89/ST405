@@ -858,14 +858,14 @@
     "href": "5b-JAGS.html#step-4---output",
     "title": "Bayesian Data Analysis",
     "section": "Step 4 - Output",
-    "text": "Step 4 - Output\n\nMCMC samples can be obtained as follows:\n\n\nmcmc.array &lt;- mod$BUGSoutput$sims.array\nmcmc.array %&gt;% dim() \n\n[1] 1000    3    2\n\n\nwhere the dimension of the mcmc.array is given by niterations x nchains x (nparameters+deviance).\n\nmcmc.list &lt;- mod$BUGSoutput$sims.list\nmcmc.list$theta %&gt;% dim()\n\n[1] 3000    1\n\n\n\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% dim()\n\n[1] 3000    2\n\n\n\nWe can also get output summaries\n\n\nmod$BUGSoutput$summary\n\n              mean         sd      2.5%       25%       50%       75%     97.5%\ndeviance 4.1621459 1.23202007 3.3052198 3.3845293 3.6792972 4.4393317 7.5665441\ntheta    0.6820872 0.09302127 0.4888921 0.6216656 0.6871341 0.7476682 0.8473786\n             Rhat n.eff\ndeviance 1.000870  3000\ntheta    1.000841  3000"
+    "text": "Step 4 - Output\n\nMCMC samples can be obtained as follows:\n\n\nmcmc.array &lt;- mod$BUGSoutput$sims.array\nmcmc.array %&gt;% dim() \n\n[1] 1000    3    2\n\n\nwhere the dimension of the mcmc.array is given by niterations x nchains x (nparameters+deviance).\n\nmcmc.list &lt;- mod$BUGSoutput$sims.list\nmcmc.list$theta %&gt;% dim()\n\n[1] 3000    1\n\n\n\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% dim()\n\n[1] 3000    2\n\n\n\nWe can also get output summaries\n\n\nmod$BUGSoutput$summary\n\n              mean        sd      2.5%       25%       50%       75%     97.5%\ndeviance 4.2431698 1.3811464 3.3053596 3.3925486 3.7112152 4.4862633 8.0997475\ntheta    0.6824153 0.0973808 0.4736189 0.6207943 0.6878551 0.7507139 0.8517401\n             Rhat n.eff\ndeviance 1.001856  1600\ntheta    1.000915  3000"
   },
   {
     "objectID": "5b-JAGS.html#more-on-outout---basics",
     "href": "5b-JAGS.html#more-on-outout---basics",
     "title": "Bayesian Data Analysis",
     "section": "More on outout - basics",
-    "text": "More on outout - basics\n\nQuick viewParameter inference\n\n\n\n\n## plot output (quick plot)\nplot(mod)\n\n\n\n\n\n\n\n\n\n\n\n\n\n## look at parameters\ntheta_s &lt;- mcmc.list$theta\n\n# plot\nplot(theta_s, type = \"l\")\n\n\n\n\n\n\n\n\n\n\n\n# plot\nplot(density(theta_s))\n\n\n\n\n\n\n\n\n\n\n\n# get quantiles\nquantile(theta_s, probs=c(0.025,0.5, 0.975))\n\n\n     2.5%       50%     97.5% \n0.4888922 0.6871341 0.8473786"
+    "text": "More on outout - basics\n\nQuick viewParameter inference\n\n\n\n\n## plot output (quick plot)\nplot(mod)\n\n\n\n\n\n\n\n\n\n\n\n\n\n## look at parameters\ntheta_s &lt;- mcmc.list$theta\n\n# plot\nplot(theta_s, type = \"l\")\n\n\n\n\n\n\n\n\n\n\n\n# plot\nplot(density(theta_s))\n\n\n\n\n\n\n\n\n\n\n\n# get quantiles\nquantile(theta_s, probs=c(0.025,0.5, 0.975))\n\n\n     2.5%       50%     97.5% \n0.4736189 0.6878551 0.8517401"
   },
   {
     "objectID": "5b-JAGS.html#trace-plots-and-density-plots-with-the-coda-package",
@@ -886,14 +886,14 @@
     "href": "5b-JAGS.html#tidybayes",
     "title": "Bayesian Data Analysis",
     "section": "Tidybayes",
-    "text": "Tidybayes\nThe tidybayes package facilitates the use of tidy data (one observation per row) with Bayesian models in R.\n\nYou can use the output from JAGS in matrix format to work with tidybayes\nThe spread_draws function lets us extract draws into a data frame in tidy format\n\n\n\nlibrary(tidybayes)\n\n## look at samples for individual parameters (similar to sims.list but puts it in a tibble)\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% spread_draws(theta) \n\n\n# A tibble: 3,000 × 4\n   .chain .iteration .draw theta\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1      1          1     1 0.701\n 2      1          2     2 0.616\n 3      1          3     3 0.678\n 4      1          4     4 0.729\n 5      1          5     5 0.608\n 6      1          6     6 0.604\n 7      1          7     7 0.692\n 8      1          8     8 0.509\n 9      1          9     9 0.703\n10      1         10    10 0.776\n# ℹ 2,990 more rows"
+    "text": "Tidybayes\nThe tidybayes package facilitates the use of tidy data (one observation per row) with Bayesian models in R.\n\nYou can use the output from JAGS in matrix format to work with tidybayes\nThe spread_draws function lets us extract draws into a data frame in tidy format\n\n\n\nlibrary(tidybayes)\n\n## look at samples for individual parameters (similar to sims.list but puts it in a tibble)\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% spread_draws(theta) \n\n\n# A tibble: 3,000 × 4\n   .chain .iteration .draw theta\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1      1          1     1 0.611\n 2      1          2     2 0.715\n 3      1          3     3 0.649\n 4      1          4     4 0.800\n 5      1          5     5 0.665\n 6      1          6     6 0.710\n 7      1          7     7 0.729\n 8      1          8     8 0.578\n 9      1          9     9 0.656\n10      1         10    10 0.682\n# ℹ 2,990 more rows"
   },
   {
     "objectID": "5b-JAGS.html#tidybayes-1",
     "href": "5b-JAGS.html#tidybayes-1",
     "title": "Bayesian Data Analysis",
     "section": "Tidybayes",
-    "text": "Tidybayes\n\ntidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme [median|mean|mode]_[qi|hdi], for example, median_qi, mean_qi, mode_hdi, and so on.\n\n\n## summary for parameters\nmcmc.matrix %&gt;% \n  gather_rvars(theta) %&gt;% \n  median_qi(.value, .width = c(.95,0.9))\n\n# A tibble: 2 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 theta      0.687  0.489  0.847   0.95 median qi       \n2 theta      0.687  0.517  0.826   0.9  median qi       \n\n\n\nThe ggdist::stat_halfeye() geom provides a shortcut to generating “half-eye plots” (combinations of intervals and densities).\n\n\n\n## plots\nmcmc.matrix %&gt;%\n  spread_draws(theta) %&gt;% \n  ggplot(aes(x = theta)) +\n  stat_halfeye()"
+    "text": "Tidybayes\n\ntidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme [median|mean|mode]_[qi|hdi], for example, median_qi, mean_qi, mode_hdi, and so on.\n\n\n## summary for parameters\nmcmc.matrix %&gt;% \n  gather_rvars(theta) %&gt;% \n  median_qi(.value, .width = c(.95,0.9))\n\n# A tibble: 2 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 theta      0.688  0.474  0.852   0.95 median qi       \n2 theta      0.688  0.507  0.830   0.9  median qi       \n\n\n\nThe ggdist::stat_halfeye() geom provides a shortcut to generating “half-eye plots” (combinations of intervals and densities).\n\n\n\n## plots\nmcmc.matrix %&gt;%\n  spread_draws(theta) %&gt;% \n  ggplot(aes(x = theta)) +\n  stat_halfeye()"
   },
   {
     "objectID": "5a-Diagnostics.html#thinning",
@@ -901,5 +901,33 @@
     "title": "Bayesian Data Analysis",
     "section": "Thinning",
     "text": "Thinning\n\nThinning is the practice of retaining only every k-th sample from a Markov Chain in MCMC sampling.\n\nTypically used to reduce autocorrelation in the chain or manage large storage demands.\n\n\nHow Thinning Works\n\nGiven a sequence of samples: [ x_1, x_2, x_3, …, x_N ]\nThinning by a factor of k: Retain [ x_k, x_{2k}, x_{3k}, … ]\nThinning factor (k): Number of iterations between successive retained samples.\n\nBest Practices\n\nAvoid thinning if possible: It can unnecessarily discard valuable samples.\nUse diagnostics like autocorrelation plots and the effective sample size (which we’ll talk about next) to decide whether thinning is needed.\nIf using, choose a thinning factor based on the autocorrelation time of the chain."
+  },
+  {
+    "objectID": "5b-JAGS.html#another-example",
+    "href": "5b-JAGS.html#another-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Another Example",
+    "text": "Another Example\nAssume we have survey data from 5 countries related to the happiness of women aged 65+ and we want to compare the proportions accross countries.\n\n\n\n\n\nCountry\nN\nY\n\n\n\n\nGermany\n200\n140\n\n\nFrance\n150\n92\n\n\nItaly\n180\n122\n\n\nSpain\n170\n108\n\n\nNetherlands\n160\n116"
+  },
+  {
+    "objectID": "5b-JAGS.html#another-example-1",
+    "href": "5b-JAGS.html#another-example-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Another Example",
+    "text": "Another Example\n\nbinomialmodel = \"\nmodel{\n for(i in 1:n_country)\n{\n # data model (likelihood)\n    y[i] ~ dbinom(theta[i], N[i]) \n    \n # prior\n theta[i] ~ dbeta(1, 1) \n}\n }\n \"\n\njags.data &lt;- list(y = survey_data$Y, \n                  N = survey_data$N,\n                  n_country = length(survey_data$Country))\nparnames &lt;- c(\"theta\")\n\nlibrary(rjags)\nlibrary(R2jags)\nmod &lt;- jags(data = jags.data, \n            parameters.to.save = parnames, \n            model.file = textConnection(binomialmodel))\n\n## quick look output\nmod_mcmc &lt;- as.mcmc(mod)\nmod$BUGSoutput$summary\nplot(mod_mcmc)\n\n## tidybayes outptut\nlibrary(tidybayes)\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\ncountry &lt;- survey_data$Country\n\n## summary\nmcmc.matrix %&gt;%\n  spread_draws(theta[country]) %&gt;% \n  summarise_draws() \n\n## plot\nmcmc.matrix %&gt;%\n  spread_draws(theta[country]) %&gt;% \n  ggplot(aes(y = factor(country, labels = survey_data$Country), x = theta)) +\n  stat_halfeye() +\n  ylab(\"\")"
+  },
+  {
+    "objectID": "5b-JAGS.html#another-happiness-example",
+    "href": "5b-JAGS.html#another-happiness-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Another Happiness Example",
+    "text": "Another Happiness Example\nAssume we have survey data from 5 countries related to the happiness of women aged 65+ and we want to compare the proportions accross countries.\n\n\n\n\n\nCountry\nN\nY\n\n\n\n\nGermany\n200\n140\n\n\nFrance\n150\n92\n\n\nItaly\n180\n122\n\n\nSpain\n170\n108\n\n\nNetherlands\n160\n116\n\n\n\n\n\n\n\n\nModel specification (data model and priors): \\[\\begin{align*}\ny_i|\\theta_i &\\sim   Binomial(\\theta_i, N_i) \\\\\n\\theta_i &\\sim Be(1,1)\\\\\n\\end{align*}\\]\n\n\n\nJAGS model specification:\n\n\nbinomialmodel = \"\nmodel{\n for(i in 1:n_country)\n{\n # data model (likelihood)\n    y[i] ~ dbinom(theta[i], N[i]) \n    \n # prior\n theta[i] ~ dbeta(1, 1) \n}\n }\n \""
+  },
+  {
+    "objectID": "5b-JAGS.html#another-happiness-example-rcode",
+    "href": "5b-JAGS.html#another-happiness-example-rcode",
+    "title": "Bayesian Data Analysis",
+    "section": "Another Happiness Example: Rcode",
+    "text": "Another Happiness Example: Rcode\n\njags.data &lt;- list(y = survey_data$Y, \n                  N = survey_data$N,\n                  n_country = length(survey_data$Country))\nparnames &lt;- c(\"theta\")\n\nlibrary(rjags)\nlibrary(R2jags)\nmod &lt;- jags(data = jags.data, \n            parameters.to.save = parnames, \n            model.file = textConnection(binomialmodel))\n\n\n## quick look output\nmod_mcmc &lt;- as.mcmc(mod)\nmod$BUGSoutput$summary\nplot(mod_mcmc)\n\n## tidybayes outptut\nlibrary(tidybayes)\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\ncountry &lt;- survey_data$Country\n\n## summary\nmcmc.matrix %&gt;%\n  spread_draws(theta[country]) %&gt;% \n  summarise_draws() \n\n## plot\nmcmc.matrix %&gt;%\n  spread_draws(theta[country]) %&gt;% \n  ggplot(aes(y = factor(country, labels = survey_data$Country), x = theta)) +\n  stat_halfeye() +\n  ylab(\"\")"
   }
 ]

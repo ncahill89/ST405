@@ -548,12 +548,12 @@ Initializing model</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>mod<span class="sc">$</span>BUGSoutput<span class="sc">$</span>summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              mean         sd      2.5%       25%       50%       75%     97.5%
-deviance 4.1621459 1.23202007 3.3052198 3.3845293 3.6792972 4.4393317 7.5665441
-theta    0.6820872 0.09302127 0.4888921 0.6216656 0.6871341 0.7476682 0.8473786
+<pre><code>              mean        sd      2.5%       25%       50%       75%     97.5%
+deviance 4.2431698 1.3811464 3.3053596 3.3925486 3.7112152 4.4862633 8.0997475
+theta    0.6824153 0.0973808 0.4736189 0.6207943 0.6878551 0.7507139 0.8517401
              Rhat n.eff
-deviance 1.000870  3000
-theta    1.000841  3000</code></pre>
+deviance 1.001856  1600
+theta    1.000915  3000</code></pre>
 </div>
 </div>
 </section>
@@ -614,7 +614,7 @@ theta    1.000841  3000</code></pre>
 </div><div class="column fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>     2.5%       50%     97.5% 
-0.4888922 0.6871341 0.8473786 </code></pre>
+0.4736189 0.6878551 0.8517401 </code></pre>
 </div>
 </div></div>
 </div>
@@ -686,16 +686,16 @@ theta    1.000841  3000</code></pre>
 <pre><code># A tibble: 3,000 × 4
    .chain .iteration .draw theta
     &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
- 1      1          1     1 0.701
- 2      1          2     2 0.616
- 3      1          3     3 0.678
- 4      1          4     4 0.729
- 5      1          5     5 0.608
- 6      1          6     6 0.604
- 7      1          7     7 0.692
- 8      1          8     8 0.509
- 9      1          9     9 0.703
-10      1         10    10 0.776
+ 1      1          1     1 0.611
+ 2      1          2     2 0.715
+ 3      1          3     3 0.649
+ 4      1          4     4 0.800
+ 5      1          5     5 0.665
+ 6      1          6     6 0.710
+ 7      1          7     7 0.729
+ 8      1          8     8 0.578
+ 9      1          9     9 0.656
+10      1         10    10 0.682
 # ℹ 2,990 more rows</code></pre>
 </div>
 </div></div>
@@ -714,8 +714,8 @@ theta    1.000841  3000</code></pre>
 <pre><code># A tibble: 2 × 7
   .variable .value .lower .upper .width .point .interval
   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1 theta      0.687  0.489  0.847   0.95 median qi       
-2 theta      0.687  0.517  0.826   0.9  median qi       </code></pre>
+1 theta      0.688  0.474  0.852   0.95 median qi       
+2 theta      0.688  0.507  0.830   0.9  median qi       </code></pre>
 </div>
 </div>
 <ul>
@@ -737,6 +737,115 @@ theta    1.000841  3000</code></pre>
 </div>
 </div>
 </div></div>
+</section>
+<section id="another-happiness-example" class="slide level2" style="font-size: 70%;">
+<h2>Another Happiness Example</h2>
+<p>Assume we have survey data from 5 countries related to the happiness of women aged 65+ and we want to compare the proportions accross countries.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">Y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Germany</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">140</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">122</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">108</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">116</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Model specification (data model and priors): <span class="math display">\[\begin{align*}
+y_i|\theta_i &amp;\sim   Binomial(\theta_i, N_i) \\
+\theta_i &amp;\sim Be(1,1)\\
+\end{align*}\]</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>JAGS model specification:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27" data-code-line-numbers="5-6|8-9|3,10|1,2,11,12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>binomialmodel <span class="ot">=</span> <span class="st">"</span></span>
+<span id="cb27-2"><a></a><span class="st">model{</span></span>
+<span id="cb27-3"><a></a><span class="st"> for(i in 1:n_country)</span></span>
+<span id="cb27-4"><a></a><span class="st">{</span></span>
+<span id="cb27-5"><a></a><span class="st"> # data model (likelihood)</span></span>
+<span id="cb27-6"><a></a><span class="st">    y[i] ~ dbinom(theta[i], N[i]) </span></span>
+<span id="cb27-7"><a></a><span class="st">    </span></span>
+<span id="cb27-8"><a></a><span class="st"> # prior</span></span>
+<span id="cb27-9"><a></a><span class="st"> theta[i] ~ dbeta(1, 1) </span></span>
+<span id="cb27-10"><a></a><span class="st">}</span></span>
+<span id="cb27-11"><a></a><span class="st"> }</span></span>
+<span id="cb27-12"><a></a><span class="st"> "</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div></div>
+</section>
+<section id="another-happiness-example-rcode" class="slide level2" style="font-size: 70%;">
+<h2>Another Happiness Example: Rcode</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>jags.data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">y =</span> survey_data<span class="sc">$</span>Y, </span>
+<span id="cb28-2"><a></a>                  <span class="at">N =</span> survey_data<span class="sc">$</span>N,</span>
+<span id="cb28-3"><a></a>                  <span class="at">n_country =</span> <span class="fu">length</span>(survey_data<span class="sc">$</span>Country))</span>
+<span id="cb28-4"><a></a>parnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"theta"</span>)</span>
+<span id="cb28-5"><a></a></span>
+<span id="cb28-6"><a></a><span class="fu">library</span>(rjags)</span>
+<span id="cb28-7"><a></a><span class="fu">library</span>(R2jags)</span>
+<span id="cb28-8"><a></a>mod <span class="ot">&lt;-</span> <span class="fu">jags</span>(<span class="at">data =</span> jags.data, </span>
+<span id="cb28-9"><a></a>            <span class="at">parameters.to.save =</span> parnames, </span>
+<span id="cb28-10"><a></a>            <span class="at">model.file =</span> <span class="fu">textConnection</span>(binomialmodel))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="do">## quick look output</span></span>
+<span id="cb29-2"><a></a>mod_mcmc <span class="ot">&lt;-</span> <span class="fu">as.mcmc</span>(mod)</span>
+<span id="cb29-3"><a></a>mod<span class="sc">$</span>BUGSoutput<span class="sc">$</span>summary</span>
+<span id="cb29-4"><a></a><span class="fu">plot</span>(mod_mcmc)</span>
+<span id="cb29-5"><a></a></span>
+<span id="cb29-6"><a></a><span class="do">## tidybayes outptut</span></span>
+<span id="cb29-7"><a></a><span class="fu">library</span>(tidybayes)</span>
+<span id="cb29-8"><a></a>mcmc.matrix <span class="ot">&lt;-</span> mod<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sims.matrix</span>
+<span id="cb29-9"><a></a>country <span class="ot">&lt;-</span> survey_data<span class="sc">$</span>Country</span>
+<span id="cb29-10"><a></a></span>
+<span id="cb29-11"><a></a><span class="do">## summary</span></span>
+<span id="cb29-12"><a></a>mcmc.matrix <span class="sc">%&gt;%</span></span>
+<span id="cb29-13"><a></a>  <span class="fu">spread_draws</span>(theta[country]) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-14"><a></a>  <span class="fu">summarise_draws</span>() </span>
+<span id="cb29-15"><a></a></span>
+<span id="cb29-16"><a></a><span class="do">## plot</span></span>
+<span id="cb29-17"><a></a>mcmc.matrix <span class="sc">%&gt;%</span></span>
+<span id="cb29-18"><a></a>  <span class="fu">spread_draws</span>(theta[country]) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-19"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">factor</span>(country, <span class="at">labels =</span> survey_data<span class="sc">$</span>Country), <span class="at">x =</span> theta)) <span class="sc">+</span></span>
+<span id="cb29-20"><a></a>  <span class="fu">stat_halfeye</span>() <span class="sc">+</span></span>
+<span id="cb29-21"><a></a>  <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
