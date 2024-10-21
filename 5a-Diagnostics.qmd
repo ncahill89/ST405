@@ -170,7 +170,7 @@ p2 <- ggplot(post_samps, aes(x = sample_index, sigma_s)) +
 p1;p2
 ```
 
-## Recap: Density Plots and Summaries {style="font-size: 65%;"}
+## Recap: Density Plots and Summaries {style="font-size: 60%;"}
 
 We can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.
 
