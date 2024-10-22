@@ -548,12 +548,12 @@ Initializing model</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>mod<span class="sc">$</span>BUGSoutput<span class="sc">$</span>summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              mean        sd      2.5%       25%       50%       75%     97.5%
-deviance 4.2431698 1.3811464 3.3053596 3.3925486 3.7112152 4.4862633 8.0997475
-theta    0.6824153 0.0973808 0.4736189 0.6207943 0.6878551 0.7507139 0.8517401
+<pre><code>              mean         sd      2.5%       25%       50%       75%     97.5%
+deviance 4.2398787 1.36741588 3.3050283 3.3879710 3.6971301 4.5601411 8.2044805
+theta    0.6785648 0.09724564 0.4755575 0.6162614 0.6863046 0.7480875 0.8485808
              Rhat n.eff
-deviance 1.001856  1600
-theta    1.000915  3000</code></pre>
+deviance 1.003940   980
+theta    1.002245  1300</code></pre>
 </div>
 </div>
 </section>
@@ -614,7 +614,7 @@ theta    1.000915  3000</code></pre>
 </div><div class="column fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>     2.5%       50%     97.5% 
-0.4736189 0.6878551 0.8517401 </code></pre>
+0.4755576 0.6863046 0.8485808 </code></pre>
 </div>
 </div></div>
 </div>
@@ -686,16 +686,16 @@ theta    1.000915  3000</code></pre>
 <pre><code># A tibble: 3,000 × 4
    .chain .iteration .draw theta
     &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
- 1      1          1     1 0.611
- 2      1          2     2 0.715
- 3      1          3     3 0.649
- 4      1          4     4 0.800
- 5      1          5     5 0.665
- 6      1          6     6 0.710
- 7      1          7     7 0.729
- 8      1          8     8 0.578
- 9      1          9     9 0.656
-10      1         10    10 0.682
+ 1      1          1     1 0.613
+ 2      1          2     2 0.686
+ 3      1          3     3 0.631
+ 4      1          4     4 0.709
+ 5      1          5     5 0.684
+ 6      1          6     6 0.738
+ 7      1          7     7 0.695
+ 8      1          8     8 0.572
+ 9      1          9     9 0.730
+10      1         10    10 0.775
 # ℹ 2,990 more rows</code></pre>
 </div>
 </div></div>
@@ -714,8 +714,8 @@ theta    1.000915  3000</code></pre>
 <pre><code># A tibble: 2 × 7
   .variable .value .lower .upper .width .point .interval
   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1 theta      0.688  0.474  0.852   0.95 median qi       
-2 theta      0.688  0.507  0.830   0.9  median qi       </code></pre>
+1 theta      0.686  0.476  0.849   0.95 median qi       
+2 theta      0.686  0.510  0.826   0.9  median qi       </code></pre>
 </div>
 </div>
 <ul>

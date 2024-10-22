@@ -209,7 +209,7 @@ plot(mod_mcmc)
 
 ## Autocorrelation plots {style="font-size: 70%;"}
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, fig.height=3}
 
 autocorr.plot(mod_mcmc) # get autocorrelation plot
 ```
