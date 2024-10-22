@@ -548,16 +548,16 @@ Initializing model</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>mod<span class="sc">$</span>BUGSoutput<span class="sc">$</span>summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              mean         sd      2.5%       25%       50%       75%     97.5%
-deviance 4.2398787 1.36741588 3.3050283 3.3879710 3.6971301 4.5601411 8.2044805
-theta    0.6785648 0.09724564 0.4755575 0.6162614 0.6863046 0.7480875 0.8485808
+<pre><code>             mean         sd      2.5%      25%       50%       75%     97.5%
+deviance 4.264735 1.43208890 3.3053772 3.393112 3.7225314 4.5355025 8.0919003
+theta    0.681868 0.09854369 0.4742023 0.619348 0.6892719 0.7510315 0.8559477
              Rhat n.eff
-deviance 1.003940   980
-theta    1.002245  1300</code></pre>
+deviance 1.000701  3000
+theta    1.000536  3000</code></pre>
 </div>
 </div>
 </section>
-<section id="more-on-outout---basics" class="slide level2" style="font-size: 70%;">
+<section id="more-on-outout---basics" class="slide level2" style="font-size: 60%;">
 <h2>More on outout - basics</h2>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Quick view</a></li><li><a href="#tabset-1-2">Parameter inference</a></li></ul>
@@ -614,7 +614,7 @@ theta    1.002245  1300</code></pre>
 </div><div class="column fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>     2.5%       50%     97.5% 
-0.4755576 0.6863046 0.8485808 </code></pre>
+0.4742023 0.6892720 0.8559477 </code></pre>
 </div>
 </div></div>
 </div>
@@ -635,7 +635,7 @@ theta    1.002245  1300</code></pre>
 
 </div>
 <img data-src="5b-JAGS_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
-<section id="autocorrelation-plots" class="slide level2" style="font-size: 70%;">
+<section id="autocorrelation-plots" class="slide level2" style="font-size: 60%;">
 <h2>Autocorrelation plots</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">autocorr.plot</span>(mod_mcmc) <span class="co"># get autocorrelation plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -667,7 +667,7 @@ theta    1.002245  1300</code></pre>
 <!-- gelman.diag(mod_mcmc) # get Rhat -->
 <!-- ``` -->
 </section>
-<section id="tidybayes" class="slide level2" style="font-size: 70%;">
+<section id="tidybayes" class="slide level2" style="font-size: 60%;">
 <h2>Tidybayes</h2>
 <p><a href="http://mjskay.github.io/tidybayes/articles/tidybayes.html">The tidybayes package</a> facilitates the use of tidy data (one observation per row) with Bayesian models in R.</p>
 <ul>
@@ -686,21 +686,21 @@ theta    1.002245  1300</code></pre>
 <pre><code># A tibble: 3,000 × 4
    .chain .iteration .draw theta
     &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
- 1      1          1     1 0.613
- 2      1          2     2 0.686
- 3      1          3     3 0.631
- 4      1          4     4 0.709
- 5      1          5     5 0.684
- 6      1          6     6 0.738
- 7      1          7     7 0.695
- 8      1          8     8 0.572
- 9      1          9     9 0.730
-10      1         10    10 0.775
+ 1      1          1     1 0.887
+ 2      1          2     2 0.643
+ 3      1          3     3 0.723
+ 4      1          4     4 0.500
+ 5      1          5     5 0.537
+ 6      1          6     6 0.501
+ 7      1          7     7 0.513
+ 8      1          8     8 0.665
+ 9      1          9     9 0.670
+10      1         10    10 0.652
 # ℹ 2,990 more rows</code></pre>
 </div>
 </div></div>
 </section>
-<section id="tidybayes-1" class="slide level2" style="font-size: 70%;">
+<section id="tidybayes-1" class="slide level2" style="font-size: 60%;">
 <h2>Tidybayes</h2>
 <ul>
 <li>tidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme [median|mean|mode]_[qi|hdi], for example, median_qi, mean_qi, mode_hdi, and so on.</li>
@@ -714,8 +714,8 @@ theta    1.002245  1300</code></pre>
 <pre><code># A tibble: 2 × 7
   .variable .value .lower .upper .width .point .interval
   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1 theta      0.686  0.476  0.849   0.95 median qi       
-2 theta      0.686  0.510  0.826   0.9  median qi       </code></pre>
+1 theta      0.689  0.474  0.856   0.95 median qi       
+2 theta      0.689  0.512  0.833   0.9  median qi       </code></pre>
 </div>
 </div>
 <ul>
@@ -738,7 +738,7 @@ theta    1.002245  1300</code></pre>
 </div>
 </div></div>
 </section>
-<section id="another-happiness-example" class="slide level2" style="font-size: 70%;">
+<section id="another-happiness-example" class="slide level2" style="font-size: 60%;">
 <h2>Another Happiness Example</h2>
 <p>Assume we have survey data from 5 countries related to the happiness of women aged 65+ and we want to compare the proportions accross countries.</p>
 <div class="cell">
@@ -809,7 +809,7 @@ y_i|\theta_i &amp;\sim   Binomial(\theta_i, N_i) \\
 </div>
 </div></div>
 </section>
-<section id="another-happiness-example-rcode" class="slide level2" style="font-size: 70%;">
+<section id="another-happiness-example-rcode" class="slide level2" style="font-size: 60%;">
 <h2>Another Happiness Example: Rcode</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>jags.data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">y =</span> survey_data<span class="sc">$</span>Y, </span>

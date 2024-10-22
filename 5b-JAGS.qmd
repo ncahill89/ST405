@@ -150,7 +150,7 @@ mcmc.matrix %>% dim()
 mod$BUGSoutput$summary
 ```
 
-## More on outout - basics {style="font-size: 70%;"}
+## More on outout - basics {style="font-size: 60%;"}
 
 ::: panel-tabset
 ### Quick view
@@ -207,7 +207,7 @@ mod_mcmc <- as.mcmc(mod)
 plot(mod_mcmc) 
 ```
 
-## Autocorrelation plots {style="font-size: 70%;"}
+## Autocorrelation plots {style="font-size: 60%;"}
 
 ```{r, echo = TRUE, fig.height=3}
 
@@ -224,7 +224,7 @@ autocorr.plot(mod_mcmc) # get autocorrelation plot
 
 <!-- ``` -->
 
-## Tidybayes {style="font-size: 70%;"}
+## Tidybayes {style="font-size: 60%;"}
 
 [The tidybayes package](http://mjskay.github.io/tidybayes/articles/tidybayes.html) facilitates the use of tidy data (one observation per row) with Bayesian models in R.
 
@@ -243,7 +243,7 @@ mcmc.matrix <- mod$BUGSoutput$sims.matrix
 mcmc.matrix %>% spread_draws(theta) 
 ```
 
-## Tidybayes {style="font-size: 70%;"}
+## Tidybayes {style="font-size: 60%;"}
 
 -   tidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme \[median\|mean\|mode\]\_\[qi\|hdi\], for example, median_qi, mean_qi, mode_hdi, and so on.
 
@@ -270,7 +270,7 @@ mcmc.matrix %>%
 ```
 
 
-## Another Happiness Example {style="font-size: 70%;"}
+## Another Happiness Example {style="font-size: 60%;"}
 
 Assume we have survey data from 5 countries related to the happiness of women aged 65+ and we want to compare the proportions accross countries. 
 
@@ -325,7 +325,7 @@ model{
 :::
 
 
-## Another Happiness Example: Rcode {style="font-size: 70%;"}
+## Another Happiness Example: Rcode {style="font-size: 60%;"}
 
 ```{r, echo = TRUE, include=TRUE, eval = FALSE}
 jags.data <- list(y = survey_data$Y, 
