@@ -288,8 +288,8 @@ happiness_probs <- c(0.75, 0.60, 0.70, 0.65, 0.80)  # Probability of being happy
 Y <- rbinom(length(countries), total_surveyed, happiness_probs)
 
 # Creating the data frame
-survey_data <- data.frame(Country = countries, N = total_surveyed, Y = Y)
-knitr::kable(survey_data)
+happiness_survey <- data.frame(Country = countries, N = total_surveyed, Y = Y)
+knitr::kable(happiness_survey)
 #saveRDS(survey_data, "happiness_survey.rds")
 ```
 
@@ -312,10 +312,10 @@ model{
  for(i in 1:n_country)
 {
  # data model (likelihood)
- 	y[i] ~ dbinom(theta[i], N[i]) 
+ 	y.i[i] ~ dbinom(theta.i[i], N.i[i]) 
  	
  # prior
- theta[i] ~ dbeta(1, 1) 
+ theta.i[i] ~ dbeta(1, 1) 
 }
  }
  "
@@ -328,10 +328,10 @@ model{
 ## Another Happiness Example: Rcode {style="font-size: 60%;"}
 
 ```{r, echo = TRUE, include=TRUE, eval = FALSE}
-jags.data <- list(y = survey_data$Y, 
-                  N = survey_data$N,
+jags.data <- list(y.i = survey_data$Y, 
+                  N.i = survey_data$N,
                   n_country = length(survey_data$Country))
-parnames <- c("theta")
+parnames <- c("theta.i")
 
 library(rjags)
 library(R2jags)
@@ -350,17 +350,17 @@ plot(mod_mcmc)
 ## tidybayes outptut
 library(tidybayes)
 mcmc.matrix <- mod$BUGSoutput$sims.matrix
-country <- survey_data$Country
+country <- happiness_survey$Country
 
 ## summary
 mcmc.matrix %>%
-  spread_draws(theta[country]) %>% 
+  spread_draws(theta.i[country]) %>% 
   summarise_draws() 
 
 ## plot
 mcmc.matrix %>%
-  spread_draws(theta[country]) %>% 
-  ggplot(aes(y = factor(country, labels = survey_data$Country), x = theta)) +
+  spread_draws(theta.i[country]) %>% 
+  ggplot(aes(y = factor(country, labels = survey_data$Country), x = theta.i)) +
   stat_halfeye() +
   ylab("")
 ```
