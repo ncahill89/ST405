@@ -480,7 +480,7 @@
     "href": "index.html#tutorials",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Tutorials",
-    "text": "Tutorials\nTutorial Sheet 1: Bayesian inference using binomial and Poisson models\nTutorial Sheet 1 Solutions: Bayesian inference using binomial and Poisson models"
+    "text": "Tutorials\nTutorial Sheet 1: Bayesian inference using binomial and Poisson models\n\nTutorial Sheet 2: Bayesian Model for Multiple Proportions - Email Campaign Click-Through Rates"
   },
   {
     "objectID": "Assignment1.html",
@@ -929,5 +929,19 @@
     "title": "Bayesian Data Analysis",
     "section": "Another Happiness Example: Rcode",
     "text": "Another Happiness Example: Rcode\n\njags.data &lt;- list(y.i = survey_data$Y, \n                  N.i = survey_data$N,\n                  n_country = length(survey_data$Country))\nparnames &lt;- c(\"theta.i\")\n\nlibrary(rjags)\nlibrary(R2jags)\nmod &lt;- jags(data = jags.data, \n            parameters.to.save = parnames, \n            model.file = textConnection(binomialmodel))\n\n\n## quick look output\nmod_mcmc &lt;- as.mcmc(mod)\nmod$BUGSoutput$summary\nplot(mod_mcmc)\n\n## tidybayes outptut\nlibrary(tidybayes)\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\ncountry &lt;- happiness_survey$Country\n\n## summary\nmcmc.matrix %&gt;%\n  spread_draws(theta.i[country]) %&gt;% \n  summarise_draws() \n\n## plot\nmcmc.matrix %&gt;%\n  spread_draws(theta.i[country]) %&gt;% \n  ggplot(aes(y = factor(country, labels = survey_data$Country), x = theta.i)) +\n  stat_halfeye() +\n  ylab(\"\")"
+  },
+  {
+    "objectID": "Tutorial2.html",
+    "href": "Tutorial2.html",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "This tutorial explores Bayesian inference using JAGS.\n\n\n\nA company is running three different email campaigns (A, B, and C) to promote a new product. The marketing team wants to estimate the click-through rates (CTR) for each campaign using a Bayesian approach and compare the effectiveness of the campaigns.\nThe data collected from these campaigns is as follows:\n\n\n\nCampaign\nEmails Sent\nEmails Clicked\n\n\n\n\nA\n100\n15\n\n\nB\n120\n20\n\n\nC\n110\n12\n\n\n\nUsing this data carry out the following analysis:\n\nModel Specification:\n\n(a) Specify an appropriate likelihood.\n(b) Specify a prior distribution for the CTR of each campaign, assuming you have no strong prior knowledge about success rates.\n\nJAGS Model:\n\n(a) Specify the JAGS model.\n(b) Implement the Bayesian model in JAGS using the data from the table. Run the MCMC sampling using 4,000 iterations and discarding the first 2,000 as burn-in.\n(c) Check for convergence.\n\nInterpretation of Results:\n\n(a) Plot the posterior distributions of the CTRs for the three campaigns.\n(b) Compare the posterior distributions and interpret what the results tell you about the relative effectiveness of the three email campaigns.\n\nAdditional Analysis:\n\n(a) Calculate the posterior probability that Campaign B has a higher CTR than Campaign A and Campaign C, and interpret this probability."
+  },
+  {
+    "objectID": "Tutorial2.html#introduction",
+    "href": "Tutorial2.html#introduction",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "This tutorial explores Bayesian inference using JAGS.\n\n\n\nA company is running three different email campaigns (A, B, and C) to promote a new product. The marketing team wants to estimate the click-through rates (CTR) for each campaign using a Bayesian approach and compare the effectiveness of the campaigns.\nThe data collected from these campaigns is as follows:\n\n\n\nCampaign\nEmails Sent\nEmails Clicked\n\n\n\n\nA\n100\n15\n\n\nB\n120\n20\n\n\nC\n110\n12\n\n\n\nUsing this data carry out the following analysis:\n\nModel Specification:\n\n(a) Specify an appropriate likelihood.\n(b) Specify a prior distribution for the CTR of each campaign, assuming you have no strong prior knowledge about success rates.\n\nJAGS Model:\n\n(a) Specify the JAGS model.\n(b) Implement the Bayesian model in JAGS using the data from the table. Run the MCMC sampling using 4,000 iterations and discarding the first 2,000 as burn-in.\n(c) Check for convergence.\n\nInterpretation of Results:\n\n(a) Plot the posterior distributions of the CTRs for the three campaigns.\n(b) Compare the posterior distributions and interpret what the results tell you about the relative effectiveness of the three email campaigns.\n\nAdditional Analysis:\n\n(a) Calculate the posterior probability that Campaign B has a higher CTR than Campaign A and Campaign C, and interpret this probability."
   }
 ]

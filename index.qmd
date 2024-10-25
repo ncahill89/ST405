@@ -47,7 +47,9 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 [Tutorial Sheet 1: Bayesian inference using binomial and Poisson models](https://ncahill89.github.io/ST405/Tutorial1.html)
 
-[Tutorial Sheet 1 Solutions: Bayesian inference using binomial and Poisson models](https://ncahill89.github.io/ST405/Tutorial1_soln.html)
+<!-- [Tutorial Sheet 1 Solutions: Bayesian inference using binomial and Poisson models](https://ncahill89.github.io/ST405/Tutorial1_soln.html) -->
+
+[Tutorial Sheet 2: Bayesian Model for Multiple Proportions - Email Campaign Click-Through Rates](https://ncahill89.github.io/ST405/Tutorial2.html)
 
 
 ## Assignments
