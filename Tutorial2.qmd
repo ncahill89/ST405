@@ -27,7 +27,7 @@ The data collected from these campaigns is as follows:
 | B        | 120         | 20             |
 | C        | 110         | 12             |
 
-Using this data carry out the following analysis:
+Using this data carry out the following tasks:
 
 1.  **Model Specification**:
 

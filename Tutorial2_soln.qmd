@@ -1,0 +1,203 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Tutorial Questions (2)"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+## **Solutions**
+
+
+### **Question 1: Bayesian Model for Multiple Proportions - Email Campaign Click-Through Rates**
+
+#### 1. **Model Specification**
+
+(a) The likelihood for each campaign $i$ can be modeled as a binomial distribution:
+
+
+$\text{y}_i \sim \text{Binomial}(\text{N}_i, \theta_i)$
+
+
+where:
+
+- $\text{N}_i$ is the number of emails sent for campaign $i$,
+
+- $\text{y}_i$ is the number of emails clicked for campaign $i$,
+
+- $\theta_i$ is the click-through rate (CTR) for campaign $i$.
+
+(b) We assume a **Beta(1,1)** prior for each $\theta_i$, which represents no strong prior belief about the CTR:
+
+$\theta_i \sim \text{Beta}(1, 1)$
+
+This is a uniform prior on the interval [0, 1].
+
+#### 2. **JAGS Model**
+
+(a) Here is the corresponding JAGS code for this model:
+
+```r
+CTR_model <- "
+model {
+  # Loop over the three campaigns
+  for (i in 1:n_campaign) {
+    # Likelihood: binomial distribution for the number of clicks
+    y.i[i] ~ dbin(theta.i[i], N.i[i])
+    
+    # Prior: Beta(1,1) distribution for the CTR (uniform prior)
+    theta.i[i] ~ dbeta(1, 1)
+  }
+}
+"
+```
+
+(b) To implement the JAGS model we need data and paramters to monitor. We can also specify initial values if we wish (JAGS will also do this by default).
+
+- **Data Input for JAGS**:
+
+```r
+CTR_data <- list(
+  y.i = c(15, 20, 12),   # Number of clicks for campaigns A, B, C
+  N.i = c(100, 120, 110), # Number of emails sent for campaigns A, B, C
+  n_campaign = 3
+)
+```
+
+- **Initial Values and Parameters to Monitor**:
+
+```r
+inits <- function() list(theta.i = runif(3)) # Random initial values for CTRs
+params <- c("theta.i") # Monitor the CTRs
+```
+
+
+- **Putting all of this together and running JAGS** 
+
+```{r, message=FALSE}
+library(rjags)
+library(R2jags)
+
+CTR_model <- "
+model {
+  # Loop over the three campaigns
+  for (i in 1:n_campaign) {
+    # Likelihood: binomial distribution for the number of clicks
+    y.i[i] ~ dbin(theta.i[i], N.i[i])
+    
+    # Prior: Beta(1,1) distribution for the CTR (uniform prior)
+    theta.i[i] ~ dbeta(1, 1)
+  }
+}
+"
+CTR_data <- list(
+  y.i = c(15, 20, 12),   # Number of clicks for campaigns A, B, C
+  N.i = c(100, 120, 110), # Number of emails sent for campaigns A, B, C
+  n_campaign = 3
+)
+
+inits <- function() list(theta.i = runif(3)) # Random initial values for CTRs
+params <- c("theta.i") # Monitor the CTRs
+
+mod <- jags(data = CTR_data, 
+            inits = inits, 
+            parameters.to.save = params, 
+            n.iter = 4000,
+            n.burnin = 2000, 
+            model.file = textConnection(CTR_model))
+```
+(c) To check for convergence we can have a quick look at the summary output and trace plots.
+
+```{r}
+mod$BUGSoutput$summary
+```
+
+  - Rhat values and ESS look good. 
+  
+```{r, fig.height=10}
+library(coda)
+# turn the model into an mcmc object
+mod_mcmc <- as.mcmc(mod)
+# get trace plot and density
+plot(mod_mcmc) 
+```  
+#### 3. **Interpretation of Results**
+
+- After running the MCMC sampling (e.g., using 4,000 iterations and discarding the first 2,000 as burn-in), you will obtain samples from the posterior distributions of $\theta_i$.
+
+- **(a) Plot the posterior distributions** of the CTRs for the three campaigns using a package like `tidybayes` in R (or `coda` or the base plotting functions).
+
+```{r,message=FALSE}
+library(tidybayes)
+library(tidyverse)
+## get the output in matrix format
+mcmc.matrix <- mod$BUGSoutput$sims.matrix
+## get indexes for theta
+campaign_index <- 1:3
+
+## plots
+mcmc.matrix %>%
+  spread_draws(theta.i[campaign_index]) %>% 
+  ggplot(aes(y = factor(campaign_index, labels = c("A","B", "C")), x = theta.i)) +
+  stat_halfeye() +
+  ylab("Campaign")
+```
+
+- **(b) Compare the distributions** to assess the relative effectiveness of the campaigns. It appears that the posterior distribution for $\theta_B$ is shifted to the right compared to $\theta_A$ and $\theta_C$, suggesting that Campaign B is likely more effective, i.e., the click through rate is estimated to be higher. Note however, there is an overlap in terms of uncertainty in the estimated click through rate. 
+
+
+#### 4. **Additional Analysis**
+
+- **(a) Calculate the posterior probability** that Campaign B has a higher CTR than Campaign A and Campaign C:
+
+$P(\theta_B > \theta_A) = \frac{1}{S} \sum_{s=1}^{S} I(\theta_B^{(s)} > \theta_A^{(s)})$
+
+where $S$ is the number of posterior samples, and $I(\cdot)$ is an indicator function. You can do similar calculations for $P(\theta_B > \theta_C)$.
+
+We can implement this in R as follows
+
+```{r}
+theta_samps <- mcmc.matrix %>%
+                spread_draws(theta.i[campaign_index]) 
+
+theta_A <- theta_samps %>% filter(campaign_index == 1) %>% pull(theta.i)
+theta_B <- theta_samps %>% filter(campaign_index == 2) %>% pull(theta.i)
+theta_C <- theta_samps %>% filter(campaign_index == 3) %>% pull(theta.i)
+
+sum(theta_B > theta_A)/length(theta_B)
+sum(theta_B > theta_C)/length(theta_B)
+
+```
+
+**Interpretation:**
+
+- The posterior probability that $\theta_B > \theta_A$ is 0.61, indicating that there is a 61% chance Campaign B has a higher CTR than Campaign A.
+- The posterior probability that $\theta_B > \theta_C$ is 0.89, indicating that there is a 89% chance Campaign B has a higher CTR than Campaign C.
+
+---
+
+<!-- ## Additional Question - Markov Chain -->
+
+<!-- Consider the behavior of a twitter user (per hour).  Assume there are 3 possible states: the user doesn’t visit the site, the user visits but doesn't engage (tweet, retweet, like etc) and the user visits and engages.  -->
+
+<!-- Imagine that the following probabilities have been observed: -->
+
+<!--   - when the user doesn’t visit the site within an hour, they have a 25% chance of still not visiting the next hour, a 50% chance of visiting but not engaging and a 25% chance of visiting and engaging. -->
+
+<!--   - when the user visits this site but doesn't engage within an hour, they have a 40% chance of visiting in the next hour and engaging, a 40% of not visiting in the next hour and a 20% chance of visiting in the next hour but not engaging. -->
+
+<!--   - when the user visits and engages within an hour, they have a 60% chance of visiting in the next hour and engaging, a 25% chance of visiting and not engaging and a 15% chance of not visiting.  -->
+
+<!-- Generate a markov chain using a multinomial distribution to simulate the states. You can simulate from a multinomial distribution in R using the function `rmultinom()`. Find the stationary distribution of the markov chain. What is the overall probability that a twitter user visits the site and engages?  -->
+
+<!-- __Notes on the Multinomial distribution__ -->
+
+<!-- The multinomial distribution arises from an extension of the binomial to situations where each trial has $k \geq 2$  possible outcomes. Suppose that we have an experiment with n independent trials, where each trial produces exactly one of the events $E_1$, $E_2, \ldots, E_k$ and on each trial each event occurs with probability $\pi_1$, $\pi_2, \ldots, \pi_k$. For example, when you have 3 events $E1, E_2$ and $E_3$ that are equally likely then you can simulate a single outcome using `rmultinom(n=1, size = 1, prob = c(1/3,1/3,1/3))` -->
+
+<!-- __Hint:__ -->
+<!-- I suggest modifying the code from the weather example used in Week 4 to answer the question.  -->
+
+
