@@ -1,0 +1,136 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Assignment 2: Comparing Video Game Playing Among Students in 5 Different Countries"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+## Instructions
+
+Please submit your answers to this assignment by **November 13th, 4:00PM**. 
+
+------------------------------------------------------------------------
+
+
+### Dataset
+
+Here’s a dataset that includes information from a survey of university undergraduate students from five different countries and whether or not they play video games. This will help in examining the proportion of students who play video games across these countries.
+
+```{r}
+
+video_game_data <- data.frame(
+  Country = c("USA", "Japan", "Germany", "Brazil", "India"),
+  Plays_Video_Games_Yes = c(70, 64, 58, 81, 45),  # students who play video games
+  Total = c(120, 80, 90, 95, 70)         # total students surveyed
+)
+
+# View the data frame
+video_game_data
+
+```
+---
+
+### Questions
+
+Using these data, carry out the following tasks and answer questions 1-6 below.
+
+- [ ] **Task: Model Specification**
+
+  (@) Specify an appropriate likelihood.
+   
+  (@) Specify a Beta prior distribution for the proportion of video game players that reflects prior information that the expected proportion $\pm$ 1 standard deviation is $0.6 \pm 0.2$. Round the Beta distribution parameters to the nearest whole numbers. 
+
+- [ ] **Task: Correct JAGS Model Specification**
+
+  (@) Assume that you’ve specified the JAGS model below, but there are **5 errors** in it. What are the errors?
+   
+```{r, message=FALSE, eval = FALSE}
+library(rjags)
+library(R2jags)
+
+vg_model <- "
+ {
+  # Loop over the three campaigns
+  for (i in n_country) {
+    # Likelihood: binomial distribution for the number playing video games
+    y.i[i] <- dbinom(theta.i, N.i[i])
+    
+    # Prior: Beta distribution for the proportion
+    theta.i[i] ~ beta(a, b)
+  }
+}
+"
+```
+
+- [ ] **Task: Run the JAGS Model**
+
+   (@)  After making the modifications to the JAGS model, replace the `??` in the code below to provide the appropriate data for the JAGS model. Run the code and provide the overview plot you obtain from `plot(mod)`.
+   
+
+```{r,  message=FALSE, eval = FALSE}
+vg_data <- list(??)
+
+inits <- function() list(theta.i = runif(5)) # Random initial values for proportions
+params <- c("theta.i") # Monitor theta
+
+mod <- jags(data = vg_data, 
+            inits = inits, 
+            parameters.to.save = params, 
+            n.iter = 4000,
+            n.burnin = 2000, 
+            model.file = textConnection(vg_model))
+plot(mod)
+```
+
+
+```{r, message=FALSE, echo=FALSE, include=FALSE}
+library(rjags)
+library(R2jags)
+
+vg_model <- "
+model {
+  # Loop over the three campaigns
+  for (i in 1:n_country) {
+    # Likelihood: binomial distribution for the number playing video games
+    y.i[i] ~ dbinom(theta.i[i], N.i[i])
+    
+    # Prior: Beta(1,1) distribution for the proportion
+    theta.i[i] ~ dbeta(a, b)
+  }
+}
+"
+vg_data <- list(
+  y.i = c(70, 64, 58, 81, 45),   # Number of players from each country
+  N.i = c(120, 80, 90, 95, 70), # Number of students 
+  n_country = 5,
+  a = 1,
+  b = 1
+)
+
+inits <- function() list(theta.i = runif(5)) # Random initial values for CTRs
+params <- c("theta.i") # Monitor the CTRs
+
+mod <- jags(data = vg_data, 
+            inits = inits, 
+            parameters.to.save = params, 
+            n.iter = 4000,
+            n.burnin = 2000, 
+            model.file = textConnection(vg_model))
+```
+   
+
+- [ ] **Task: Inference**
+
+   (@)   For each country, report the posterior median and 80% credible interval for the proportion of video game players.
+   
+- [ ] **Task: Additional Analysis**
+
+   (@)  Calculate the posterior probability that India has a higher proportion of video game players than the USA, and interpret this probability.
+
+---
+
+
