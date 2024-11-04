@@ -45,7 +45,7 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 ### Week 6
 
 
-6: [Bayesian Linear Regression](https://ncahill89.github.io/ST405/6-LR.html)
+6: [Bayesian Linear Regression](https://ncahill89.github.io/ST405/6_LR.html)
 
 
 ## Tutorials
