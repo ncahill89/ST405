@@ -160,7 +160,7 @@ For more information see [this paper by Andrew Gelman.](https://projecteuclid.or
 **Priors** \begin{align*}
  \alpha  &\sim Normal(100, 30^2)\\
  \beta  &\sim Normal(0, 2^2)\\
- \sigma &\sim half-t(30, 10^2,1)\\
+ \sigma &\sim Uniform(0,50)\\
 \end{align*}
 :::
 
