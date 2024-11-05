@@ -573,16 +573,16 @@ Initializing model</code></pre>
 <pre><code># A tibble: 3,000 × 6
    .chain .iteration .draw alpha  beta sigma
     &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1      1          1     1  88.2 0.610  19.0
- 2      1          2     2  87.2 0.708  18.0
- 3      1          3     3  89.0 0.666  17.6
- 4      1          4     4  86.0 0.651  18.4
- 5      1          5     5  87.9 0.490  17.0
- 6      1          6     6  86.6 0.558  17.6
- 7      1          7     7  86.6 0.649  17.7
- 8      1          8     8  88.5 0.572  18.0
- 9      1          9     9  88.2 0.621  18.5
-10      1         10    10  86.7 0.643  17.9
+ 1      1          1     1  88.3 0.650  18.4
+ 2      1          2     2  86.6 0.663  17.8
+ 3      1          3     3  86.9 0.541  18.5
+ 4      1          4     4  86.6 0.565  18.6
+ 5      1          5     5  85.0 0.530  18.0
+ 6      1          6     6  86.6 0.610  18.2
+ 7      1          7     7  87.4 0.649  18.0
+ 8      1          8     8  86.1 0.578  18.1
+ 9      1          9     9  85.3 0.567  18.2
+10      1         10    10  87.7 0.603  17.9
 # ℹ 2,990 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>par_summary1 <span class="ot">&lt;-</span> mcmc.matrix1 <span class="sc">%&gt;%</span> </span>
@@ -594,10 +594,10 @@ Initializing model</code></pre>
   .variable .value .lower .upper .width .point .interval
   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
 1 alpha     86.8   85.1   88.5     0.95 median qi       
-2 beta       0.610  0.488  0.726   0.95 median qi       
+2 beta       0.614  0.496  0.728   0.95 median qi       
 3 sigma     18.3   17.1   19.6     0.95 median qi       
-4 alpha     86.8   85.4   88.2     0.9  median qi       
-5 beta       0.610  0.508  0.707   0.9  median qi       
+4 alpha     86.8   85.4   88.3     0.9  median qi       
+5 beta       0.614  0.512  0.707   0.9  median qi       
 6 sigma     18.3   17.3   19.4     0.9  median qi       </code></pre>
 </div>
 </div>
@@ -617,15 +617,15 @@ Initializing model</code></pre>
 # Groups:   mu_ind [434]
    mu_ind  mu.i .chain .iteration .draw
     &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;
- 1      1 101.       1          1     1
- 2      1 102.       1          2     2
- 3      1 103.       1          3     3
- 4      1  99.8      1          4     4
- 5      1  98.2      1          5     5
- 6      1  98.4      1          6     6
- 7      1 100.       1          7     7
- 8      1 101.       1          8     8
- 9      1 101.       1          9     9
+ 1      1 102.       1          1     1
+ 2      1 101.       1          2     2
+ 3      1  98.4      1          3     3
+ 4      1  98.5      1          4     4
+ 5      1  96.2      1          5     5
+ 6      1  99.5      1          6     6
+ 7      1 101.       1          7     7
+ 8      1  98.3      1          8     8
+ 9      1  97.3      1          9     9
 10      1 100.       1         10    10
 # ℹ 1,301,990 more rows</code></pre>
 </div>
@@ -654,15 +654,15 @@ Initializing model</code></pre>
 # Groups:   mu_ind [434]
    mu_ind  mu.i .chain .iteration .draw
     &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;
- 1      1 101.       1          1     1
- 2      1 102.       1          2     2
- 3      1 103.       1          3     3
- 4      1  99.8      1          4     4
- 5      1  98.2      1          5     5
- 6      1  98.4      1          6     6
- 7      1 100.       1          7     7
- 8      1 101.       1          8     8
- 9      1 101.       1          9     9
+ 1      1 102.       1          1     1
+ 2      1 101.       1          2     2
+ 3      1  98.4      1          3     3
+ 4      1  98.5      1          4     4
+ 5      1  96.2      1          5     5
+ 6      1  99.5      1          6     6
+ 7      1 101.       1          7     7
+ 8      1  98.3      1          8     8
+ 9      1  97.3      1          9     9
 10      1 100.       1         10    10
 # ℹ 1,301,990 more rows</code></pre>
 </div>
@@ -694,16 +694,16 @@ Initializing model</code></pre>
 <pre><code># A tibble: 434 × 7
    mu_ind  mu.i .lower .upper .width .point .interval
     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
- 1      1  99.7   96.6  103.    0.95 median qi       
- 2      2  80.3   78.2   82.5   0.95 median qi       
+ 1      1  99.7   96.7  103.    0.95 median qi       
+ 2      2  80.3   78.2   82.4   0.95 median qi       
  3      3  96.2   93.8   98.7   0.95 median qi       
- 4      4  86.5   84.8   88.2   0.95 median qi       
- 5      5  82.4   80.5   84.3   0.95 median qi       
+ 4      4  86.5   84.7   88.2   0.95 median qi       
+ 5      5  82.4   80.4   84.3   0.95 median qi       
  6      6  91.6   89.7   93.6   0.95 median qi       
  7      7 111.   106.   115.    0.95 median qi       
- 8      8 102.    98.7  106.    0.95 median qi       
- 9      9  75.6   73.0   78.5   0.95 median qi       
-10     10  83.8   82.0   85.6   0.95 median qi       
+ 8      8 102.    98.8  106.    0.95 median qi       
+ 9      9  75.5   72.8   78.3   0.95 median qi       
+10     10  83.8   81.9   85.6   0.95 median qi       
 # ℹ 424 more rows</code></pre>
 </div>
 </div></div>
@@ -863,16 +863,16 @@ Initializing model</code></pre>
 <pre><code># A tibble: 3,000 × 5
    .chain .iteration .draw mu_pred ytilde
     &lt;int&gt;      &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
- 1      1          1     1   101.   120. 
- 2      1          2     2   101.   138. 
- 3      1          3     3    98.7   69.7
- 4      1          4     4    98.3   62.4
- 5      1          5     5   101.    53.5
- 6      1          6     6    98.1  126. 
- 7      1          7     7    99.1  119. 
- 8      1          8     8    97.9  101. 
- 9      1          9     9    97.7   88.1
-10      1         10    10    97.8  103. 
+ 1      1          1     1    99.5  102. 
+ 2      1          2     2    97.5   78.1
+ 3      1          3     3    98.6   84.4
+ 4      1          4     4    99.6   93.7
+ 5      1          5     5    99.7   74.7
+ 6      1          6     6    99.4   73.5
+ 7      1          7     7    99.5   85.0
+ 8      1          8     8   101.   122. 
+ 9      1          9     9    95.7  101. 
+10      1         10    10    98.9  103. 
 # ℹ 2,990 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>par_summary1 <span class="ot">&lt;-</span> mcmc.matrix1 <span class="sc">%&gt;%</span> </span>
@@ -883,8 +883,8 @@ Initializing model</code></pre>
 <pre><code># A tibble: 2 × 7
   .variable .value .lower .upper .width .point .interval
   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1 mu_pred     99.0   96.0   102.   0.95 median qi       
-2 ytilde      98.9   62.5   135.   0.95 median qi       </code></pre>
+1 mu_pred     99.0   96.1   102.   0.95 median qi       
+2 ytilde      99.0   62.0   135.   0.95 median qi       </code></pre>
 </div>
 </div>
 <p>What do you notice about the width of the intervals?</p>
@@ -894,8 +894,8 @@ Initializing model</code></pre>
 <p>Suppose now we want to see if there’s a “highschool” effect on the relationship between Mother’s IQ and Kid’s IQ.</p>
 <p>Some possible choices:</p>
 <ul>
-<li><p>Model 2A: Add the highschool variable in as a covariate, this will lead to a varying intercepts model with <span class="math inline">\(\alpha_1\)</span> for <code>highschool = no</code> and <span class="math inline">\(\alpha_2\)</span> for <code>highschool = yes</code>.</p></li>
-<li><p>Model 2B: Add the highschool variable in as a covariate and as an interaction with Mother’s IQ, this will lead to a varying intercepts and slopes model with <span class="math inline">\(\alpha_1\)</span> and <span class="math inline">\(\beta_1\)</span> for <code>highschool = no</code> and <span class="math inline">\(\alpha_2\)</span> and <span class="math inline">\(\beta_2\)</span> for <code>highscool = yes</code>.</p></li>
+<li><p>Model 2A: Add the highschool variable as a grouping variable, such that you have a varying intercepts model with <span class="math inline">\(\alpha_1\)</span> for <code>highschool = no</code> and <span class="math inline">\(\alpha_2\)</span> for <code>highschool = yes</code>.</p></li>
+<li><p>Model 2B: Add the highschool variable in as a grouping variable such that you have a varying intercepts and slopes model with <span class="math inline">\(\alpha_1\)</span> and <span class="math inline">\(\beta_1\)</span> for <code>highschool = no</code> and <span class="math inline">\(\alpha_2\)</span> and <span class="math inline">\(\beta_2\)</span> for <code>highscool = yes</code>.</p></li>
 </ul>
 <p>Let’s consider model 2B. The specification of this model could be written as</p>
 <p><span class="math inline">\(y_i|\mu,\sigma^2 \sim N(\mu_i, \sigma^2)\)</span></p>
@@ -978,10 +978,10 @@ Initializing model</code></pre>
 <pre><code># A tibble: 4 × 8
   `1:2` .variable .value .lower .upper .width .point .interval
   &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1     1 alpha.j   85.3   81.0   89.7     0.95 median qi       
-2     2 alpha.j   88.2   86.3   90.1     0.95 median qi       
-3     1 beta.j     0.960  0.678  1.26    0.95 median qi       
-4     2 beta.j     0.486  0.363  0.610   0.95 median qi       </code></pre>
+1     1 alpha.j   85.4   80.9   89.7     0.95 median qi       
+2     2 alpha.j   88.2   86.3   90.2     0.95 median qi       
+3     1 beta.j     0.967  0.672  1.25    0.95 median qi       
+4     2 beta.j     0.485  0.356  0.619   0.95 median qi       </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>mu_ind <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(kidiq)</span>
 <span id="cb24-2"><a></a>mu_samps2 <span class="ot">&lt;-</span> mcmc.matrix2 <span class="sc">%&gt;%</span> <span class="fu">spread_draws</span>(mu.i[mu_ind]) </span>
@@ -993,16 +993,16 @@ Initializing model</code></pre>
 <pre><code># A tibble: 434 × 7
    mu_ind  mu.i .lower .upper .width .point .interval
     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
- 1      1  98.5   95.4  101.    0.95 median qi       
- 2      2  83.0   80.5   85.5   0.95 median qi       
- 3      3  95.7   93.2   98.2   0.95 median qi       
- 4      4  87.9   86.0   89.9   0.95 median qi       
- 5      5  84.7   82.4   86.9   0.95 median qi       
- 6      6  92.9   87.1   99.0   0.95 median qi       
+ 1      1  98.5   95.3  102.    0.95 median qi       
+ 2      2  83.1   80.4   85.7   0.95 median qi       
+ 3      3  95.7   93.1   98.3   0.95 median qi       
+ 4      4  88.0   86.0   89.9   0.95 median qi       
+ 5      5  84.7   82.4   87.1   0.95 median qi       
+ 6      6  93.0   86.9   99.0   0.95 median qi       
  7      7 107.   102.   112.    0.95 median qi       
- 8      8 100.    97.0  104.    0.95 median qi       
- 9      9  79.2   76.1   82.4   0.95 median qi       
-10     10  85.8   83.7   87.9   0.95 median qi       
+ 8      8 100.    96.9  104.    0.95 median qi       
+ 9      9  79.3   75.9   82.6   0.95 median qi       
+10     10  85.8   83.7   88.0   0.95 median qi       
 # ℹ 424 more rows</code></pre>
 </div>
 </div>
@@ -1071,7 +1071,7 @@ Initializing model</code></pre>
 <ul>
 <li>The second called the Widely Applicable Information Criterion (WAIC) which is calculated as:</li>
 </ul>
-<p>WAIC: -2 log <span class="math inline">\(p(y|\hat{\theta}) + 2 p_{WAIC}\)</span></p>
+<p>WAIC: -2 log <span class="math inline">\(p(y|{\hat\theta}) + 2 p_{WAIC}\)</span></p>
 <p>Here <span class="math inline">\(p_{WAIC}\)</span> - the effective number of parameters - is a measure of the variability of the likelihood scores</p>
 </section>
 <section id="which-ic-to-use" class="slide level2" style="font-size: 70%;">
@@ -1092,12 +1092,12 @@ Initializing model</code></pre>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>DIC.m1 <span class="ot">=</span> mod1<span class="sc">$</span>BUGSoutput<span class="sc">$</span>DIC</span>
 <span id="cb27-2"><a></a>DIC.m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3757.684</code></pre>
+<pre><code>[1] 3757.415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>DIC.m2 <span class="ot">=</span> mod2<span class="sc">$</span>BUGSoutput<span class="sc">$</span>DIC</span>
 <span id="cb29-2"><a></a>DIC.m2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3744.965</code></pre>
+<pre><code>[1] 3745.806</code></pre>
 </div>
 </div>
 <ul>
@@ -1106,11 +1106,11 @@ Initializing model</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  waic1 p_waic1 
- 3757.1     2.9 </code></pre>
+ 3757.2     2.9 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  waic2 p_waic2 
- 3744.9     4.8 </code></pre>
+ 3744.9     4.9 </code></pre>
 </div>
 </div>
 </section>

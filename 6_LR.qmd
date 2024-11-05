@@ -3,6 +3,8 @@ title: "Bayesian Data Analysis"
 subtitle: "Bayesian Linear Regression with JAGS"
 author: "Prof. Niamh Cahill (she/her)"
 format: revealjs
+htlm-math-method:
+  method: mathjax
 editor: visual
 ---
 
@@ -517,9 +519,9 @@ Suppose now we want to see if there's a "highschool" effect on the relationship 
 
 Some possible choices:
 
--   Model 2A: Add the highschool variable in as a covariate, this will lead to a varying intercepts model with $\alpha_1$ for `highschool = no` and $\alpha_2$ for `highschool = yes`.
+-   Model 2A: Add the highschool variable as a grouping variable, such that you have a varying intercepts model with $\alpha_1$ for `highschool = no` and $\alpha_2$ for `highschool = yes`. 
 
--   Model 2B: Add the highschool variable in as a covariate and as an interaction with Mother's IQ, this will lead to a varying intercepts and slopes model with $\alpha_1$ and $\beta_1$ for `highschool = no` and $\alpha_2$ and $\beta_2$ for `highscool = yes`.
+-   Model 2B: Add the highschool variable in as a grouping variable such that you have a varying intercepts and slopes model with $\alpha_1$ and $\beta_1$ for `highschool = no` and $\alpha_2$ and $\beta_2$ for `highscool = yes`.
 
 Let's consider model 2B. The specification of this model could be written as
 
@@ -714,7 +716,7 @@ where $p_D$ = 2(log $p(y|\hat{\theta})$ $- E_{post}$log $p(y|\theta))$ is the ef
 
 -   The second called the Widely Applicable Information Criterion (WAIC) which is calculated as:
 
-WAIC: -2 log $p(y|\hat{\theta}) + 2 p_{WAIC}$
+WAIC: -2 log $p(y|{\hat\theta}) + 2 p_{WAIC}$
 
 Here $p_{WAIC}$ - the effective number of parameters - is a measure of the variability of the likelihood scores
 

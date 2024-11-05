@@ -228,7 +228,7 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression\n\n\nWeek 7\n7: Model Checking\n\n\nWeek 8\n8: Bayesian Hierarchical Modelling - Binomial Model\n\n\nWeek 9\n9: Bayesian Hierarchical Modelling - Regression Model\n\n\nWeek 10\n10: Bayesian GLMs\n\n\nWeek 11\n11: Bayesian Hierarchical Modelling - GLM"
   },
   {
     "objectID": "2a-BetaBinomial.html#scenario",
@@ -998,7 +998,7 @@
     "href": "6_LR.html#output---parameter-uncertainty",
     "title": "Bayesian Data Analysis",
     "section": "Output - Parameter Uncertainty",
-    "text": "Output - Parameter Uncertainty\n\nlibrary(tidybayes)\n\nmcmc.matrix1 &lt;- mod1$BUGSoutput$sims.matrix\npar_samps1 &lt;- mcmc.matrix1 %&gt;% spread_draws(alpha,beta,sigma) \npar_samps1\n\n# A tibble: 3,000 × 6\n   .chain .iteration .draw alpha  beta sigma\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1      1          1     1  88.2 0.610  19.0\n 2      1          2     2  87.2 0.708  18.0\n 3      1          3     3  89.0 0.666  17.6\n 4      1          4     4  86.0 0.651  18.4\n 5      1          5     5  87.9 0.490  17.0\n 6      1          6     6  86.6 0.558  17.6\n 7      1          7     7  86.6 0.649  17.7\n 8      1          8     8  88.5 0.572  18.0\n 9      1          9     9  88.2 0.621  18.5\n10      1         10    10  86.7 0.643  17.9\n# ℹ 2,990 more rows\n\npar_summary1 &lt;- mcmc.matrix1 %&gt;% \n                gather_rvars(alpha,beta,sigma) %&gt;% \n                median_qi(.value, .width = c(.95,0.9))\npar_summary1\n\n# A tibble: 6 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     86.8   85.1   88.5     0.95 median qi       \n2 beta       0.610  0.488  0.726   0.95 median qi       \n3 sigma     18.3   17.1   19.6     0.95 median qi       \n4 alpha     86.8   85.4   88.2     0.9  median qi       \n5 beta       0.610  0.508  0.707   0.9  median qi       \n6 sigma     18.3   17.3   19.4     0.9  median qi"
+    "text": "Output - Parameter Uncertainty\n\nlibrary(tidybayes)\n\nmcmc.matrix1 &lt;- mod1$BUGSoutput$sims.matrix\npar_samps1 &lt;- mcmc.matrix1 %&gt;% spread_draws(alpha,beta,sigma) \npar_samps1\n\n# A tibble: 3,000 × 6\n   .chain .iteration .draw alpha  beta sigma\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1      1          1     1  88.3 0.650  18.4\n 2      1          2     2  86.6 0.663  17.8\n 3      1          3     3  86.9 0.541  18.5\n 4      1          4     4  86.6 0.565  18.6\n 5      1          5     5  85.0 0.530  18.0\n 6      1          6     6  86.6 0.610  18.2\n 7      1          7     7  87.4 0.649  18.0\n 8      1          8     8  86.1 0.578  18.1\n 9      1          9     9  85.3 0.567  18.2\n10      1         10    10  87.7 0.603  17.9\n# ℹ 2,990 more rows\n\npar_summary1 &lt;- mcmc.matrix1 %&gt;% \n                gather_rvars(alpha,beta,sigma) %&gt;% \n                median_qi(.value, .width = c(.95,0.9))\npar_summary1\n\n# A tibble: 6 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     86.8   85.1   88.5     0.95 median qi       \n2 beta       0.614  0.496  0.728   0.95 median qi       \n3 sigma     18.3   17.1   19.6     0.95 median qi       \n4 alpha     86.8   85.4   88.3     0.9  median qi       \n5 beta       0.614  0.512  0.707   0.9  median qi       \n6 sigma     18.3   17.3   19.4     0.9  median qi"
   },
   {
     "objectID": "6_LR.html#output---parameter-uncertainty-1",
@@ -1012,21 +1012,21 @@
     "href": "6_LR.html#posterior-draws-of-mu_i",
     "title": "Bayesian Data Analysis",
     "section": "Posterior Draws of \\(\\mu_i\\)",
-    "text": "Posterior Draws of \\(\\mu_i\\)\nFor each sample draw (simulation) \\(s= 1, \\ldots , S\\) of the parameters from the posterior distribution we can obtain \\(\\mu_i^{(s)} = \\beta_0^{(s)} + \\beta_1^{(s)}(x_{i} - \\bar{x})\\)\n\n\n\n\n# A tibble: 1,302,000 × 5\n# Groups:   mu_ind [434]\n   mu_ind  mu.i .chain .iteration .draw\n    &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;\n 1      1 101.       1          1     1\n 2      1 102.       1          2     2\n 3      1 103.       1          3     3\n 4      1  99.8      1          4     4\n 5      1  98.2      1          5     5\n 6      1  98.4      1          6     6\n 7      1 100.       1          7     7\n 8      1 101.       1          8     8\n 9      1 101.       1          9     9\n10      1 100.       1         10    10\n# ℹ 1,301,990 more rows\n\n\n\n5 posterior draws"
+    "text": "Posterior Draws of \\(\\mu_i\\)\nFor each sample draw (simulation) \\(s= 1, \\ldots , S\\) of the parameters from the posterior distribution we can obtain \\(\\mu_i^{(s)} = \\beta_0^{(s)} + \\beta_1^{(s)}(x_{i} - \\bar{x})\\)\n\n\n\n\n# A tibble: 1,302,000 × 5\n# Groups:   mu_ind [434]\n   mu_ind  mu.i .chain .iteration .draw\n    &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;\n 1      1 102.       1          1     1\n 2      1 101.       1          2     2\n 3      1  98.4      1          3     3\n 4      1  98.5      1          4     4\n 5      1  96.2      1          5     5\n 6      1  99.5      1          6     6\n 7      1 101.       1          7     7\n 8      1  98.3      1          8     8\n 9      1  97.3      1          9     9\n10      1 100.       1         10    10\n# ℹ 1,301,990 more rows\n\n\n\n5 posterior draws"
   },
   {
     "objectID": "6_LR.html#posterior-draws-of-mu_i-1",
     "href": "6_LR.html#posterior-draws-of-mu_i-1",
     "title": "Bayesian Data Analysis",
     "section": "Posterior Draws of \\(\\mu_i\\)",
-    "text": "Posterior Draws of \\(\\mu_i\\)\nFor each draw (simulation) \\(s= 1, \\ldots , S\\) of the parameters from the posterior distribution we can obtain \\(\\mu_i^{(s)} = \\beta_0^{(s)} + \\beta_1^{(s)}(x_{i} - \\bar{x})\\)\n\n\n\n\n# A tibble: 1,302,000 × 5\n# Groups:   mu_ind [434]\n   mu_ind  mu.i .chain .iteration .draw\n    &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;\n 1      1 101.       1          1     1\n 2      1 102.       1          2     2\n 3      1 103.       1          3     3\n 4      1  99.8      1          4     4\n 5      1  98.2      1          5     5\n 6      1  98.4      1          6     6\n 7      1 100.       1          7     7\n 8      1 101.       1          8     8\n 9      1 101.       1          9     9\n10      1 100.       1         10    10\n# ℹ 1,301,990 more rows\n\n\n\n200 posterior draws"
+    "text": "Posterior Draws of \\(\\mu_i\\)\nFor each draw (simulation) \\(s= 1, \\ldots , S\\) of the parameters from the posterior distribution we can obtain \\(\\mu_i^{(s)} = \\beta_0^{(s)} + \\beta_1^{(s)}(x_{i} - \\bar{x})\\)\n\n\n\n\n# A tibble: 1,302,000 × 5\n# Groups:   mu_ind [434]\n   mu_ind  mu.i .chain .iteration .draw\n    &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;\n 1      1 102.       1          1     1\n 2      1 101.       1          2     2\n 3      1  98.4      1          3     3\n 4      1  98.5      1          4     4\n 5      1  96.2      1          5     5\n 6      1  99.5      1          6     6\n 7      1 101.       1          7     7\n 8      1  98.3      1          8     8\n 9      1  97.3      1          9     9\n10      1 100.       1         10    10\n# ℹ 1,301,990 more rows\n\n\n\n200 posterior draws"
   },
   {
     "objectID": "6_LR.html#summary-for-mu_i---point-estimate-credible-interval",
     "href": "6_LR.html#summary-for-mu_i---point-estimate-credible-interval",
     "title": "Bayesian Data Analysis",
     "section": "Summary for \\(\\mu_i\\) - Point Estimate + Credible Interval",
-    "text": "Summary for \\(\\mu_i\\) - Point Estimate + Credible Interval\n\n\nmu_ind &lt;- 1:nrow(kidiq)\nmu_samps1 &lt;- mcmc.matrix1 %&gt;% spread_draws(mu.i[mu_ind]) \nmu_summary1 &lt;- mu_samps1 %&gt;% \n                median_qi(.width = 0.95)\nmu_summary1\n\n\n# A tibble: 434 × 7\n   mu_ind  mu.i .lower .upper .width .point .interval\n    &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n 1      1  99.7   96.6  103.    0.95 median qi       \n 2      2  80.3   78.2   82.5   0.95 median qi       \n 3      3  96.2   93.8   98.7   0.95 median qi       \n 4      4  86.5   84.8   88.2   0.95 median qi       \n 5      5  82.4   80.5   84.3   0.95 median qi       \n 6      6  91.6   89.7   93.6   0.95 median qi       \n 7      7 111.   106.   115.    0.95 median qi       \n 8      8 102.    98.7  106.    0.95 median qi       \n 9      9  75.6   73.0   78.5   0.95 median qi       \n10     10  83.8   82.0   85.6   0.95 median qi       \n# ℹ 424 more rows\n\n\n\n\nkidiq &lt;- kidiq %&gt;% mutate(mu.i = mu_summary1$mu.i,\n                          lower = mu_summary1$.lower,\n                          upper = mu_summary1$.upper)\n\nggplot(kidiq, aes(x = mom_iq, y = kid_score)) +\n  geom_point() +\n  geom_line(aes(x = mom_iq, y = mu.i),colour = \"blue\") +\n  geom_ribbon(aes(ymin = lower, ymax = upper, fill = \"CI\"), alpha = 0.3) +\n  theme_bw() +\n  labs(fill = \"\") +\n  ylab(\"Kid's IQ\") +\n  xlab(\"Mother's IQ\")"
+    "text": "Summary for \\(\\mu_i\\) - Point Estimate + Credible Interval\n\n\nmu_ind &lt;- 1:nrow(kidiq)\nmu_samps1 &lt;- mcmc.matrix1 %&gt;% spread_draws(mu.i[mu_ind]) \nmu_summary1 &lt;- mu_samps1 %&gt;% \n                median_qi(.width = 0.95)\nmu_summary1\n\n\n# A tibble: 434 × 7\n   mu_ind  mu.i .lower .upper .width .point .interval\n    &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n 1      1  99.7   96.7  103.    0.95 median qi       \n 2      2  80.3   78.2   82.4   0.95 median qi       \n 3      3  96.2   93.8   98.7   0.95 median qi       \n 4      4  86.5   84.7   88.2   0.95 median qi       \n 5      5  82.4   80.4   84.3   0.95 median qi       \n 6      6  91.6   89.7   93.6   0.95 median qi       \n 7      7 111.   106.   115.    0.95 median qi       \n 8      8 102.    98.8  106.    0.95 median qi       \n 9      9  75.5   72.8   78.3   0.95 median qi       \n10     10  83.8   81.9   85.6   0.95 median qi       \n# ℹ 424 more rows\n\n\n\n\nkidiq &lt;- kidiq %&gt;% mutate(mu.i = mu_summary1$mu.i,\n                          lower = mu_summary1$.lower,\n                          upper = mu_summary1$.upper)\n\nggplot(kidiq, aes(x = mom_iq, y = kid_score)) +\n  geom_point() +\n  geom_line(aes(x = mom_iq, y = mu.i),colour = \"blue\") +\n  geom_ribbon(aes(ymin = lower, ymax = upper, fill = \"CI\"), alpha = 0.3) +\n  theme_bw() +\n  labs(fill = \"\") +\n  ylab(\"Kid's IQ\") +\n  xlab(\"Mother's IQ\")"
   },
   {
     "objectID": "6_LR.html#predictive-distribution",
@@ -1068,14 +1068,14 @@
     "href": "6_LR.html#credible-interval-vs-prediction-interval",
     "title": "Bayesian Data Analysis",
     "section": "Credible interval vs prediction interval",
-    "text": "Credible interval vs prediction interval\nLet’s consider the difference between the credible interval and the prediction interval for the Kid’s IQ when the Mother’s IQ = 120.\n\npar_samps1 &lt;- mcmc.matrix1 %&gt;% spread_draws(mu_pred,ytilde) \npar_samps1\n\n# A tibble: 3,000 × 5\n   .chain .iteration .draw mu_pred ytilde\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;\n 1      1          1     1   101.   120. \n 2      1          2     2   101.   138. \n 3      1          3     3    98.7   69.7\n 4      1          4     4    98.3   62.4\n 5      1          5     5   101.    53.5\n 6      1          6     6    98.1  126. \n 7      1          7     7    99.1  119. \n 8      1          8     8    97.9  101. \n 9      1          9     9    97.7   88.1\n10      1         10    10    97.8  103. \n# ℹ 2,990 more rows\n\npar_summary1 &lt;- mcmc.matrix1 %&gt;% \n                gather_rvars(mu_pred,ytilde) %&gt;% \n                median_qi(.value)\npar_summary1\n\n# A tibble: 2 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 mu_pred     99.0   96.0   102.   0.95 median qi       \n2 ytilde      98.9   62.5   135.   0.95 median qi       \n\n\nWhat do you notice about the width of the intervals?"
+    "text": "Credible interval vs prediction interval\nLet’s consider the difference between the credible interval and the prediction interval for the Kid’s IQ when the Mother’s IQ = 120.\n\npar_samps1 &lt;- mcmc.matrix1 %&gt;% spread_draws(mu_pred,ytilde) \npar_samps1\n\n# A tibble: 3,000 × 5\n   .chain .iteration .draw mu_pred ytilde\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;\n 1      1          1     1    99.5  102. \n 2      1          2     2    97.5   78.1\n 3      1          3     3    98.6   84.4\n 4      1          4     4    99.6   93.7\n 5      1          5     5    99.7   74.7\n 6      1          6     6    99.4   73.5\n 7      1          7     7    99.5   85.0\n 8      1          8     8   101.   122. \n 9      1          9     9    95.7  101. \n10      1         10    10    98.9  103. \n# ℹ 2,990 more rows\n\npar_summary1 &lt;- mcmc.matrix1 %&gt;% \n                gather_rvars(mu_pred,ytilde) %&gt;% \n                median_qi(.value)\npar_summary1\n\n# A tibble: 2 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 mu_pred     99.0   96.1   102.   0.95 median qi       \n2 ytilde      99.0   62.0   135.   0.95 median qi       \n\n\nWhat do you notice about the width of the intervals?"
   },
   {
     "objectID": "6_LR.html#extending-the-regression-model",
     "href": "6_LR.html#extending-the-regression-model",
     "title": "Bayesian Data Analysis",
     "section": "Extending the regression model",
-    "text": "Extending the regression model\nSuppose now we want to see if there’s a “highschool” effect on the relationship between Mother’s IQ and Kid’s IQ.\nSome possible choices:\n\nModel 2A: Add the highschool variable in as a covariate, this will lead to a varying intercepts model with \\(\\alpha_1\\) for highschool = no and \\(\\alpha_2\\) for highschool = yes.\nModel 2B: Add the highschool variable in as a covariate and as an interaction with Mother’s IQ, this will lead to a varying intercepts and slopes model with \\(\\alpha_1\\) and \\(\\beta_1\\) for highschool = no and \\(\\alpha_2\\) and \\(\\beta_2\\) for highscool = yes.\n\nLet’s consider model 2B. The specification of this model could be written as\n\\(y_i|\\mu,\\sigma^2 \\sim N(\\mu_i, \\sigma^2)\\)\n\\(\\mu_i = \\underset{\\text{j[i] = HS for obs i}}{\\alpha_{j[i]} + \\beta_{j[i]}}(x_{i} - \\bar{x})\\)\n\\(\\alpha_j \\sim N(100,30^2), \\hspace{0.5em} \\text{for } j=1,2\\)\n\\(\\beta_j \\sim N(0,2^2), \\hspace{0.5em} \\text{for } j=1,2\\)"
+    "text": "Extending the regression model\nSuppose now we want to see if there’s a “highschool” effect on the relationship between Mother’s IQ and Kid’s IQ.\nSome possible choices:\n\nModel 2A: Add the highschool variable as a grouping variable, such that you have a varying intercepts model with \\(\\alpha_1\\) for highschool = no and \\(\\alpha_2\\) for highschool = yes.\nModel 2B: Add the highschool variable in as a grouping variable such that you have a varying intercepts and slopes model with \\(\\alpha_1\\) and \\(\\beta_1\\) for highschool = no and \\(\\alpha_2\\) and \\(\\beta_2\\) for highscool = yes.\n\nLet’s consider model 2B. The specification of this model could be written as\n\\(y_i|\\mu,\\sigma^2 \\sim N(\\mu_i, \\sigma^2)\\)\n\\(\\mu_i = \\underset{\\text{j[i] = HS for obs i}}{\\alpha_{j[i]} + \\beta_{j[i]}}(x_{i} - \\bar{x})\\)\n\\(\\alpha_j \\sim N(100,30^2), \\hspace{0.5em} \\text{for } j=1,2\\)\n\\(\\beta_j \\sim N(0,2^2), \\hspace{0.5em} \\text{for } j=1,2\\)"
   },
   {
     "objectID": "6_LR.html#jags-model-specification-1",
@@ -1096,7 +1096,7 @@
     "href": "6_LR.html#output",
     "title": "Bayesian Data Analysis",
     "section": "Output",
-    "text": "Output\n\nmcmc.matrix2 &lt;- mod2$BUGSoutput$sims.matrix\n\npar_summary2 &lt;- mcmc.matrix2 %&gt;% \n                gather_rvars(alpha.j[1:2],beta.j[1:2]) %&gt;% \n                median_qi(.value)\npar_summary2\n\n# A tibble: 4 × 8\n  `1:2` .variable .value .lower .upper .width .point .interval\n  &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1     1 alpha.j   85.3   81.0   89.7     0.95 median qi       \n2     2 alpha.j   88.2   86.3   90.1     0.95 median qi       \n3     1 beta.j     0.960  0.678  1.26    0.95 median qi       \n4     2 beta.j     0.486  0.363  0.610   0.95 median qi       \n\nmu_ind &lt;- 1:nrow(kidiq)\nmu_samps2 &lt;- mcmc.matrix2 %&gt;% spread_draws(mu.i[mu_ind]) \nmu_summary2 &lt;- mu_samps2 %&gt;% \n                median_qi(.width = 0.95)\n\nmu_summary2\n\n# A tibble: 434 × 7\n   mu_ind  mu.i .lower .upper .width .point .interval\n    &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n 1      1  98.5   95.4  101.    0.95 median qi       \n 2      2  83.0   80.5   85.5   0.95 median qi       \n 3      3  95.7   93.2   98.2   0.95 median qi       \n 4      4  87.9   86.0   89.9   0.95 median qi       \n 5      5  84.7   82.4   86.9   0.95 median qi       \n 6      6  92.9   87.1   99.0   0.95 median qi       \n 7      7 107.   102.   112.    0.95 median qi       \n 8      8 100.    97.0  104.    0.95 median qi       \n 9      9  79.2   76.1   82.4   0.95 median qi       \n10     10  85.8   83.7   87.9   0.95 median qi       \n# ℹ 424 more rows"
+    "text": "Output\n\nmcmc.matrix2 &lt;- mod2$BUGSoutput$sims.matrix\n\npar_summary2 &lt;- mcmc.matrix2 %&gt;% \n                gather_rvars(alpha.j[1:2],beta.j[1:2]) %&gt;% \n                median_qi(.value)\npar_summary2\n\n# A tibble: 4 × 8\n  `1:2` .variable .value .lower .upper .width .point .interval\n  &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1     1 alpha.j   85.4   80.9   89.7     0.95 median qi       \n2     2 alpha.j   88.2   86.3   90.2     0.95 median qi       \n3     1 beta.j     0.967  0.672  1.25    0.95 median qi       \n4     2 beta.j     0.485  0.356  0.619   0.95 median qi       \n\nmu_ind &lt;- 1:nrow(kidiq)\nmu_samps2 &lt;- mcmc.matrix2 %&gt;% spread_draws(mu.i[mu_ind]) \nmu_summary2 &lt;- mu_samps2 %&gt;% \n                median_qi(.width = 0.95)\n\nmu_summary2\n\n# A tibble: 434 × 7\n   mu_ind  mu.i .lower .upper .width .point .interval\n    &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n 1      1  98.5   95.3  102.    0.95 median qi       \n 2      2  83.1   80.4   85.7   0.95 median qi       \n 3      3  95.7   93.1   98.3   0.95 median qi       \n 4      4  88.0   86.0   89.9   0.95 median qi       \n 5      5  84.7   82.4   87.1   0.95 median qi       \n 6      6  93.0   86.9   99.0   0.95 median qi       \n 7      7 107.   102.   112.    0.95 median qi       \n 8      8 100.    96.9  104.    0.95 median qi       \n 9      9  79.3   75.9   82.6   0.95 median qi       \n10     10  85.8   83.7   88.0   0.95 median qi       \n# ℹ 424 more rows"
   },
   {
     "objectID": "6_LR.html#visualising-the-results",
@@ -1138,7 +1138,7 @@
     "href": "6_LR.html#model-information-criteria-2",
     "title": "Bayesian Data Analysis",
     "section": "Model information criteria",
-    "text": "Model information criteria\nFor Bayesian models it’s hard to know which value of L to use, seeing as at each iteration we get a different likelihood score. Two specific versions of IC have been developed.\n\nThe first, called the Deviance Information Criteria (DIC) is calculated via:\n\nDIC: -2 log \\(p(y|\\hat{\\theta}) + 2 p_D\\)\nwhere \\(p_D\\) = 2(log \\(p(y|\\hat{\\theta})\\) \\(- E_{post}\\)log \\(p(y|\\theta))\\) is the effective number of parameters\n\nThe second called the Widely Applicable Information Criterion (WAIC) which is calculated as:\n\nWAIC: -2 log \\(p(y|\\hat{\\theta}) + 2 p_{WAIC}\\)\nHere \\(p_{WAIC}\\) - the effective number of parameters - is a measure of the variability of the likelihood scores"
+    "text": "Model information criteria\nFor Bayesian models it’s hard to know which value of L to use, seeing as at each iteration we get a different likelihood score. Two specific versions of IC have been developed.\n\nThe first, called the Deviance Information Criteria (DIC) is calculated via:\n\nDIC: -2 log \\(p(y|\\hat{\\theta}) + 2 p_D\\)\nwhere \\(p_D\\) = 2(log \\(p(y|\\hat{\\theta})\\) \\(- E_{post}\\)log \\(p(y|\\theta))\\) is the effective number of parameters\n\nThe second called the Widely Applicable Information Criterion (WAIC) which is calculated as:\n\nWAIC: -2 log \\(p(y|{\\hat\\theta}) + 2 p_{WAIC}\\)\nHere \\(p_{WAIC}\\) - the effective number of parameters - is a measure of the variability of the likelihood scores"
   },
   {
     "objectID": "6_LR.html#which-ic-to-use",
@@ -1152,7 +1152,7 @@
     "href": "6_LR.html#obtaining-dic-and-waic-from-jags",
     "title": "Bayesian Data Analysis",
     "section": "Obtaining DIC and WAIC from JAGS",
-    "text": "Obtaining DIC and WAIC from JAGS\n\nDIC is easy to obtain from JAGS\n\n\nDIC.m1 = mod1$BUGSoutput$DIC\nDIC.m1\n\n[1] 3757.684\n\nDIC.m2 = mod2$BUGSoutput$DIC\nDIC.m2\n\n[1] 3744.965\n\n\n\nWAIC takes a little bit more work but there’s some code here that illustrates how to do it.\n\n\n\n  waic1 p_waic1 \n 3757.1     2.9 \n\n\n  waic2 p_waic2 \n 3744.9     4.8"
+    "text": "Obtaining DIC and WAIC from JAGS\n\nDIC is easy to obtain from JAGS\n\n\nDIC.m1 = mod1$BUGSoutput$DIC\nDIC.m1\n\n[1] 3757.415\n\nDIC.m2 = mod2$BUGSoutput$DIC\nDIC.m2\n\n[1] 3745.806\n\n\n\nWAIC takes a little bit more work but there’s some code here that illustrates how to do it.\n\n\n\n  waic1 p_waic1 \n 3757.2     2.9 \n\n\n  waic2 p_waic2 \n 3744.9     4.9"
   },
   {
     "objectID": "6_LR.html#cross-validation",
@@ -1188,5 +1188,96 @@
     "title": "ST405/ST645 Bayesian Data Analysis",
     "section": "",
     "text": "Please submit your answers to this assignment by November 13th, 4:00PM.\n\n\n\nHere’s a dataset that includes information from a survey of university undergraduate students from five different countries and whether or not they play video games. This will help in examining the proportion of students who play video games across these countries.\n\nvideo_game_data &lt;- data.frame(\n  Country = c(\"USA\", \"Japan\", \"Germany\", \"Brazil\", \"India\"),\n  Plays_Video_Games_Yes = c(70, 64, 58, 81, 45),  # students who play video games\n  Total = c(120, 80, 90, 95, 70)         # total students surveyed\n)\n\n# View the data frame\nvideo_game_data\n\n  Country Plays_Video_Games_Yes Total\n1     USA                    70   120\n2   Japan                    64    80\n3 Germany                    58    90\n4  Brazil                    81    95\n5   India                    45    70\n\n\n\n\n\n\nUsing these data, carry out the following tasks and answer questions 1-6 below.\n\nTask: Model Specification\n\nSpecify an appropriate likelihood.\nSpecify a Beta prior distribution for the proportion of video game players that reflects prior information that the expected proportion \\(\\pm\\) 1 standard deviation is \\(0.6 \\pm 0.2\\). Round the Beta distribution parameters to the nearest whole numbers.\n\nTask: Correct JAGS Model Specification\n\nAssume that you’ve specified the JAGS model below, but there are 5 errors in it. What are the errors?\n\n\n\nlibrary(rjags)\nlibrary(R2jags)\n\nvg_model &lt;- \"\n {\n  # Loop over the three campaigns\n  for (i in n_country) {\n    # Likelihood: binomial distribution for the number playing video games\n    y.i[i] &lt;- dbinom(theta.i, N.i[i])\n    \n    # Prior: Beta distribution for the proportion\n    theta.i[i] ~ beta(a, b)\n  }\n}\n\"\n\n\nTask: Run the JAGS Model\n\nAfter making the modifications to the JAGS model, replace the ?? in the code below to provide the appropriate data for the JAGS model. Run the code and provide the overview plot you obtain from plot(mod).\n\n\n\nvg_data &lt;- list(??)\n\ninits &lt;- function() list(theta.i = runif(5)) # Random initial values for proportions\nparams &lt;- c(\"theta.i\") # Monitor theta\n\nmod &lt;- jags(data = vg_data, \n            inits = inits, \n            parameters.to.save = params, \n            n.iter = 4000,\n            n.burnin = 2000, \n            model.file = textConnection(vg_model))\nplot(mod)\n\n\nTask: Inference\n\nFor each country, report the posterior median and 80% credible interval for the proportion of video game players.\n\nTask: Additional Analysis\n\nCalculate the posterior probability that India has a higher proportion of video game players than the USA, and interpret this probability."
+  },
+  {
+    "objectID": "7-checking.html#posterior-predictive-checking",
+    "href": "7-checking.html#posterior-predictive-checking",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior Predictive Checking",
+    "text": "Posterior Predictive Checking\nThe idea behind posterior predictive checking is simple: if a model is a good fit then we should be able to use it to generate data that looks a lot like the data we observed.\n\nTo generate the data used for posterior predictive checks (PPCs) we simulate from the posterior predictive distribution.\nFor each draw (simulation) \\(s= 1, \\ldots , S\\) of the parameters from the posterior distribution, we draw an entire vector of \\(N\\) outcomes \\(\\tilde{y}^{(s)}\\) from the posterior predictive distribution by simulation from the data model, conditional on parameters.\nThe result is an \\(S \\times N\\) matrix of draws \\(\\tilde{y}\\)\nWhen simulating from the posterior predictive distribution using the same values of the predictors X that we used when fitting the model we denote the simulations \\(y^{rep}\\).\nWhen predicting new or future observations we denote the simulations \\(\\tilde{y}\\).\nWe will use the bayesplot package to create various graphical displays for posterior predictive checks (PPCs)."
+  },
+  {
+    "objectID": "7-checking.html#predictive-distribution-for-observations-yrep",
+    "href": "7-checking.html#predictive-distribution-for-observations-yrep",
+    "title": "Bayesian Data Analysis",
+    "section": "Predictive Distribution for Observations, \\(y^{rep}\\)",
+    "text": "Predictive Distribution for Observations, \\(y^{rep}\\)\nLet’s revisit the Bayesian regression Model applied to Kid IQ:\n\nModel for Observations:\n\\[y_i \\sim N(\\mu_i, \\sigma)\\]\nRegression Structure:\n\\[\\mu_i = \\alpha_{j[i]} + \\beta_{j[i]} \\left( x_i - \\text{mean}(x) \\right), \\quad \\text{where } j[i] = \\text{education level for observation } i\\]\n\n\\(\\alpha_j \\sim N(100, 30^2), \\quad j = 1, 2\\)\n\\(\\beta_j \\sim N(0, 2^2), \\quad j = 1, 2\\)\n\n\nTo simulate new observations (\\(y^{\\text{rep}}\\)) based on this model, we follow these steps:\n\nSample \\(\\mu_i^{(s)}\\) and \\(\\sigma^{(s)}\\) from the posterior distribution \\(p(\\mu, \\sigma \\mid y)\\).\nGenerate Replicates \\(y_i^{\\text{rep}(s)}\\) by drawing from \\(N(\\mu_i^{(s)}, \\sigma^{(s)})\\).\n\nThis process provides a predictive distribution of Kid IQ observations, enabling us to compare the model’s predictions to the observed data."
+  },
+  {
+    "objectID": "7-checking.html#jags-model-to-include-yrep",
+    "href": "7-checking.html#jags-model-to-include-yrep",
+    "title": "Bayesian Data Analysis",
+    "section": "JAGS model to include \\(y^{rep}\\)",
+    "text": "JAGS model to include \\(y^{rep}\\)\n\nlrmodel2 =\"\nmodel{\n    for (i in 1:n){\n        y.i[i] ~ dnorm(mu.i[i], sigma^-2)\n        mu.i[i] &lt;- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i))\n    }\n\n#Priors\nfor(j in 1:m)\n{\nalpha.j[j] ~ dnorm(100, 30^-2) \nbeta.j[j] ~ dnorm(0, 2^-2) \n}\nsigma ~ dunif(0,50)\n\n## predictive distribution\nfor (i in 1:n) {yrep[i] ~ dnorm(mu.i[i], sigma^-2)}\n}\n\""
+  },
+  {
+    "objectID": "7-checking.html#posterior-predictive-checking-histograms",
+    "href": "7-checking.html#posterior-predictive-checking-histograms",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior predictive checking: histograms",
+    "text": "Posterior predictive checking: histograms\nTo use the PPC function from the bayesplot package we need the outcome values y and a matrix of replicates yrep\n\ny &lt;- kidiq$kid_score\nyrep &lt;- mod$BUGSoutput$sims.list$yrep\n\nNow let’s look at histograms of some of the yrep datasets and see how they compare to y\n\nlibrary(bayesplot)\ncolor_scheme_set(\"brightblue\")\nppc_hist(y, yrep[1:3, ])"
+  },
+  {
+    "objectID": "7-checking.html#posterior-predictive-checking-density-overlay",
+    "href": "7-checking.html#posterior-predictive-checking-density-overlay",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior predictive checking: density overlay",
+    "text": "Posterior predictive checking: density overlay\nWe can also look at is a comparison of the distribution of y and the distributions of some of the simulated datasets in the yrep matrix via density plots.\n\nppc_dens_overlay(y, yrep[1:50, ])"
+  },
+  {
+    "objectID": "7-checking.html#posterior-predictive-checking-test-statistic",
+    "href": "7-checking.html#posterior-predictive-checking-test-statistic",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior predictive checking: test statistic",
+    "text": "Posterior predictive checking: test statistic\nDecide on a test quantity (min, max) \\(T(y,\\theta)\\). A good statistic would ideally be independent of the parameters of the model.\n\nobtain the summary quantity for the observed data \\(T(y)\\)\nobtain the summary quantity for the replicated data \\(T(y,\\theta)\\)\n\nLet’s consider the maximum Kid IQ score as the test quantity\n\nmax_y &lt;- max(kidiq$kid_score)\nppc_stat(y,yrep, stat = \"max\")"
+  },
+  {
+    "objectID": "7-checking.html#posterior-predictive-checking-test-statistic-1",
+    "href": "7-checking.html#posterior-predictive-checking-test-statistic-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior predictive checking: test statistic",
+    "text": "Posterior predictive checking: test statistic\nMany of the available PPCs can also be carried out within levels of a grouping variable.\nFor example we can compute the test statistic within levels of the highschool grouping variable and a separate plot is made for each level.\n\nmax_y &lt;- max(kidiq$kid_score)\nppc_stat_grouped(y,yrep,group = kidiq$mom_hs,  stat = \"max\")\n\n\nHere’s an enhanced version of your sensitivity analysis slide for better clarity and emphasis:"
+  },
+  {
+    "objectID": "7-checking.html#sensitivity-analysis",
+    "href": "7-checking.html#sensitivity-analysis",
+    "title": "Bayesian Data Analysis",
+    "section": "Sensitivity Analysis",
+    "text": "Sensitivity Analysis\nHow do model structure and prior choices impact the results?\n\nTest Alternative Models and Priors\nEvaluate the robustness of inferences by experimenting with different model configurations and prior distributions.\nCompare Sensitivity of Key Inference Metrics\nAssess how changes in model assumptions affect critical inference measures.\nSensitivity of Extremes vs. Central Tendency\nExtremes (e.g., percentiles) tend to be more affected by model changes than measures of central tendency (means, medians).\nExtrapolation vs. Interpolation\nPredictions made outside the observed predictor range (extrapolation) show higher sensitivity to model assumptions than predictions within this range (interpolation)."
+  },
+  {
+    "objectID": "7-checking.html#prior-predictive-checks",
+    "href": "7-checking.html#prior-predictive-checks",
+    "title": "Bayesian Data Analysis",
+    "section": "Prior predictive checks",
+    "text": "Prior predictive checks\nPrior predictive checks allow us to look at the situation prior to any data being observed in order to see what data distribution is being implied by the choice of priors and likelihood.\n\nIdeally this distribution would have at least some mass around all plausible data sets.\n\nJAGS has a simulation functionality that allows us to easily generate prior predictive distributions based on our specified model.\n\nThe likelihood and priors can be specified in a “data” block so that we can simulate what data generated from the likelihood would look like, based solely on our prior assumptions.\n\n\nlrmodel_prior =\"\ndata{\n    for (i in 1:n){\n      yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2)\n        mu.i[i] &lt;- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i))\n    }\n#Priors\nfor(j in 1:m)\n{\nalpha.j[j] ~ dnorm(80, 30^-2) \nbeta.j[j] ~ dnorm(0, 2^-2) \n}\nsigma ~ dt(30,10^-2,1)T(0,) #truncated t-distribution\n} # end data block\nmodel{\nfake &lt;- 0\n}\n\""
+  },
+  {
+    "objectID": "7-checking.html#prior-predictive-checks-1",
+    "href": "7-checking.html#prior-predictive-checks-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Prior predictive checks",
+    "text": "Prior predictive checks\nWe can use the run.jags() function from the runjags package to generate the simulations.\n\njags.data &lt;- list(x.i = kidiq$mom_iq, \n                  hs_index = as.numeric(kidiq$mom_hs + 1),\n                  n = nrow(kidiq),\n                  m = 2)\n\nyrep_prior &lt;- matrix(NA, nrow = 50, ncol = nrow(kidiq))\n\nfor(i in 1:50)\n  {\nout &lt;- runjags::run.jags(lrmodel_prior, \n                         data = jags.data,monitor=c(\"yrep_prior\"), \n                         sample=1, \n                         n.chains=1, \n                         summarise=FALSE)\n\n yrep_prior[i,] &lt;- coda::as.mcmc(out)\n }"
+  },
+  {
+    "objectID": "7-checking.html#prior-predictive-checks-2",
+    "href": "7-checking.html#prior-predictive-checks-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Prior predictive checks",
+    "text": "Prior predictive checks\nWe can then use the PPC functions from the bayesplot package by providing replicates yrep_prior instead of y_rep\n\nppc_hist(y, yrep_prior[1:5, ])"
+  },
+  {
+    "objectID": "7-checking.html#prior-vs-posterior-for-parameters-alpha_j",
+    "href": "7-checking.html#prior-vs-posterior-for-parameters-alpha_j",
+    "title": "Bayesian Data Analysis",
+    "section": "Prior vs Posterior for parameters (\\(\\alpha_j\\))",
+    "text": "Prior vs Posterior for parameters (\\(\\alpha_j\\))"
+  },
+  {
+    "objectID": "7-checking.html#prior-vs-posterior-for-parameters-beta_j",
+    "href": "7-checking.html#prior-vs-posterior-for-parameters-beta_j",
+    "title": "Bayesian Data Analysis",
+    "section": "Prior vs Posterior for parameters (\\(\\beta_j\\))",
+    "text": "Prior vs Posterior for parameters (\\(\\beta_j\\))"
   }
 ]

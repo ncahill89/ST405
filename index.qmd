@@ -47,6 +47,27 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 6: [Bayesian Linear Regression](https://ncahill89.github.io/ST405/6_LR.html)
 
+### Week 7
+
+7: [Model Checking](https://ncahill89.github.io/ST405/7-checking.html)
+
+### Week 8
+
+8: [Bayesian Hierarchical Modelling - Binomial Model]()
+
+### Week 9
+
+9: [Bayesian Hierarchical Modelling - Regression Model]()
+
+### Week 10
+
+10: [Bayesian GLMs]()
+
+### Week 11
+
+11: [Bayesian Hierarchical Modelling - GLM]()
+
+
 
 ## Tutorials
 
