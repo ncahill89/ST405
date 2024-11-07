@@ -228,7 +228,7 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression\n\n\nWeek 7\n7: Model Checking\n\n\nWeek 8\n8: Bayesian Hierarchical Modelling - Binomial Model\n\n\nWeek 9\n9: Bayesian Hierarchical Modelling - Regression Model\n\n\nWeek 10\n10: Bayesian GLMs\n\n\nWeek 11\n11: Bayesian Hierarchical Modelling - GLM"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression\n\n\nWeek 7\n7: Model Checking\n\n\nWeek 8\n8: Introducing Bayesian Hierarchical Modelling\n\n\nWeek 9\n9: Bayesian Hierarchical Regression Modelling\n\n\nWeek 10\n10: Bayesian GLMs\n\n\nWeek 11\n11: Bayesian Hierarchical Modelling - GLM"
   },
   {
     "objectID": "2a-BetaBinomial.html#scenario",
@@ -521,8 +521,8 @@
     "objectID": "4-MCMC.html#what-do-we-know-so-far",
     "href": "4-MCMC.html#what-do-we-know-so-far",
     "title": "Bayesian Data Analysis",
-    "section": "What do we know so far?",
-    "text": "What do we know so far?\nWe can use Bayes’ rule to get posterior densities\n\nExample for single parameter Normal - \\(\\mu\\)\n\n\\(p(\\mu|y) \\propto p(y|\\mu)p(\\mu)\\)\n\nExample for single parameter Normal - \\(\\tau\\)\n\n\\(p(\\tau|y) \\propto p(y|\\tau)p(\\tau)\\)\n\nWe could also do this for multiple parameters\n\n\\(p(\\mu, \\tau|y) \\propto p(y|\\mu,\\tau)p(\\mu,\\tau)\\)\n\n\nBUT…\n\nRealistic problems with multiple parameters, data points, and common choices of priors don’t get a closed-form expression for \\(p(\\mu, \\tau|y)\\)\nSampling to the rescue!!"
+    "section": "",
+    "text": "We can use Bayes’ rule to get posterior densities\n\nExample for single parameter Normal - \\(\\mu\\)\n\n\\(p(\\mu|y) \\propto p(y|\\mu)p(\\mu)\\)\n\nExample for single parameter Normal - \\(\\tau\\)\n\n\\(p(\\tau|y) \\propto p(y|\\tau)p(\\tau)\\)\n\nWe could also do this for multiple parameters\n\n\\(p(\\mu, \\tau|y) \\propto p(y|\\mu,\\tau)p(\\mu,\\tau)\\)\n\n\nBUT…\n\nRealistic problems with multiple parameters, data points, and common choices of priors don’t get a closed-form expression for \\(p(\\mu, \\tau|y)\\)\nSampling to the rescue!!"
   },
   {
     "objectID": "4-MCMC.html#simulation-based-inference-recap",
@@ -536,7 +536,7 @@
     "href": "4-MCMC.html#markov-chain-monte-carlo-mcmc",
     "title": "Bayesian Data Analysis",
     "section": "Markov Chain Monte Carlo (MCMC)",
-    "text": "Markov Chain Monte Carlo (MCMC)\nWe’ve already discussed Monte Carlo sampling. Now we’re going to consider Markov Chain Monte Carlo (MCMC) sampling. MCMC algorithms are used for sampling from a target distribution.\n\n\n\n\n\n\nMarkov Chain\n\n\n\nAny process in which each step has no memory of states before the current state is called a (first-order) Markov process and a sucession of such steps is a Markov chain.\nThe stationary distribution of the Markov chain is the target distribution.\n\n\n\n\nUsing MCMC we can construct a set of samples from an unknown target (e.g., posterior) distribution."
+    "text": "Markov Chain Monte Carlo (MCMC)\nWe’ve already discussed Monte Carlo sampling. Now we’re going to consider Markov Chain Monte Carlo (MCMC) sampling. MCMC algorithms are used for sampling from a target distribution.\n\n\n\n\n\n\nMarkov Chain\n\n\n\n\nAny process in which each step has no memory of states before the current state is called a (first-order) Markov process and a sucession of such steps is a Markov chain.\nThe stationary distribution of the Markov chain is the target distribution.\n\n\n\nUsing MCMC we can construct a set of samples from an unknown target (e.g., posterior) distribution."
   },
   {
     "objectID": "4-MCMC.html#a-simple-markov-chain-example",
@@ -550,7 +550,7 @@
     "href": "4-MCMC.html#creating-the-markov-chain",
     "title": "Bayesian Data Analysis",
     "section": "Creating the Markov Chain",
-    "text": "Creating the Markov Chain\n\n\nThe “algorithm”\n\nWe have to initialize i.e., a randomly chosen start point of sunny or rainy.\nWe can sample the weather, W, (coded as 1 for sunny and 0 for rainy) from a Bernoulli distribution (Binomial with \\(n=1\\)).\n\n\nThe probability distribution will change depending on the current state of the chain, i.e., if W = 1, or W =0.\n\n\nBased on the samples of \\(W\\) we can estimate \\(P(W=1) = P(S)\\) and \\(P(W=0) = P(R)\\).\n\nWe find after enough iterations (samples) \\(P(S) = 0.83\\).\n\nR code\n\n# 0 = rainy, 1 = sunny\n\n# 1. initialize\nW_current &lt;- rbinom(1,1,0.5) \n\n# 2. run the Markov Chain\n# number of Monte Carlo sampling interations\nn_iter &lt;- 10000\n# save the samples\nW_new &lt;- p_sunny &lt;- rep(NA, n_iter)\n\nfor(i in 1:n_iter)\n{\nW_new[i] &lt;- ifelse(W_current == 0,\n       rbinom(1,1,0.5),\n       rbinom(1,1,0.9))\n\nW_current = W_new[i]\n\n# 3. get the probability of sunny\np_sunny[i] &lt;- sum(W_new, na.rm = TRUE)/i\n\n}\n\nplot(p_sunny, type = \"l\", xlab = \"Iteration\", ylab = \"P(S)\")"
+    "text": "Creating the Markov Chain\n\n\n\nThe “algorithm”\n\nWe have to initialize i.e., a randomly chosen start point of sunny or rainy.\nWe can sample the weather, W, (coded as 1 for sunny and 0 for rainy) from a Bernoulli distribution (Binomial with \\(n=1\\)).\n\n\nThe probability distribution will change depending on the current state of the chain, i.e., if W = 1, or W =0.\n\n\nBased on the samples of \\(W\\) we can estimate \\(P(W=1) = P(S)\\) and \\(P(W=0) = P(R)\\).\n\nWe find after enough iterations (samples) \\(P(S) = 0.83\\).\n\n\n\nR code\n\n# 0 = rainy, 1 = sunny\n\n# 1. initialize\nW_current &lt;- rbinom(1,1,0.5) \n\n# 2. run the Markov Chain\n# number of Monte Carlo sampling interations\nn_iter &lt;- 10000\n# save the samples\nW_new &lt;- p_sunny &lt;- rep(NA, n_iter)\n\nfor(i in 1:n_iter)\n{\nW_new[i] &lt;- ifelse(W_current == 0,\n       rbinom(1,1,0.5),\n       rbinom(1,1,0.9))\n\nW_current = W_new[i]\n\n# 3. get the probability of sunny\np_sunny[i] &lt;- sum(W_new, na.rm = TRUE)/i\n\n}\n\nplot(p_sunny, type = \"l\", xlab = \"Iteration\", ylab = \"P(S)\")"
   },
   {
     "objectID": "4-MCMC.html#stationary-distribution",
@@ -571,7 +571,7 @@
     "href": "4-MCMC.html#metropolis-algorithm-for-the-happiness-example",
     "title": "Bayesian Data Analysis",
     "section": "Metropolis Algorithm for the Happiness example",
-    "text": "Metropolis Algorithm for the Happiness example\nRecall for the Happiness example: n = 20 women, y = 14 women reported being happy.\n\n\nThe Metropolis algorithm\n\\(y \\sim Binomial(n = 20, \\theta)\\)\n\\(\\theta|a,b \\sim Beta(a = 1 ,b = 1)\\)\n\nLet’s initialise using \\(\\theta_{cur}\\) = 0.5\nPropose a new move using a Normal proposal distribution such that \\(\\theta_{pro} = \\theta_{cur} + N(0,\\sigma)\\)\n\\(r = \\text{min} \\bigg(1, \\frac{ dbinom(y,n,\\theta_{pro})dbeta(\\theta_{pro},a,b)}{dbinom(y,n,\\theta_{cur})dbeta(\\theta_{cur},a,b)}\\bigg)\\)\nCompare \\(u \\sim Uniform(0,1)\\) with \\(r\\) and accept move if \\(u &lt; r\\)\nRepeat\n\nVisualise the samples and look for a “fuzzy caterpiller” 🐛\n\nR code\n\n# data \ny &lt;- 14; N &lt;- 20\n# beta prior parameters\na &lt;- 1; b &lt;- 1\n# number of samples to generate\nn_iter &lt;- 10000\n\n# 0. \ntheta_cur &lt;- rep(NA, n_iter)\ntheta_cur[1] &lt;- 0.5\n\nfor(i in 1:(n_iter-1)){\n# 1.\ntheta_pro &lt;- theta_cur[i] + rnorm(1,0,sd = 0.2)\n# 2. \nif(theta_pro&lt;0|theta_pro&gt;1){r &lt;- 0 } # set to zero if theta outside [0,1]\nelse {\n  r &lt;- \nmin(1,dbinom(14,20,theta_pro)*dbeta(theta_pro,a,b)/\n      dbinom(14,20,theta_cur[i])*dbeta(theta_cur[i],a,b))\n  }\n# 3. \nu &lt;- runif(1,0,1)\naccept &lt;- u &lt; r\ntheta_cur[i+1]&lt;- ifelse(accept,theta_pro,theta_cur[i])\n} # end i loop\n\nplot(theta_cur, type = \"l\")"
+    "text": "Metropolis Algorithm for the Happiness example\nRecall for the Happiness example: n = 20 women, y = 14 women reported being happy.\n\n\n\nThe Metropolis algorithm\n\\(y \\sim Binomial(n = 20, \\theta)\\)\n\\(\\theta|a,b \\sim Beta(a = 1 ,b = 1)\\)\n\nLet’s initialise using \\(\\theta_{cur}\\) = 0.5\nPropose a new move using a Normal proposal distribution such that \\(\\theta_{pro} = \\theta_{cur} + N(0,\\sigma)\\)\n\\(r = \\text{min} \\bigg(1, \\frac{ dbinom(y,n,\\theta_{pro})dbeta(\\theta_{pro},a,b)}{dbinom(y,n,\\theta_{cur})dbeta(\\theta_{cur},a,b)}\\bigg)\\)\nCompare \\(u \\sim Uniform(0,1)\\) with \\(r\\) and accept move if \\(u &lt; r\\)\nRepeat\n\nVisualise the samples and look for a “fuzzy caterpiller” 🐛\n\n\n\nR code\n\n# data \ny &lt;- 14; N &lt;- 20\n# beta prior parameters\na &lt;- 1; b &lt;- 1\n# number of samples to generate\nn_iter &lt;- 10000\n\n# 0. \ntheta_cur &lt;- rep(NA, n_iter)\ntheta_cur[1] &lt;- 0.5\n\nfor(i in 1:(n_iter-1)){\n# 1.\ntheta_pro &lt;- theta_cur[i] + rnorm(1,0,sd = 0.2)\n# 2. \nif(theta_pro&lt;0|theta_pro&gt;1){r &lt;- 0 } # set to zero if theta outside [0,1]\nelse {\n  r &lt;- \nmin(1,dbinom(14,20,theta_pro)*dbeta(theta_pro,a,b)/\n      dbinom(14,20,theta_cur[i])*dbeta(theta_cur[i],a,b))\n  }\n# 3. \nu &lt;- runif(1,0,1)\naccept &lt;- u &lt; r\ntheta_cur[i+1]&lt;- ifelse(accept,theta_pro,theta_cur[i])\n} # end i loop\n\nplot(theta_cur, type = \"l\")"
   },
   {
     "objectID": "4-MCMC.html#trace-plot-and-chains-for-theta",
@@ -620,35 +620,35 @@
     "href": "4-MCMC.html#output-from-mcmc",
     "title": "Bayesian Data Analysis",
     "section": "Output from MCMC",
-    "text": "Output from MCMC\nMCMC samples are not independent draws from a target distribution:\n\nThe first draw is not a random draw from the target distribution and tuning of MCMC parameters may occur at the start of a chain.\nSubsequently, draw s + 1 depends on draw s: the samples may be autocorrelated.\n\nWe can use samples from an MCMC algorithm to do inference but ONLY IF\n\nWe exclude samples from the initial period (burn-in).\nWe “wait long enough” to get a set of samples that are representative of the target (posterior). distribution.\n\n\n\n# Create a dataset (tibble) of samples\n# chose a \"burn-in\" \nn_burnin &lt;- 100\n# Remove the first sample from mu_s and sigma_s\npost_samps &lt;- tibble(sample_index = 1:(n_iter-n_burnin),\n                     mu_s = mu_s[-(1:n_burnin)], \n                     sigma_s = sigma_s[-(1:n_burnin)])\npost_samps\n\n\n# A tibble: 9,900 × 3\n   sample_index  mu_s sigma_s\n          &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1            1  87.7    19.9\n 2            2  88.0    21.6\n 3            3  85.6    20.2\n 4            4  87.3    21.5\n 5            5  85.9    20.4\n 6            6  86.2    19.0\n 7            7  85.9    21.1\n 8            8  86.2    20.3\n 9            9  85.7    19.6\n10           10  86.6    19.8\n# ℹ 9,890 more rows"
+    "text": "Output from MCMC\nMCMC samples are not independent draws from a target distribution:\n\nThe first draw is not a random draw from the target distribution and tuning of MCMC parameters may occur at the start of a chain.\nSubsequently, draw s + 1 depends on draw s: the samples may be autocorrelated.\n\nWe can use samples from an MCMC algorithm to do inference but ONLY IF\n\nWe exclude samples from the initial period (burn-in).\nWe “wait long enough” to get a set of samples that are representative of the target (posterior). distribution.\n\n\n# Create a dataset (tibble) of samples\n# chose a \"burn-in\" \nn_burnin &lt;- 100\n# Remove the first sample from mu_s and sigma_s\npost_samps &lt;- tibble(sample_index = 1:(n_iter-n_burnin),\n                     mu_s = mu_s[-(1:n_burnin)], \n                     sigma_s = sigma_s[-(1:n_burnin)])\npost_samps\n\n# A tibble: 9,900 × 3\n   sample_index  mu_s sigma_s\n          &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1            1  87.9    20.3\n 2            2  86.0    20.2\n 3            3  85.0    21.8\n 4            4  86.4    18.8\n 5            5  86.1    21.3\n 6            6  88.0    21.7\n 7            7  86.8    21.4\n 8            8  86.5    20.3\n 9            9  87.6    20.3\n10           10  87.5    20.2\n# ℹ 9,890 more rows"
   },
   {
     "objectID": "4-MCMC.html#output-from-mcmc-trace-plots",
     "href": "4-MCMC.html#output-from-mcmc-trace-plots",
     "title": "Bayesian Data Analysis",
     "section": "Output from MCMC: trace plots",
-    "text": "Output from MCMC: trace plots\nWe can use trace plots to investigate the MCMC samples/chains for the parameters.\n\n\nlibrary(ggplot2)\n\n# Trace plot for mu\np1 &lt;- ggplot(post_samps, aes(x = sample_index, mu_s)) +\n        geom_line(colour = \"blue\") +\n        ggtitle(\"Posterior Samples of mu\")\n\n# Trace plot for sigma\np2 &lt;- ggplot(post_samps, aes(x = sample_index, sigma_s)) +\n        geom_line(colour = \"blue\") +\n        ggtitle(\"Posterior Samples of sigma\")\n\np1;p2"
+    "text": "Output from MCMC: trace plots\nWe can use trace plots to investigate the MCMC samples/chains for the parameters.\n\nlibrary(ggplot2)\n\n# Trace plot for mu\np1 &lt;- ggplot(post_samps, aes(x = sample_index, mu_s)) +\n        geom_line(colour = \"blue\") +\n        ggtitle(\"Posterior Samples of mu\")\n\n# Trace plot for sigma\np2 &lt;- ggplot(post_samps, aes(x = sample_index, sigma_s)) +\n        geom_line(colour = \"blue\") +\n        ggtitle(\"Posterior Samples of sigma\")\n\np1;p2"
   },
   {
     "objectID": "4-MCMC.html#output-from-mcmc-joint-parameter-plots",
     "href": "4-MCMC.html#output-from-mcmc-joint-parameter-plots",
     "title": "Bayesian Data Analysis",
     "section": "Output from MCMC: joint parameter plots",
-    "text": "Output from MCMC: joint parameter plots\nWe can visualise the joint posterior distribution of the parameters based on the MCMC samples.\n\n\n# Scatter plot of mu_s vs. sd_s\np3 &lt;- ggplot(post_samps, aes(x = sigma_s, mu_s)) +\n        geom_point(colour = \"blue\") \n\n# Contour plot of joint density\np4 &lt;- ggplot(post_samps, aes(x = sigma_s, y = mu_s)) + \n  geom_density_2d(colour = \"blue\")    \n\np3;p4"
+    "text": "Output from MCMC: joint parameter plots\nWe can visualise the joint posterior distribution of the parameters based on the MCMC samples.\n\n# Scatter plot of mu_s vs. sd_s\np3 &lt;- ggplot(post_samps, aes(x = sigma_s, mu_s)) +\n        geom_point(colour = \"blue\") \n\n# Contour plot of joint density\np4 &lt;- ggplot(post_samps, aes(x = sigma_s, y = mu_s)) + \n  geom_density_2d(colour = \"blue\")    \n\np3;p4"
   },
   {
     "objectID": "4-MCMC.html#output-from-mcmc-density-plots-and-summaries",
     "href": "4-MCMC.html#output-from-mcmc-density-plots-and-summaries",
     "title": "Bayesian Data Analysis",
     "section": "Output from MCMC: density plots and summaries",
-    "text": "Output from MCMC: density plots and summaries\nWe can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.\n\n\n# Density plot for posterior samples of mu\np5 &lt;- ggplot(post_samps, aes(x = mu_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of mu\") \n\n# Mean and credible interval for mu\nmu_mean &lt;- mean(mu_s)\nmu_ci &lt;- quantile(mu_s, probs = c(0.025, 0.975))\n\np5;cat(\"Mean of Mu:\", mu_mean, \"\\n\");cat(\"95% Credible Interval for Mu:\", mu_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Mu: 86.732 \n\n\n95% Credible Interval for Mu: 84.79202 88.62285 \n\n\n\n\np6 &lt;- ggplot(post_samps, aes(x = sigma_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of sigma\") \n\n# Mean and credible interval for sigma\nsigma_mean &lt;- mean(sigma_s)\nsigma_ci &lt;- quantile(sigma_s, probs = c(0.025, 0.975))\n\np6;cat(\"Mean of Sigma:\", sigma_mean, \"\\n\");cat(\"95% Credible Interval for Sigma:\", sigma_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Sigma: 20.4007 \n\n\n95% Credible Interval for Sigma: 19.09032 21.812"
+    "text": "Output from MCMC: density plots and summaries\nWe can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.\n\n# Density plot for posterior samples of mu\np5 &lt;- ggplot(post_samps, aes(x = mu_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of mu\") \n\n# Mean and credible interval for mu\nmu_mean &lt;- mean(mu_s)\nmu_ci &lt;- quantile(mu_s, probs = c(0.025, 0.975))\n\np5;cat(\"Mean of Mu:\", mu_mean, \"\\n\");cat(\"95% Credible Interval for Mu:\", mu_ci, \"\\n\")\n\n\n\n\n\n\n\n\nMean of Mu: 86.74137 \n\n\n95% Credible Interval for Mu: 84.82647 88.66879 \n\n\n\np6 &lt;- ggplot(post_samps, aes(x = sigma_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of sigma\") \n\n# Mean and credible interval for sigma\nsigma_mean &lt;- mean(sigma_s)\nsigma_ci &lt;- quantile(sigma_s, probs = c(0.025, 0.975))\n\np6;cat(\"Mean of Sigma:\", sigma_mean, \"\\n\");cat(\"95% Credible Interval for Sigma:\", sigma_ci, \"\\n\")\n\n\n\n\n\n\n\n\nMean of Sigma: 20.39958 \n\n\n95% Credible Interval for Sigma: 19.07164 21.79159"
   },
   {
     "objectID": "4-MCMC.html#stationary-distributions",
     "href": "4-MCMC.html#stationary-distributions",
     "title": "Bayesian Data Analysis",
     "section": "Stationary Distributions",
-    "text": "Stationary Distributions\nAs we progress through time, the probability of being in certain states (e.g., rainy or sunny) are more likely than others. Over the long run, the distribution will reach an equilibrium with an associated probability of being in each state.\nThis is known as the Stationary Distribution.\n\n\n\n\n\n\nThe stationary distribution of a Markov chain\n\n\nThe stationary distribution of a Markov chain is a probability distribution over the states of the chain that remains unchanged as time progresses.\nMathematically, if \\(\\pi\\) represents the stationary distribution (a row vector of probabilities) and \\(P\\) is the transition matrix of the Markov chain, the stationary distribution satisfies the equation:\n\\[\\pi = \\pi P\\]\nThis means that when the transition matrix \\(P\\) is applied to \\(\\pi\\), the result is still \\(\\pi\\), indicating that the distribution has stabilized and doesn’t change over time."
+    "text": "Stationary Distributions\nAs we progress through time, the probability of being in certain states (e.g., rainy or sunny) are more likely than others. Over the long run, the distribution will reach an equilibrium with an associated probability of being in each state.\nThis is known as the Stationary Distribution.\n\n\n\n\n\n\nThe stationary distribution of a Markov chain\n\n\n\nThe stationary distribution of a Markov chain is a probability distribution over the states of the chain that remains unchanged as time progresses.\nMathematically, if \\(\\pi\\) represents the stationary distribution (a row vector of probabilities) and \\(P\\) is the transition matrix of the Markov chain, the stationary distribution satisfies the equation:\n\\[\\pi = \\pi P\\]\nThis means that when the transition matrix \\(P\\) is applied to \\(\\pi\\), the result is still \\(\\pi\\), indicating that the distribution has stabilized and doesn’t change over time."
   },
   {
     "objectID": "4-MCMC.html#gibbs-aampling-algorithm-for-the-kid-iq-example",
@@ -676,14 +676,14 @@
     "href": "4-MCMC.html#mcmc-the-metropolis-algorithm",
     "title": "Bayesian Data Analysis",
     "section": "MCMC: The Metropolis Algorithm",
-    "text": "MCMC: The Metropolis Algorithm\n\nSuppose we have a target distribution \\(p(\\theta|y)\\) from which we would like to generate a representative sample.\nSample values from the target distribution can be generated by taking a random walk through the parameter space.\n\n\n\n\n\n\n\nThe metropolis algorithm\n\n\n\nStart at some arbitrary parameter value (initial value).\nPropose a move to a new value in the parameter space.\nCalculate the acceptance ratio \\(r = min \\bigg(1, \\frac{ p(y|\\theta_{pro})p(\\theta_{pro})}{p(y|\\theta_{cur})p(\\theta_{cur})}\\bigg)\\).\nDraw a random number, \\(u\\) between 0 and 1. If \\(u &lt; r\\) then the move is accepted.\nRepeat until a representative sample from the target distribution has been generated (more on this later)."
+    "text": "MCMC: The Metropolis Algorithm\n\nSuppose we have a target distribution \\(p(\\theta|y)\\) from which we would like to generate a representative sample.\nSample values from the target distribution can be generated by taking a random walk through the parameter space.\n\n\n\n\n\n\n\nThe metropolis algorithm\n\n\n\n\n\n\nStart at some arbitrary parameter value (initial value).\nPropose a move to a new value in the parameter space.\nCalculate the acceptance ratio \\(r = min \\bigg(1, \\frac{ p(y|\\theta_{pro})p(\\theta_{pro})}{p(y|\\theta_{cur})p(\\theta_{cur})}\\bigg)\\).\nDraw a random number, \\(u\\) between 0 and 1. If \\(u &lt; r\\) then the move is accepted.\nRepeat until a representative sample from the target distribution has been generated (more on this later)."
   },
   {
     "objectID": "4-MCMC.html#mcmc-the-gibbs-sampler",
     "href": "4-MCMC.html#mcmc-the-gibbs-sampler",
     "title": "Bayesian Data Analysis",
     "section": "MCMC: The Gibbs Sampler",
-    "text": "MCMC: The Gibbs Sampler\nWe can use Gibbs Sampling when we can sample directly from the conditional posterior distributions for each model parameter.\nSo instead of trying to sample directly from a joint posterior distribution, we sample parameters sequentially from their complete conditional distributions (conditioning on data as well as all other model parameters).\n\n\n\n\n\n\nThe Gibbs sampling algorithm for \\(\\mu\\) and \\(\\tau\\)\n\n\n\nAssign initial values to the parameters \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\)\nGiven starting values \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\), draw samples s = 2, 3,….,`some large number’ as follows:\n1.1. sample \\(\\tau^{(s)}\\) from \\(p(\\tau|y,\\mu^{(s-1)})\\).\n1.2. sample \\(\\mu^{(s)}\\) from \\(p(\\mu|y,\\tau^{(s)})\\)\nRepeat and this will (eventually) generate samples from \\(p(\\mu,\\sigma|y)\\), which is what we want!"
+    "text": "MCMC: The Gibbs Sampler\nWe can use Gibbs Sampling when we can sample directly from the conditional posterior distributions for each model parameter.\nSo instead of trying to sample directly from a joint posterior distribution, we sample parameters sequentially from their complete conditional distributions (conditioning on data as well as all other model parameters).\n\n\n\n\n\n\nThe Gibbs sampling algorithm for \\(\\mu\\) and \\(\\tau\\)\n\n\n\n\n\n\nAssign initial values to the parameters \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\)\nGiven starting values \\(\\mu^{(1)}\\) and \\(\\tau^{(1)}\\), draw samples s = 2, 3,….,`some large number’ as follows:\n1.1. sample \\(\\tau^{(s)}\\) from \\(p(\\tau|y,\\mu^{(s-1)})\\).\n1.2. sample \\(\\mu^{(s)}\\) from \\(p(\\mu|y,\\tau^{(s)})\\)\nRepeat and this will (eventually) generate samples from \\(p(\\mu,\\sigma|y)\\), which is what we want!"
   },
   {
     "objectID": "4-MCMC.html#visualising",
@@ -711,7 +711,7 @@
     "href": "5a-Diagnostics.html#recap-output-from-mcmc",
     "title": "Bayesian Data Analysis",
     "section": "Recap: Output from MCMC",
-    "text": "Recap: Output from MCMC\nMCMC samples are not independent draws from a target distribution:\n\nThe first draw is not a random draw from the target distribution and tuning of MCMC parameters may occur at the start of a chain.\nSubsequently, draw s + 1 depends on draw s: the samples may be autocorrelated.\n\nWe can use samples from an MCMC algorithm to do inference but ONLY IF\n\nWe exclude samples from the initial period (burn-in).\nWe “wait long enough” to get a set of samples that are representative of the target (posterior). distribution.\n\n\n\n# Create a dataset (tibble) of samples\n# chose a \"burn-in\" \nn_burnin &lt;- 100\n# Remove the first sample from mu_s and sigma_s\npost_samps &lt;- tibble(sample_index = 1:(n_iter-n_burnin),\n                     mu_s = mu_s[-(1:n_burnin)], \n                     sigma_s = sigma_s[-(1:n_burnin)])\npost_samps\n\n\n# A tibble: 9,900 × 3\n   sample_index  mu_s sigma_s\n          &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1            1  87.4    19.5\n 2            2  87.1    20.7\n 3            3  85.2    21.1\n 4            4  86.3    19.5\n 5            5  84.9    21.4\n 6            6  85.9    20.8\n 7            7  88.0    19.8\n 8            8  86.6    20.1\n 9            9  85.7    20.7\n10           10  86.6    20.1\n# ℹ 9,890 more rows"
+    "text": "Recap: Output from MCMC\nMCMC samples are not independent draws from a target distribution:\n\nThe first draw is not a random draw from the target distribution and tuning of MCMC parameters may occur at the start of a chain.\nSubsequently, draw s + 1 depends on draw s: the samples may be autocorrelated.\n\nWe can use samples from an MCMC algorithm to do inference but ONLY IF\n\nWe exclude samples from the initial period (burn-in).\nWe “wait long enough” to get a set of samples that are representative of the target (posterior). distribution.\n\n\n\n# Create a dataset (tibble) of samples\n# chose a \"burn-in\" \nn_burnin &lt;- 100\n# Remove the first sample from mu_s and sigma_s\npost_samps &lt;- tibble(sample_index = 1:(n_iter-n_burnin),\n                     mu_s = mu_s[-(1:n_burnin)], \n                     sigma_s = sigma_s[-(1:n_burnin)])\npost_samps\n\n\n# A tibble: 9,900 × 3\n   sample_index  mu_s sigma_s\n          &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1            1  87.8    21.2\n 2            2  87.7    20.1\n 3            3  86.8    20.4\n 4            4  87.0    20.0\n 5            5  89.2    21.2\n 6            6  86.4    19.6\n 7            7  87.1    19.1\n 8            8  85.7    19.8\n 9            9  85.2    20.3\n10           10  84.3    21.3\n# ℹ 9,890 more rows"
   },
   {
     "objectID": "5a-Diagnostics.html#recap-trace-plots",
@@ -725,7 +725,7 @@
     "href": "5a-Diagnostics.html#recap-density-plots-and-summaries",
     "title": "Bayesian Data Analysis",
     "section": "Recap: Density Plots and Summaries",
-    "text": "Recap: Density Plots and Summaries\nWe can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.\n\n\n# Density plot for posterior samples of mu\np5 &lt;- ggplot(post_samps, aes(x = mu_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of mu\") \n\n# Mean and credible interval for mu\nmu_mean &lt;- mean(mu_s)\nmu_ci &lt;- quantile(mu_s, probs = c(0.025, 0.975))\n\np5;cat(\"Mean of Mu:\", mu_mean, \"\\n\");cat(\"95% Credible Interval for Mu:\", mu_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Mu: 86.74059 \n\n\n95% Credible Interval for Mu: 84.78347 88.63201 \n\n\n\n\np6 &lt;- ggplot(post_samps, aes(x = sigma_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of sigma\") \n\n# Mean and credible interval for sigma\nsigma_mean &lt;- mean(sigma_s)\nsigma_ci &lt;- quantile(sigma_s, probs = c(0.025, 0.975))\n\np6;cat(\"Mean of Sigma:\", sigma_mean, \"\\n\");cat(\"95% Credible Interval for Sigma:\", sigma_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Sigma: 20.39006 \n\n\n95% Credible Interval for Sigma: 19.08239 21.80982"
+    "text": "Recap: Density Plots and Summaries\nWe can visualise and obtain summaries for the marginal posterior distributions of the parameters based on the MCMC samples.\n\n\n# Density plot for posterior samples of mu\np5 &lt;- ggplot(post_samps, aes(x = mu_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of mu\") \n\n# Mean and credible interval for mu\nmu_mean &lt;- mean(mu_s)\nmu_ci &lt;- quantile(mu_s, probs = c(0.025, 0.975))\n\np5;cat(\"Mean of Mu:\", mu_mean, \"\\n\");cat(\"95% Credible Interval for Mu:\", mu_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Mu: 86.73365 \n\n\n95% Credible Interval for Mu: 84.8307 88.6514 \n\n\n\n\np6 &lt;- ggplot(post_samps, aes(x = sigma_s)) +\n        geom_density(fill = \"lightblue\", \n                     color = \"blue\", \n                     alpha = 0.6) +\n        ggtitle(\"Posterior Density of sigma\") \n\n# Mean and credible interval for sigma\nsigma_mean &lt;- mean(sigma_s)\nsigma_ci &lt;- quantile(sigma_s, probs = c(0.025, 0.975))\n\np6;cat(\"Mean of Sigma:\", sigma_mean, \"\\n\");cat(\"95% Credible Interval for Sigma:\", sigma_ci, \"\\n\")\n\n\n\n\n\n\n\n\n\nMean of Sigma: 20.38515 \n\n\n95% Credible Interval for Sigma: 19.09044 21.81506"
   },
   {
     "objectID": "5a-Diagnostics.html#mcmc-reprentativeness-accuracy-and-efficiency",
@@ -858,14 +858,14 @@
     "href": "5b-JAGS.html#step-4---output",
     "title": "Bayesian Data Analysis",
     "section": "Step 4 - Output",
-    "text": "Step 4 - Output\n\nMCMC samples can be obtained as follows:\n\n\nmcmc.array &lt;- mod$BUGSoutput$sims.array\nmcmc.array %&gt;% dim() \n\n[1] 1000    3    2\n\n\nwhere the dimension of the mcmc.array is given by niterations x nchains x (nparameters+deviance).\n\nmcmc.list &lt;- mod$BUGSoutput$sims.list\nmcmc.list$theta %&gt;% dim()\n\n[1] 3000    1\n\n\n\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% dim()\n\n[1] 3000    2\n\n\n\nWe can also get output summaries\n\n\nmod$BUGSoutput$summary\n\n              mean         sd      2.5%       25%       50%       75%     97.5%\ndeviance 4.2972678 1.41943408 3.3055330 3.4037132 3.7467750 4.6439439 8.2683649\ntheta    0.6814324 0.09994511 0.4718221 0.6173203 0.6879147 0.7535919 0.8552247\n             Rhat n.eff\ndeviance 1.001347  2400\ntheta    1.001306  2500"
+    "text": "Step 4 - Output\n\nMCMC samples can be obtained as follows:\n\n\nmcmc.array &lt;- mod$BUGSoutput$sims.array\nmcmc.array %&gt;% dim() \n\n[1] 1000    3    2\n\n\nwhere the dimension of the mcmc.array is given by niterations x nchains x (nparameters+deviance).\n\nmcmc.list &lt;- mod$BUGSoutput$sims.list\nmcmc.list$theta %&gt;% dim()\n\n[1] 3000    1\n\n\n\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% dim()\n\n[1] 3000    2\n\n\n\nWe can also get output summaries\n\n\nmod$BUGSoutput$summary\n\n              mean         sd      2.5%       25%      50%       75%     97.5%\ndeviance 4.2373965 1.32419393 3.3052062 3.4107862 3.745141 4.5149047 8.0653926\ntheta    0.6794092 0.09703187 0.4770903 0.6123634 0.686353 0.7501163 0.8465404\n            Rhat n.eff\ndeviance 1.00742   820\ntheta    1.00202  3000"
   },
   {
     "objectID": "5b-JAGS.html#more-on-outout---basics",
     "href": "5b-JAGS.html#more-on-outout---basics",
     "title": "Bayesian Data Analysis",
     "section": "More on outout - basics",
-    "text": "More on outout - basics\n\nQuick viewParameter inference\n\n\n\n\n## plot output (quick plot)\nplot(mod)\n\n\n\n\n\n\n\n\n\n\n\n\n\n## look at parameters\ntheta_s &lt;- mcmc.list$theta\n\n# plot\nplot(theta_s, type = \"l\")\n\n\n\n\n\n\n\n\n\n\n\n# plot\nplot(density(theta_s))\n\n\n\n\n\n\n\n\n\n\n\n# get quantiles\nquantile(theta_s, probs=c(0.025,0.5, 0.975))\n\n\n     2.5%       50%     97.5% \n0.4718221 0.6879147 0.8552247"
+    "text": "More on outout - basics\n\nQuick viewParameter inference\n\n\n\n\n## plot output (quick plot)\nplot(mod)\n\n\n\n\n\n\n\n\n\n\n\n\n\n## look at parameters\ntheta_s &lt;- mcmc.list$theta\n\n# plot\nplot(theta_s, type = \"l\")\n\n\n\n\n\n\n\n\n\n\n\n# plot\nplot(density(theta_s))\n\n\n\n\n\n\n\n\n\n\n\n# get quantiles\nquantile(theta_s, probs=c(0.025,0.5, 0.975))\n\n\n     2.5%       50%     97.5% \n0.4770904 0.6863530 0.8465404"
   },
   {
     "objectID": "5b-JAGS.html#trace-plots-and-density-plots-with-the-coda-package",
@@ -886,14 +886,14 @@
     "href": "5b-JAGS.html#tidybayes",
     "title": "Bayesian Data Analysis",
     "section": "Tidybayes",
-    "text": "Tidybayes\nThe tidybayes package facilitates the use of tidy data (one observation per row) with Bayesian models in R.\n\nYou can use the output from JAGS in matrix format to work with tidybayes\nThe spread_draws function lets us extract draws into a data frame in tidy format\n\n\n\nlibrary(tidybayes)\n\n## look at samples for individual parameters (similar to sims.list but puts it in a tibble)\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% spread_draws(theta) \n\n\n# A tibble: 3,000 × 4\n   .chain .iteration .draw theta\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1      1          1     1 0.745\n 2      1          2     2 0.610\n 3      1          3     3 0.485\n 4      1          4     4 0.697\n 5      1          5     5 0.643\n 6      1          6     6 0.667\n 7      1          7     7 0.650\n 8      1          8     8 0.628\n 9      1          9     9 0.617\n10      1         10    10 0.785\n# ℹ 2,990 more rows"
+    "text": "Tidybayes\nThe tidybayes package facilitates the use of tidy data (one observation per row) with Bayesian models in R.\n\nYou can use the output from JAGS in matrix format to work with tidybayes\nThe spread_draws function lets us extract draws into a data frame in tidy format\n\n\n\nlibrary(tidybayes)\n\n## look at samples for individual parameters (similar to sims.list but puts it in a tibble)\nmcmc.matrix &lt;- mod$BUGSoutput$sims.matrix\nmcmc.matrix %&gt;% spread_draws(theta) \n\n\n# A tibble: 3,000 × 4\n   .chain .iteration .draw theta\n    &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1      1          1     1 0.670\n 2      1          2     2 0.696\n 3      1          3     3 0.719\n 4      1          4     4 0.605\n 5      1          5     5 0.843\n 6      1          6     6 0.753\n 7      1          7     7 0.822\n 8      1          8     8 0.760\n 9      1          9     9 0.767\n10      1         10    10 0.573\n# ℹ 2,990 more rows"
   },
   {
     "objectID": "5b-JAGS.html#tidybayes-1",
     "href": "5b-JAGS.html#tidybayes-1",
     "title": "Bayesian Data Analysis",
     "section": "Tidybayes",
-    "text": "Tidybayes\n\ntidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme [median|mean|mode]_[qi|hdi], for example, median_qi, mean_qi, mode_hdi, and so on.\n\n\n## summary for parameters\nmcmc.matrix %&gt;% \n  gather_rvars(theta) %&gt;% \n  median_qi(.value, .width = c(.95,0.9))\n\n# A tibble: 2 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 theta      0.688  0.472  0.855   0.95 median qi       \n2 theta      0.688  0.503  0.834   0.9  median qi       \n\n\n\nThe ggdist::stat_halfeye() geom provides a shortcut to generating “half-eye plots” (combinations of intervals and densities).\n\n\n\n## plots\nmcmc.matrix %&gt;%\n  spread_draws(theta) %&gt;% \n  ggplot(aes(x = theta)) +\n  stat_halfeye()"
+    "text": "Tidybayes\n\ntidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme [median|mean|mode]_[qi|hdi], for example, median_qi, mean_qi, mode_hdi, and so on.\n\n\n## summary for parameters\nmcmc.matrix %&gt;% \n  gather_rvars(theta) %&gt;% \n  median_qi(.value, .width = c(.95,0.9))\n\n# A tibble: 2 × 7\n  .variable .value .lower .upper .width .point .interval\n  &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 theta      0.686  0.477  0.847   0.95 median qi       \n2 theta      0.686  0.510  0.826   0.9  median qi       \n\n\n\nThe ggdist::stat_halfeye() geom provides a shortcut to generating “half-eye plots” (combinations of intervals and densities).\n\n\n\n## plots\nmcmc.matrix %&gt;%\n  spread_draws(theta) %&gt;% \n  ggplot(aes(x = theta)) +\n  stat_halfeye()"
   },
   {
     "objectID": "5a-Diagnostics.html#thinning",
@@ -1279,5 +1279,159 @@
     "title": "Bayesian Data Analysis",
     "section": "Prior vs Posterior for parameters (\\(\\beta_j\\))",
     "text": "Prior vs Posterior for parameters (\\(\\beta_j\\))"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-binomial-model",
+    "href": "8-BHM.html#hierarchical-binomial-model",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Binomial Model",
+    "text": "Hierarchical Binomial Model\nSuppose we are considering the success of a treatment for cardio vascular disease (CVD) in a number of different hospitals. We are interested in \\(\\theta_j\\) the survival probability associated with hospital \\(j\\).\n\nWe have observations \\(y_{ij}\\) which tells us the status of patient \\(i\\) in hospital \\(j\\) such that \\(y_{ij} = 1\\) if the patient survived and \\(y_{ij} = 0\\) otherwise.\nWe could assume that \\(\\theta_j\\) are independent."
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-binomial-model-1",
+    "href": "8-BHM.html#hierarchical-binomial-model-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Binomial Model",
+    "text": "Hierarchical Binomial Model\nWe could assume that there’s a joint effect i.e., a common \\(\\theta\\)"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-binomial-model-2",
+    "href": "8-BHM.html#hierarchical-binomial-model-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Binomial Model",
+    "text": "Hierarchical Binomial Model\nBut maybe it’s more sensible to assume that we have different \\(\\theta_j\\) but that they have something in common.\n\nA natural assumption to make is that \\(\\theta_j\\) have a common population distribution\n\n\nNow we are building up levels.\n\nWe have a data level, a parameter level and a hyperparameter level"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-models---terms",
+    "href": "8-BHM.html#hierarchical-models---terms",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Models - Terms",
+    "text": "Hierarchical Models - Terms\nThe data level: observations given parameters \\(p(y_{ij}|\\theta_j)\\)\nThe parameter level: parameters given hyperparameters \\(p(\\theta_j|\\tau)\\)\nThe hyperparameter level: \\(p(\\tau)\\)\nPutting all of this together in Bayes’ theorem we get:\n\\(p(\\theta, \\tau|y) \\propto p(y|\\theta)p(\\theta|\\tau)p(\\tau)\\)"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-models---rats-example",
+    "href": "8-BHM.html#hierarchical-models---rats-example",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Models - Rats example",
+    "text": "Hierarchical Models - Rats example\n\nIn the evaluation of drugs for possible clinical application, studies are routinely performed on rodents.\nSuppose we have studies to estimate \\(\\theta\\), the probability of a tumor in a population of female laboratory rats of type ‘F344’ that receive a zero dose of the drug (a control group).\nThe data are whether the rat developed endometrial stromal polyps (a kind of tumor)\nThe experiment has been repeated 71 times and the data are shown below:\n\n\n\n [1] \"0/20\"  \"0/20\"  \"0/20\"  \"0/20\"  \"0/20\"  \"0/20\"  \"0/20\"  \"0/19\"  \"0/19\" \n[10] \"0/19\"  \"0/19\"  \"0/18\"  \"0/18\"  \"0/17\"  \"1/20\"  \"1/20\"  \"1/20\"  \"1/20\" \n[19] \"1/19\"  \"1/19\"  \"1/18\"  \"1/18\"  \"2/25\"  \"2/24\"  \"2/23\"  \"2/20\"  \"2/20\" \n[28] \"2/20\"  \"2/20\"  \"2/20\"  \"2/20\"  \"1/10\"  \"5/49\"  \"2/19\"  \"5/46\"  \"3/27\" \n[37] \"2/17\"  \"7/49\"  \"7/47\"  \"3/20\"  \"3/20\"  \"2/13\"  \"9/48\"  \"10/50\" \"4/20\" \n[46] \"4/20\"  \"4/20\"  \"4/20\"  \"4/20\"  \"4/20\"  \"4/20\"  \"10/48\" \"4/19\"  \"4/19\" \n[55] \"4/19\"  \"5/22\"  \"11/46\" \"12/49\" \"5/20\"  \"5/20\"  \"6/23\"  \"5/19\"  \"6/22\" \n[64] \"6/20\"  \"6/20\"  \"6/20\"  \"16/52\" \"15/46\" \"15/47\" \"9/24\"  \"4/14\""
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-models---rats-example-1",
+    "href": "8-BHM.html#hierarchical-models---rats-example-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Models - Rats example",
+    "text": "Hierarchical Models - Rats example\nLet’s specify a Bayesian Hierarchical model for the rats example.\n\nLet \\(y_j\\) be the number of rats that had tumors in study \\(j\\) and let \\(n_j\\) be the total number of rats in study \\(j\\).\nIt is natural to assume a binomial model for the number of tumors, given \\(\\theta_j\\).\nWe can select a prior distribution for \\(\\theta_j\\) from the conjugate family and vague priors for the hyperparameters.\n\n\n\n\\(\\text{}\\)\n\\(\\text{}\\)\n\\(y_j|\\theta_j \\sim Binomial(\\theta_j,n_j)\\)\n\\(\\theta_j|\\alpha,\\beta \\sim Be(\\alpha, \\beta)\\)\n\\(\\text{}\\)\n\\(\\alpha \\sim ht(1,10^2,1)\\)\n\\(\\beta \\sim ht(1,10^2,1)\\)"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-models---rats-example-2",
+    "href": "8-BHM.html#hierarchical-models---rats-example-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Models - Rats example",
+    "text": "Hierarchical Models - Rats example"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-models---rats-example-3",
+    "href": "8-BHM.html#hierarchical-models---rats-example-3",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Models - Rats example",
+    "text": "Hierarchical Models - Rats example"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-models---rats-example-4",
+    "href": "8-BHM.html#hierarchical-models---rats-example-4",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Models - Rats example",
+    "text": "Hierarchical Models - Rats example\n\nSummary of hyperparameters \\(\\alpha\\) and \\(\\beta\\) from the population Beta prior distribution\n\n\n\n\n\n\n.variable\n.value\n.lower\n.upper\n.width\n.point\n.interval\n\n\n\n\nalpha\n2.302976\n1.270626\n4.538142\n0.95\nmedian\nqi\n\n\nbeta\n13.779446\n7.591737\n27.849263\n0.95\nmedian\nqi\n\n\n\n\n\n\n\\(Beta(\\alpha, \\beta)\\) given posterior draws of \\(\\alpha\\) and \\(\\beta\\)"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-normal-model",
+    "href": "8-BHM.html#hierarchical-normal-model",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Normal Model",
+    "text": "Hierarchical Normal Model\nAssume a factory has 6 machines and a quality measure that is taken on a regular basis.\n\nHow might we structure a hierarchical model such that we get an overall estimate of quality across all machines as well as a quality estimate per machine?\n\n\n\n\\(\\text{}\\)\n\\(y_{ij} \\sim N(\\mu_j,\\sigma^2)\\)\n\\(\\mu_j \\sim N(\\mu_F, \\sigma_F^2)\\)\n\\(\\text{}\\)\n\\(\\mu_F \\sim N(...)\\)\n\\(\\sigma_F \\sim ht(...)\\)\n\\(\\sigma \\sim ht(...)\\)"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-normal-model-1",
+    "href": "8-BHM.html#hierarchical-normal-model-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Normal Model",
+    "text": "Hierarchical Normal Model\nYou might also consider that the variation in quality measures is not constant across all machines.\n\n\n\\(\\text{}\\)\n\\(\\text{}\\)\n\\(y_{ij} \\sim N(\\mu_j,\\sigma^2)\\)\n\\(\\mu_j \\sim N(\\mu_F, \\sigma_F^2)\\)\n\\(\\sigma_j \\sim ht(...)\\)\n\\(\\text{}\\)\n\\(\\mu_F \\sim N(...)\\)\n\\(\\sigma_F \\sim ht(...)\\)"
+  },
+  {
+    "objectID": "8-BHM.html#example-8-schools",
+    "href": "8-BHM.html#example-8-schools",
+    "title": "Bayesian Data Analysis",
+    "section": "Example: 8 schools",
+    "text": "Example: 8 schools\n\nA study was performed for the Educational Testing Service to analyze the effects of special coaching programs on test scores\nSeparate randomized experiments were performed to estimate the effects of coaching programs for the SAT (Scholastic Aptitude Test) in each of eight high schools.\nThe outcome variable in each study was the score on the SAT\nTypically the scores can vary between 200 and 800, with a mean = 500 and standard deviation = 100.\nThe SAT examinations are designed to be resistant to short-term efforts directed specifically toward improving performance on the test; instead they are designed to reflect knowledge acquired and abilities developed over many years of education.\nNevertheless, each of the eight schools in this study considered its short-term coaching program to be successful at increasing SAT scores."
+  },
+  {
+    "objectID": "8-BHM.html#example-8-schools-1",
+    "href": "8-BHM.html#example-8-schools-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Example: 8 schools",
+    "text": "Example: 8 schools\n\nThe performance gains of coached students were compared to non-coached students. Separate estimates were obtained for each school, but because the size of the schools differed, the standard errors differed as well.\nIn each school the estimated coaching effect and its standard error were obtained.\n\n\n\n\n\n\ny\nse\n\n\n\n\n28\n15\n\n\n8\n10\n\n\n-3\n16\n\n\n7\n11\n\n\n-1\n9\n\n\n1\n11\n\n\n18\n10\n\n\n12\n18"
+  },
+  {
+    "objectID": "8-BHM.html#example-8-schools-2",
+    "href": "8-BHM.html#example-8-schools-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Example: 8 schools",
+    "text": "Example: 8 schools\n\nUpon initial examination of the data it may seem that some coaching programs have moderate effects (in the range 18–28 points), most have small effects (0–12 points), and two have small negative effects.\nHowever, when we take note of the standard errors of these estimated effects, we see that it is difficult statistically to distinguish between any of the experiments:"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-normal-model-8-schools",
+    "href": "8-BHM.html#hierarchical-normal-model-8-schools",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical normal model: 8 schools",
+    "text": "Hierarchical normal model: 8 schools\nThe general overlap in the posterior intervals based on independent analyses suggests that all experiments might be estimating the same quantity.\n\nIs the effect actually the same everywhere i.e., is there one common coaching effect?\nUnder the hypothesis that all experiments have the same effect and produce independent estimates of this common effect, we could treat the data as eight normally distributed observation with an overall mean and known variances.\nBut, would it be possible to have an effect of 28 in one school just by chance if the coaching effect across all schools is the same?"
+  },
+  {
+    "objectID": "8-BHM.html#issues-with-spearate-and-pooled-effects",
+    "href": "8-BHM.html#issues-with-spearate-and-pooled-effects",
+    "title": "Bayesian Data Analysis",
+    "section": "Issues with spearate and pooled effects",
+    "text": "Issues with spearate and pooled effects\nLet’s consider schools A, with the separate effects model we infer that for school A there is a 50% chance that the true effect is greater than ~28."
+  },
+  {
+    "objectID": "8-BHM.html#issues-with-spearate-and-pooled-effects-1",
+    "href": "8-BHM.html#issues-with-spearate-and-pooled-effects-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Issues with spearate and pooled effects",
+    "text": "Issues with spearate and pooled effects\nWith the pooled effects model, we infer that there is a 50% chance that the true effect is greater than 7.5. A value greater than 28 is highly improbable."
+  },
+  {
+    "objectID": "8-BHM.html#issues-with-spearate-and-pooled-effects-2",
+    "href": "8-BHM.html#issues-with-spearate-and-pooled-effects-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Issues with spearate and pooled effects",
+    "text": "Issues with spearate and pooled effects\n\nThe separate effects model treats School A completely in isolation, ignoring the fact that we have considerable evidence that courses similar to the one taught in School A evidently have typical effect size less than 20 points.\nThe pooled effects model would assume that the true effect in all schools is exactly equal, in spite of the courses being taught by different teachers to different students.\n\n\n\nWhat about a middle path?"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-normal-model---8-schools",
+    "href": "8-BHM.html#hierarchical-normal-model---8-schools",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Normal Model - 8 Schools",
+    "text": "Hierarchical Normal Model - 8 Schools\n\nAssume that each school’s “true effect” is drawn from a normal distribution with unknown mean and standard deviation\nAssume the observed effect in each school is sampled from a normal distribution with a mean equal to the true effect, and standard deviation given in the dataset.\n\n\n\n\\(\\text{}\\)\n\\(\\text{}\\)\n\\(y_{i} \\sim N(\\mu_i,\\sigma_i^2)\\)\n\\(\\mu_i \\sim N(\\mu_P, \\sigma_P^2)\\)\n\\(\\text{}\\)\n\\(\\mu_P \\sim N(0,200^2)\\)\n\\(\\sigma_P \\sim Uniform(0,200)\\)"
+  },
+  {
+    "objectID": "8-BHM.html#hierarchical-normal-model---8-schools-1",
+    "href": "8-BHM.html#hierarchical-normal-model---8-schools-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Normal Model - 8 Schools",
+    "text": "Hierarchical Normal Model - 8 Schools\n\n\n\\(y_{i} \\sim N(\\mu_i,\\sigma_i^2)\\)\n\\(\\mu_i \\sim N(\\mu_P, \\sigma_P^2)\\)\n\\(\\mu_P \\sim N(0,200^2)\\)\n\\(\\sigma_P \\sim Uniform(0,200)\\)\n\n\nnormalmodel = \"\nmodel{\n  for(i in 1:N)\n{\n y.i[i] ~ dnorm(mu.i[i],sigma.i[i]^-2) # data model\n mu.i[i] ~ dnorm(mu_p,sigma_p^-2)  # prior for effect\n} # end i loop\n\nmu_p ~ dnorm(0,200^-2)\nsigma_p ~ dunif(0,200)\n }\n \"\n\n\n\n\nPosterior distribution for the effects\n\n\n\n\n\n\n\n\n\n\nEffect summaries\n\n\n# A tibble: 8 × 8\n  school .variable .value .lower .upper .width .point .interval\n   &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1      1 mu.i       10.5   -2.02   32.5   0.95 median qi       \n2      2 mu.i        8.00  -4.68   20.6   0.95 median qi       \n3      3 mu.i        6.73 -12.0    20.1   0.95 median qi       \n4      4 mu.i        7.71  -5.96   20.6   0.95 median qi       \n5      5 mu.i        5.52  -9.19   16.9   0.95 median qi       \n6      6 mu.i        6.53  -8.64   18.8   0.95 median qi       \n7      7 mu.i       10.3   -1.21   26.4   0.95 median qi       \n8      8 mu.i        8.33  -6.37   25.5   0.95 median qi"
+  },
+  {
+    "objectID": "8-BHM.html#what-about-sigma_p",
+    "href": "8-BHM.html#what-about-sigma_p",
+    "title": "Bayesian Data Analysis",
+    "section": "What about \\(\\sigma_p\\)?",
+    "text": "What about \\(\\sigma_p\\)?\n\n\\(\\sigma_p\\) is the shrinkage parameter, in this model it controls how much \\(\\mu_i\\) can vary away from \\(\\mu_p\\)\nIf \\(\\sigma_p\\) is close to zero we tend towards to pooled model.\nAs \\(\\sigma_p\\) increases we move back towards the independent model.\n\n\n\nPosterior distribution of \\(\\sigma_p\\)\n\n\n\n\n\n\n\n\n\n\nWhat happens to \\(\\mu_i\\) as \\(\\sigma_p\\) changes?"
+  },
+  {
+    "objectID": "4-MCMC.html",
+    "href": "4-MCMC.html",
+    "title": "Bayesian Data Analysis",
+    "section": "",
+    "text": "We can use Bayes’ rule to get posterior densities\n\nExample for single parameter Normal - \\(\\mu\\)\n\n\\(p(\\mu|y) \\propto p(y|\\mu)p(\\mu)\\)\n\nExample for single parameter Normal - \\(\\tau\\)\n\n\\(p(\\tau|y) \\propto p(y|\\tau)p(\\tau)\\)\n\nWe could also do this for multiple parameters\n\n\\(p(\\mu, \\tau|y) \\propto p(y|\\mu,\\tau)p(\\mu,\\tau)\\)\n\n\nBUT…\n\nRealistic problems with multiple parameters, data points, and common choices of priors don’t get a closed-form expression for \\(p(\\mu, \\tau|y)\\)\nSampling to the rescue!!"
   }
 ]

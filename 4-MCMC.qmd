@@ -110,7 +110,6 @@ $$\pi = \pi P$$
 This means that when the transition matrix $P$ is applied to $\pi$, the result is still $\pi$, indicating that the distribution has stabilized and doesn't change over time.
 :::
 
-
 ## Creating the Markov Chain {style="font-size: 65%;"}
 
 ::: columns
@@ -162,7 +161,6 @@ plot(p_sunny, type = "l", xlab = "Iteration", ylab = "P(S)")
 ```
 :::
 :::
-
 
 ## MCMC: The Metropolis Algorithm {style="font-size: 70%;"}
 
@@ -323,7 +321,6 @@ p <- ggplot() +
 
 p
 ```
-
 
 ## Trace plot and chains for $\theta$ {style="font-size: 70%;"}
 
