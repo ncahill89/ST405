@@ -1236,7 +1236,7 @@
     "href": "7-checking.html#posterior-predictive-checking-test-statistic-1",
     "title": "Bayesian Data Analysis",
     "section": "Posterior predictive checking: test statistic",
-    "text": "Posterior predictive checking: test statistic\nMany of the available PPCs can also be carried out within levels of a grouping variable.\nFor example we can compute the test statistic within levels of the highschool grouping variable and a separate plot is made for each level.\n\nmax_y &lt;- max(kidiq$kid_score)\nppc_stat_grouped(y,yrep,group = kidiq$mom_hs,  stat = \"max\")\n\n\nHere’s an enhanced version of your sensitivity analysis slide for better clarity and emphasis:"
+    "text": "Posterior predictive checking: test statistic\nMany of the available PPCs can also be carried out within levels of a grouping variable.\nFor example we can compute the test statistic within levels of the highschool grouping variable and a separate plot is made for each level.\n\nmax_y &lt;- max(kidiq$kid_score)\nppc_stat_grouped(y,yrep,group = kidiq$mom_hs,  stat = \"max\")"
   },
   {
     "objectID": "7-checking.html#sensitivity-analysis",

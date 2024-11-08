@@ -143,9 +143,8 @@ max_y <- max(kidiq$kid_score)
 ppc_stat_grouped(y,yrep,group = kidiq$mom_hs,  stat = "max")
 ```
 
-Here’s an enhanced version of your sensitivity analysis slide for better clarity and emphasis:
 
-------------------------------------------------------------------------
+
 
 ## Sensitivity Analysis {style="font-size: 60%;"}
 
