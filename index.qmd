@@ -78,6 +78,8 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 [Tutorial Sheet 2: Bayesian Model for Multiple Proportions - Email Campaign Click-Through Rates](https://ncahill89.github.io/ST405/Tutorial2.html)
 
 
+[Tutorial Sheet 3: Bayesian Regression Model - Fisherys Data](https://ncahill89.github.io/ST405/Tutorial3.html)
+
 ## Assignments
 
 [Assignment 1: Bayesian Inference on Particle Emission Energy](https://ncahill89.github.io/ST405/Assignment1.html)

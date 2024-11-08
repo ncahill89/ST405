@@ -1,0 +1,96 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Tutorial Questions (3)"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidybayes)
+library(rjags)
+library(R2jags)
+library(bayesplot)
+
+
+football <- read_csv("football.csv")
+```
+
+## **Introduction**
+
+This tutorial explores posterior predictive checking.
+
+### **Question: Bayesian Regression Model - Fisherys Data**
+
+The **Fishery Dataset**, `fish_dat.csv` consists of 256 snapper length measurements along with a grouping variable for different age groups. You'll find the dataset in the ST405/ST645 folder on the Rstudio server. 
+
+Your goal is to perform a Bayesian analysis on this dataset as outlined in the steps below:
+
+1.  **Visualize the Snapper Length Data**
+
+    -   Produce a histogram of the snapper lengths ($y$) to explore the distribution of the data.
+
+------------------------------------------------------------------------
+
+2.  **Fit a Basic Bayesian Model**
+
+    -   Fit a Bayesian model that assumes a **Normal likelihood** for the length data, with an **overall mean** and **variance** (ignoring age groups for now).
+
+------------------------------------------------------------------------
+
+3.  **Assess Model Convergence**
+
+    -   Use convergence diagnostics (e.g., trace plots, R-hat values) to check if the model has successfully converged.
+
+4.  **Summarize Model Parameters**
+
+    -   Provide summaries (mean, median, credible intervals) for the key parameters of the model.
+
+5.  **Conduct Posterior Predictive Checks**
+
+-   Perform the following checks to assess the fit of your model:
+
+    **(i)** **Compare Distributions**
+
+    -   Plot the observed distribution of $y$ and overlay it with the distributions of 50 simulated datasets ($y_{\text{rep}}$) from the model.
+
+    **(ii)** **Evaluate Test Statistics**
+
+    -   Calculate the empirical values for the following test statistics based on the observed data:
+        -   1st percentile
+        -   Median
+        -   97th percentile
+    -   Compare these empirical values with the corresponding posterior predictive distributions of test statistics.
+
+    **(iii)** **Posterior Predictive** $p$-values and Effect Sizes
+
+    -   For each test statistic in (ii), calculate:
+
+        -   **Posterior predictive ( p )-value**: Proportion of simulated datasets with test statistic values as extreme or more extreme than the observed.
+
+        -   **Effect size**: Difference between the observed test statistic and the median of the posterior predictive distribution of test statistics, divided by the standard deviation of this predictive distribution.
+
+------------------------------------------------------------------------
+
+6.  **Fit a Group-Specific Bayesian Model**
+
+    -   **(a)** Fit a Bayesian model with **group-specific means and variances** in the Normal likelihood (accounting for age groups).
+
+    -   **(b)** Repeat parts 3–5 for this model, including convergence checks, parameter summaries, and posterior predictive checks.
+
+    -   **(c)** Based on your posterior predictive checks, discuss which model (the overall model from part 2 or the group-specific model from part 6) you believe provides a better fit for the snapper length data. Justify your answer.
+
+------------------------------------------------------------------------
+
+### **Notes**
+
+-   The **posterior predictive ( p )-value** indicates how many of the simulated datasets have test statistic values as extreme or more extreme than the value observed in the empirical data. It reflects the degree to which the model can replicate observed data characteristics.
+
+-   The **effect size** quantifies the distance between the observed test statistic and the median of the posterior predictive distribution in standard deviation units. This gives an indication of how unusual the observed data is relative to the model predictions.
+
+------------------------------------------------------------------------
