@@ -79,16 +79,16 @@ for (i in 1:n) {yrep[i] ~ dnorm(mu.i[i], sigma^-2)}
 ```
 
 ```{r, include = FALSE, echo=FALSE}
-jags.data <- list(y.i = kidiq$kid_score, 
+jags.data2 <- list(y.i = kidiq$kid_score, 
                   x.i = kidiq$mom_iq, 
                   hs_index = as.numeric(kidiq$mom_hs + 1),
                   n = nrow(kidiq),
                   m = 2)
 
-parnames <- c("alpha.j","beta.j","mu.i","yrep")
+parnames2 <- c("alpha.j","beta.j","mu.i","yrep")
 
-mod <- jags(data = jags.data, 
-            parameters.to.save=parnames, 
+mod2 <- jags(data = jags.data2, 
+            parameters.to.save=parnames2, 
             model.file = textConnection(lrmodel2))
 ```
 
@@ -98,7 +98,7 @@ To use the PPC function from the `bayesplot` package we need the outcome values 
 
 ```{r}
 y <- kidiq$kid_score
-yrep <- mod$BUGSoutput$sims.list$yrep
+yrep <- mod2$BUGSoutput$sims.list$yrep
 ```
 
 Now let's look at histograms of some of the `yrep` datasets and see how they compare to `y`
@@ -179,17 +179,17 @@ JAGS has a simulation functionality that allows us to easily generate prior pred
 ```{r}
 lrmodel_prior ="
 data{
-	for (i in 1:n){
-	  yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2)
- 		mu.i[i] <- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i))
-	}
+    for (i in 1:n){
+      yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2)
+        mu.i[i] <- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i))
+    }
 #Priors
 for(j in 1:m)
 {
-alpha.j[j] ~ dnorm(80, 30^-2) 
+alpha.j[j] ~ dnorm(100, 30^-2) 
 beta.j[j] ~ dnorm(0, 2^-2) 
 }
-sigma ~ dt(30,10^-2,1)T(0,) #truncated t-distribution
+sigma ~ dunif(0,50)
 } # end data block
 model{
 fake <- 0
@@ -252,7 +252,7 @@ ppc_hist(y, yrep_prior[1:5, ])
 ## Prior vs Posterior for parameters ($\alpha_j$) {style="font-size: 60%;"}
 
 ```{r, echo = FALSE, message = FALSE, warning=FALSE}
-m1 <- mod$BUGSoutput$sims.matrix
+m1 <- mod2$BUGSoutput$sims.matrix
 
 par_samps <- m1 %>% spread_draws(alpha.j[1:2],beta.j[1:2]) 
 

@@ -1215,7 +1215,7 @@
     "href": "7-checking.html#posterior-predictive-checking-histograms",
     "title": "Bayesian Data Analysis",
     "section": "Posterior predictive checking: histograms",
-    "text": "Posterior predictive checking: histograms\nTo use the PPC function from the bayesplot package we need the outcome values y and a matrix of replicates yrep\n\ny &lt;- kidiq$kid_score\nyrep &lt;- mod$BUGSoutput$sims.list$yrep\n\nNow let’s look at histograms of some of the yrep datasets and see how they compare to y\n\nlibrary(bayesplot)\ncolor_scheme_set(\"brightblue\")\nppc_hist(y, yrep[1:3, ])"
+    "text": "Posterior predictive checking: histograms\nTo use the PPC function from the bayesplot package we need the outcome values y and a matrix of replicates yrep\n\ny &lt;- kidiq$kid_score\nyrep &lt;- mod2$BUGSoutput$sims.list$yrep\n\nNow let’s look at histograms of some of the yrep datasets and see how they compare to y\n\nlibrary(bayesplot)\ncolor_scheme_set(\"brightblue\")\nppc_hist(y, yrep[1:3, ])"
   },
   {
     "objectID": "7-checking.html#posterior-predictive-checking-density-overlay",
@@ -1250,7 +1250,7 @@
     "href": "7-checking.html#prior-predictive-checks",
     "title": "Bayesian Data Analysis",
     "section": "Prior predictive checks",
-    "text": "Prior predictive checks\nPrior predictive checks allow us to look at the situation prior to any data being observed in order to see what data distribution is being implied by the choice of priors and likelihood.\n\nIdeally this distribution would have at least some mass around all plausible data sets.\n\nJAGS has a simulation functionality that allows us to easily generate prior predictive distributions based on our specified model.\n\nThe likelihood and priors can be specified in a “data” block so that we can simulate what data generated from the likelihood would look like, based solely on our prior assumptions.\n\n\nlrmodel_prior =\"\ndata{\n    for (i in 1:n){\n      yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2)\n        mu.i[i] &lt;- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i))\n    }\n#Priors\nfor(j in 1:m)\n{\nalpha.j[j] ~ dnorm(80, 30^-2) \nbeta.j[j] ~ dnorm(0, 2^-2) \n}\nsigma ~ dt(30,10^-2,1)T(0,) #truncated t-distribution\n} # end data block\nmodel{\nfake &lt;- 0\n}\n\""
+    "text": "Prior predictive checks\nPrior predictive checks allow us to look at the situation prior to any data being observed in order to see what data distribution is being implied by the choice of priors and likelihood.\n\nIdeally this distribution would have at least some mass around all plausible data sets.\n\nJAGS has a simulation functionality that allows us to easily generate prior predictive distributions based on our specified model.\n\nThe likelihood and priors can be specified in a “data” block so that we can simulate what data generated from the likelihood would look like, based solely on our prior assumptions.\n\n\nlrmodel_prior =\"\ndata{\n    for (i in 1:n){\n      yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2)\n        mu.i[i] &lt;- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i))\n    }\n#Priors\nfor(j in 1:m)\n{\nalpha.j[j] ~ dnorm(100, 30^-2) \nbeta.j[j] ~ dnorm(0, 2^-2) \n}\nsigma ~ dunif(0,50)\n} # end data block\nmodel{\nfake &lt;- 0\n}\n\""
   },
   {
     "objectID": "7-checking.html#prior-predictive-checks-1",

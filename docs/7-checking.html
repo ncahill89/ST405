@@ -464,7 +464,7 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <p>To use the PPC function from the <code>bayesplot</code> package we need the outcome values <code>y</code> and a matrix of replicates <code>yrep</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>y <span class="ot">&lt;-</span> kidiq<span class="sc">$</span>kid_score</span>
-<span id="cb2-2"><a></a>yrep <span class="ot">&lt;-</span> mod<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sims.list<span class="sc">$</span>yrep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a></a>yrep <span class="ot">&lt;-</span> mod2<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sims.list<span class="sc">$</span>yrep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now let’s look at histograms of some of the <code>yrep</code> datasets and see how they compare to <code>y</code></p>
 <div class="cell">
@@ -540,10 +540,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <span id="cb7-7"><a></a><span class="st">#Priors</span></span>
 <span id="cb7-8"><a></a><span class="st">for(j in 1:m)</span></span>
 <span id="cb7-9"><a></a><span class="st">{</span></span>
-<span id="cb7-10"><a></a><span class="st">alpha.j[j] ~ dnorm(80, 30^-2) </span></span>
+<span id="cb7-10"><a></a><span class="st">alpha.j[j] ~ dnorm(100, 30^-2) </span></span>
 <span id="cb7-11"><a></a><span class="st">beta.j[j] ~ dnorm(0, 2^-2) </span></span>
 <span id="cb7-12"><a></a><span class="st">}</span></span>
-<span id="cb7-13"><a></a><span class="st">sigma ~ dt(30,10^-2,1)T(0,) #truncated t-distribution</span></span>
+<span id="cb7-13"><a></a><span class="st">sigma ~ dunif(0,50)</span></span>
 <span id="cb7-14"><a></a><span class="st">} # end data block</span></span>
 <span id="cb7-15"><a></a><span class="st">model{</span></span>
 <span id="cb7-16"><a></a><span class="st">fake &lt;- 0</span></span>
