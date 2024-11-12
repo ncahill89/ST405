@@ -513,13 +513,13 @@ par_summary1
 
 What do you notice about the width of the intervals?
 
-## Extending the regression model {style="font-size: 70%;"}
+## Extending the regression model {style="font-size: 60%;"}
 
 Suppose now we want to see if there's a "highschool" effect on the relationship between Mother's IQ and Kid's IQ.
 
 Some possible choices:
 
--   Model 2A: Add the highschool variable as a grouping variable, such that you have a varying intercepts model with $\alpha_1$ for `highschool = no` and $\alpha_2$ for `highschool = yes`. 
+-   Model 2A: Add the highschool variable as a grouping variable, such that you have a varying intercepts model with $\alpha_1$ for `highschool = no` and $\alpha_2$ for `highschool = yes`.
 
 -   Model 2B: Add the highschool variable in as a grouping variable such that you have a varying intercepts and slopes model with $\alpha_1$ and $\beta_1$ for `highschool = no` and $\alpha_2$ and $\beta_2$ for `highscool = yes`.
 
