@@ -23,7 +23,7 @@ football_dat <- read_csv("football_dat.csv")
 
 ## Instructions
 
-Please submit your answers to this assignment by **November 27th, 4:00PM**.
+Please submit your answers to this assignment by **November 27th, 4:00PM**. Include your JAGS model with your answers. 
 
 ------------------------------------------------------------------------
 
