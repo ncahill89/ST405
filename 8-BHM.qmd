@@ -597,7 +597,7 @@ $\text{}$
 
 $\text{}$
 
-$y_{ij} \sim N(\mu_j,\sigma^2)$
+$y_{ij} \sim N(\mu_j,\sigma_j^2)$
 
 $\mu_j \sim N(\mu_F, \sigma_F^2)$
 
