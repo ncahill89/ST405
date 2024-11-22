@@ -1475,5 +1475,159 @@
     "title": "ST405/ST645 Bayesian Data Analysis",
     "section": "",
     "text": "This tutorial explores Bayesian Hierarchical Regression Modelling.\nLet’s create a dataset to explore the idea of independent modelling versus pooling versus partial pooling (via hierarchical modelling). We will create a simple one-dimensional regression problem, i.e. there is a single predictor and a single outcome. There are eight different groups, with each group having its own slope, and a fixed intercept of zero. The code for simulating the data is given below.\n\nset.seed(28) # set the seed\nmean_slope = 2 # the 8 different slopes have a mean of 2\nsigma_slope = 0.2 # across group variation\nslopes = rnorm(8,mean_slope,sigma_slope) # groups slopes vary around the mean\ngroups = c(rep(1:6,each = 14),rep(7,5), rep(8,5)) # some groups have smaller sample sizes\nsigma &lt;- c(0.5,0.5,2,2,0.5,2,0.5,0.5) # have some groups with large variation\nx = rnorm(length(groups)) # simulate a predictor\ny =  slopes[groups]*x + rnorm(length(groups),0,sigma[groups]) # simulate y\ny[length(groups)] &lt;- 8 # add an outlier\nsim_dat &lt;- tibble(x = x, y = y, group = groups) # create the simulated dataset\n\n## Plot the simulated data\nggplot(sim_dat, aes(x = x, y = y)) +\n  geom_point() +\n  facet_wrap(~group)\n\n\n\n\n\n\n\n\nSome things to note:\n\nThe groups variable contains the group each observation belongs to. Groups 1 to 6 have fourteen data points and groups 7,8 have five data points.\nGroups 3,4 and 6 have more variation than the other groups.\nAn outlier has been added to group 8.\n\n\n\n1. Fit a regression model with varying slopes\n\nFit regression model with a common intercept and varying slopes such that\n\n\\[y_i \\sim N(\\alpha + \\beta_{j[i]} x_i, \\sigma)\\]\n\nAssume independent slopes, such that \\(\\beta_{j} \\sim N(0, 10^2)\\)\n\n\n2. Change the model structure\n\nExtend 1 to model \\(\\beta_{j}\\) hierarchically instead of independently\n\n\n3. Compare posterior distributions\n\nFor each model (1 & 2), plot the posterior distributions for the slope parameters and compare the distributions to the true slopes used to simulate the data.\nNote the differences and similarities between the parameter estimates for both models.\n\n\n4. Look at hyperparameters\n\nFor the model in 2, compare the distributions for the model hyperparmaters to the true values from the simulation above.\n\n\n5. Modify the simulation\n\nChange some of the simulation settings and see how it impacts 1-4."
+  },
+  {
+    "objectID": "9-BHRM.html#hierarchical-linear-models",
+    "href": "9-BHRM.html#hierarchical-linear-models",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Linear Models",
+    "text": "Hierarchical Linear Models\nWhy Use Hierarchical Regression Models?\nHierarchical regression models are useful when predictors vary across different levels of a dataset. They help account for nested or clustered data structures, providing more accurate insights into relationships at each level.\nExamples\n\nEducational Research\nStudying scholastic achievement involves information at multiple levels:\n\nIndividual-level: Student characteristics, such as family background\n\nClass-level: Teacher characteristics and teaching style\n\nSchool-level: Policies, neighborhood context\n\nClustered or Stratified Sampling\nWhen data are collected through stratified or cluster sampling, hierarchical models allow for regression analyses that respect these data groupings, providing insights within and across clusters."
+  },
+  {
+    "objectID": "9-BHRM.html#hierarchical-linear-models-1",
+    "href": "9-BHRM.html#hierarchical-linear-models-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical Linear Models",
+    "text": "Hierarchical Linear Models\nAdding Predictors at Multiple Levels\nPredictors can be introduced for each level in hierarchical data. For example:\n\nEducational Context: Predictors for individual students, classrooms, and schools\nSampling Context: Predictors for strata or clusters\n\nChallenges in Multi-Level Modeling\n\nIncreasing Parameters: Introducing predictors at multiple levels increases the number of parameters, often dramatically.\nEstimation Approach: Estimating these parameters accurately requires additional modeling, typically through a population distribution.\n\nHandling Multiple Levels and Bayesian Estimation\n\nHierarchical models can handle multiple levels of variation without a set limit.\nBayesian methods offer robust approaches for estimating unknown parameters across levels."
+  },
+  {
+    "objectID": "9-BHRM.html#math-scores-data",
+    "href": "9-BHRM.html#math-scores-data",
+    "title": "Bayesian Data Analysis",
+    "section": "Math Scores Data",
+    "text": "Math Scores Data\nSuppose that we have some data on the math scores for students in 10 different schools.\n\nEach school contributes a number of data points.\nWe also have predictors on number of completed homeworks and type of school (public, private).\nSchool-specific regression lines can describe the relationship between math scores and homework completed at the school level.\nIf there is a lack of data for some schools then parameter estimates can be informed by all other schools.\nWe can consider the school type as a predictor for the school level parameters.\nWe can get an overall estimate of the relationship between math scores and no. of homeworks completed."
+  },
+  {
+    "objectID": "9-BHRM.html#visualising-the-data",
+    "href": "9-BHRM.html#visualising-the-data",
+    "title": "Bayesian Data Analysis",
+    "section": "Visualising the Data",
+    "text": "Visualising the Data"
+  },
+  {
+    "objectID": "9-BHRM.html#hierarcical-regression-on-individuals-within-groups",
+    "href": "9-BHRM.html#hierarcical-regression-on-individuals-within-groups",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarcical Regression on Individuals within Groups",
+    "text": "Hierarcical Regression on Individuals within Groups\nGoal: Model math scores with a linear regression and share information across schools to provide information where data are sparse. Include relevant predictors at the different levels in the hierarchy.\nModelling Option\n\\(y_{i} \\sim N(\\mu_i,\\sigma^2)\\)\n\\(\\mu_i = \\alpha_{j[i]} + \\beta x_i\\) for \\(i = 1 \\ldots n\\)\n\\(\\alpha_j \\sim N(\\mu_{\\alpha},\\sigma^2_{\\alpha})\\) for \\(j = 1 \\ldots m\\)\nwhere \\(x_i\\) is the number of homeworks completed.\n\\(\\beta \\sim Normal(0,10^2)\\)\n\\(\\sigma \\sim Uniform(0,30)\\)"
+  },
+  {
+    "objectID": "9-BHRM.html#including-predictors-at-the-group-level",
+    "href": "9-BHRM.html#including-predictors-at-the-group-level",
+    "title": "Bayesian Data Analysis",
+    "section": "Including Predictors at the Group Level",
+    "text": "Including Predictors at the Group Level\nAdditionally, type of school is potentially informative for across-school variation in average math scores and in this case we can further extend the model such that\n\\(\\alpha_j \\sim N(\\mu_{\\alpha_j},\\sigma^2_{\\alpha})\\) for \\(j = 1 \\ldots m\\)\n\\(\\mu_{\\alpha_j} = \\gamma_0 + \\gamma_1u_j\\)\nwhere \\(u_j\\) is the school type (public or private).\n\\(\\gamma_0 \\sim Uniform(0,100)\\)\n\\(\\gamma_1 \\sim Normal(0,10^2)\\)\n\\(\\sigma_{\\alpha} \\sim dt(0,2^2,1)\\)"
+  },
+  {
+    "objectID": "9-BHRM.html#the-model-dag",
+    "href": "9-BHRM.html#the-model-dag",
+    "title": "Bayesian Data Analysis",
+    "section": "The model DAG",
+    "text": "The model DAG"
+  },
+  {
+    "objectID": "9-BHRM.html#the-jags-model",
+    "href": "9-BHRM.html#the-jags-model",
+    "title": "Bayesian Data Analysis",
+    "section": "The JAGS model",
+    "text": "The JAGS model\n\nbhregmodel = \"\nmodel{\n  for(i in 1:N)\n{\n y.i[i] ~ dnorm(mu.i[i],sigma^-2) # data model\n mu.i[i] &lt;- alpha.j[school[i]] + beta*x.i[i]\n} # end i loop\n\nfor(j in 1:n_school)\n{\nalpha.j[j] ~ dnorm(mu_alpha.j[j],sigma_alpha^-2)\nmu_alpha.j[j] &lt;- gamma0 + gamma1*u.j[j]\n}\n\nbeta ~ dnorm(0,10^-2)\ngamma0 ~ dunif(0,100)\ngamma1 ~ dnorm(0,10^-2)\n\nsigma ~ dunif(0,30)\nsigma_alpha ~ dt(0,2^-2,1)T(0,)\n \""
+  },
+  {
+    "objectID": "9-BHRM.html#results",
+    "href": "9-BHRM.html#results",
+    "title": "Bayesian Data Analysis",
+    "section": "Results",
+    "text": "Results\n\n\n# A tibble: 27 × 8\n   `1:10` .variable  .value .lower .upper .width .point .interval\n    &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n 1      1 alpha.j     45.3  42.4    48.4    0.95 median qi       \n 2      2 alpha.j     47.0  44.7    49.4    0.95 median qi       \n 3      3 alpha.j     42.3  37.4    47.1    0.95 median qi       \n 4      4 alpha.j     73.9  71.4    76.5    0.95 median qi       \n 5      5 alpha.j     42.7  39.5    45.7    0.95 median qi       \n 6      6 alpha.j     41.6  39.0    44.2    0.95 median qi       \n 7      7 alpha.j     61.1  55.5    66.4    0.95 median qi       \n 8      8 alpha.j     55.3  52.9    57.8    0.95 median qi       \n 9      9 alpha.j     46.9  44.3    49.5    0.95 median qi       \n10     10 alpha.j     71.8  69.5    74.0    0.95 median qi       \n11     11 alpha.j     47.5  45.0    50.0    0.95 median qi       \n12     12 alpha.j     47.7  42.9    52.6    0.95 median qi       \n13     NA beta         1.03  0.679   1.37   0.95 median qi       \n14      1 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n15      2 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n16      3 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n17      4 mu_alpha.j  67.2  59.4    73.1    0.95 median qi       \n18      5 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n19      6 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n20      7 mu_alpha.j  67.2  59.4    73.1    0.95 median qi       \n21      8 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n22      9 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n23     10 mu_alpha.j  67.2  59.4    73.1    0.95 median qi       \n# ℹ 4 more rows"
+  },
+  {
+    "objectID": "9-BHRM.html#results-school-specific-intercepts",
+    "href": "9-BHRM.html#results-school-specific-intercepts",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: school specific intercepts",
+    "text": "Results: school specific intercepts\nRecall: \\(\\alpha_j \\sim N(\\gamma_0 + \\gamma_1u_j, \\sigma_{\\alpha}^2)\\)"
+  },
+  {
+    "objectID": "9-BHRM.html#results-posterior-samples-of-mu_ij",
+    "href": "9-BHRM.html#results-posterior-samples-of-mu_ij",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: Posterior samples of \\(\\mu_{ij}\\)",
+    "text": "Results: Posterior samples of \\(\\mu_{ij}\\)"
+  },
+  {
+    "objectID": "9-BHRM.html#results-regression-lines-95-credible-intervals",
+    "href": "9-BHRM.html#results-regression-lines-95-credible-intervals",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: Regression lines + 95% Credible Intervals",
+    "text": "Results: Regression lines + 95% Credible Intervals"
+  },
+  {
+    "objectID": "9-BHRM.html#results-overall-regression-lines-for-each-school-type",
+    "href": "9-BHRM.html#results-overall-regression-lines-for-each-school-type",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: Overall regression lines for each school type",
+    "text": "Results: Overall regression lines for each school type"
+  },
+  {
+    "objectID": "9-BHRM.html#posterior-predicitive-checks-density-overlay",
+    "href": "9-BHRM.html#posterior-predicitive-checks-density-overlay",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior predicitive checks (density overlay)",
+    "text": "Posterior predicitive checks (density overlay)"
+  },
+  {
+    "objectID": "9-BHRM.html#posterior-predicitive-checks-test-statistic",
+    "href": "9-BHRM.html#posterior-predicitive-checks-test-statistic",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior predicitive checks (test statistic)",
+    "text": "Posterior predicitive checks (test statistic)\nTest statistic = max(y) - min(y)"
+  },
+  {
+    "objectID": "9-BHRM.html#further-extend-the-model-to-include-varying-slopes",
+    "href": "9-BHRM.html#further-extend-the-model-to-include-varying-slopes",
+    "title": "Bayesian Data Analysis",
+    "section": "Further extend the model to include varying slopes",
+    "text": "Further extend the model to include varying slopes\n\\(y_{i} \\sim N(\\mu_i,\\sigma^2)\\)\n\\(\\mu_i = \\alpha_{j[i]} + \\beta_{j[i]} x_i\\) for \\(i = 1 \\ldots n\\)\n\\(\\beta \\sim Normal(\\mu_{\\beta}, \\sigma_{\\beta})\\)"
+  },
+  {
+    "objectID": "9-BHRM.html#results-compare-regression-lines",
+    "href": "9-BHRM.html#results-compare-regression-lines",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: Compare Regression lines",
+    "text": "Results: Compare Regression lines"
+  },
+  {
+    "objectID": "9-BHRM.html#posterior-predicitive-checks-density-overlay-1",
+    "href": "9-BHRM.html#posterior-predicitive-checks-density-overlay-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior predicitive checks (density overlay)",
+    "text": "Posterior predicitive checks (density overlay)"
+  },
+  {
+    "objectID": "9-BHRM.html#posterior-predicitive-checks-test-statistic-1",
+    "href": "9-BHRM.html#posterior-predicitive-checks-test-statistic-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior predicitive checks (test statistic)",
+    "text": "Posterior predicitive checks (test statistic)\nTest statistic = max(y) - min(y)"
+  },
+  {
+    "objectID": "9-BHRM.html#example-math-scores-data",
+    "href": "9-BHRM.html#example-math-scores-data",
+    "title": "Bayesian Data Analysis",
+    "section": "Example: Math Scores Data",
+    "text": "Example: Math Scores Data\nSuppose that we have some data on the math scores for students in 10 different schools.\n\nEach school contributes a number of data points.\nWe also have predictors on number of completed homeworks and type of school (public, private).\nSchool-specific regression lines can describe the relationship between math scores and homework completed at the school level.\nIf there is a lack of data for some schools then parameter estimates can be informed by all other schools.\nWe can consider the school type as a predictor for the school level parameters.\nWe can get an overall estimate of the relationship between math scores and no. of homeworks completed."
+  },
+  {
+    "objectID": "9-BHRM.html#results-parameter-estimates",
+    "href": "9-BHRM.html#results-parameter-estimates",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: parameter estimates",
+    "text": "Results: parameter estimates\n\n\n# A tibble: 27 × 8\n   `1:10` .variable  .value .lower .upper .width .point .interval\n    &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n 1      1 alpha.j     45.3  42.4    48.4    0.95 median qi       \n 2      2 alpha.j     47.0  44.7    49.4    0.95 median qi       \n 3      3 alpha.j     42.3  37.4    47.1    0.95 median qi       \n 4      4 alpha.j     73.9  71.4    76.5    0.95 median qi       \n 5      5 alpha.j     42.7  39.5    45.7    0.95 median qi       \n 6      6 alpha.j     41.6  39.0    44.2    0.95 median qi       \n 7      7 alpha.j     61.1  55.5    66.4    0.95 median qi       \n 8      8 alpha.j     55.3  52.9    57.8    0.95 median qi       \n 9      9 alpha.j     46.9  44.3    49.5    0.95 median qi       \n10     10 alpha.j     71.8  69.5    74.0    0.95 median qi       \n11     11 alpha.j     47.5  45.0    50.0    0.95 median qi       \n12     12 alpha.j     47.7  42.9    52.6    0.95 median qi       \n13     NA beta         1.03  0.679   1.37   0.95 median qi       \n14      1 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n15      2 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n16      3 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n17      4 mu_alpha.j  67.2  59.4    73.1    0.95 median qi       \n18      5 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n19      6 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n20      7 mu_alpha.j  67.2  59.4    73.1    0.95 median qi       \n21      8 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n22      9 mu_alpha.j  46.8  43.1    50.9    0.95 median qi       \n23     10 mu_alpha.j  67.2  59.4    73.1    0.95 median qi       \n# ℹ 4 more rows"
+  },
+  {
+    "objectID": "9-BHRM.html#results-cchool-specific-intercepts",
+    "href": "9-BHRM.html#results-cchool-specific-intercepts",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: cchool specific intercepts",
+    "text": "Results: cchool specific intercepts\nRecall: \\(\\alpha_j \\sim N(\\gamma_0 + \\gamma_1u_j, \\sigma_{\\alpha}^2)\\)"
   }
 ]

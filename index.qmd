@@ -56,7 +56,7 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 ### Week 9
 
-9: [Bayesian Hierarchical Regression Modelling]()
+9: [Bayesian Hierarchical Regression Modelling](https://ncahill89.github.io/ST405/9-BHRM.html)
 
 ### Week 10
 
