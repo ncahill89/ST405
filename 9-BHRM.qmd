@@ -45,7 +45,7 @@ Predictors can be introduced for each level in hierarchical data. For example:
 
 -   **Sampling Context**: Predictors for strata or clusters
 
-**Challenges in Multi-Level Modeling**
+**Challenges in Multi-Level (Hierarchical) Modeling**
 
 -   **Increasing Parameters**: Introducing predictors at multiple levels increases the number of parameters, often dramatically.
 
@@ -59,7 +59,7 @@ Predictors can be introduced for each level in hierarchical data. For example:
 
 ## Example: Math Scores Data {style="font-size: 65%;"}
 
-Suppose that we have some data on the math scores for students in 10 different schools.
+Suppose that we have some data on the math scores for students in 12 different schools.
 
 -   Each school contributes a number of data points.
 
@@ -829,6 +829,21 @@ ggplot(data = pred_summary,aes(x = x, y = .value),alpha = 0.3) +
   facet_wrap(~school_id) +
   labs(colour = "")
 
+```
+
+
+## Zoom in
+
+```{r}
+ggplot(data = pred_summary,aes(x = x, y = .value),alpha = 0.3) +
+  geom_line(aes(colour = "BHM - common slope")) +
+  geom_line(data = pred_summary2,aes(x = x, y = .value, colour = "BHM - varying slope"),alpha = 0.3) +
+  geom_line(data = pred_summary3,aes(x = x, y = .value, colour = "SLR"),alpha = 0.3) +
+  #geom_ribbon(data = pred_summary,aes(ymin = .lower, ymax = .upper), alpha = 0.2) +
+  geom_point(data = school_performance_dat, aes(x = homework_completed,y=math_score)) +
+  theme_bw() +
+  facet_wrap(~school_id, scales = "free_y") +
+  labs(colour = "")
 ```
 
 ## Posterior predicitive checks (density overlay) {style="font-size: 65%;"}

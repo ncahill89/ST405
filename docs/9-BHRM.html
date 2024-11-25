@@ -430,7 +430,7 @@ When data are collected through stratified or cluster sampling, hierarchical mod
 <li><p><strong>Educational Context</strong>: Predictors for individual students, classrooms, and schools</p></li>
 <li><p><strong>Sampling Context</strong>: Predictors for strata or clusters</p></li>
 </ul>
-<p><strong>Challenges in Multi-Level Modeling</strong></p>
+<p><strong>Challenges in Multi-Level (Hierarchical) Modeling</strong></p>
 <ul>
 <li><p><strong>Increasing Parameters</strong>: Introducing predictors at multiple levels increases the number of parameters, often dramatically.</p></li>
 <li><p><strong>Estimation Approach</strong>: Estimating these parameters accurately requires additional modeling, typically through a population distribution.</p></li>
@@ -443,7 +443,7 @@ When data are collected through stratified or cluster sampling, hierarchical mod
 </section>
 <section id="example-math-scores-data" class="slide level2" style="font-size: 65%;">
 <h2>Example: Math Scores Data</h2>
-<p>Suppose that we have some data on the math scores for students in 10 different schools.</p>
+<p>Suppose that we have some data on the math scores for students in 12 different schools.</p>
 <ul>
 <li><p>Each school contributes a number of data points.</p></li>
 <li><p>We also have predictors on number of completed homeworks and type of school (public, private).</p></li>
@@ -591,16 +591,20 @@ When data are collected through stratified or cluster sampling, hierarchical mod
 <h2>Results: Compare Regression lines</h2>
 
 <img data-src="9-BHRM_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<section id="zoom-in" class="slide level2">
+<h2>Zoom in</h2>
+
+<img data-src="9-BHRM_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="posterior-predicitive-checks-density-overlay-1" class="slide level2" style="font-size: 65%;">
 <h2>Posterior predicitive checks (density overlay)</h2>
 
-<img data-src="9-BHRM_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<img data-src="9-BHRM_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
 <section id="posterior-predicitive-checks-test-statistic-1" class="slide level2" style="font-size: 65%;">
 <h2>Posterior predicitive checks (test statistic)</h2>
 <p>Test statistic = max(y) - min(y)</p>
 
 
-<img data-src="9-BHRM_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
+<img data-src="9-BHRM_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

@@ -1488,7 +1488,7 @@
     "href": "9-BHRM.html#hierarchical-linear-models-1",
     "title": "Bayesian Data Analysis",
     "section": "Hierarchical Linear Models",
-    "text": "Hierarchical Linear Models\nAdding Predictors at Multiple Levels\nPredictors can be introduced for each level in hierarchical data. For example:\n\nEducational Context: Predictors for individual students, classrooms, and schools\nSampling Context: Predictors for strata or clusters\n\nChallenges in Multi-Level Modeling\n\nIncreasing Parameters: Introducing predictors at multiple levels increases the number of parameters, often dramatically.\nEstimation Approach: Estimating these parameters accurately requires additional modeling, typically through a population distribution.\n\nHandling Multiple Levels and Bayesian Estimation\n\nHierarchical models can handle multiple levels of variation without a set limit.\nBayesian methods offer robust approaches for estimating unknown parameters across levels."
+    "text": "Hierarchical Linear Models\nAdding Predictors at Multiple Levels\nPredictors can be introduced for each level in hierarchical data. For example:\n\nEducational Context: Predictors for individual students, classrooms, and schools\nSampling Context: Predictors for strata or clusters\n\nChallenges in Multi-Level (Hierarchical) Modeling\n\nIncreasing Parameters: Introducing predictors at multiple levels increases the number of parameters, often dramatically.\nEstimation Approach: Estimating these parameters accurately requires additional modeling, typically through a population distribution.\n\nHandling Multiple Levels and Bayesian Estimation\n\nHierarchical models can handle multiple levels of variation without a set limit.\nBayesian methods offer robust approaches for estimating unknown parameters across levels."
   },
   {
     "objectID": "9-BHRM.html#math-scores-data",
@@ -1614,7 +1614,7 @@
     "href": "9-BHRM.html#example-math-scores-data",
     "title": "Bayesian Data Analysis",
     "section": "Example: Math Scores Data",
-    "text": "Example: Math Scores Data\nSuppose that we have some data on the math scores for students in 10 different schools.\n\nEach school contributes a number of data points.\nWe also have predictors on number of completed homeworks and type of school (public, private).\nSchool-specific regression lines can describe the relationship between math scores and homework completed at the school level.\nIf there is a lack of data for some schools then parameter estimates can be informed by all other schools.\nWe can consider the school type as a predictor for the school level parameters.\nWe can get an overall estimate of the relationship between math scores and no. of homeworks completed."
+    "text": "Example: Math Scores Data\nSuppose that we have some data on the math scores for students in 12 different schools.\n\nEach school contributes a number of data points.\nWe also have predictors on number of completed homeworks and type of school (public, private).\nSchool-specific regression lines can describe the relationship between math scores and homework completed at the school level.\nIf there is a lack of data for some schools then parameter estimates can be informed by all other schools.\nWe can consider the school type as a predictor for the school level parameters.\nWe can get an overall estimate of the relationship between math scores and no. of homeworks completed."
   },
   {
     "objectID": "9-BHRM.html#results-parameter-estimates",
@@ -1629,5 +1629,12 @@
     "title": "Bayesian Data Analysis",
     "section": "Results: cchool specific intercepts",
     "text": "Results: cchool specific intercepts\nRecall: \\(\\alpha_j \\sim N(\\gamma_0 + \\gamma_1u_j, \\sigma_{\\alpha}^2)\\)"
+  },
+  {
+    "objectID": "9-BHRM.html#zoom-in",
+    "href": "9-BHRM.html#zoom-in",
+    "title": "Bayesian Data Analysis",
+    "section": "Zoom in",
+    "text": "Zoom in"
   }
 ]
