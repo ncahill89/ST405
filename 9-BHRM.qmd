@@ -167,9 +167,16 @@ $y_{i} \sim N(\mu_i,\sigma^2)$
 
 $\mu_i = \alpha_{j[i]} + \beta x_i$ for $i = 1 \ldots n$
 
+where $x_i$ is the number of homeworks completed.
+
+
+**Priors** 
+
 $\alpha_j \sim N(\mu_{\alpha},\sigma^2_{\alpha})$ for $j = 1 \ldots m$
 
-where $x_i$ is the number of homeworks completed.
+$\mu_{\alpha} \sim Uniform(0,100)$
+
+$\sigma_{\alpha} \sim \text{half-t}(0,2^2,1)$
 
 $\beta \sim Normal(0,10^2)$
 

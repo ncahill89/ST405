@@ -1509,7 +1509,7 @@
     "href": "9-BHRM.html#hierarcical-regression-on-individuals-within-groups",
     "title": "Bayesian Data Analysis",
     "section": "Hierarcical Regression on Individuals within Groups",
-    "text": "Hierarcical Regression on Individuals within Groups\nGoal: Model math scores with a linear regression and share information across schools to provide information where data are sparse. Include relevant predictors at the different levels in the hierarchy.\nModelling Option\n\\(y_{i} \\sim N(\\mu_i,\\sigma^2)\\)\n\\(\\mu_i = \\alpha_{j[i]} + \\beta x_i\\) for \\(i = 1 \\ldots n\\)\n\\(\\alpha_j \\sim N(\\mu_{\\alpha},\\sigma^2_{\\alpha})\\) for \\(j = 1 \\ldots m\\)\nwhere \\(x_i\\) is the number of homeworks completed.\n\\(\\beta \\sim Normal(0,10^2)\\)\n\\(\\sigma \\sim Uniform(0,30)\\)"
+    "text": "Hierarcical Regression on Individuals within Groups\nGoal: Model math scores with a linear regression and share information across schools to provide information where data are sparse. Include relevant predictors at the different levels in the hierarchy.\nModelling Option\n\\(y_{i} \\sim N(\\mu_i,\\sigma^2)\\)\n\\(\\mu_i = \\alpha_{j[i]} + \\beta x_i\\) for \\(i = 1 \\ldots n\\)\nwhere \\(x_i\\) is the number of homeworks completed.\nPriors\n\\(\\alpha_j \\sim N(\\mu_{\\alpha},\\sigma^2_{\\alpha})\\) for \\(j = 1 \\ldots m\\)\n\\(\\mu_{\\alpha} \\sim Uniform(0,100)\\)\n\\(\\sigma_{\\alpha} \\sim \\text{half-t}(0,2^2,1)\\)\n\\(\\beta \\sim Normal(0,10^2)\\)\n\\(\\sigma \\sim Uniform(0,30)\\)"
   },
   {
     "objectID": "9-BHRM.html#including-predictors-at-the-group-level",

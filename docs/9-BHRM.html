@@ -463,8 +463,11 @@ When data are collected through stratified or cluster sampling, hierarchical mod
 <p><strong>Modelling Option</strong></p>
 <p><span class="math inline">\(y_{i} \sim N(\mu_i,\sigma^2)\)</span></p>
 <p><span class="math inline">\(\mu_i = \alpha_{j[i]} + \beta x_i\)</span> for <span class="math inline">\(i = 1 \ldots n\)</span></p>
-<p><span class="math inline">\(\alpha_j \sim N(\mu_{\alpha},\sigma^2_{\alpha})\)</span> for <span class="math inline">\(j = 1 \ldots m\)</span></p>
 <p>where <span class="math inline">\(x_i\)</span> is the number of homeworks completed.</p>
+<p><strong>Priors</strong></p>
+<p><span class="math inline">\(\alpha_j \sim N(\mu_{\alpha},\sigma^2_{\alpha})\)</span> for <span class="math inline">\(j = 1 \ldots m\)</span></p>
+<p><span class="math inline">\(\mu_{\alpha} \sim Uniform(0,100)\)</span></p>
+<p><span class="math inline">\(\sigma_{\alpha} \sim \text{half-t}(0,2^2,1)\)</span></p>
 <p><span class="math inline">\(\beta \sim Normal(0,10^2)\)</span></p>
 <p><span class="math inline">\(\sigma \sim Uniform(0,30)\)</span></p>
 </section>
