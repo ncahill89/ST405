@@ -850,8 +850,8 @@ ggplot(data = pred_summary,aes(x = x, y = .value),alpha = 0.3) +
 
 ```{r, warning=FALSE}
 y <- school_performance_dat$math
-yrep2 <- mod2$BUGSoutput$sims.list$yrep
-ppc_dens_overlay (y, yrep2[1:50, ])
+yrep3 <- mod3$BUGSoutput$sims.list$yrep
+ppc_dens_overlay (y, yrep3[1:50, ])
 ```
 
 ## Posterior predicitive checks (test statistic) {style="font-size: 65%;"}
@@ -860,6 +860,6 @@ Test statistic = max(y) - min(y)
 
 ```{r, warning = FALSE}
 r <- function(y) max(y) - min(y)
-ppc_stat_grouped(y,yrep2,group = school_performance_dat$private,  stat = "r",binwidth = 2)
+ppc_stat_grouped(y,yrep3,group = school_performance_dat$private,  stat = "r",binwidth = 2)
 # ppc_stat_grouped(y,yrep,group = school_performance_dat$private,  stat = "median")
 ```
