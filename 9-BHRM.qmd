@@ -832,7 +832,7 @@ ggplot(data = pred_summary,aes(x = x, y = .value),alpha = 0.3) +
 ```
 
 
-## Zoom in
+## Zoom in {style="font-size: 65%;"}
 
 ```{r}
 ggplot(data = pred_summary,aes(x = x, y = .value),alpha = 0.3) +
