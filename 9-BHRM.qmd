@@ -415,11 +415,11 @@ m <- mod$BUGSoutput$sims.matrix
 
 ## Results: parameter estimates {style="font-size: 65%;"}
 
-```{r}
+```{r, echo = TRUE}
 par_summary <- m %>% 
-                gather_rvars(alpha.j[1:10],beta,mu_alpha.j[1:10],sigma,sigma_alpha) %>% 
+                gather_rvars(alpha.j[1:12],beta,mu_alpha.j[1:12],sigma,sigma_alpha) %>% 
                 median_qi(.value)
-par_summary %>% print(n = 23)
+par_summary %>% print(n = 27)
 
 ```
 
@@ -437,7 +437,7 @@ ggplot(alpha_samps, aes(x = alpha_ind, y = alpha.j)) +
   geom_boxplot(colour = jags.data$u.j+1) +
   xlab("school") +
   geom_hline(yintercept = mod$BUGSoutput$mean$gamma0) +
-  geom_hline(yintercept = mod$BUGSoutput$mean$gamma0 + mod$BUGSoutput$mean$gamma1) 
+  geom_hline(yintercept = mod$BUGSoutput$mean$gamma0 + mod$BUGSoutput$mean$gamma1, colour = "red") 
 ```
 
 <!-- ## Results: Posterior samples of $\mu_{ij}$ {style="font-size: 65%;"} -->
@@ -870,3 +870,18 @@ r <- function(y) max(y) - min(y)
 ppc_stat_grouped(y,yrep3,group = school_performance_dat$private,  stat = "r",binwidth = 2)
 # ppc_stat_grouped(y,yrep,group = school_performance_dat$private,  stat = "median")
 ```
+
+
+## Class Example {style="font-size: 65%;"}
+
+We have data containing a sub-sample of outcomes for the annual Cherry Blossom Ten Mile race in Washington, D.C.
+
+```{r, echo = TRUE}
+library(bayesrules)
+data("cherry_blossom_sample")
+
+running_dat <- cherry_blossom_sample
+running_dat
+```
+
+Fit a Bayesian hierarchical regression model to these data. 
