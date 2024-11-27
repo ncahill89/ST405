@@ -60,7 +60,7 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 ### Week 10
 
-10: [Bayesian GLMs]()
+10: [Bayesian Generalised Linear Models (GLMs)](https://ncahill89.github.io/ST405/10-BGLM.html)
 
 ### Week 11
 

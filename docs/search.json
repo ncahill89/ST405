@@ -228,7 +228,7 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression\n\n\nWeek 7\n7: Model Checking\n\n\nWeek 8\n8: Introducing Bayesian Hierarchical Modelling\n\n\nWeek 9\n9: Bayesian Hierarchical Regression Modelling\n\n\nWeek 10\n10: Bayesian GLMs\n\n\nWeek 11\n11: Bayesian Hierarchical Modelling - GLM"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression\n\n\nWeek 7\n7: Model Checking\n\n\nWeek 8\n8: Introducing Bayesian Hierarchical Modelling\n\n\nWeek 9\n9: Bayesian Hierarchical Regression Modelling\n\n\nWeek 10\n10: Bayesian Generalised Linear Models (GLMs)\n\n\nWeek 11\n11: Bayesian Hierarchical Modelling - GLM"
   },
   {
     "objectID": "2a-BetaBinomial.html#scenario",
@@ -1480,8 +1480,8 @@
     "objectID": "9-BHRM.html#hierarchical-linear-models",
     "href": "9-BHRM.html#hierarchical-linear-models",
     "title": "Bayesian Data Analysis",
-    "section": "Hierarchical Linear Models",
-    "text": "Hierarchical Linear Models\nWhy Use Hierarchical Regression Models?\nHierarchical regression models are useful when predictors vary across different levels of a dataset. They help account for nested or clustered data structures, providing more accurate insights into relationships at each level.\nExamples\n\nEducational Research\nStudying scholastic achievement involves information at multiple levels:\n\nIndividual-level: Student characteristics, such as family background\n\nClass-level: Teacher characteristics and teaching style\n\nSchool-level: Policies, neighborhood context\n\nClustered or Stratified Sampling\nWhen data are collected through stratified or cluster sampling, hierarchical models allow for regression analyses that respect these data groupings, providing insights within and across clusters."
+    "section": "",
+    "text": "Why Use Hierarchical Regression Models?\nHierarchical regression models are useful when predictors vary across different levels of a dataset. They help account for nested or clustered data structures, providing more accurate insights into relationships at each level.\n\n\n\nEducational Research\nStudying scholastic achievement involves information at multiple levels:\n\nIndividual-level: Student characteristics, such as family background\n\nClass-level: Teacher characteristics and teaching style\n\nSchool-level: Policies, neighborhood context\n\nClustered or Stratified Sampling\nWhen data are collected through stratified or cluster sampling, hierarchical models allow for regression analyses that respect these data groupings, providing insights within and across clusters."
   },
   {
     "objectID": "9-BHRM.html#hierarchical-linear-models-1",
@@ -1657,5 +1657,173 @@
     "title": "ST405/ST645 Bayesian Data Analysis",
     "section": "",
     "text": "Please submit your answers to this assignment by December 11th, 4:00PM. Include your JAGS model with your answers.\n\n\n\nRadon is a naturally occurring radioactive gas. Its decay products are also radioactive; in high concentrations, they can cause lung cancer (several 1000 deaths/year in the USA). Radon levels vary greatly across US homes. We have data related to radon activity from the state of Minnesota, USA.\nThe dataset radon_dat.csv contains measurements of radon activity (activity) for houses within 85 counties in Minnesota. Some counties have more house measurements than others.\n\n\n\nAssume that you want to estimate average radon levels for each county and that you want to share information across counties to account for the lack of measurements in some counties relative to others. You therefore decide to fit a model to the log(activity) measurements in a Hierarchical framework such that\n\\(y_i|\\alpha_{j[i]} \\sim N(\\alpha_{j[i]},\\sigma)\\)\n\\(\\alpha_j|\\mu_{\\alpha},\\sigma_{\\alpha} \\sim N(\\mu_{\\alpha},\\sigma_{\\alpha})\\)\n\nwhere \\(y_i\\) = log(activity)\n\\(i = 1, \\ldots, n\\)\n\\(j = 1, \\ldots, m\\)\n\\(n\\) is the number of observations\n\\(m\\) is the number of unique counties.\n\nNote, we log transform the activity data because we have a continuous measurement but it does not look normally distributed on the original scale. See the histogram plots below for a comparison of the original scale vs the log scale. In this case \\(\\alpha_j\\) can be interpreted as the average county-specific radon activity on the log scale.\n\n\n\n\n\n\n\n\n\n\n\n\n\nTask 1\n\nWrite the JAGS code and run the model to fit the Bayesian Hierarchical model outlined above to the log(activity) data.\n\nTask 2\n\nCreate the following plots and interpret them:\n\nCreate a scatter plot with \\(\\bar{y}_j\\) = county level sample means for log(activity) on the x-axis vs \\(\\hat{\\alpha}_j\\) = estimates of the \\(\\alpha_j\\)’s from the hierarchical model on the y-axis. Add error bars for the \\(\\alpha_j\\)’s that reflect the 68% credible intervals [once you have the interval values you can use geom_errorbar() to do this with ggplot()]. Add the identity line (i.e, the y = x line) to the plot [you can use geom_abline(slope = 1, intercept = 0) to do this with ggplot()]. Finally, add a horizontal line to the plot that represents the estimate of \\(\\mu_{\\alpha}\\) from the model. Examine the plot and explain what it illustrates about the log(activity) estimates that you get from the hierarchical model.\nCreate a scatter plot with the county level sample sizes (i.e., the number of measurements in each county) on the x-axis vs \\(\\bar{y}_j - \\hat{\\alpha}_j\\) on the y-axis. Add a horizontal line at 0. Examine the plot and explain what it illustrates about the log(activity) estimates that you get from the hierarchical model. How does what you learned here relate to what you learned from the plot in (i)?"
+  },
+  {
+    "objectID": "10-BGLM.html#generalized-linear-models",
+    "href": "10-BGLM.html#generalized-linear-models",
+    "title": "Bayesian Data Analysis",
+    "section": "Generalized Linear Models",
+    "text": "Generalized Linear Models\nA Generalized Linear Model (GLM) is a flexible extension of linear regression models that allows for:\n\nResponse variables to follow a non-normal distribution, such as binomial, Poisson, or others.\nLink functions to connect the linear predictor (a linear combination of independent variables) to the mean of the response variable in a way that is appropriate for its distribution.\n\nThe GLM framework consists of three components:\n\nRandom component: Specifies the probability distribution of the response variable (e.g., normal, binomial, Poisson).\nSystematic component: A linear predictor formed by the independent variables and their coefficients (e.g., ( = X)).\nLink function: Transforms the expected value of the response variable to relate it linearly to the predictors (e.g., log, logit).\n\nExamples include logistic regression, Poisson regression, and others tailored to specific data types and distributions."
+  },
+  {
+    "objectID": "10-BGLM.html#components-of-a-generalized-linear-model",
+    "href": "10-BGLM.html#components-of-a-generalized-linear-model",
+    "title": "Bayesian Data Analysis",
+    "section": "Components of a generalized linear model",
+    "text": "Components of a generalized linear model\nRandom component\n\\(Y\\) is the response variable. \\(Y \\sim\\) some distribution.\nE.g.,\n\\(Y\\) is continuous, \\(Y \\sim\\) Normal.\n\\(Y\\) is binary, \\(Y \\sim\\) Bernoulli.\n\\(Y\\) is # successes out of n trials, \\(Y \\sim\\) Binomial.\n\\(Y\\) is count, \\(Y \\sim\\) Poisson.\nSystematic component\nThe linear combination of explanatory variables used in the model.\n\\[\\eta = \\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}\\]\nYou could have \\(x_{2}= x_{1}^{2}\\) or \\(x_{3}=x_{1}x_{2}\\) etc.\nLink function\nLet \\(\\mu = \\mathbb{E}[Y]\\). The link function, \\(g\\), relates \\(\\mu\\) to the systematic component: \\[g(\\mu) =  \\eta\\]"
+  },
+  {
+    "objectID": "10-BGLM.html#logistic-regression-models-binary-responses",
+    "href": "10-BGLM.html#logistic-regression-models-binary-responses",
+    "title": "Bayesian Data Analysis",
+    "section": "Logistic regression models: binary responses",
+    "text": "Logistic regression models: binary responses\nA logistic regression model is a type of generalized linear model used for binary outcomes, where the dependent variable represents two categories (e.g., success/failure). It uses the logit link function to model the relationship between predictors and the log-odds of the outcome.\nFor a logistic regression model, the components are as follows:\nRandom component\n\\[Y \\sim \\mbox{Bernoulli}(\\pi).\\]\n\\[\\mathbb{E}[Y]= \\pi\\]\nSystematic component\n\\[\\eta = \\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}\\]\nLink function: logit link\n\\[g(\\pi) =  \\log\\left(\\frac{\\pi}{1-\\pi}\\right) = \\eta.\\]"
+  },
+  {
+    "objectID": "10-BGLM.html#logistic-regression-models-binary-responses-1",
+    "href": "10-BGLM.html#logistic-regression-models-binary-responses-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Logistic regression models: binary responses",
+    "text": "Logistic regression models: binary responses\nNote that since we are interested in the parameter \\(\\pi\\):\n\\[\\begin{eqnarray*}\n% \\mbox{logit}(\\pi) &=& \\eta \\\\\n\\mbox{log}\\left(\\frac{\\pi}{1-\\pi}\\right) &=& \\eta \\\\\n\\frac{\\pi}{1-\\pi} &=& e^{\\eta} \\\\\n% \\pi &=& e^{\\eta}(1-\\pi) \\\\\n% \\pi + e^{\\eta}\\pi  &=& e^{\\eta} \\\\\n% \\pi(1 + e^{\\eta}) &=& e^{\\eta} \\\\\n\\pi &=& \\frac{e^{\\eta}}{1 + e^{\\eta}} \\\\\n% \\pi &=& \\frac{e^{\\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}}}{1 + e^{\\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}}}\\\\\n\\end{eqnarray*}\\]\nThis is called the logistic function.\nNotice that \\(0 &lt; \\displaystyle\\frac{e^{\\eta}}{1 + e^{\\eta}} &lt; 1\\).\nThis gives us the logistic regression function:\n\\[\\log\\left(\\frac{\\pi}{1-\\pi}\\right) = \\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}.\\]"
+  },
+  {
+    "objectID": "10-BGLM.html#aside-interpreting-odds",
+    "href": "10-BGLM.html#aside-interpreting-odds",
+    "title": "Bayesian Data Analysis",
+    "section": "Aside: Interpreting Odds",
+    "text": "Aside: Interpreting Odds\nLet an event of interest have probability \\(\\pi \\in [0, 1]\\) and corresponding odds \\(\\frac{\\pi}{1 - \\pi} \\in [0, \\infty)\\).\nAcross this spectrum, comparing the odds to 1 provides perspective on an event’s uncertainty:\n\nThe odds of an event are less than 1 if and only if the event’s chances are less than 50-50, i.e., \\(\\pi &lt; 0.5\\).\nThe odds of an event are equal to 1 if and only if the event’s chances are 50-50, i.e., \\(\\pi = 0.5\\).\nThe odds of an event are greater than 1 if and only if the event’s chances are greater than 50-50, i.e., \\(\\pi &gt; 0.5\\)."
+  },
+  {
+    "objectID": "10-BGLM.html#interpretation-of-logistic-regression-parameters",
+    "href": "10-BGLM.html#interpretation-of-logistic-regression-parameters",
+    "title": "Bayesian Data Analysis",
+    "section": "Interpretation of logistic regression parameters",
+    "text": "Interpretation of logistic regression parameters\nConsider the model with one predictor (\\(k = 1\\)):\n\\[\\mbox{log}\\left(\\frac{\\pi}{1-\\pi}\\right) = \\alpha + \\beta_{1}x_{1}\\]\nInterpretation of \\(\\alpha\\):\nAt \\(x_1 = 0\\), then \\[\\begin{eqnarray*}\n\\log\\left(\\frac{\\pi}{1-\\pi}\\right) &=& \\alpha \\\\\n\\frac{\\pi}{1-\\pi} &=& e^{\\alpha}\\\\\n\\end{eqnarray*}\\] So \\(e^{\\beta_0}\\) = the success odds at \\(x_1 = 0\\)."
+  },
+  {
+    "objectID": "10-BGLM.html#interpretation-of-logistic-regression-parameters-1",
+    "href": "10-BGLM.html#interpretation-of-logistic-regression-parameters-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Interpretation of logistic regression parameters",
+    "text": "Interpretation of logistic regression parameters\nInterpretation of \\(\\beta_{1}\\):\nSuppose \\(X_1\\) increases from \\(x_1\\) to \\(x_1+1\\). Let \\(w_1\\) = the success odds at \\(x_1\\) and \\(w_2\\) = the success odds at \\(x_1+1\\). Then the odds change from: \\[w_1 = e^{\\alpha + \\beta_{1}x_{1}}\\] to \\[\\begin{eqnarray*}\nw_2 &=& e^{\\alpha + \\beta_{1}(x_{1}+1)} \\\\\n&=& w_{1} e^{\\beta_{1}}\n\\end{eqnarray*}\\]\ni.e., increasing \\(X_1\\) by 1 unit changes the success odds by a multiplicative factor of \\(e^{\\beta_{1}}\\)\nOr, \\[\\frac{w_2}{w_1} = e^{\\beta_{1}}\\]\ni.e., \\(e^{\\beta_{1}}\\) is the odds ratio for a unit increase in \\(x_1\\)."
+  },
+  {
+    "objectID": "10-BGLM.html#example-rain-in-perth",
+    "href": "10-BGLM.html#example-rain-in-perth",
+    "title": "Bayesian Data Analysis",
+    "section": "Example: Rain in Perth",
+    "text": "Example: Rain in Perth\nSuppose we find ourselves in Australia, the city of Perth specifically. Located on the southwest coast, Perth experiences dry summers and wet winters. Our goal will be to predict whether or not it will rain tomorrow. We’re going to use today’s humidity as a predictor. Here’s a quick look at the data.\n\n\n\n\n# A tibble: 280 × 3\n   day_of_year raintomorrow humidity9am\n         &lt;dbl&gt; &lt;fct&gt;              &lt;int&gt;\n 1          45 No                    55\n 2          11 No                    43\n 3         261 Yes                   62\n 4         347 No                    53\n 5         357 No                    65\n 6         254 No                    84\n 7         364 No                    48\n 8         293 No                    51\n 9         304 Yes                   47\n10         231 Yes                   90\n# ℹ 270 more rows"
+  },
+  {
+    "objectID": "10-BGLM.html#model-specification-and-logit-link",
+    "href": "10-BGLM.html#model-specification-and-logit-link",
+    "title": "Bayesian Data Analysis",
+    "section": "Model specification and logit link",
+    "text": "Model specification and logit link\nThe model specification:\n\\(Y \\sim \\mbox{Bernoulli}(\\pi).\\)\n\\(\\eta = \\alpha + \\beta_{1}x_{1}\\)\nLogit link function:\n\\(g(\\pi) = \\log\\left(\\frac{\\pi}{1-\\pi}\\right) = \\eta.\\)\n\n\n\nAn example relationship between rain and humidity on the log(odds), odds, and probability scales (Example from Bayes Rules)."
+  },
+  {
+    "objectID": "10-BGLM.html#specify-the-jags-model-simple-logistic-regression",
+    "href": "10-BGLM.html#specify-the-jags-model-simple-logistic-regression",
+    "title": "Bayesian Data Analysis",
+    "section": "Specify the JAGS model (simple logistic regression)",
+    "text": "Specify the JAGS model (simple logistic regression)\nThe Model\n\nlogisticmodel = \"\nmodel{\n\n## Data model\n\nfor(i in 1:n)\n{\ny.i[i] ~ dbern(pi.i[i])\n\nnu.i[i] &lt;- alpha + beta*x.i[i]\n\npi.i[i] &lt;- exp(nu.i[i])/(1+ exp(nu.i[i]))\n}\n\n## priors\nalpha ~ dnorm(0, 2^-2)\nbeta ~ dnorm(0, 2^-2)\n}\n\"\n\nThe Data\n\njags.data &lt;- list(y.i = as.numeric(weather$raintomorrow)-1,\n                  x.i = weather$humidity9am,\n                  n = nrow(weather))\n\n## monitor parameters\nparnames &lt;- c(\"pi.i\",\"alpha\", \"beta\")"
+  },
+  {
+    "objectID": "10-BGLM.html#results-parameters",
+    "href": "10-BGLM.html#results-parameters",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: Parameters",
+    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\n\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     -5.02   -6.51   -3.67     0.95 median qi       \n2 beta       0.0542  0.0350  0.0752   0.95 median qi"
+  },
+  {
+    "objectID": "10-BGLM.html#results-plot-data-and-fit",
+    "href": "10-BGLM.html#results-plot-data-and-fit",
+    "title": "Bayesian Data Analysis",
+    "section": "Results Plot data and fit",
+    "text": "Results Plot data and fit\nCalculate & plot the rain rate by humidity bracket\n\n\nweather_bracket &lt;- weather %&gt;% \n  mutate(humidity_bracket = \n           cut(humidity9am, breaks = seq(10, 100, by = 10))) %&gt;% \n  group_by(humidity_bracket) %&gt;% \n  summarize(rain_rate = mean(raintomorrow == \"Yes\")) \n\n\n  ggplot(weather_bracket, aes(x = humidity_bracket, y = rain_rate)) + \n    geom_point() + \n    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\nPlot the model fit for probability of rain rate by humidity\n\n\npred_summary &lt;- m %&gt;% \n                gather_rvars(pi.i[pred_ind]) %&gt;% \n                median_qi(.value) %&gt;% \n                mutate(x = jags.data$x.i)\n\nggplot(pred_summary,aes(x = x, y = .value),alpha = 0.3) +\n  geom_line() +\n  geom_ribbon(data = pred_summary,aes(ymin = .lower, ymax = .upper), alpha = 0.2) +\n  theme_bw()"
+  },
+  {
+    "objectID": "10-BGLM.html#posterior-predictive-check",
+    "href": "10-BGLM.html#posterior-predictive-check",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior Predictive Check",
+    "text": "Posterior Predictive Check\nAdd the JAGS code for the posterior predictive check:\nfor(i in 1:n)\n{\nyrep[i] ~ dbern(pi.i[i])\n}\nCheck observed proportion of days on which it rained vs proportion of days on which it rained in each of the posterior simulated datasets.\n\n\nyrep &lt;- mod$BUGSoutput$sims.list$yrep\ny &lt;- jags.data$y.i\nproportion_rain &lt;- function(y){mean(y == 1)}\nppc_stat(y, yrep, stat = \"proportion_rain\")"
+  },
+  {
+    "objectID": "10-BGLM.html#poisson-regression",
+    "href": "10-BGLM.html#poisson-regression",
+    "title": "Bayesian Data Analysis",
+    "section": "Poisson Regression",
+    "text": "Poisson Regression\nA Poisson regression model is a type of generalized linear model used for count data, where the response variable represents the number of occurrences of an event in an interval of time. It uses the log link function to relate predictors to the expected log count of the outcome.\nFor a Poisson regression model, the components are as follows:\n\nRandom component:\n\n\\[Y \\sim \\mbox{Poisson}(\\lambda).\\]\n\\(\\mathbb{E}[Y]= \\lambda, \\mathbb{Var}[Y]= \\lambda\\)\nSystematic component\n\\[\\eta = \\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}\\]\n\nLink function: log link\n\n\\[g(\\lambda) = \\log(\\lambda) = \\eta\\]"
+  },
+  {
+    "objectID": "10-BGLM.html#poisson-regression-models-count-responses",
+    "href": "10-BGLM.html#poisson-regression-models-count-responses",
+    "title": "Bayesian Data Analysis",
+    "section": "Poisson regression models: count responses",
+    "text": "Poisson regression models: count responses\nNote that since we are interested in the parameter \\(\\lambda\\):\n\\[\\begin{eqnarray*}\n% \\mbox{log}(\\lambda) &=& \\eta \\\\\n\\mbox{log}(\\lambda) &=& \\eta \\\\\n\\lambda &=& e^{\\eta} \\\\\n% \\lambda &=& e^{\\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}}\\\\\n\\end{eqnarray*}\\]\nThis is the log function. Notice that \\(0 &lt; \\displaystyle e^{\\eta} &lt; \\infty\\).\nThis gives us the Poisson regression:\n\\[\\log(\\lambda) = \\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}.\\]\nStructure of variability\nA typical value of \\(y\\) conditioned on \\(x\\) should be roughly equivalent to the variability in \\(y\\)\n\n\n\nTwo simulated datasets. The data on the left satisfies the Poisson regression assumption that, at any given x, the variability in y is roughly on par with the average y value. The data on the right does not, exhibiting consistently low variability in y across all x values."
+  },
+  {
+    "objectID": "10-BGLM.html#interpretation-of-parameter-estimates",
+    "href": "10-BGLM.html#interpretation-of-parameter-estimates",
+    "title": "Bayesian Data Analysis",
+    "section": "Interpretation of parameter estimates",
+    "text": "Interpretation of parameter estimates\nConsider the model with one predictor (\\(k = 1\\)):\n\\[log(\\lambda) = \\alpha + \\beta x_{1}\\]\nInterpretation of \\(\\alpha\\):\nAt \\(x_1 = 0\\), then \\[\\begin{eqnarray*}\n\\log(\\lambda) &=& \\alpha \\\\\n\\lambda &=& e^{\\alpha}\\\\\n\\end{eqnarray*}\\] So \\(e^{\\alpha}\\) = the expected count at \\(x_1 = 0\\)."
+  },
+  {
+    "objectID": "10-BGLM.html#interpretation-of-logistic-regression-parameters-2",
+    "href": "10-BGLM.html#interpretation-of-logistic-regression-parameters-2",
+    "title": "Bayesian Data Analysis",
+    "section": "Interpretation of logistic regression parameters",
+    "text": "Interpretation of logistic regression parameters\nInterpretation of \\(\\beta\\):\nSuppose \\(x_1\\) increases from \\(x\\) to \\(x+1\\). Then \\(\\lambda\\) changes from\n\\[\\lambda(x) = \\mbox{exp}(\\alpha + \\beta x)\\] to \\[\\begin{eqnarray*}\n\\lambda(x+1) &=& \\mbox{exp}(\\alpha + \\beta (x+1)) \\\\\n&=& \\lambda(x)e^{\\beta}\n\\end{eqnarray*}\\]\nEach unit increase in \\(x_1\\) multiplies the mean response (expected count) by \\(e^{\\beta_1}\\)."
+  },
+  {
+    "objectID": "10-BGLM.html#example---fabric-faults",
+    "href": "10-BGLM.html#example---fabric-faults",
+    "title": "Bayesian Data Analysis",
+    "section": "Example - Fabric Faults",
+    "text": "Example - Fabric Faults\n\nData: Numbers of faults found in 32 rolls of fabric produced in a particular factory (Hinde, J. (1982))\n\nPredictor: the length of each roll.\n\n\n\n\n\n# A tibble: 32 × 2\n   length faults\n    &lt;dbl&gt;  &lt;dbl&gt;\n 1    551      6\n 2    651      4\n 3    832     17\n 4    375      9\n 5    715     14\n 6    868      8\n 7    271      5\n 8    630      7\n 9    491      7\n10    372      7\n# ℹ 22 more rows"
+  },
+  {
+    "objectID": "10-BGLM.html#model-specification-and-log-link",
+    "href": "10-BGLM.html#model-specification-and-log-link",
+    "title": "Bayesian Data Analysis",
+    "section": "Model Specification and log link",
+    "text": "Model Specification and log link\nThe model specification\n\\(y_i|\\lambda_i \\sim\\) Poisson(\\(\\lambda_i\\))\n\\(\\eta = \\alpha + \\beta (x_i - \\bar{x})\\)\nlog link function\n\\(g(\\lambda) = log(\\lambda) = \\eta\\)\n\nAn example relationship between faults and length on the log and count scales"
+  },
+  {
+    "objectID": "10-BGLM.html#jags-specification-simple-poisson-regression",
+    "href": "10-BGLM.html#jags-specification-simple-poisson-regression",
+    "title": "Bayesian Data Analysis",
+    "section": "JAGS Specification (simple Poisson regression)",
+    "text": "JAGS Specification (simple Poisson regression)\nThe Model\n\npoismodel = \"\nmodel{\n    for( i in 1:n ) {\n #Poisson likelihood for observed counts\n  y.i[i] ~ dpois(lambda.i[i])\n  lambda.i[i] &lt;- exp(alpha + beta*(x.i[i] - mean(x.i)))\n    }\n #Prior distributions\n  alpha ~ dnorm(0, 2^-2)\n  beta ~ dnorm(0, 2^-2)\n  \n  for(i in 1:n){yrep[i] ~ dpois(lambda.i[i])}\n}\n\"\n\nThe Data\n\n## Create the JAGS data list\njags.data &lt;- list(y.i = fabric_faults$faults, \n                  x.i = fabric_faults$length, \n                  n = nrow(fabric_faults))"
+  },
+  {
+    "objectID": "10-BGLM.html#results-parameters-1",
+    "href": "10-BGLM.html#results-parameters-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Results: Parameters",
+    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     2.10    1.97    2.22      0.95 median qi       \n2 beta      0.00194 0.00137 0.00254   0.95 median qi"
+  },
+  {
+    "objectID": "10-BGLM.html#results-plot-data-and-fit-1",
+    "href": "10-BGLM.html#results-plot-data-and-fit-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Results Plot data and fit",
+    "text": "Results Plot data and fit\nPlot the faults by length\n\n\nggplot(fabric_faults, aes(x = length, y = faults)) +\n  geom_point() +\n  theme_bw() \n\n\n\n\n\n\n\n\n\n\nPlot the model fit for faults by length\n\n\npred_summary &lt;- m %&gt;% \n                gather_rvars(lambda.i[pred_ind]) %&gt;% \n                median_qi(.value) %&gt;% \n                mutate(x = jags.data$x.i)\n\nggplot(pred_summary,aes(x = x, y = .value),alpha = 0.3) +\n  geom_line() +\n  geom_ribbon(data = pred_summary,aes(ymin = .lower, ymax = .upper), alpha = 0.2) +\n  geom_point(data = fabric_faults, aes(x = length, y = faults)) +\n  theme_bw()"
+  },
+  {
+    "objectID": "10-BGLM.html#posterior-predictive-check-1",
+    "href": "10-BGLM.html#posterior-predictive-check-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Posterior Predictive Check",
+    "text": "Posterior Predictive Check\n\nyrep &lt;- mod$BUGSoutput$sims.list$yrep\ny &lt;- fabric_faults$faults\nppc_stat(y,yrep,  stat = \"max\",binwidth = 2)"
+  },
+  {
+    "objectID": "9-BHRM.html",
+    "href": "9-BHRM.html",
+    "title": "Bayesian Data Analysis",
+    "section": "",
+    "text": "Why Use Hierarchical Regression Models?\nHierarchical regression models are useful when predictors vary across different levels of a dataset. They help account for nested or clustered data structures, providing more accurate insights into relationships at each level.\n\n\n\nEducational Research\nStudying scholastic achievement involves information at multiple levels:\n\nIndividual-level: Student characteristics, such as family background\n\nClass-level: Teacher characteristics and teaching style\n\nSchool-level: Policies, neighborhood context\n\nClustered or Stratified Sampling\nWhen data are collected through stratified or cluster sampling, hierarchical models allow for regression analyses that respect these data groupings, providing insights within and across clusters."
   }
 ]

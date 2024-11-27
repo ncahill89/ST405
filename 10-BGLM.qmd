@@ -1,0 +1,653 @@
+---
+title: "Bayesian Data Analysis"
+subtitle: "Bayesian Generalised Linear Models"
+author: "Prof. Niamh Cahill (she/her)"
+format: revealjs
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(DiagrammeR)
+library(tidyverse)
+library(rjags)
+library(R2jags)
+library(tidybayes)
+library(bayesplot) 
+library(bayesrules)
+#library(maps)
+#library(maptools)
+
+
+
+fabric_faults <- read_csv("https://www.dropbox.com/s/czdos7zv76i2t8s/fabric_faults.csv?raw=1")
+
+data(weather_perth)
+weather <- weather_perth %>% 
+  select(day_of_year, raintomorrow, humidity9am)
+
+
+weather <- weather[1:280,]
+```
+
+## Generalized Linear Models {style="font-size: 65%;"}
+
+A **Generalized Linear Model (GLM)** is a flexible extension of linear regression models that allows for:
+
+1.  **Response variables** to follow a non-normal distribution, such as binomial, Poisson, or others.
+
+2.  **Link functions** to connect the linear predictor (a linear combination of independent variables) to the mean of the response variable in a way that is appropriate for its distribution.
+
+The GLM framework consists of three components:
+
+1.  **Random component**: Specifies the probability distribution of the response variable (e.g., normal, binomial, Poisson).
+
+2.  **Systematic component**: A linear predictor formed by the independent variables and their coefficients (e.g., ( \eta = X\beta )).
+
+3.  **Link function**: Transforms the expected value of the response variable to relate it linearly to the predictors (e.g., log, logit).
+
+Examples include **logistic regression**, **Poisson regression**, and others tailored to specific data types and distributions.
+
+## Components of a generalized linear model {style="font-size: 65%;"}
+
+**Random component**
+
+$Y$ is the response variable. $Y \sim$ some distribution.
+
+E.g.,
+
+$Y$ is continuous, $Y \sim$ Normal.
+
+$Y$ is binary, $Y \sim$ Bernoulli.
+
+$Y$ is \# successes out of n trials, $Y \sim$ Binomial.
+
+$Y$ is count, $Y \sim$ Poisson.
+
+**Systematic component**
+
+The linear combination of explanatory variables used in the model.
+
+$$\eta = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}$$
+
+You could have $x_{2}= x_{1}^{2}$ or $x_{3}=x_{1}x_{2}$ etc.
+
+**Link function**
+
+Let $\mu = \mathbb{E}[Y]$. The link function, $g$, relates $\mu$ to the systematic component: $$g(\mu) =  \eta$$
+
+## Logistic regression models: binary responses {style="font-size: 65%;"}
+
+A **logistic regression model** is a type of generalized linear model used for binary outcomes, where the dependent variable represents two categories (e.g., success/failure). It uses the **logit link function** to model the relationship between predictors and the log-odds of the outcome.
+
+For a **logistic regression model**, the components are as follows:
+
+**Random component**
+
+$$Y \sim \mbox{Bernoulli}(\pi).$$
+
+$$\mathbb{E}[Y]= \pi$$
+
+**Systematic component**
+
+$$\eta = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}$$
+
+**Link function:** logit link
+
+$$g(\pi) =  \log\left(\frac{\pi}{1-\pi}\right) = \eta.$$
+
+## Logistic regression models: binary responses {style="font-size: 65%;"}
+
+Note that since we are interested in the parameter $\pi$:
+
+```{=tex}
+\begin{eqnarray*}
+% \mbox{logit}(\pi) &=& \eta \\
+\mbox{log}\left(\frac{\pi}{1-\pi}\right) &=& \eta \\
+\frac{\pi}{1-\pi} &=& e^{\eta} \\
+% \pi &=& e^{\eta}(1-\pi) \\
+% \pi + e^{\eta}\pi  &=& e^{\eta} \\
+% \pi(1 + e^{\eta}) &=& e^{\eta} \\
+\pi &=& \frac{e^{\eta}}{1 + e^{\eta}} \\
+% \pi &=& \frac{e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}}{1 + e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}}\\
+\end{eqnarray*}
+```
+This is called the **logistic function**.
+
+Notice that $0 < \displaystyle\frac{e^{\eta}}{1 + e^{\eta}} < 1$.
+
+This gives us the **logistic regression** function:
+
+$$\log\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}.$$
+
+## Aside: Interpreting Odds {style="font-size: 65%;"}
+
+Let an event of interest have probability $\pi \in [0, 1]$ and corresponding odds $\frac{\pi}{1 - \pi} \in [0, \infty)$.
+
+Across this spectrum, comparing the odds to 1 provides perspective on an event’s uncertainty:
+
+-   **The odds of an event are less than 1** if and only if the event’s chances are less than 50-50, i.e., $\pi < 0.5$.
+-   **The odds of an event are equal to 1** if and only if the event’s chances are 50-50, i.e., $\pi = 0.5$.
+-   **The odds of an event are greater than 1** if and only if the event’s chances are greater than 50-50, i.e., $\pi > 0.5$.
+
+## Interpretation of logistic regression parameters {style="font-size: 65%;"}
+
+Consider the model with one predictor ($k = 1$):
+
+$$\mbox{log}\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x_{1}$$
+
+**Interpretation of** $\alpha$:
+
+At $x_1 = 0$, then \begin{eqnarray*}
+\log\left(\frac{\pi}{1-\pi}\right) &=& \alpha \\
+\frac{\pi}{1-\pi} &=& e^{\alpha}\\
+\end{eqnarray*} So $e^{\beta_0}$ = the **success odds** at $x_1 = 0$.
+
+## Interpretation of logistic regression parameters {style="font-size: 65%;"}
+
+**Interpretation of** $\beta_{1}$:
+
+Suppose $X_1$ increases from $x_1$ to $x_1+1$. Let $w_1$ = the success odds at $x_1$ and $w_2$ = the success odds at $x_1+1$. Then the odds change from: $$w_1 = e^{\alpha + \beta_{1}x_{1}}$$ to \begin{eqnarray*} 
+w_2 &=& e^{\alpha + \beta_{1}(x_{1}+1)} \\
+&=& w_{1} e^{\beta_{1}}
+\end{eqnarray*}
+
+i.e., increasing $X_1$ by 1 unit changes the success odds by a multiplicative factor of $e^{\beta_{1}}$
+
+Or, $$\frac{w_2}{w_1} = e^{\beta_{1}}$$
+
+\vspace{0.3cm}
+
+i.e., $e^{\beta_{1}}$ is the **odds ratio** for a unit increase in $x_1$.
+
+## Example: Rain in Perth {style="font-size: 65%;"}
+
+Suppose we find ourselves in Australia, the city of Perth specifically. Located on the southwest coast, Perth experiences dry summers and wet winters. Our goal will be to predict whether or not it will rain tomorrow. We're going to use today's humidity as a predictor. Here's a quick look at the data.
+
+::: columns
+::: {.column width="40%"}
+```{r}
+weather
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+ggplot(weather, aes(x = raintomorrow, y = humidity9am)) +
+  geom_boxplot() +
+  coord_flip()
+```
+:::
+:::
+
+## Model specification and logit link {style="font-size: 65%;"}
+
+**The model specification:**
+
+$Y \sim \mbox{Bernoulli}(\pi).$
+
+$\eta = \alpha + \beta_{1}x_{1}$
+
+**Logit link function:**
+
+$g(\pi) = \log\left(\frac{\pi}{1-\pi}\right) = \eta.$
+
+[![An example relationship between rain and humidity on the log(odds), odds, and probability scales (Example from Bayes Rules).](images/Screenshot%202024-11-25%20at%2009.56.04.png)](https://www.bayesrulesbook.com/chapter-13)
+
+## Specify the JAGS model (simple logistic regression) {style="font-size: 65%;"}
+
+**The Model**
+
+```{r, echo=TRUE}
+logisticmodel = "
+model{
+
+## Data model
+
+for(i in 1:n)
+{
+y.i[i] ~ dbern(pi.i[i])
+
+nu.i[i] <- alpha + beta*x.i[i]
+
+pi.i[i] <- exp(nu.i[i])/(1+ exp(nu.i[i]))
+}
+
+## priors
+alpha ~ dnorm(0, 2^-2)
+beta ~ dnorm(0, 2^-2)
+}
+"
+```
+
+**The Data**
+
+```{r, echo=TRUE}
+
+jags.data <- list(y.i = as.numeric(weather$raintomorrow)-1,
+                  x.i = weather$humidity9am,
+                  n = nrow(weather))
+
+## monitor parameters
+parnames <- c("pi.i","alpha", "beta")
+```
+
+```{r, include = FALSE}
+mod <- jags(data = jags.data, 
+            parameters.to.save=parnames, 
+            model.file = textConnection(logisticmodel),
+            n.burnin = 2000,
+            n.iter = 15000,
+            n.thin = 5)
+
+## create output objects
+#mcmc.array <- mod$BUGSoutput$sims.array
+#dim(mcmc.array)
+
+#mod_samps <- mod$BUGSoutput$sims.list
+
+## parameter summary
+#mod$BUGSoutput$summary
+
+## DIC
+#mod$BUGSoutput$DIC
+
+```
+
+## Results: Parameters {style="font-size: 65%;"}
+
+```{r, echo = TRUE}
+m <- mod$BUGSoutput$sims.matrix
+
+par_summary <- m %>% 
+                gather_rvars(alpha,beta) %>% 
+                median_qi(.value)
+par_summary
+```
+
+## Results Plot data and fit {style="font-size: 65%;"}
+
+**Calculate & plot the rain rate by humidity bracket**
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: ""
+#| output-location: column-fragment
+
+weather_bracket <- weather %>% 
+  mutate(humidity_bracket = 
+           cut(humidity9am, breaks = seq(10, 100, by = 10))) %>% 
+  group_by(humidity_bracket) %>% 
+  summarize(rain_rate = mean(raintomorrow == "Yes")) 
+
+
+  ggplot(weather_bracket, aes(x = humidity_bracket, y = rain_rate)) + 
+    geom_point() + 
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +
+    theme_bw()
+```
+
+. . .
+
+**Plot the model fit for probability of rain rate by humidity**
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: ""
+#| output-location: column-fragment
+
+pred_summary <- m %>% 
+                gather_rvars(pi.i[pred_ind]) %>% 
+                median_qi(.value) %>% 
+                mutate(x = jags.data$x.i)
+
+ggplot(pred_summary,aes(x = x, y = .value),alpha = 0.3) +
+  geom_line() +
+  geom_ribbon(data = pred_summary,aes(ymin = .lower, ymax = .upper), alpha = 0.2) +
+  theme_bw() 
+```
+
+## Posterior Predictive Check {style="font-size: 65%;"}
+
+```{r, include = FALSE}
+logisticmodel = "
+model{
+
+## Data model
+
+for(i in 1:n)
+{
+y.i[i] ~ dbern(pi.i[i])
+
+nu.i[i] <- alpha + beta*x.i[i]
+
+pi.i[i] <- exp(nu.i[i])/(1+ exp(nu.i[i]))
+}
+
+## priors
+alpha ~ dnorm(0, 2^-2)
+beta ~ dnorm(0, 2^-2)
+
+for(i in 1:n)
+{
+yrep[i] ~ dbern(pi.i[i])
+}
+}
+"
+
+## monitor parameters
+parnames <- c("pi.i","alpha", "beta", "yrep")
+
+mod <- jags(data = jags.data, 
+            parameters.to.save=parnames, 
+            model.file = textConnection(logisticmodel),
+            n.burnin = 2000,
+            n.iter = 15000,
+            n.thin = 5)
+
+```
+
+Add the JAGS code for the posterior predictive check:
+
+```         
+for(i in 1:n)
+{
+yrep[i] ~ dbern(pi.i[i])
+}
+```
+
+Check observed proportion of days on which it rained vs proportion of days on which it rained in each of the posterior simulated datasets.
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: ""
+#| output-location: column-fragment
+
+yrep <- mod$BUGSoutput$sims.list$yrep
+y <- jags.data$y.i
+proportion_rain <- function(y){mean(y == 1)}
+ppc_stat(y, yrep, stat = "proportion_rain") 
+```
+
+<!-- ## Data -->
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- ## Read in the data -->
+
+<!-- golf_dat <- read_csv("https://www.dropbox.com/s/q0h9f8bz4k235h4/golf_putting.csv?raw=1") -->
+
+<!-- golf_dat <- golf_dat %>%  -->
+
+<!--               mutate(p = y/n) # add observed p's to the dataset -->
+
+<!-- ggplot(golf_dat, aes(x = distance, y = log(p/(1-p)))) + -->
+
+<!--   geom_point() -->
+
+<!-- ``` -->
+
+## Poisson Regression {style="font-size: 65%;"}
+
+A **Poisson regression model** is a type of generalized linear model used for count data, where the response variable represents the number of occurrences of an event in an interval of time. It uses the **log link function** to relate predictors to the expected log count of the outcome.
+
+For a **Poisson regression model**, the components are as follows:
+
+1.  **Random component**:
+
+$$Y \sim \mbox{Poisson}(\lambda).$$
+
+$\mathbb{E}[Y]= \lambda, \mathbb{Var}[Y]= \lambda$
+
+**Systematic component**
+
+$$\eta = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}$$
+
+3.  **Link function**: log link
+
+$$g(\lambda) = \log(\lambda) = \eta$$
+
+## Poisson regression models: count responses {style="font-size: 65%;"}
+
+Note that since we are interested in the parameter $\lambda$:
+
+```{=tex}
+\begin{eqnarray*}
+% \mbox{log}(\lambda) &=& \eta \\
+\mbox{log}(\lambda) &=& \eta \\
+\lambda &=& e^{\eta} \\
+% \lambda &=& e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}\\
+\end{eqnarray*}
+```
+This is the **log function**. Notice that $0 < \displaystyle e^{\eta} < \infty$.
+
+This gives us the **Poisson regression**:
+
+$$\log(\lambda) = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}.$$
+
+**Structure of variability**
+
+A typical value of $y$ conditioned on $x$ should be roughly equivalent to the variability in $y$
+
+[![Two simulated datasets. The data on the left satisfies the Poisson regression assumption that, at any given x, the variability in y is roughly on par with the average y value. The data on the right does not, exhibiting consistently low variability in y across all x values.](images/Screenshot%202024-11-27%20at%2010.24.09.png)](https://www.bayesrulesbook.com/chapter-12)
+
+<!-- ## Poisson Regression {style="font-size: 65%;"} -->
+
+<!-- It follows that: -->
+
+<!-- $$P[Y=k] = \displaystyle\frac{e^{-\mu}\mu^{k}}{k!}\;\;\; \mbox{for} \;\;\;k=0, 1, 2, ...$$ $$\mathbb{E}[Y] = \mu, \;\;\; \mbox{Var}[Y] = \mu.$$ -->
+
+<!-- The Poisson regression model is of the form: $$\mbox{log}(\mu) = \beta_0 + \beta_1x_1 + ... + \beta_kx_k.$$ -->
+
+<!-- -   Poisson regression is a **generalized linear model** with a log **link function** that relates $\mathbb{E}[Y]$ to the **systematic component**, which is a linear function of explanatory variables used in the model. -->
+
+<!-- ## Why not use regular linear regression? {style="font-size: 65%;"} -->
+
+<!-- -   So far, we discussed regression problems where the data were assumed to be normally distributed. -->
+
+<!-- -   That's not always an appropriate assumption, for example when dealing with count data, e.g. death counts due to lip cancer in Scotland; -->
+
+<!--     -   Data not normally distributed. -->
+
+<!--     -   Variance is not constant. -->
+
+<!-- Note: for sufficiently large values of $\mu$, the normal distribution with mean $\mu$ and variance $\mu$ can be used as an approximation to the Poisson distribution. Thus for large counts we may be able to use linear regression. -->
+
+## Interpretation of parameter estimates {style="font-size: 65%;"}
+
+Consider the model with one predictor ($k = 1$):
+
+$$log(\lambda) = \alpha + \beta x_{1}$$
+
+**Interpretation of** $\alpha$:
+
+At $x_1 = 0$, then \begin{eqnarray*}
+\log(\lambda) &=& \alpha \\
+\lambda &=& e^{\alpha}\\
+\end{eqnarray*} So $e^{\alpha}$ = the **expected count** at $x_1 = 0$.
+
+## Interpretation of logistic regression parameters {style="font-size: 65%;"}
+
+**Interpretation of** $\beta$:
+
+Suppose $x_1$ increases from $x$ to $x+1$. Then $\lambda$ changes from
+
+$$\lambda(x) = \mbox{exp}(\alpha + \beta x)$$ to \begin{eqnarray*}
+\lambda(x+1) &=& \mbox{exp}(\alpha + \beta (x+1)) \\
+&=& \lambda(x)e^{\beta}
+\end{eqnarray*}
+
+Each unit increase in $x_1$ multiplies the mean response (expected count) by $e^{\beta_1}$.
+
+<!-- ## Poisson Regression: Introduction -->
+
+<!-- \footnotesize -->
+
+<!--   - So far, we discussed regression problems where the data were assumed to be normally distributed. -->
+
+<!-- - That's not always an appropriate assumption, for example when dealing with -->
+
+<!--     - count data, e.g. death counts due to lip cancer in Scotland; -->
+
+<!-- - We will a discuss (hierarchical) poisson regression model to answer questions using these types of data.  -->
+
+<!-- - Suppose that $y_1,y_2,\ldots,y_n$ are independent count observations. -->
+
+<!-- - If $y_i\sim\mbox{Poisson}(\lambda)$ then -->
+
+<!-- $${\mathbb P}\{y_i=y\}=\frac{\lambda^y \exp(-\lambda)}{y!}, \mbox{ where $\lambda>0$.}$$ -->
+
+<!-- - Under this model,  -->
+
+<!-- $${\mathbb E}(y)=\lambda \mbox{ and } {\mathbb V}\mbox{ar}(y)=\lambda.$$ -->
+
+<!-- - So, the model cannot account for situations where $${\mathbb E}(y)\neq {\mathbb V}\mbox{ar}(y).$$ -->
+
+## Example - Fabric Faults {style="font-size: 65%;"}
+
+-   Data: Numbers of faults found in 32 rolls of fabric produced in a particular factory (Hinde, J. (1982))\
+-   Predictor: the length of each roll.
+
+::: columns
+::: {.column width="40%"}
+```{r}
+fabric_faults
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+ggplot(fabric_faults, aes(x = length, y = faults)) +
+  geom_point()
+
+```
+:::
+:::
+
+## Model Specification and log link {style="font-size: 65%;"}
+
+**The model specification**
+
+$y_i|\lambda_i \sim$ Poisson($\lambda_i$)
+
+$\eta = \alpha + \beta (x_i - \bar{x})$
+
+**log link function**
+
+$g(\lambda) = log(\lambda) = \eta$
+
+```{r, fig.cap= "An example relationship between faults and length on the log and count scales"}
+
+# Load the data (adjust the path as needed)
+data <- fabric_faults
+
+# Create a new column for log-transformed faults (log(faults))
+data$log_faults <- log(data$faults)
+
+# Create the first plot: Regression line for Faults vs Length
+p1 <- ggplot(data, aes(x = length, y = faults)) +
+  geom_smooth(method = "glm", method.args = list(family = "poisson"), se = FALSE) +
+  labs(x = "Fabric Length", y = "Faults") 
+
+# Create the second plot: Regression line for Log(Faults + 1) vs Length
+p2 <- ggplot(data, aes(x = length, y = log_faults)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Fabric Length", y = "Log(Faults)") 
+
+# Combine the two plots using patchwork (install if necessary: install.packages("patchwork"))
+library(patchwork)
+p2 + p1
+
+```
+
+## JAGS Specification (simple Poisson regression) {style="font-size: 65%;"}
+
+**The Model**
+
+```{r, echo = TRUE}
+poismodel = "
+model{
+	for( i in 1:n ) {
+ #Poisson likelihood for observed counts
+  y.i[i] ~ dpois(lambda.i[i])
+  lambda.i[i] <- exp(alpha + beta*(x.i[i] - mean(x.i)))
+	}
+ #Prior distributions
+  alpha ~ dnorm(0, 2^-2)
+  beta ~ dnorm(0, 2^-2)
+  
+  for(i in 1:n){yrep[i] ~ dpois(lambda.i[i])}
+}
+"
+```
+
+**The Data**
+
+```{r, echo = TRUE}
+## Create the JAGS data list
+jags.data <- list(y.i = fabric_faults$faults, 
+                  x.i = fabric_faults$length, 
+                  n = nrow(fabric_faults))
+```
+
+```{r, include=FALSE}
+## Choose parameters to monitor
+parnames <- c("lambda.i","alpha","beta","yrep")
+
+mod <- jags(data = jags.data, 
+            parameters.to.save=parnames, 
+            model.file = textConnection(poismodel),
+            n.iter = 10000,
+            n.burnin = 2000,
+            n.thin = 5,
+            DIC = TRUE)
+
+```
+
+## Results: Parameters {style="font-size: 65%;"}
+
+```{r, echo = TRUE}
+m <- mod$BUGSoutput$sims.matrix
+par_summary <- m %>% 
+                gather_rvars(alpha,beta) %>% 
+                median_qi(.value)
+par_summary
+```
+
+## Results Plot data and fit {style="font-size: 65%;"}
+
+**Plot the faults by length**
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: ""
+#| output-location: column-fragment
+
+ggplot(fabric_faults, aes(x = length, y = faults)) +
+  geom_point() +
+  theme_bw() 
+```
+
+. . .
+
+**Plot the model fit for faults by length**
+
+```{r, echo = TRUE, include=TRUE}
+#| code-line-numbers: ""
+#| output-location: column-fragment
+
+pred_summary <- m %>% 
+                gather_rvars(lambda.i[pred_ind]) %>% 
+                median_qi(.value) %>% 
+                mutate(x = jags.data$x.i)
+
+ggplot(pred_summary,aes(x = x, y = .value),alpha = 0.3) +
+  geom_line() +
+  geom_ribbon(data = pred_summary,aes(ymin = .lower, ymax = .upper), alpha = 0.2) +
+  geom_point(data = fabric_faults, aes(x = length, y = faults)) +
+  theme_bw() 
+```
+
+## Posterior Predictive Check {style="font-size: 65%;"}
+
+```{r, echo = TRUE}
+yrep <- mod$BUGSoutput$sims.list$yrep
+y <- fabric_faults$faults
+ppc_stat(y,yrep,  stat = "max",binwidth = 2)
+```

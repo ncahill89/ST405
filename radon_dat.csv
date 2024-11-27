@@ -1,0 +1,917 @@
+county,activity
+AITKIN              ,2.2
+AITKIN              ,2.2
+AITKIN              ,2.9
+AITKIN              ,1
+ANOKA               ,3.1
+ANOKA               ,2.5
+ANOKA               ,1.5
+ANOKA               ,1
+ANOKA               ,0.7
+ANOKA               ,1.2
+ANOKA               ,1.2
+ANOKA               ,1.3
+ANOKA               ,1.4
+ANOKA               ,0.4
+ANOKA               ,1.1
+ANOKA               ,4.5
+ANOKA               ,1.3
+ANOKA               ,2.1
+ANOKA               ,5.9
+ANOKA               ,3.3
+ANOKA               ,1.8
+ANOKA               ,5.4
+ANOKA               ,6.3
+ANOKA               ,1.9
+ANOKA               ,6.6
+ANOKA               ,3.1
+ANOKA               ,6.8
+ANOKA               ,7
+ANOKA               ,7.7
+ANOKA               ,5.2
+ANOKA               ,4.5
+ANOKA               ,4.4
+ANOKA               ,2.8
+ANOKA               ,8.1
+ANOKA               ,1.6
+ANOKA               ,4.2
+ANOKA               ,5.4
+ANOKA               ,4
+ANOKA               ,2.3
+ANOKA               ,2.9
+ANOKA               ,1.4
+ANOKA               ,3.3
+ANOKA               ,2.9
+ANOKA               ,1.8
+ANOKA               ,0.2
+ANOKA               ,2.4
+ANOKA               ,1.1
+ANOKA               ,2.2
+ANOKA               ,0.6
+ANOKA               ,1.7
+ANOKA               ,2.9
+ANOKA               ,2.2
+ANOKA               ,1.7
+ANOKA               ,1.4
+ANOKA               ,1.9
+ANOKA               ,1.8
+BECKER              ,1.2
+BECKER              ,4.3
+BECKER              ,4.5
+BELTRAMI            ,6.3
+BELTRAMI            ,4.6
+BELTRAMI            ,5.7
+BELTRAMI            ,2.2
+BELTRAMI            ,0.4
+BELTRAMI            ,4.6
+BELTRAMI            ,4.4
+BENTON              ,6.6
+BENTON              ,2.7
+BENTON              ,2.9
+BENTON              ,2.9
+BIG STONE           ,7.2
+BIG STONE           ,5
+BIG STONE           ,2.6
+BLUE EARTH          ,5
+BLUE EARTH          ,13
+BLUE EARTH          ,7.2
+BLUE EARTH          ,6.8
+BLUE EARTH          ,12.8
+BLUE EARTH          ,5.8
+BLUE EARTH          ,9.5
+BLUE EARTH          ,6
+BLUE EARTH          ,3.8
+BLUE EARTH          ,14.3
+BLUE EARTH          ,1.8
+BLUE EARTH          ,6.9
+BLUE EARTH          ,4.7
+BLUE EARTH          ,9.5
+BROWN               ,2.5
+BROWN               ,6.7
+BROWN               ,4
+BROWN               ,10.1
+CARLTON             ,2.2
+CARLTON             ,1.8
+CARLTON             ,3.4
+CARLTON             ,5.6
+CARLTON             ,4.3
+CARLTON             ,3.9
+CARLTON             ,1.3
+CARLTON             ,4.2
+CARLTON             ,0.8
+CARLTON             ,2
+CARVER              ,1.6
+CARVER              ,12.9
+CARVER              ,14.7
+CARVER              ,4.7
+CARVER              ,9.6
+CASS                ,3.7
+CASS                ,7.4
+CASS                ,1.9
+CASS                ,5.3
+CASS                ,4
+CHIPPEWA            ,7.7
+CHIPPEWA            ,1.4
+CHIPPEWA            ,10
+CHIPPEWA            ,9.4
+CHISAGO             ,0.8
+CHISAGO             ,4.4
+CHISAGO             ,5
+CHISAGO             ,2.1
+CHISAGO             ,1.7
+CHISAGO             ,8.1
+CLAY                ,0.9
+CLAY                ,12.9
+CLAY                ,2.6
+CLAY                ,3.5
+CLAY                ,26.6
+CLAY                ,1.5
+CLAY                ,13
+CLAY                ,8.8
+CLAY                ,19.5
+CLAY                ,2.5
+CLAY                ,9
+CLAY                ,13.1
+CLAY                ,3.6
+CLAY                ,6.9
+CLEARWATER          ,4.8
+CLEARWATER          ,3.4
+CLEARWATER          ,0.9
+CLEARWATER          ,3.4
+COOK                ,2.7
+COOK                ,1.4
+COTTONWOOD          ,6.8
+COTTONWOOD          ,11.1
+COTTONWOOD          ,2.5
+CROW WING           ,1.8
+CROW WING           ,1.6
+CROW WING           ,1
+CROW WING           ,0.9
+CROW WING           ,2.9
+CROW WING           ,4.4
+CROW WING           ,1.5
+CROW WING           ,4.1
+CROW WING           ,2.5
+CROW WING           ,6.7
+CROW WING           ,4.3
+CROW WING           ,5.5
+DAKOTA              ,3.6
+DAKOTA              ,2.8
+DAKOTA              ,14.6
+DAKOTA              ,6.7
+DAKOTA              ,8
+DAKOTA              ,2.6
+DAKOTA              ,2.8
+DAKOTA              ,4.4
+DAKOTA              ,1.7
+DAKOTA              ,2
+DAKOTA              ,2
+DAKOTA              ,1.5
+DAKOTA              ,9.6
+DAKOTA              ,8.1
+DAKOTA              ,3.5
+DAKOTA              ,0.8
+DAKOTA              ,5.1
+DAKOTA              ,3.2
+DAKOTA              ,10.8
+DAKOTA              ,8.2
+DAKOTA              ,6.3
+DAKOTA              ,4.8
+DAKOTA              ,6
+DAKOTA              ,1.1
+DAKOTA              ,8.7
+DAKOTA              ,8.8
+DAKOTA              ,6.8
+DAKOTA              ,2.3
+DAKOTA              ,1.6
+DAKOTA              ,2.8
+DAKOTA              ,6.5
+DAKOTA              ,1.7
+DAKOTA              ,4.6
+DAKOTA              ,3.3
+DAKOTA              ,4.4
+DAKOTA              ,21.2
+DAKOTA              ,9.1
+DAKOTA              ,0.9
+DAKOTA              ,4.9
+DAKOTA              ,5
+DAKOTA              ,1.1
+DAKOTA              ,7.6
+DAKOTA              ,5.4
+DAKOTA              ,3.6
+DAKOTA              ,4.9
+DAKOTA              ,4.7
+DAKOTA              ,1.4
+DAKOTA              ,3.4
+DAKOTA              ,4.2
+DAKOTA              ,2.5
+DAKOTA              ,1.4
+DAKOTA              ,1.4
+DAKOTA              ,1.9
+DAKOTA              ,4.8
+DAKOTA              ,1.4
+DAKOTA              ,3.8
+DAKOTA              ,8.8
+DAKOTA              ,4.3
+DAKOTA              ,4.4
+DAKOTA              ,4.5
+DAKOTA              ,2.2
+DAKOTA              ,0.5
+DAKOTA              ,5.8
+DODGE               ,5.4
+DODGE               ,7.2
+DODGE               ,5.7
+DOUGLAS             ,7.4
+DOUGLAS             ,4.8
+DOUGLAS             ,6.8
+DOUGLAS             ,6.4
+DOUGLAS             ,3.7
+DOUGLAS             ,5.5
+DOUGLAS             ,7.8
+DOUGLAS             ,4.4
+DOUGLAS             ,2.7
+FARIBAULT           ,3.4
+FARIBAULT           ,4.2
+FARIBAULT           ,2.3
+FARIBAULT           ,1.3
+FARIBAULT           ,5.2
+FARIBAULT           ,0.1
+FILLMORE            ,2.5
+FILLMORE            ,3.2
+FREEBORN            ,3.2
+FREEBORN            ,9.6
+FREEBORN            ,4.2
+FREEBORN            ,9
+FREEBORN            ,6.3
+FREEBORN            ,32.6
+FREEBORN            ,13.2
+FREEBORN            ,2.2
+FREEBORN            ,5.6
+GOODHUE             ,14.3
+GOODHUE             ,6.9
+GOODHUE             ,7.6
+GOODHUE             ,9.8
+GOODHUE             ,2.6
+GOODHUE             ,43.5
+GOODHUE             ,4.9
+GOODHUE             ,4.9
+GOODHUE             ,3.5
+GOODHUE             ,4.8
+GOODHUE             ,5.6
+GOODHUE             ,3.5
+GOODHUE             ,3.9
+GOODHUE             ,6.7
+HENNEPIN            ,7.9
+HENNEPIN            ,3.3
+HENNEPIN            ,2.1
+HENNEPIN            ,1.6
+HENNEPIN            ,4
+HENNEPIN            ,1.8
+HENNEPIN            ,2.5
+HENNEPIN            ,11.2
+HENNEPIN            ,2.6
+HENNEPIN            ,3.9
+HENNEPIN            ,7.4
+HENNEPIN            ,1.3
+HENNEPIN            ,0.9
+HENNEPIN            ,0.4
+HENNEPIN            ,2.5
+HENNEPIN            ,6
+HENNEPIN            ,2
+HENNEPIN            ,5.4
+HENNEPIN            ,3
+HENNEPIN            ,2.9
+HENNEPIN            ,5.5
+HENNEPIN            ,4.1
+HENNEPIN            ,3.9
+HENNEPIN            ,14.9
+HENNEPIN            ,7.2
+HENNEPIN            ,2.3
+HENNEPIN            ,2.8
+HENNEPIN            ,4.4
+HENNEPIN            ,1.5
+HENNEPIN            ,8.6
+HENNEPIN            ,5.6
+HENNEPIN            ,8.6
+HENNEPIN            ,3.8
+HENNEPIN            ,1.8
+HENNEPIN            ,1.9
+HENNEPIN            ,5.5
+HENNEPIN            ,2.5
+HENNEPIN            ,0.8
+HENNEPIN            ,2.1
+HENNEPIN            ,2.8
+HENNEPIN            ,3.9
+HENNEPIN            ,4.3
+HENNEPIN            ,4.7
+HENNEPIN            ,2.8
+HENNEPIN            ,4.1
+HENNEPIN            ,1.6
+HENNEPIN            ,4.3
+HENNEPIN            ,0.7
+HENNEPIN            ,5.5
+HENNEPIN            ,3.3
+HENNEPIN            ,5.5
+HENNEPIN            ,2.5
+HENNEPIN            ,2.7
+HENNEPIN            ,8.4
+HENNEPIN            ,3.3
+HENNEPIN            ,3.2
+HENNEPIN            ,8.6
+HENNEPIN            ,1.7
+HENNEPIN            ,5.7
+HENNEPIN            ,13
+HENNEPIN            ,2.7
+HENNEPIN            ,4.7
+HENNEPIN            ,5.6
+HENNEPIN            ,13.8
+HENNEPIN            ,7.6
+HENNEPIN            ,5.7
+HENNEPIN            ,4.6
+HENNEPIN            ,7.6
+HENNEPIN            ,2.6
+HENNEPIN            ,4.5
+HENNEPIN            ,5.9
+HENNEPIN            ,2.2
+HENNEPIN            ,2.4
+HENNEPIN            ,4
+HENNEPIN            ,4.6
+HENNEPIN            ,4.6
+HENNEPIN            ,10.9
+HENNEPIN            ,7.6
+HENNEPIN            ,3
+HENNEPIN            ,1.5
+HENNEPIN            ,1.6
+HENNEPIN            ,16.5
+HENNEPIN            ,3.1
+HENNEPIN            ,5.1
+HENNEPIN            ,4.9
+HENNEPIN            ,6
+HENNEPIN            ,0.9
+HENNEPIN            ,1.8
+HENNEPIN            ,3.9
+HENNEPIN            ,5.6
+HENNEPIN            ,0.4
+HENNEPIN            ,2.6
+HENNEPIN            ,3.6
+HENNEPIN            ,6.2
+HENNEPIN            ,23.6
+HENNEPIN            ,3.9
+HENNEPIN            ,2.9
+HENNEPIN            ,3
+HENNEPIN            ,4.7
+HENNEPIN            ,3
+HENNEPIN            ,4.2
+HENNEPIN            ,3.8
+HENNEPIN            ,3
+HENNEPIN            ,4.3
+HENNEPIN            ,2.9
+HOUSTON             ,3.4
+HOUSTON             ,8.5
+HOUSTON             ,9
+HOUSTON             ,4.8
+HOUSTON             ,3.6
+HOUSTON             ,2.2
+HUBBARD             ,2.8
+HUBBARD             ,0.8
+HUBBARD             ,1.5
+HUBBARD             ,4.6
+HUBBARD             ,3.7
+ISANTI              ,3.6
+ISANTI              ,3
+ISANTI              ,2.2
+ITASCA              ,1.9
+ITASCA              ,2.6
+ITASCA              ,1.8
+ITASCA              ,2.4
+ITASCA              ,4.3
+ITASCA              ,2.6
+ITASCA              ,1.1
+ITASCA              ,3.3
+ITASCA              ,2.5
+ITASCA              ,9.4
+ITASCA              ,1.3
+JACKSON             ,8.4
+JACKSON             ,5
+JACKSON             ,2.9
+JACKSON             ,13.1
+JACKSON             ,15.3
+KANABEC             ,1.8
+KANABEC             ,3.8
+KANABEC             ,7.9
+KANABEC             ,2.6
+KANDIYOHI           ,11.3
+KANDIYOHI           ,4.1
+KANDIYOHI           ,12.3
+KANDIYOHI           ,6.7
+KITTSON             ,6.9
+KITTSON             ,4.5
+KITTSON             ,0.9
+KOOCHICHING         ,1.7
+KOOCHICHING         ,1.4
+KOOCHICHING         ,2
+KOOCHICHING         ,1
+KOOCHICHING         ,1
+KOOCHICHING         ,2.8
+KOOCHICHING         ,1.3
+LAC QUI PARLE       ,11.3
+LAC QUI PARLE       ,16
+LAKE                ,1.3
+LAKE                ,1.3
+LAKE                ,1.6
+LAKE                ,0.9
+LAKE                ,2.8
+LAKE                ,0.5
+LAKE                ,1.5
+LAKE                ,7.1
+LAKE                ,0.5
+LAKE OF THE WOODS   ,10.1
+LAKE OF THE WOODS   ,4.3
+LAKE OF THE WOODS   ,3.3
+LAKE OF THE WOODS   ,2.9
+LE SUEUR            ,12.5
+LE SUEUR            ,4.2
+LE SUEUR            ,4.5
+LE SUEUR            ,3.9
+LE SUEUR            ,3.3
+LINCOLN             ,17.5
+LINCOLN             ,10.6
+LINCOLN             ,7.9
+LINCOLN             ,3.5
+LYON                ,6.5
+LYON                ,6.9
+LYON                ,5.1
+LYON                ,12
+LYON                ,5.1
+LYON                ,8.9
+LYON                ,5.8
+LYON                ,4.6
+MAHNOMEN            ,3.9
+MARSHALL            ,1.5
+MARSHALL            ,23.8
+MARSHALL            ,0.9
+MARSHALL            ,1.4
+MARSHALL            ,1.1
+MARSHALL            ,2.8
+MARSHALL            ,48.2
+MARSHALL            ,0.9
+MARSHALL            ,8.3
+MARTIN              ,4.1
+MARTIN              ,0.5
+MARTIN              ,6.7
+MARTIN              ,7.5
+MARTIN              ,9.2
+MARTIN              ,0.5
+MARTIN              ,1.5
+MCLEOD              ,10.3
+MCLEOD              ,3.9
+MCLEOD              ,1.8
+MCLEOD              ,9.9
+MCLEOD              ,2.3
+MCLEOD              ,4.4
+MCLEOD              ,2.8
+MCLEOD              ,1.1
+MCLEOD              ,1.2
+MCLEOD              ,1.6
+MCLEOD              ,25.4
+MCLEOD              ,10.6
+MEEKER              ,2.3
+MEEKER              ,3.9
+MEEKER              ,7.2
+MEEKER              ,2.1
+MEEKER              ,3.2
+MILLE LACS          ,0.5
+MILLE LACS          ,5.7
+MORRISON            ,1.4
+MORRISON            ,2.1
+MORRISON            ,4.4
+MORRISON            ,2.4
+MORRISON            ,4.9
+MORRISON            ,3
+MORRISON            ,3
+MORRISON            ,2.8
+MORRISON            ,3.9
+MOWER               ,10.9
+MOWER               ,6.4
+MOWER               ,2
+MOWER               ,3
+MOWER               ,4.5
+MOWER               ,2.1
+MOWER               ,8
+MOWER               ,1.3
+MOWER               ,9.2
+MOWER               ,1.1
+MOWER               ,10.6
+MOWER               ,24
+MOWER               ,9.1
+MURRAY              ,12.1
+NICOLLET            ,8.1
+NICOLLET            ,10.8
+NICOLLET            ,4.2
+NICOLLET            ,15.7
+NOBLES              ,5.4
+NOBLES              ,6.2
+NOBLES              ,9.7
+NORMAN              ,8.1
+NORMAN              ,1.6
+NORMAN              ,1.6
+OLMSTED             ,6.4
+OLMSTED             ,4.4
+OLMSTED             ,11.2
+OLMSTED             ,10
+OLMSTED             ,4.5
+OLMSTED             ,8
+OLMSTED             ,2.3
+OLMSTED             ,3.2
+OLMSTED             ,5
+OLMSTED             ,4.1
+OLMSTED             ,1.1
+OLMSTED             ,2
+OLMSTED             ,1.1
+OLMSTED             ,2.9
+OLMSTED             ,2.1
+OLMSTED             ,7.8
+OLMSTED             ,3.8
+OLMSTED             ,2.5
+OLMSTED             ,2.9
+OLMSTED             ,1.7
+OLMSTED             ,2.5
+OLMSTED             ,9.4
+OLMSTED             ,0.6
+OTTER TAIL          ,2.7
+OTTER TAIL          ,1.1
+OTTER TAIL          ,2.1
+OTTER TAIL          ,12
+OTTER TAIL          ,12.6
+OTTER TAIL          ,3.2
+OTTER TAIL          ,4.2
+OTTER TAIL          ,3.8
+PENNINGTON          ,3.7
+PENNINGTON          ,5.8
+PENNINGTON          ,0.3
+PINE                ,4.1
+PINE                ,2.8
+PINE                ,1.9
+PINE                ,1.2
+PINE                ,1.2
+PINE                ,1.5
+PIPESTONE           ,9.4
+PIPESTONE           ,1.7
+PIPESTONE           ,12.1
+PIPESTONE           ,4.3
+POLK                ,6.9
+POLK                ,1.4
+POLK                ,2.5
+POLK                ,9.6
+POPE                ,3.8
+POPE                ,3.4
+RAMSEY              ,6.8
+RAMSEY              ,3.6
+RAMSEY              ,2.2
+RAMSEY              ,2.6
+RAMSEY              ,2.1
+RAMSEY              ,7
+RAMSEY              ,1.2
+RAMSEY              ,3.8
+RAMSEY              ,3.5
+RAMSEY              ,4.2
+RAMSEY              ,1.6
+RAMSEY              ,2.8
+RAMSEY              ,8.6
+RAMSEY              ,6.2
+RAMSEY              ,5.2
+RAMSEY              ,2.7
+RAMSEY              ,1.2
+RAMSEY              ,3.5
+RAMSEY              ,5.5
+RAMSEY              ,10.1
+RAMSEY              ,5.5
+RAMSEY              ,1.2
+RAMSEY              ,4.9
+RAMSEY              ,4
+RAMSEY              ,3.5
+RAMSEY              ,2.5
+RAMSEY              ,1.2
+RAMSEY              ,2.7
+RAMSEY              ,1.7
+RAMSEY              ,3.1
+RAMSEY              ,0.7
+RAMSEY              ,1
+REDWOOD             ,1.9
+REDWOOD             ,3.8
+REDWOOD             ,8.9
+REDWOOD             ,7.4
+REDWOOD             ,20.7
+RENVILLE            ,6
+RENVILLE            ,2.1
+RENVILLE            ,5.8
+RICE                ,9.7
+RICE                ,6.4
+RICE                ,4.6
+RICE                ,5.6
+RICE                ,19
+RICE                ,2.4
+RICE                ,3
+RICE                ,5.1
+RICE                ,7.7
+RICE                ,8.1
+RICE                ,4.7
+ROCK                ,8.4
+ROCK                ,1.6
+ROSEAU              ,6
+ROSEAU              ,1.1
+ROSEAU              ,11.4
+ROSEAU              ,4.3
+ROSEAU              ,3.6
+ROSEAU              ,10.3
+ROSEAU              ,3.4
+ROSEAU              ,3.1
+ROSEAU              ,3.6
+ROSEAU              ,2.7
+ROSEAU              ,4
+ROSEAU              ,1.2
+ROSEAU              ,1.7
+ROSEAU              ,4.2
+SCOTT               ,19.3
+SCOTT               ,9.1
+SCOTT               ,2
+SCOTT               ,11.4
+SCOTT               ,10.2
+SCOTT               ,2.1
+SCOTT               ,1.2
+SCOTT               ,3.2
+SCOTT               ,2
+SCOTT               ,4.3
+SCOTT               ,2.2
+SCOTT               ,5.4
+SCOTT               ,25.2
+SHERBURNE           ,5.1
+SHERBURNE           ,2.3
+SHERBURNE           ,3.2
+SHERBURNE           ,2.5
+SHERBURNE           ,2.8
+SHERBURNE           ,3.1
+SHERBURNE           ,1.6
+SHERBURNE           ,4.7
+SIBLEY              ,4
+SIBLEY              ,5
+SIBLEY              ,1.5
+SIBLEY              ,4.8
+ST LOUIS            ,0.8
+ST LOUIS            ,0.5
+ST LOUIS            ,2.4
+ST LOUIS            ,2.3
+ST LOUIS            ,4.6
+ST LOUIS            ,11
+ST LOUIS            ,14.9
+ST LOUIS            ,8.6
+ST LOUIS            ,4.5
+ST LOUIS            ,1.5
+ST LOUIS            ,3.9
+ST LOUIS            ,1.8
+ST LOUIS            ,1.6
+ST LOUIS            ,0.5
+ST LOUIS            ,0.4
+ST LOUIS            ,0.5
+ST LOUIS            ,8.7
+ST LOUIS            ,1.6
+ST LOUIS            ,1.4
+ST LOUIS            ,8.7
+ST LOUIS            ,11.1
+ST LOUIS            ,1.5
+ST LOUIS            ,1.1
+ST LOUIS            ,0.9
+ST LOUIS            ,0.7
+ST LOUIS            ,4.2
+ST LOUIS            ,3.4
+ST LOUIS            ,2.1
+ST LOUIS            ,2.9
+ST LOUIS            ,1.8
+ST LOUIS            ,1.8
+ST LOUIS            ,2.4
+ST LOUIS            ,1.7
+ST LOUIS            ,0.8
+ST LOUIS            ,11.7
+ST LOUIS            ,1.8
+ST LOUIS            ,2.8
+ST LOUIS            ,3.5
+ST LOUIS            ,3.6
+ST LOUIS            ,3.5
+ST LOUIS            ,3
+ST LOUIS            ,3.2
+ST LOUIS            ,3.1
+ST LOUIS            ,3.3
+ST LOUIS            ,1.7
+ST LOUIS            ,5.6
+ST LOUIS            ,3.4
+ST LOUIS            ,1.5
+ST LOUIS            ,32.2
+ST LOUIS            ,1.1
+ST LOUIS            ,2.1
+ST LOUIS            ,0.8
+ST LOUIS            ,1.5
+ST LOUIS            ,1.3
+ST LOUIS            ,3.1
+ST LOUIS            ,7.2
+ST LOUIS            ,1.4
+ST LOUIS            ,1.3
+ST LOUIS            ,1.5
+ST LOUIS            ,5
+ST LOUIS            ,2.3
+ST LOUIS            ,2.4
+ST LOUIS            ,1.2
+ST LOUIS            ,5.4
+ST LOUIS            ,1.1
+ST LOUIS            ,1.4
+ST LOUIS            ,7.2
+ST LOUIS            ,1.1
+ST LOUIS            ,3.3
+ST LOUIS            ,3.2
+ST LOUIS            ,1.5
+ST LOUIS            ,3.6
+ST LOUIS            ,0.8
+ST LOUIS            ,1.6
+ST LOUIS            ,1.4
+ST LOUIS            ,2.7
+ST LOUIS            ,3.3
+ST LOUIS            ,0.9
+ST LOUIS            ,0.6
+ST LOUIS            ,2
+ST LOUIS            ,1.9
+ST LOUIS            ,0.9
+ST LOUIS            ,5.4
+ST LOUIS            ,1.5
+ST LOUIS            ,3.1
+ST LOUIS            ,1.8
+ST LOUIS            ,0.9
+ST LOUIS            ,3.3
+ST LOUIS            ,1.7
+ST LOUIS            ,3.1
+ST LOUIS            ,0.7
+ST LOUIS            ,4.3
+ST LOUIS            ,1.4
+ST LOUIS            ,1.8
+ST LOUIS            ,1.5
+ST LOUIS            ,2.2
+ST LOUIS            ,2.4
+ST LOUIS            ,2.7
+ST LOUIS            ,1.7
+ST LOUIS            ,1.1
+ST LOUIS            ,1.8
+ST LOUIS            ,0.2
+ST LOUIS            ,2.2
+ST LOUIS            ,4.6
+ST LOUIS            ,2.1
+ST LOUIS            ,2
+ST LOUIS            ,0.7
+ST LOUIS            ,6.4
+ST LOUIS            ,3
+ST LOUIS            ,2
+ST LOUIS            ,0.9
+ST LOUIS            ,3.3
+ST LOUIS            ,1.8
+ST LOUIS            ,1.8
+ST LOUIS            ,2.2
+ST LOUIS            ,4.3
+STEARNS             ,7.5
+STEARNS             ,6.4
+STEARNS             ,8.3
+STEARNS             ,2.1
+STEARNS             ,3.3
+STEARNS             ,1.3
+STEARNS             ,5
+STEARNS             ,1
+STEARNS             ,7
+STEARNS             ,5.7
+STEARNS             ,10.1
+STEARNS             ,6.6
+STEARNS             ,2.6
+STEARNS             ,3.3
+STEARNS             ,1.5
+STEARNS             ,5
+STEARNS             ,7.4
+STEARNS             ,14.5
+STEARNS             ,1.8
+STEARNS             ,7.4
+STEARNS             ,2.6
+STEARNS             ,3.7
+STEARNS             ,1.9
+STEARNS             ,2.2
+STEARNS             ,5
+STEELE              ,7.3
+STEELE              ,3.7
+STEELE              ,2.9
+STEELE              ,4.4
+STEELE              ,8.4
+STEELE              ,5.1
+STEELE              ,3.6
+STEELE              ,1.5
+STEELE              ,8.6
+STEELE              ,10.6
+STEVENS             ,8
+STEVENS             ,4.5
+SWIFT               ,3
+SWIFT               ,2.4
+SWIFT               ,1.5
+SWIFT               ,4.8
+TODD                ,6.8
+TODD                ,2.1
+TODD                ,6
+TRAVERSE            ,2.9
+TRAVERSE            ,6.7
+TRAVERSE            ,19.3
+TRAVERSE            ,4
+WABASHA             ,5.9
+WABASHA             ,9
+WABASHA             ,8.4
+WABASHA             ,1.1
+WABASHA             ,3.1
+WABASHA             ,11.5
+WABASHA             ,9.6
+WADENA              ,2.9
+WADENA              ,0.7
+WADENA              ,3.2
+WADENA              ,4.7
+WADENA              ,4.8
+WASECA              ,0.4
+WASECA              ,9.3
+WASECA              ,1.7
+WASECA              ,0.9
+WASHINGTON          ,10.2
+WASHINGTON          ,7.7
+WASHINGTON          ,2.2
+WASHINGTON          ,6.5
+WASHINGTON          ,12.2
+WASHINGTON          ,4.6
+WASHINGTON          ,6.2
+WASHINGTON          ,6.5
+WASHINGTON          ,2.8
+WASHINGTON          ,1.9
+WASHINGTON          ,1.2
+WASHINGTON          ,2.4
+WASHINGTON          ,1
+WASHINGTON          ,1.2
+WASHINGTON          ,1.6
+WASHINGTON          ,0.8
+WASHINGTON          ,1.7
+WASHINGTON          ,4.7
+WASHINGTON          ,1.7
+WASHINGTON          ,3.3
+WASHINGTON          ,0.8
+WASHINGTON          ,9.8
+WASHINGTON          ,5.3
+WASHINGTON          ,8.5
+WASHINGTON          ,1.9
+WASHINGTON          ,6.6
+WASHINGTON          ,3.8
+WASHINGTON          ,5.9
+WASHINGTON          ,4.9
+WASHINGTON          ,2.5
+WASHINGTON          ,10.7
+WASHINGTON          ,2.4
+WASHINGTON          ,2.1
+WASHINGTON          ,4.7
+WASHINGTON          ,3.7
+WASHINGTON          ,13.4
+WASHINGTON          ,2.9
+WASHINGTON          ,4.3
+WASHINGTON          ,3.8
+WASHINGTON          ,1.8
+WASHINGTON          ,1.5
+WASHINGTON          ,1.8
+WASHINGTON          ,1.3
+WASHINGTON          ,6.6
+WASHINGTON          ,20.4
+WASHINGTON          ,6
+WATONWAN            ,13.8
+WATONWAN            ,10.2
+WATONWAN            ,5.7
+WILKIN              ,9.3
+WINONA              ,3.4
+WINONA              ,4.1
+WINONA              ,11.6
+WINONA              ,7.2
+WINONA              ,4.7
+WINONA              ,1.8
+WINONA              ,0.7
+WINONA              ,4.7
+WINONA              ,10.2
+WINONA              ,11.3
+WINONA              ,7.6
+WINONA              ,11.8
+WINONA              ,0.5
+WRIGHT              ,6.7
+WRIGHT              ,5.3
+WRIGHT              ,3.1
+WRIGHT              ,2.1
+WRIGHT              ,7.3
+WRIGHT              ,5.1
+WRIGHT              ,2.2
+WRIGHT              ,2.3
+WRIGHT              ,15.9
+WRIGHT              ,9.5
+WRIGHT              ,6.4
+WRIGHT              ,4.5
+WRIGHT              ,5
+YELLOW MEDICINE     ,3.7
+YELLOW MEDICINE     ,2.9

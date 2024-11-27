@@ -169,8 +169,7 @@ $\mu_i = \alpha_{j[i]} + \beta x_i$ for $i = 1 \ldots n$
 
 where $x_i$ is the number of homeworks completed.
 
-
-**Priors** 
+**Priors**
 
 $\alpha_j \sim N(\mu_{\alpha},\sigma^2_{\alpha})$ for $j = 1 \ldots m$
 
@@ -443,11 +442,15 @@ ggplot(alpha_samps, aes(x = alpha_ind, y = alpha.j)) +
 <!-- ## Results: Posterior samples of $\mu_{ij}$ {style="font-size: 65%;"} -->
 
 <!-- ```{r} -->
+
 <!-- pred_ind <- 1:jags.data$npred -->
+
 <!-- pred_samps <- m %>% spread_draws(mu_pred.k[pred_ind])  -->
 
 <!-- pred_samps$traj <- rep(1:dim(m)[1],jags.data$npred) -->
+
 <!-- pred_samps$x <- rep(jags.data$xpred.k, each = dim(m)[1]) -->
+
 <!-- pred_samps$school_id <- rep(jags.data$school_pred, each = dim(m)[1]) -->
 
 <!-- pred_samps <- pred_samps %>% arrange(school_id,x) %>% mutate(traj = as.factor(traj)) -->
@@ -455,11 +458,17 @@ ggplot(alpha_samps, aes(x = alpha_ind, y = alpha.j)) +
 <!-- ``` -->
 
 <!-- ```{r} -->
+
 <!-- ggplot(school_performance_dat, aes(x = homework_completed, y = math_score)) + -->
+
 <!--   geom_point(alpha = 0.3) + -->
+
 <!--   geom_line(data = pred_samps %>% filter(traj == c(1:20)),aes(x = x, y = mu_pred.k,group = traj),alpha = 0.3) + -->
+
 <!--   theme_bw() + -->
+
 <!--   facet_wrap(~school_id) -->
+
 <!-- ``` -->
 
 ## Results: Regression lines + 95% Credible Intervals {style="font-size: 65%;"}
@@ -527,7 +536,7 @@ $\mu_i = \alpha_{j[i]} + \beta_{j[i]} x_i$ for $i = 1 \ldots n$
 
 $\beta \sim Normal(\mu_{\beta}, \sigma_{\beta})$
 
-![](images/Screenshot 2024-11-22 at 09.50.02.png)
+![](images/Screenshot%202024-11-22%20at%2009.50.02.png)
 
 ```{r, eval = FALSE}
 grViz("
@@ -838,7 +847,6 @@ ggplot(data = pred_summary,aes(x = x, y = .value),alpha = 0.3) +
 
 ```
 
-
 ## Zoom in {style="font-size: 65%;"}
 
 ```{r}
@@ -871,7 +879,6 @@ ppc_stat_grouped(y,yrep3,group = school_performance_dat$private,  stat = "r",bin
 # ppc_stat_grouped(y,yrep,group = school_performance_dat$private,  stat = "median")
 ```
 
-
 ## Class Example {style="font-size: 65%;"}
 
 We have data containing a sub-sample of outcomes for the annual Cherry Blossom Ten Mile race in Washington, D.C.
@@ -884,4 +891,4 @@ running_dat <- cherry_blossom_sample
 running_dat
 ```
 
-Fit a Bayesian hierarchical regression model to these data. 
+Fit a Bayesian hierarchical regression model to these data.
