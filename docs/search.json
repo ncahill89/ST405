@@ -1663,7 +1663,7 @@
     "href": "10-BGLM.html#generalized-linear-models",
     "title": "Bayesian Data Analysis",
     "section": "Generalized Linear Models",
-    "text": "Generalized Linear Models\nA Generalized Linear Model (GLM) is a flexible extension of linear regression models that allows for:\n\nResponse variables to follow a non-normal distribution, such as binomial, Poisson, or others.\nLink functions to connect the linear predictor (a linear combination of independent variables) to the mean of the response variable in a way that is appropriate for its distribution.\n\nThe GLM framework consists of three components:\n\nRandom component: Specifies the probability distribution of the response variable (e.g., normal, binomial, Poisson).\nSystematic component: A linear predictor formed by the independent variables and their coefficients (e.g., ( = X)).\nLink function: Transforms the expected value of the response variable to relate it linearly to the predictors (e.g., log, logit).\n\nExamples include logistic regression, Poisson regression, and others tailored to specific data types and distributions."
+    "text": "Generalized Linear Models\nA Generalized Linear Model (GLM) is a flexible extension of linear regression models that allows for:\n\nResponse variables to follow a non-normal distribution, such as binomial, Poisson, or others.\nLink functions to connect the linear predictor (a linear combination of independent variables) to the mean of the response variable in a way that is appropriate for its distribution.\n\nThe GLM framework consists of three components:\n\nRandom component: Specifies the probability distribution of the response variable (e.g., normal, binomial, Poisson).\nSystematic component: A linear predictor formed by the independent variables and their coefficients (e.g., ( \\(\\eta = X\\beta\\) )).\nLink function: Transforms the expected value of the response variable to relate it linearly to the predictors (e.g., log, logit).\n\nExamples include logistic regression, Poisson regression, and others tailored to specific data types and distributions."
   },
   {
     "objectID": "10-BGLM.html#components-of-a-generalized-linear-model",
@@ -1684,7 +1684,7 @@
     "href": "10-BGLM.html#logistic-regression-models-binary-responses-1",
     "title": "Bayesian Data Analysis",
     "section": "Logistic regression models: binary responses",
-    "text": "Logistic regression models: binary responses\nNote that since we are interested in the parameter \\(\\pi\\):\n\\[\\begin{eqnarray*}\n% \\mbox{logit}(\\pi) &=& \\eta \\\\\n\\mbox{log}\\left(\\frac{\\pi}{1-\\pi}\\right) &=& \\eta \\\\\n\\frac{\\pi}{1-\\pi} &=& e^{\\eta} \\\\\n% \\pi &=& e^{\\eta}(1-\\pi) \\\\\n% \\pi + e^{\\eta}\\pi  &=& e^{\\eta} \\\\\n% \\pi(1 + e^{\\eta}) &=& e^{\\eta} \\\\\n\\pi &=& \\frac{e^{\\eta}}{1 + e^{\\eta}} \\\\\n% \\pi &=& \\frac{e^{\\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}}}{1 + e^{\\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}}}\\\\\n\\end{eqnarray*}\\]\nThis is called the logistic function.\nNotice that \\(0 &lt; \\displaystyle\\frac{e^{\\eta}}{1 + e^{\\eta}} &lt; 1\\).\nThis gives us the logistic regression function:\n\\[\\log\\left(\\frac{\\pi}{1-\\pi}\\right) = \\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}.\\]"
+    "text": "Logistic regression models: binary responses\nThis gives us the logistic regression function:\n\\[\\log\\left(\\frac{\\pi}{1-\\pi}\\right) = \\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}.\\]\nNote that since we are interested in the parameter \\(\\pi\\):\n\\[\\begin{eqnarray*}\n% \\mbox{logit}(\\pi) &=& \\eta \\\\\n\\mbox{log}\\left(\\frac{\\pi}{1-\\pi}\\right) &=& \\eta \\\\\n\\frac{\\pi}{1-\\pi} &=& e^{\\eta} \\\\\n% \\pi &=& e^{\\eta}(1-\\pi) \\\\\n% \\pi + e^{\\eta}\\pi  &=& e^{\\eta} \\\\\n% \\pi(1 + e^{\\eta}) &=& e^{\\eta} \\\\\n\\pi &=& \\frac{e^{\\eta}}{1 + e^{\\eta}} \\\\\n% \\pi &=& \\frac{e^{\\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}}}{1 + e^{\\alpha + \\beta_{1}x_{1} + ... + \\beta_{k}x_{k}}}\\\\\n\\end{eqnarray*}\\]\nNotice that \\(0 &lt; \\displaystyle\\frac{e^{\\eta}}{1 + e^{\\eta}} &lt; 1\\)."
   },
   {
     "objectID": "10-BGLM.html#aside-interpreting-odds",
@@ -1698,14 +1698,14 @@
     "href": "10-BGLM.html#interpretation-of-logistic-regression-parameters",
     "title": "Bayesian Data Analysis",
     "section": "Interpretation of logistic regression parameters",
-    "text": "Interpretation of logistic regression parameters\nConsider the model with one predictor (\\(k = 1\\)):\n\\[\\mbox{log}\\left(\\frac{\\pi}{1-\\pi}\\right) = \\alpha + \\beta_{1}x_{1}\\]\nInterpretation of \\(\\alpha\\):\nAt \\(x_1 = 0\\), then \\[\\begin{eqnarray*}\n\\log\\left(\\frac{\\pi}{1-\\pi}\\right) &=& \\alpha \\\\\n\\frac{\\pi}{1-\\pi} &=& e^{\\alpha}\\\\\n\\end{eqnarray*}\\] So \\(e^{\\beta_0}\\) = the success odds at \\(x_1 = 0\\)."
+    "text": "Interpretation of logistic regression parameters\nConsider the model with one predictor (\\(k = 1\\)):\n\\[\\mbox{log}\\left(\\frac{\\pi}{1-\\pi}\\right) = \\alpha + \\beta_{1}x\\]\nInterpretation of \\(\\alpha\\):\nAt \\(x = 0\\), then \\[\\begin{eqnarray*}\n\\log\\left(\\frac{\\pi}{1-\\pi}\\right) &=& \\alpha \\\\\n\\frac{\\pi}{1-\\pi} &=& e^{\\alpha}\\\\\n\\end{eqnarray*}\\] So \\(e^{\\alpha}\\) = the success odds at \\(x = 0\\)."
   },
   {
     "objectID": "10-BGLM.html#interpretation-of-logistic-regression-parameters-1",
     "href": "10-BGLM.html#interpretation-of-logistic-regression-parameters-1",
     "title": "Bayesian Data Analysis",
     "section": "Interpretation of logistic regression parameters",
-    "text": "Interpretation of logistic regression parameters\nInterpretation of \\(\\beta_{1}\\):\nSuppose \\(X_1\\) increases from \\(x_1\\) to \\(x_1+1\\). Let \\(w_1\\) = the success odds at \\(x_1\\) and \\(w_2\\) = the success odds at \\(x_1+1\\). Then the odds change from: \\[w_1 = e^{\\alpha + \\beta_{1}x_{1}}\\] to \\[\\begin{eqnarray*}\nw_2 &=& e^{\\alpha + \\beta_{1}(x_{1}+1)} \\\\\n&=& w_{1} e^{\\beta_{1}}\n\\end{eqnarray*}\\]\ni.e., increasing \\(X_1\\) by 1 unit changes the success odds by a multiplicative factor of \\(e^{\\beta_{1}}\\)\nOr, \\[\\frac{w_2}{w_1} = e^{\\beta_{1}}\\]\ni.e., \\(e^{\\beta_{1}}\\) is the odds ratio for a unit increase in \\(x_1\\)."
+    "text": "Interpretation of logistic regression parameters\nInterpretation of \\(\\beta_{1}\\):\nSuppose \\(X\\) increases from \\(x\\) to \\(x+1\\). Let \\(w_1\\) = the success odds at \\(x\\) and \\(w_2\\) = the success odds at \\(x+1\\). Then the odds change from: \\[w_1 = e^{\\alpha + \\beta_{1}x}\\] to \\[\\begin{eqnarray*}\nw_2 &=& e^{\\alpha + \\beta_{1}(x+1)} \\\\\n&=& w_{1} e^{\\beta_{1}}\n\\end{eqnarray*}\\]\ni.e., increasing \\(X\\) by 1 unit changes the success odds by a multiplicative factor of \\(e^{\\beta_{1}}\\)\nOr, \\[\\frac{w_2}{w_1} = e^{\\beta_{1}}\\]\ni.e., \\(e^{\\beta_{1}}\\) is the odds ratio for a unit increase in \\(X\\)."
   },
   {
     "objectID": "10-BGLM.html#example-rain-in-perth",
@@ -1719,7 +1719,7 @@
     "href": "10-BGLM.html#model-specification-and-logit-link",
     "title": "Bayesian Data Analysis",
     "section": "Model specification and logit link",
-    "text": "Model specification and logit link\nThe model specification:\n\\(Y \\sim \\mbox{Bernoulli}(\\pi).\\)\n\\(\\eta = \\alpha + \\beta_{1}x_{1}\\)\nLogit link function:\n\\(g(\\pi) = \\log\\left(\\frac{\\pi}{1-\\pi}\\right) = \\eta.\\)\n\n\n\nAn example relationship between rain and humidity on the log(odds), odds, and probability scales (Example from Bayes Rules)."
+    "text": "Model specification and logit link\nThe model specification:\n\\(y_i \\sim \\mbox{Bernoulli}(\\pi_i).\\)\n\\(\\eta_i = \\alpha + \\beta_{1}x_i\\)\nLogit link function:\n\\(g(\\pi_i) = \\log\\left(\\frac{\\pi_i}{1-\\pi_i}\\right) = \\eta_i.\\)\n\n\n\nAn example relationship between rain and humidity on the log(odds), odds, and probability scales (Example from Bayes Rules)."
   },
   {
     "objectID": "10-BGLM.html#specify-the-jags-model-simple-logistic-regression",
@@ -1733,7 +1733,7 @@
     "href": "10-BGLM.html#results-parameters",
     "title": "Bayesian Data Analysis",
     "section": "Results: Parameters",
-    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\n\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     -5.02   -6.51   -3.67     0.95 median qi       \n2 beta       0.0542  0.0350  0.0752   0.95 median qi"
+    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\n\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     -5.09   -6.43   -3.84     0.95 median qi       \n2 beta       0.0552  0.0373  0.0741   0.95 median qi"
   },
   {
     "objectID": "10-BGLM.html#results-plot-data-and-fit",
@@ -1768,14 +1768,14 @@
     "href": "10-BGLM.html#interpretation-of-parameter-estimates",
     "title": "Bayesian Data Analysis",
     "section": "Interpretation of parameter estimates",
-    "text": "Interpretation of parameter estimates\nConsider the model with one predictor (\\(k = 1\\)):\n\\[log(\\lambda) = \\alpha + \\beta x_{1}\\]\nInterpretation of \\(\\alpha\\):\nAt \\(x_1 = 0\\), then \\[\\begin{eqnarray*}\n\\log(\\lambda) &=& \\alpha \\\\\n\\lambda &=& e^{\\alpha}\\\\\n\\end{eqnarray*}\\] So \\(e^{\\alpha}\\) = the expected count at \\(x_1 = 0\\)."
+    "text": "Interpretation of parameter estimates\nConsider the model with one predictor (\\(k = 1\\)):\n\\[log(\\lambda) = \\alpha + \\beta x\\]\nInterpretation of \\(\\alpha\\):\nAt \\(x = 0\\), then \\[\\begin{eqnarray*}\n\\log(\\lambda) &=& \\alpha \\\\\n\\lambda &=& e^{\\alpha}\\\\\n\\end{eqnarray*}\\] So \\(e^{\\alpha}\\) = the expected count at \\(x = 0\\)."
   },
   {
     "objectID": "10-BGLM.html#interpretation-of-logistic-regression-parameters-2",
     "href": "10-BGLM.html#interpretation-of-logistic-regression-parameters-2",
     "title": "Bayesian Data Analysis",
     "section": "Interpretation of logistic regression parameters",
-    "text": "Interpretation of logistic regression parameters\nInterpretation of \\(\\beta\\):\nSuppose \\(x_1\\) increases from \\(x\\) to \\(x+1\\). Then \\(\\lambda\\) changes from\n\\[\\lambda(x) = \\mbox{exp}(\\alpha + \\beta x)\\] to \\[\\begin{eqnarray*}\n\\lambda(x+1) &=& \\mbox{exp}(\\alpha + \\beta (x+1)) \\\\\n&=& \\lambda(x)e^{\\beta}\n\\end{eqnarray*}\\]\nEach unit increase in \\(x_1\\) multiplies the mean response (expected count) by \\(e^{\\beta_1}\\)."
+    "text": "Interpretation of logistic regression parameters\nInterpretation of \\(\\beta\\):\nSuppose \\(X\\) increases from \\(x\\) to \\(x+1\\). Then \\(\\lambda\\) changes from\n\\[\\lambda(x) = \\mbox{exp}(\\alpha + \\beta x)\\] to \\[\\begin{eqnarray*}\n\\lambda(x+1) &=& \\mbox{exp}(\\alpha + \\beta (x+1)) \\\\\n&=& \\lambda(x)e^{\\beta}\n\\end{eqnarray*}\\]\nEach unit increase in \\(X\\) multiplies the mean response (expected count) by \\(e^{\\beta_1}\\)."
   },
   {
     "objectID": "10-BGLM.html#example---fabric-faults",
@@ -1803,7 +1803,7 @@
     "href": "10-BGLM.html#results-parameters-1",
     "title": "Bayesian Data Analysis",
     "section": "Results: Parameters",
-    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     2.10    1.97    2.22      0.95 median qi       \n2 beta      0.00194 0.00137 0.00254   0.95 median qi"
+    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     2.10    1.97    2.22      0.95 median qi       \n2 beta      0.00193 0.00132 0.00255   0.95 median qi"
   },
   {
     "objectID": "10-BGLM.html#results-plot-data-and-fit-1",

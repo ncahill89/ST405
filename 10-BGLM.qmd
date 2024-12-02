@@ -42,13 +42,13 @@ The GLM framework consists of three components:
 
 1.  **Random component**: Specifies the probability distribution of the response variable (e.g., normal, binomial, Poisson).
 
-2.  **Systematic component**: A linear predictor formed by the independent variables and their coefficients (e.g., ( \eta = X\beta )).
+2.  **Systematic component**: A linear predictor formed by the independent variables and their coefficients (e.g., ( $\eta = X\beta$ )).
 
 3.  **Link function**: Transforms the expected value of the response variable to relate it linearly to the predictors (e.g., log, logit).
 
 Examples include **logistic regression**, **Poisson regression**, and others tailored to specific data types and distributions.
 
-## Components of a generalized linear model {style="font-size: 65%;"}
+## Components of a generalized linear model {style="font-size: 60%;"}
 
 **Random component**
 
@@ -98,6 +98,10 @@ $$g(\pi) =  \log\left(\frac{\pi}{1-\pi}\right) = \eta.$$
 
 ## Logistic regression models: binary responses {style="font-size: 65%;"}
 
+This gives us the **logistic regression** function:
+
+$$\log\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}.$$
+
 Note that since we are interested in the parameter $\pi$:
 
 ```{=tex}
@@ -112,13 +116,11 @@ Note that since we are interested in the parameter $\pi$:
 % \pi &=& \frac{e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}}{1 + e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}}\\
 \end{eqnarray*}
 ```
-This is called the **logistic function**.
+
 
 Notice that $0 < \displaystyle\frac{e^{\eta}}{1 + e^{\eta}} < 1$.
 
-This gives us the **logistic regression** function:
 
-$$\log\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}.$$
 
 ## Aside: Interpreting Odds {style="font-size: 65%;"}
 
@@ -134,31 +136,31 @@ Across this spectrum, comparing the odds to 1 provides perspective on an eventâ€
 
 Consider the model with one predictor ($k = 1$):
 
-$$\mbox{log}\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x_{1}$$
+$$\mbox{log}\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x$$
 
 **Interpretation of** $\alpha$:
 
-At $x_1 = 0$, then \begin{eqnarray*}
+At $x = 0$, then \begin{eqnarray*}
 \log\left(\frac{\pi}{1-\pi}\right) &=& \alpha \\
 \frac{\pi}{1-\pi} &=& e^{\alpha}\\
-\end{eqnarray*} So $e^{\beta_0}$ = the **success odds** at $x_1 = 0$.
+\end{eqnarray*} So $e^{\alpha}$ = the **success odds** at $x = 0$.
 
 ## Interpretation of logistic regression parameters {style="font-size: 65%;"}
 
 **Interpretation of** $\beta_{1}$:
 
-Suppose $X_1$ increases from $x_1$ to $x_1+1$. Let $w_1$ = the success odds at $x_1$ and $w_2$ = the success odds at $x_1+1$. Then the odds change from: $$w_1 = e^{\alpha + \beta_{1}x_{1}}$$ to \begin{eqnarray*} 
-w_2 &=& e^{\alpha + \beta_{1}(x_{1}+1)} \\
+Suppose $X$ increases from $x$ to $x+1$. Let $w_1$ = the success odds at $x$ and $w_2$ = the success odds at $x+1$. Then the odds change from: $$w_1 = e^{\alpha + \beta_{1}x}$$ to \begin{eqnarray*} 
+w_2 &=& e^{\alpha + \beta_{1}(x+1)} \\
 &=& w_{1} e^{\beta_{1}}
 \end{eqnarray*}
 
-i.e., increasing $X_1$ by 1 unit changes the success odds by a multiplicative factor of $e^{\beta_{1}}$
+i.e., increasing $X$ by 1 unit changes the success odds by a multiplicative factor of $e^{\beta_{1}}$
 
 Or, $$\frac{w_2}{w_1} = e^{\beta_{1}}$$
 
 \vspace{0.3cm}
 
-i.e., $e^{\beta_{1}}$ is the **odds ratio** for a unit increase in $x_1$.
+i.e., $e^{\beta_{1}}$ is the **odds ratio** for a unit increase in $X$.
 
 ## Example: Rain in Perth {style="font-size: 65%;"}
 
@@ -184,13 +186,13 @@ ggplot(weather, aes(x = raintomorrow, y = humidity9am)) +
 
 **The model specification:**
 
-$Y \sim \mbox{Bernoulli}(\pi).$
+$y_i \sim \mbox{Bernoulli}(\pi_i).$
 
-$\eta = \alpha + \beta_{1}x_{1}$
+$\eta_i = \alpha + \beta_{1}x_i$
 
 **Logit link function:**
 
-$g(\pi) = \log\left(\frac{\pi}{1-\pi}\right) = \eta.$
+$g(\pi_i) = \log\left(\frac{\pi_i}{1-\pi_i}\right) = \eta_i.$
 
 [![An example relationship between rain and humidity on the log(odds), odds, and probability scales (Example from Bayes Rules).](images/Screenshot%202024-11-25%20at%2009.56.04.png)](https://www.bayesrulesbook.com/chapter-13)
 
@@ -404,7 +406,7 @@ $$\eta = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}$$
 
 $$g(\lambda) = \log(\lambda) = \eta$$
 
-## Poisson regression models: count responses {style="font-size: 65%;"}
+## Poisson regression models: count responses {style="font-size: 60%;"}
 
 Note that since we are interested in the parameter $\lambda$:
 
@@ -454,27 +456,27 @@ A typical value of $y$ conditioned on $x$ should be roughly equivalent to the va
 
 Consider the model with one predictor ($k = 1$):
 
-$$log(\lambda) = \alpha + \beta x_{1}$$
+$$log(\lambda) = \alpha + \beta x$$
 
 **Interpretation of** $\alpha$:
 
-At $x_1 = 0$, then \begin{eqnarray*}
+At $x = 0$, then \begin{eqnarray*}
 \log(\lambda) &=& \alpha \\
 \lambda &=& e^{\alpha}\\
-\end{eqnarray*} So $e^{\alpha}$ = the **expected count** at $x_1 = 0$.
+\end{eqnarray*} So $e^{\alpha}$ = the **expected count** at $x = 0$.
 
 ## Interpretation of logistic regression parameters {style="font-size: 65%;"}
 
 **Interpretation of** $\beta$:
 
-Suppose $x_1$ increases from $x$ to $x+1$. Then $\lambda$ changes from
+Suppose $X$ increases from $x$ to $x+1$. Then $\lambda$ changes from
 
 $$\lambda(x) = \mbox{exp}(\alpha + \beta x)$$ to \begin{eqnarray*}
 \lambda(x+1) &=& \mbox{exp}(\alpha + \beta (x+1)) \\
 &=& \lambda(x)e^{\beta}
 \end{eqnarray*}
 
-Each unit increase in $x_1$ multiplies the mean response (expected count) by $e^{\beta_1}$.
+Each unit increase in $X$ multiplies the mean response (expected count) by $e^{\beta_1}$.
 
 <!-- ## Poisson Regression: Introduction -->
 

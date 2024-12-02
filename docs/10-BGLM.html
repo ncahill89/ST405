@@ -413,12 +413,12 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <p>The GLM framework consists of three components:</p>
 <ol type="1">
 <li><p><strong>Random component</strong>: Specifies the probability distribution of the response variable (e.g., normal, binomial, Poisson).</p></li>
-<li><p><strong>Systematic component</strong>: A linear predictor formed by the independent variables and their coefficients (e.g., ( = X)).</p></li>
+<li><p><strong>Systematic component</strong>: A linear predictor formed by the independent variables and their coefficients (e.g., ( <span class="math inline">\(\eta = X\beta\)</span> )).</p></li>
 <li><p><strong>Link function</strong>: Transforms the expected value of the response variable to relate it linearly to the predictors (e.g., log, logit).</p></li>
 </ol>
 <p>Examples include <strong>logistic regression</strong>, <strong>Poisson regression</strong>, and others tailored to specific data types and distributions.</p>
 </section>
-<section id="components-of-a-generalized-linear-model" class="slide level2" style="font-size: 65%;">
+<section id="components-of-a-generalized-linear-model" class="slide level2" style="font-size: 60%;">
 <h2>Components of a generalized linear model</h2>
 <p><strong>Random component</strong></p>
 <p><span class="math inline">\(Y\)</span> is the response variable. <span class="math inline">\(Y \sim\)</span> some distribution.</p>
@@ -448,6 +448,8 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </section>
 <section id="logistic-regression-models-binary-responses-1" class="slide level2" style="font-size: 65%;">
 <h2>Logistic regression models: binary responses</h2>
+<p>This gives us the <strong>logistic regression</strong> function:</p>
+<p><span class="math display">\[\log\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}.\]</span></p>
 <p>Note that since we are interested in the parameter <span class="math inline">\(\pi\)</span>:</p>
 <span class="math display">\[\begin{eqnarray*}
 % \mbox{logit}(\pi) &amp;=&amp; \eta \\
@@ -459,10 +461,7 @@ Prof.&nbsp;Niamh Cahill (she/her)
 \pi &amp;=&amp; \frac{e^{\eta}}{1 + e^{\eta}} \\
 % \pi &amp;=&amp; \frac{e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}}{1 + e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}}\\
 \end{eqnarray*}\]</span>
-<p>This is called the <strong>logistic function</strong>.</p>
 <p>Notice that <span class="math inline">\(0 &lt; \displaystyle\frac{e^{\eta}}{1 + e^{\eta}} &lt; 1\)</span>.</p>
-<p>This gives us the <strong>logistic regression</strong> function:</p>
-<p><span class="math display">\[\log\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}.\]</span></p>
 </section>
 <section id="aside-interpreting-odds" class="slide level2" style="font-size: 65%;">
 <h2>Aside: Interpreting Odds</h2>
@@ -477,23 +476,23 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <section id="interpretation-of-logistic-regression-parameters" class="slide level2" style="font-size: 65%;">
 <h2>Interpretation of logistic regression parameters</h2>
 <p>Consider the model with one predictor (<span class="math inline">\(k = 1\)</span>):</p>
-<p><span class="math display">\[\mbox{log}\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x_{1}\]</span></p>
+<p><span class="math display">\[\mbox{log}\left(\frac{\pi}{1-\pi}\right) = \alpha + \beta_{1}x\]</span></p>
 <p><strong>Interpretation of</strong> <span class="math inline">\(\alpha\)</span>:</p>
-<p>At <span class="math inline">\(x_1 = 0\)</span>, then <span class="math display">\[\begin{eqnarray*}
+<p>At <span class="math inline">\(x = 0\)</span>, then <span class="math display">\[\begin{eqnarray*}
 \log\left(\frac{\pi}{1-\pi}\right) &amp;=&amp; \alpha \\
 \frac{\pi}{1-\pi} &amp;=&amp; e^{\alpha}\\
-\end{eqnarray*}\]</span> So <span class="math inline">\(e^{\beta_0}\)</span> = the <strong>success odds</strong> at <span class="math inline">\(x_1 = 0\)</span>.</p>
+\end{eqnarray*}\]</span> So <span class="math inline">\(e^{\alpha}\)</span> = the <strong>success odds</strong> at <span class="math inline">\(x = 0\)</span>.</p>
 </section>
 <section id="interpretation-of-logistic-regression-parameters-1" class="slide level2" style="font-size: 65%;">
 <h2>Interpretation of logistic regression parameters</h2>
 <p><strong>Interpretation of</strong> <span class="math inline">\(\beta_{1}\)</span>:</p>
-<p>Suppose <span class="math inline">\(X_1\)</span> increases from <span class="math inline">\(x_1\)</span> to <span class="math inline">\(x_1+1\)</span>. Let <span class="math inline">\(w_1\)</span> = the success odds at <span class="math inline">\(x_1\)</span> and <span class="math inline">\(w_2\)</span> = the success odds at <span class="math inline">\(x_1+1\)</span>. Then the odds change from: <span class="math display">\[w_1 = e^{\alpha + \beta_{1}x_{1}}\]</span> to <span class="math display">\[\begin{eqnarray*}
-w_2 &amp;=&amp; e^{\alpha + \beta_{1}(x_{1}+1)} \\
+<p>Suppose <span class="math inline">\(X\)</span> increases from <span class="math inline">\(x\)</span> to <span class="math inline">\(x+1\)</span>. Let <span class="math inline">\(w_1\)</span> = the success odds at <span class="math inline">\(x\)</span> and <span class="math inline">\(w_2\)</span> = the success odds at <span class="math inline">\(x+1\)</span>. Then the odds change from: <span class="math display">\[w_1 = e^{\alpha + \beta_{1}x}\]</span> to <span class="math display">\[\begin{eqnarray*}
+w_2 &amp;=&amp; e^{\alpha + \beta_{1}(x+1)} \\
 &amp;=&amp; w_{1} e^{\beta_{1}}
 \end{eqnarray*}\]</span></p>
-<p>i.e., increasing <span class="math inline">\(X_1\)</span> by 1 unit changes the success odds by a multiplicative factor of <span class="math inline">\(e^{\beta_{1}}\)</span></p>
+<p>i.e., increasing <span class="math inline">\(X\)</span> by 1 unit changes the success odds by a multiplicative factor of <span class="math inline">\(e^{\beta_{1}}\)</span></p>
 <p>Or, <span class="math display">\[\frac{w_2}{w_1} = e^{\beta_{1}}\]</span></p>
-<p>i.e., <span class="math inline">\(e^{\beta_{1}}\)</span> is the <strong>odds ratio</strong> for a unit increase in <span class="math inline">\(x_1\)</span>.</p>
+<p>i.e., <span class="math inline">\(e^{\beta_{1}}\)</span> is the <strong>odds ratio</strong> for a unit increase in <span class="math inline">\(X\)</span>.</p>
 </section>
 <section id="example-rain-in-perth" class="slide level2" style="font-size: 65%;">
 <h2>Example: Rain in Perth</h2>
@@ -533,10 +532,10 @@ w_2 &amp;=&amp; e^{\alpha + \beta_{1}(x_{1}+1)} \\
 <section id="model-specification-and-logit-link" class="slide level2" style="font-size: 65%;">
 <h2>Model specification and logit link</h2>
 <p><strong>The model specification:</strong></p>
-<p><span class="math inline">\(Y \sim \mbox{Bernoulli}(\pi).\)</span></p>
-<p><span class="math inline">\(\eta = \alpha + \beta_{1}x_{1}\)</span></p>
+<p><span class="math inline">\(y_i \sim \mbox{Bernoulli}(\pi_i).\)</span></p>
+<p><span class="math inline">\(\eta_i = \alpha + \beta_{1}x_i\)</span></p>
 <p><strong>Logit link function:</strong></p>
-<p><span class="math inline">\(g(\pi) = \log\left(\frac{\pi}{1-\pi}\right) = \eta.\)</span></p>
+<p><span class="math inline">\(g(\pi_i) = \log\left(\frac{\pi_i}{1-\pi_i}\right) = \eta_i.\)</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="https://www.bayesrulesbook.com/chapter-13"><img data-src="images/Screenshot 2024-11-25 at 09.56.04.png" alt="An example relationship between rain and humidity on the log(odds), odds, and probability scales (Example from Bayes Rules)."></a></p>
@@ -591,8 +590,8 @@ w_2 &amp;=&amp; e^{\alpha + \beta_{1}(x_{1}+1)} \\
 <pre><code># A tibble: 2 × 7
   .variable  .value  .lower  .upper .width .point .interval
   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1 alpha     -5.02   -6.51   -3.67     0.95 median qi       
-2 beta       0.0542  0.0350  0.0752   0.95 median qi       </code></pre>
+1 alpha     -5.09   -6.43   -3.84     0.95 median qi       
+2 beta       0.0552  0.0373  0.0741   0.95 median qi       </code></pre>
 </div>
 </div>
 </section>
@@ -694,7 +693,7 @@ yrep[i] ~ dbern(pi.i[i])
 </ol>
 <p><span class="math display">\[g(\lambda) = \log(\lambda) = \eta\]</span></p>
 </section>
-<section id="poisson-regression-models-count-responses" class="slide level2" style="font-size: 65%;">
+<section id="poisson-regression-models-count-responses" class="slide level2" style="font-size: 60%;">
 <h2>Poisson regression models: count responses</h2>
 <p>Note that since we are interested in the parameter <span class="math inline">\(\lambda\)</span>:</p>
 <span class="math display">\[\begin{eqnarray*}
@@ -729,22 +728,22 @@ yrep[i] ~ dbern(pi.i[i])
 <section id="interpretation-of-parameter-estimates" class="slide level2" style="font-size: 65%;">
 <h2>Interpretation of parameter estimates</h2>
 <p>Consider the model with one predictor (<span class="math inline">\(k = 1\)</span>):</p>
-<p><span class="math display">\[log(\lambda) = \alpha + \beta x_{1}\]</span></p>
+<p><span class="math display">\[log(\lambda) = \alpha + \beta x\]</span></p>
 <p><strong>Interpretation of</strong> <span class="math inline">\(\alpha\)</span>:</p>
-<p>At <span class="math inline">\(x_1 = 0\)</span>, then <span class="math display">\[\begin{eqnarray*}
+<p>At <span class="math inline">\(x = 0\)</span>, then <span class="math display">\[\begin{eqnarray*}
 \log(\lambda) &amp;=&amp; \alpha \\
 \lambda &amp;=&amp; e^{\alpha}\\
-\end{eqnarray*}\]</span> So <span class="math inline">\(e^{\alpha}\)</span> = the <strong>expected count</strong> at <span class="math inline">\(x_1 = 0\)</span>.</p>
+\end{eqnarray*}\]</span> So <span class="math inline">\(e^{\alpha}\)</span> = the <strong>expected count</strong> at <span class="math inline">\(x = 0\)</span>.</p>
 </section>
 <section id="interpretation-of-logistic-regression-parameters-2" class="slide level2" style="font-size: 65%;">
 <h2>Interpretation of logistic regression parameters</h2>
 <p><strong>Interpretation of</strong> <span class="math inline">\(\beta\)</span>:</p>
-<p>Suppose <span class="math inline">\(x_1\)</span> increases from <span class="math inline">\(x\)</span> to <span class="math inline">\(x+1\)</span>. Then <span class="math inline">\(\lambda\)</span> changes from</p>
+<p>Suppose <span class="math inline">\(X\)</span> increases from <span class="math inline">\(x\)</span> to <span class="math inline">\(x+1\)</span>. Then <span class="math inline">\(\lambda\)</span> changes from</p>
 <p><span class="math display">\[\lambda(x) = \mbox{exp}(\alpha + \beta x)\]</span> to <span class="math display">\[\begin{eqnarray*}
 \lambda(x+1) &amp;=&amp; \mbox{exp}(\alpha + \beta (x+1)) \\
 &amp;=&amp; \lambda(x)e^{\beta}
 \end{eqnarray*}\]</span></p>
-<p>Each unit increase in <span class="math inline">\(x_1\)</span> multiplies the mean response (expected count) by <span class="math inline">\(e^{\beta_1}\)</span>.</p>
+<p>Each unit increase in <span class="math inline">\(X\)</span> multiplies the mean response (expected count) by <span class="math inline">\(e^{\beta_1}\)</span>.</p>
 <!-- ## Poisson Regression: Introduction -->
 <!-- \footnotesize -->
 <!--   - So far, we discussed regression problems where the data were assumed to be normally distributed. -->
@@ -846,7 +845,7 @@ yrep[i] ~ dbern(pi.i[i])
   .variable  .value  .lower  .upper .width .point .interval
   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
 1 alpha     2.10    1.97    2.22      0.95 median qi       
-2 beta      0.00194 0.00137 0.00254   0.95 median qi       </code></pre>
+2 beta      0.00193 0.00132 0.00255   0.95 median qi       </code></pre>
 </div>
 </div>
 </section>
