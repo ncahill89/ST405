@@ -1733,7 +1733,7 @@
     "href": "10-BGLM.html#results-parameters",
     "title": "Bayesian Data Analysis",
     "section": "Results: Parameters",
-    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\n\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     -5.09   -6.43   -3.84     0.95 median qi       \n2 beta       0.0552  0.0373  0.0741   0.95 median qi"
+    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\n\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     -5.07   -6.42   -3.80     0.95 median qi       \n2 beta       0.0548  0.0366  0.0738   0.95 median qi"
   },
   {
     "objectID": "10-BGLM.html#results-plot-data-and-fit",
@@ -1803,7 +1803,7 @@
     "href": "10-BGLM.html#results-parameters-1",
     "title": "Bayesian Data Analysis",
     "section": "Results: Parameters",
-    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     2.10    1.97    2.22      0.95 median qi       \n2 beta      0.00193 0.00132 0.00255   0.95 median qi"
+    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     2.10    1.97    2.23      0.95 median qi       \n2 beta      0.00193 0.00134 0.00253   0.95 median qi"
   },
   {
     "objectID": "10-BGLM.html#results-plot-data-and-fit-1",

@@ -406,7 +406,7 @@ $$\eta = \alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}$$
 
 $$g(\lambda) = \log(\lambda) = \eta$$
 
-## Poisson regression models: count responses {style="font-size: 60%;"}
+## Poisson regression models: count responses {style="font-size: 55%;"}
 
 Note that since we are interested in the parameter $\lambda$:
 
