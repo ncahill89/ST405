@@ -64,7 +64,7 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 ### Week 11
 
-11: [Bayesian Hierarchical Modelling - GLM]()
+11: [Bayesian Hierarchical Modelling - GLM](https://ncahill89.github.io/ST405/11-HierarchicalGLM.html)
 
 ## Tutorials
 

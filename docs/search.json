@@ -1825,5 +1825,103 @@
     "title": "Bayesian Data Analysis",
     "section": "",
     "text": "Why Use Hierarchical Regression Models?\nHierarchical regression models are useful when predictors vary across different levels of a dataset. They help account for nested or clustered data structures, providing more accurate insights into relationships at each level.\n\n\n\nEducational Research\nStudying scholastic achievement involves information at multiple levels:\n\nIndividual-level: Student characteristics, such as family background\n\nClass-level: Teacher characteristics and teaching style\n\nSchool-level: Policies, neighborhood context\n\nClustered or Stratified Sampling\nWhen data are collected through stratified or cluster sampling, hierarchical models allow for regression analyses that respect these data groupings, providing insights within and across clusters."
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#example-lip-cancer-study",
+    "href": "11-HierarchicalGLM.html#example-lip-cancer-study",
+    "title": "Bayesian Data Analysis",
+    "section": "Example: Lip cancer study",
+    "text": "Example: Lip cancer study\n\nWe will now examine incidence rates of lip cancer deaths in males in 56 counties of Scotland, registered in 1975–1980.\n\nWakefield, Jonathan. “Disease mapping and spatial regression with count data.” Biostatistics 8 2 (2007): 158-83.\n\nThe data consist of the observed and expected numbers of deaths\n\nFor each region the observed frequency of deaths \\(y_i\\) was recorded for \\(i = 1, 2 \\ldots, n\\).\nAn expected count \\(e_i\\) was calculated based on age-specific reference rates (based on all data for all counties combined) and the population-by-age distribution in the county.\n\nA covariate measuring the proportion of the population engaged in agriculture, fishing, or forestry (AFF) is also available (exposure to sunlight is a risk factor for lip cancer)"
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#aside-standardized-morbidity-ratio-smr",
+    "href": "11-HierarchicalGLM.html#aside-standardized-morbidity-ratio-smr",
+    "title": "Bayesian Data Analysis",
+    "section": "Aside: Standardized Morbidity Ratio (SMR)",
+    "text": "Aside: Standardized Morbidity Ratio (SMR)\nThe standardized morbidity ratio (SMR) is calculated as the ratio of observed cases to expected cases, often used in epidemiology to compare the health outcomes of a specific group to a standard population.\nDefinition:\n\\(SMR = \\frac{Y}{E}\\)\nWhere:\n\n\\(Y\\) = Observed number of cases\n\\(E\\) = Expected number of cases (from standard rates)\n\nExpected Value and Variance of SMR\n\nAssume \\(Y\\) follows a Poisson distribution such that \\(Y \\sim Poisson(\\lambda)\\).\nExpected value of \\(SMR\\)\\(: \\frac{\\text{E}(Y)}{E} = \\frac{\\lambda}{E}\\)\nVariance of \\(SMR\\): \\(\\frac{\\text{Var}(Y)}{E^2} = \\frac{\\lambda}{E^2}\\).\n\\(E\\) is fixed (non-random)."
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#lip-cancer-study-more-info",
+    "href": "11-HierarchicalGLM.html#lip-cancer-study-more-info",
+    "title": "Bayesian Data Analysis",
+    "section": "Lip cancer study: more info",
+    "text": "Lip cancer study: more info\n\nFor the lip cancer study, \\(SMR_i = y_i/e_i\\) is a relative risk ratio of the number of deaths observed in a population over a given period to the number that would be expected over the same period.\nAn estimate of the true (but unknown) relative risk is denoted by \\(\\theta_i\\) in county \\(i\\).\nProblem: the SMRs in some regions are based on small \\(e_is\\) (i.e., for 22 counties \\(e_i &lt; 5\\)) and the estimates are thus very uncertain.\nQuestion: How to estimate county-specific relative risks?\nRecall: that we also have the information on the percentage of the population working outside (in agriculture etc.). How do we use this information to improve the relative risk estimates?"
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#estimating-region-specific-mortality",
+    "href": "11-HierarchicalGLM.html#estimating-region-specific-mortality",
+    "title": "Bayesian Data Analysis",
+    "section": "Estimating region specific mortality",
+    "text": "Estimating region specific mortality\n\nAs usual, we need to specify how the data relates to the parameter of interest, so here’s how death counts \\(y_i\\) relate to relative risk \\(\\theta_i\\).\nA standard choice for count data is the Poisson data model: \\(y_i|\\lambda_i \\sim Poisson(\\lambda_i)\\), where \\(\\lambda_i = E(y_i) = Var(y_i).\\)\nIf we assume \\(y_i \\sim Poisson(\\lambda_i)\\) then \\(\\theta_i = \\frac{\\lambda_i}{e_i}\\)\nAlternatively we can write this as \\(\\lambda_i = \\theta_ie_i\\), such that the death count is given by the expected death count times the true relative risk.\nHow to estimate \\(\\theta_i\\)?\nThree choices:\n\nEstimate \\(\\theta_i\\) for each county independently.\nAssume \\(\\theta_i\\) is the same for all counties, \\(\\theta_i\\) = \\(\\theta\\): we would no longer investigate whether there are differences in relative risks.\nUse a hierarchical model for the \\(\\theta_i\\)’s to exchange information across counties."
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#hierarchical-model-for-estimating-relative-risks",
+    "href": "11-HierarchicalGLM.html#hierarchical-model-for-estimating-relative-risks",
+    "title": "Bayesian Data Analysis",
+    "section": "Hierarchical model for estimating relative risks",
+    "text": "Hierarchical model for estimating relative risks\n\nWe will assume the data model: \\(y_i|\\theta_i \\sim Poisson(\\theta_ie_i)\\), \\(\\theta_i &gt; 0\\).\nA Gamma distribution results in full conditionals in closed form: if we set\n\n\\[\\theta_i|\\alpha, \\beta \\sim Gamma(\\alpha, \\beta)\\] with \\(E(\\theta_i) = \\alpha/\\beta\\) and \\(Var(\\theta_i) = \\alpha/\\beta^2\\), then we get a nice interpretable form for the posterior of \\(\\theta_i\\):\n\\[\\theta_i|\\alpha, \\beta,y \\sim Gamma(\\alpha + y_i, \\beta + e_i)\\]\n\nThink of \\(\\alpha\\) as “the prior number of death counts”\nThink of \\(\\beta\\) as the “prior expected counts”\nThe posterior mean will be a weighted sum of the prior mean and the observed rel. risks\n\n\\(\\frac{\\alpha + y_i}{\\beta + e_i} = w_i \\frac{\\alpha}{\\beta} + (1-w_i) \\frac{y_i}{e_i}\\)\nwhere the weight (or shrinkage factor) \\(w_i = \\frac{\\beta}{\\beta + e_i}\\)"
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#jags-model",
+    "href": "11-HierarchicalGLM.html#jags-model",
+    "title": "Bayesian Data Analysis",
+    "section": "JAGS Model",
+    "text": "JAGS Model\n\nbhpoismodel = \"\nmodel{\nfor(i in 1:n) {\n# Poisson likelihood (data model)\ny.i[i] ~ dpois(lambda.i[i])\nlambda.i[i] &lt;- theta.i[i]*e.i[i]\n\n# prior for theta\ntheta.i[i] ~ dgamma(alpha,beta)\n# Shrinkage factor\nw.i[i] &lt;- beta/(beta + e.i[i])\n}\n# Prior distributions for hyper parameters\nalpha ~ dexp(1)\nbeta  ~ dexp(1)\n# store group mean and across-group variance\nmtheta &lt;- alpha/beta\nsdtheta &lt;- sqrt(alpha/(beta^2))\n}\n\""
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#lets-explore-the-impact-of-the-shrinkage",
+    "href": "11-HierarchicalGLM.html#lets-explore-the-impact-of-the-shrinkage",
+    "title": "Bayesian Data Analysis",
+    "section": "Let’s explore the impact of the shrinkage",
+    "text": "Let’s explore the impact of the shrinkage\n\nThis behavior illustrates both the potential benefits and hazards of smoothing;\n\nthe estimates of \\(\\theta_i\\) will be less variable than the observed SMRs,\nbut an outlying estimate that is not based on a large expected number will be shrunk, and we may miss an important excess."
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#lets-visualise-some-results",
+    "href": "11-HierarchicalGLM.html#lets-visualise-some-results",
+    "title": "Bayesian Data Analysis",
+    "section": "Let’s visualise some results",
+    "text": "Let’s visualise some results\nRaw and smoothed estimates in 56 counties of Scotland."
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#add-in-predictors-for-estimating-the-smr",
+    "href": "11-HierarchicalGLM.html#add-in-predictors-for-estimating-the-smr",
+    "title": "Bayesian Data Analysis",
+    "section": "Add in predictors for estimating the SMR",
+    "text": "Add in predictors for estimating the SMR\n\nWe have information on the the proportion of the population engaged in agriculture, fishing, or forestry (AFF) for each county (\\(x_i\\))\nA possible set-up:\n\n\\[y_i|\\lambda_i \\sim Poisson(\\lambda_i)\\]\n\\[\\lambda_i = \\theta_i e_i\\] \\[log(\\theta_i) = \\alpha_i + \\beta(x_i - \\bar{x})\\] \\[\\alpha_i|\\mu_{\\alpha},\\sigma_{\\alpha} \\sim N(\\mu_{\\alpha},\\sigma_{\\alpha})\\]\n\nNote: We switched to using normal distributions for the log-transformed county-specific intercepts."
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#add-in-predictors-for-estimating-the-smr-1",
+    "href": "11-HierarchicalGLM.html#add-in-predictors-for-estimating-the-smr-1",
+    "title": "Bayesian Data Analysis",
+    "section": "Add in predictors for estimating the SMR",
+    "text": "Add in predictors for estimating the SMR\n\nbhpoismodel2 = \"\nmodel{\nfor(i in 1:n) {\n# Poisson likelihood (data model)\ny.i[i] ~ dpois(lambda.i[i])\nlambda.i[i] &lt;- theta.i[i]*e.i[i]\n\n# prior for theta\nltheta.i[i] &lt;- alpha.i[i] + beta*(x.i[i]-mean(x.i))\ntheta.i[i] &lt;- exp(ltheta.i[i])\nalpha.i[i] ~ dnorm(mu_alpha, sigma_alpha^-2)\n\n}\n# Prior distributions for hyper parameters\nmu_alpha ~ dnorm(0,2^-2)\nbeta ~ dnorm(0,2^-2)\nsigma_alpha ~ dt(0,2^-2,1)T(0,)\n}\n\""
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#lets-look-at-expalpha_i",
+    "href": "11-HierarchicalGLM.html#lets-look-at-expalpha_i",
+    "title": "Bayesian Data Analysis",
+    "section": "Let’s look at \\(exp(\\alpha_i)\\)",
+    "text": "Let’s look at \\(exp(\\alpha_i)\\)\n\nBoxplots are shown for \\(exp(\\alpha_i)\\) which is the expected SMR for counties where \\(\\sim 9 \\%\\) work outside.\nThe solid black line is \\(exp(\\mu_{\\alpha})\\) which is the expected SMR across all counties when \\(\\sim 9\\%\\) work outside."
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#compare-expalpha_i-for-an-independent-vs-hierarchical-model",
+    "href": "11-HierarchicalGLM.html#compare-expalpha_i-for-an-independent-vs-hierarchical-model",
+    "title": "Bayesian Data Analysis",
+    "section": "Compare \\(exp(\\alpha_i)\\) for an independent vs hierarchical model",
+    "text": "Compare \\(exp(\\alpha_i)\\) for an independent vs hierarchical model\n\nThe comparison below is for 3 counties that have expected \\(&lt;5\\)\nNote the difference in the uncertainty!!"
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#lets-look-at-theta_i",
+    "href": "11-HierarchicalGLM.html#lets-look-at-theta_i",
+    "title": "Bayesian Data Analysis",
+    "section": "Let’s look at \\(\\theta_i\\)",
+    "text": "Let’s look at \\(\\theta_i\\)"
+  },
+  {
+    "objectID": "11-HierarchicalGLM.html#lets-visualise-on-a-map",
+    "href": "11-HierarchicalGLM.html#lets-visualise-on-a-map",
+    "title": "Bayesian Data Analysis",
+    "section": "Let’s visualise on a map",
+    "text": "Let’s visualise on a map"
   }
 ]
