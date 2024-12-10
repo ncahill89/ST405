@@ -1845,7 +1845,7 @@
     "href": "11-HierarchicalGLM.html#lip-cancer-study-more-info",
     "title": "Bayesian Data Analysis",
     "section": "Lip cancer study: more info",
-    "text": "Lip cancer study: more info\n\nFor the lip cancer study, \\(SMR_i = y_i/e_i\\) is a relative risk ratio of the number of deaths observed in a population over a given period to the number that would be expected over the same period.\nAn estimate of the true (but unknown) relative risk is denoted by \\(\\theta_i\\) in county \\(i\\).\nProblem: the SMRs in some regions are based on small \\(e_is\\) (i.e., for 22 counties \\(e_i &lt; 5\\)) and the estimates are thus very uncertain.\nQuestion: How to estimate county-specific relative risks?\nRecall: that we also have the information on the percentage of the population working outside (in agriculture etc.). How do we use this information to improve the relative risk estimates?"
+    "text": "Lip cancer study: more info\n\nFor the lip cancer study, \\(SMR_i = y_i/e_i\\) is a relative risk ratio of the number of deaths observed in a population over a given period to the number that would be expected over the same period.\nAn estimate of the true (but unknown) SMR (relative risk) is denoted by \\(\\theta_i\\) in county \\(i\\).\nProblem: the SMRs in some regions are based on small \\(e_is\\) (i.e., for 22 counties \\(e_i &lt; 5\\)) and the estimates are thus very uncertain.\nQuestion: How to estimate county-specific relative risks?\nRecall: that we also have the information on the percentage of the population working outside (in agriculture etc.). How do we use this information to improve the relative risk estimates?"
   },
   {
     "objectID": "11-HierarchicalGLM.html#estimating-region-specific-mortality",
@@ -1859,7 +1859,7 @@
     "href": "11-HierarchicalGLM.html#hierarchical-model-for-estimating-relative-risks",
     "title": "Bayesian Data Analysis",
     "section": "Hierarchical model for estimating relative risks",
-    "text": "Hierarchical model for estimating relative risks\n\nWe will assume the data model: \\(y_i|\\theta_i \\sim Poisson(\\theta_ie_i)\\), \\(\\theta_i &gt; 0\\).\nA Gamma distribution results in full conditionals in closed form: if we set\n\n\\[\\theta_i|\\alpha, \\beta \\sim Gamma(\\alpha, \\beta)\\] with \\(E(\\theta_i) = \\alpha/\\beta\\) and \\(Var(\\theta_i) = \\alpha/\\beta^2\\), then we get a nice interpretable form for the posterior of \\(\\theta_i\\):\n\\[\\theta_i|\\alpha, \\beta,y \\sim Gamma(\\alpha + y_i, \\beta + e_i)\\]\n\nThink of \\(\\alpha\\) as “the prior number of death counts”\nThink of \\(\\beta\\) as the “prior expected counts”\nThe posterior mean will be a weighted sum of the prior mean and the observed rel. risks\n\n\\(\\frac{\\alpha + y_i}{\\beta + e_i} = w_i \\frac{\\alpha}{\\beta} + (1-w_i) \\frac{y_i}{e_i}\\)\nwhere the weight (or shrinkage factor) \\(w_i = \\frac{\\beta}{\\beta + e_i}\\)"
+    "text": "Hierarchical model for estimating relative risks\n\nWe will assume the data model: \\(y_i|\\theta_i \\sim Poisson(\\theta_ie_i)\\), \\(\\theta_i &gt; 0\\).\nA Gamma distribution results in full conditionals in closed form: if we set\n\n\\[\\theta_i|\\alpha, \\beta \\sim Gamma(\\alpha, \\beta)\\] with \\(E(\\theta_i) = \\alpha/\\beta\\) and \\(Var(\\theta_i) = \\alpha/\\beta^2\\), then we get a nice interpretable form for the posterior of \\(\\theta_i\\):\n\\[\\theta_i|\\alpha, \\beta,y_i \\sim Gamma(\\alpha + y_i, \\beta + e_i)\\]\n\nThink of \\(\\alpha\\) as “the prior number of death counts”\nThink of \\(\\beta\\) as the “prior expected counts”\nThe posterior mean will be a weighted sum of the prior mean and the observed rel. risks\n\n\\(\\frac{\\alpha + y_i}{\\beta + e_i} = w_i \\frac{\\alpha}{\\beta} + (1-w_i) \\frac{y_i}{e_i}\\)\nwhere the weight (or shrinkage factor) \\(w_i = \\frac{\\beta}{\\beta + e_i}\\)"
   },
   {
     "objectID": "11-HierarchicalGLM.html#jags-model",
@@ -1887,7 +1887,7 @@
     "href": "11-HierarchicalGLM.html#add-in-predictors-for-estimating-the-smr",
     "title": "Bayesian Data Analysis",
     "section": "Add in predictors for estimating the SMR",
-    "text": "Add in predictors for estimating the SMR\n\nWe have information on the the proportion of the population engaged in agriculture, fishing, or forestry (AFF) for each county (\\(x_i\\))\nA possible set-up:\n\n\\[y_i|\\lambda_i \\sim Poisson(\\lambda_i)\\]\n\\[\\lambda_i = \\theta_i e_i\\] \\[log(\\theta_i) = \\alpha_i + \\beta(x_i - \\bar{x})\\] \\[\\alpha_i|\\mu_{\\alpha},\\sigma_{\\alpha} \\sim N(\\mu_{\\alpha},\\sigma_{\\alpha})\\]\n\nNote: We switched to using normal distributions for the log-transformed county-specific intercepts."
+    "text": "Add in predictors for estimating the SMR\n\nWe have information on the the proportion of the population engaged in agriculture, fishing, or forestry (AFF) for each county (\\(x_i\\))\nA possible set-up:\n\n\\[y_i|\\lambda_i \\sim Poisson(\\lambda_i)\\]\n\\[\\lambda_i = \\theta_i e_i\\] \\[log(\\theta_i) = \\alpha_i + \\beta(x_i - \\bar{x})\\] \\[\\alpha_i|\\mu_{\\alpha},\\sigma_{\\alpha} \\sim N(\\mu_{\\alpha},\\sigma_{\\alpha}^2)\\]\n\nNote: We switched to using normal distributions for the log-transformed county-specific intercepts."
   },
   {
     "objectID": "11-HierarchicalGLM.html#add-in-predictors-for-estimating-the-smr-1",

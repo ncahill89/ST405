@@ -440,7 +440,7 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <h2>Lip cancer study: more info</h2>
 <ul>
 <li><p>For the lip cancer study, <span class="math inline">\(SMR_i = y_i/e_i\)</span> is a relative risk ratio of the number of deaths observed in a population over a given period to the number that would be expected over the same period.</p></li>
-<li><p>An estimate of the true (but unknown) relative risk is denoted by <span class="math inline">\(\theta_i\)</span> in county <span class="math inline">\(i\)</span>.</p></li>
+<li><p>An estimate of the true (but unknown) SMR (relative risk) is denoted by <span class="math inline">\(\theta_i\)</span> in county <span class="math inline">\(i\)</span>.</p></li>
 <li><p>Problem: the SMRs in some regions are based on small <span class="math inline">\(e_is\)</span> (i.e., for 22 counties <span class="math inline">\(e_i &lt; 5\)</span>) and the estimates are thus very uncertain.</p></li>
 <li><p>Question: How to estimate county-specific relative risks?</p></li>
 <li><p>Recall: that we also have the information on the percentage of the population working outside (in agriculture etc.). How do we use this information to improve the relative risk estimates?</p></li>
@@ -469,7 +469,7 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <li><p>A Gamma distribution results in full conditionals in closed form: if we set</p></li>
 </ul>
 <p><span class="math display">\[\theta_i|\alpha, \beta \sim Gamma(\alpha, \beta)\]</span> with <span class="math inline">\(E(\theta_i) = \alpha/\beta\)</span> and <span class="math inline">\(Var(\theta_i) = \alpha/\beta^2\)</span>, then we get a nice interpretable form for the posterior of <span class="math inline">\(\theta_i\)</span>:</p>
-<p><span class="math display">\[\theta_i|\alpha, \beta,y \sim Gamma(\alpha + y_i, \beta + e_i)\]</span></p>
+<p><span class="math display">\[\theta_i|\alpha, \beta,y_i \sim Gamma(\alpha + y_i, \beta + e_i)\]</span></p>
 <ul>
 <li><p>Think of <span class="math inline">\(\alpha\)</span> as “the prior number of death counts”</p></li>
 <li><p>Think of <span class="math inline">\(\beta\)</span> as the “prior expected counts”</p></li>
@@ -524,7 +524,7 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <li><p>A possible set-up:</p></li>
 </ul>
 <p><span class="math display">\[y_i|\lambda_i \sim Poisson(\lambda_i)\]</span></p>
-<p><span class="math display">\[\lambda_i = \theta_i e_i\]</span> <span class="math display">\[log(\theta_i) = \alpha_i + \beta(x_i - \bar{x})\]</span> <span class="math display">\[\alpha_i|\mu_{\alpha},\sigma_{\alpha} \sim N(\mu_{\alpha},\sigma_{\alpha})\]</span></p>
+<p><span class="math display">\[\lambda_i = \theta_i e_i\]</span> <span class="math display">\[log(\theta_i) = \alpha_i + \beta(x_i - \bar{x})\]</span> <span class="math display">\[\alpha_i|\mu_{\alpha},\sigma_{\alpha} \sim N(\mu_{\alpha},\sigma_{\alpha}^2)\]</span></p>
 <ul>
 <li>Note: We switched to using normal distributions for the log-transformed county-specific intercepts.</li>
 </ul>

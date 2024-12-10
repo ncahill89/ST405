@@ -57,7 +57,7 @@ Where:
 
 -   For the lip cancer study, $SMR_i = y_i/e_i$ is a relative risk ratio of the number of deaths observed in a population over a given period to the number that would be expected over the same period.
 
--   An estimate of the true (but unknown) relative risk is denoted by $\theta_i$ in county $i$.
+-   An estimate of the true (but unknown) SMR (relative risk) is denoted by $\theta_i$ in county $i$.
 
 -   Problem: the SMRs in some regions are based on small $e_is$ (i.e., for 22 counties $e_i < 5$) and the estimates are thus very uncertain.
 
@@ -93,7 +93,7 @@ Where:
 
 $$\theta_i|\alpha, \beta \sim Gamma(\alpha, \beta)$$ with $E(\theta_i) = \alpha/\beta$ and $Var(\theta_i) = \alpha/\beta^2$, then we get a nice interpretable form for the posterior of $\theta_i$:
 
-$$\theta_i|\alpha, \beta,y \sim Gamma(\alpha + y_i, \beta + e_i)$$
+$$\theta_i|\alpha, \beta,y_i \sim Gamma(\alpha + y_i, \beta + e_i)$$
 
 -   Think of $\alpha$ as "the prior number of death counts"
 
@@ -261,7 +261,7 @@ ggpubr::ggarrange(gg1 + ggtitle("Raw SMR Estimates") ,gg2 + ggtitle("Model Estim
 
 $$y_i|\lambda_i \sim Poisson(\lambda_i)$$
 
-$$\lambda_i = \theta_i e_i$$ $$log(\theta_i) = \alpha_i + \beta(x_i - \bar{x})$$ $$\alpha_i|\mu_{\alpha},\sigma_{\alpha} \sim N(\mu_{\alpha},\sigma_{\alpha})$$
+$$\lambda_i = \theta_i e_i$$ $$log(\theta_i) = \alpha_i + \beta(x_i - \bar{x})$$ $$\alpha_i|\mu_{\alpha},\sigma_{\alpha} \sim N(\mu_{\alpha},\sigma_{\alpha}^2)$$
 
 -   Note: We switched to using normal distributions for the log-transformed county-specific intercepts.
 
