@@ -1,6 +1,6 @@
 ---
 title: "Bayesian Data Analysis"
-subtitle: "A Bayesian Hierarichal GLM Case Study"
+subtitle: "A Bayesian hierarchical GLM Case Study"
 author: "Prof. Niamh Cahill (she/her)"
 format: revealjs
 editor: visual
