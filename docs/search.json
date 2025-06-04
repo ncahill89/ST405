@@ -1480,8 +1480,8 @@
     "objectID": "9-BHRM.html#hierarchical-linear-models",
     "href": "9-BHRM.html#hierarchical-linear-models",
     "title": "Bayesian Data Analysis",
-    "section": "",
-    "text": "Why Use Hierarchical Regression Models?\nHierarchical regression models are useful when predictors vary across different levels of a dataset. They help account for nested or clustered data structures, providing more accurate insights into relationships at each level.\n\n\n\nEducational Research\nStudying scholastic achievement involves information at multiple levels:\n\nIndividual-level: Student characteristics, such as family background\n\nClass-level: Teacher characteristics and teaching style\n\nSchool-level: Policies, neighborhood context\n\nClustered or Stratified Sampling\nWhen data are collected through stratified or cluster sampling, hierarchical models allow for regression analyses that respect these data groupings, providing insights within and across clusters."
+    "section": "Hierarchical Linear Models",
+    "text": "Hierarchical Linear Models\nWhy Use Hierarchical Regression Models?\nHierarchical regression models are useful when predictors vary across different levels of a dataset. They help account for nested or clustered data structures, providing more accurate insights into relationships at each level.\nExamples\n\nEducational Research\nStudying scholastic achievement involves information at multiple levels:\n\nIndividual-level: Student characteristics, such as family background\n\nClass-level: Teacher characteristics and teaching style\n\nSchool-level: Policies, neighborhood context\n\nClustered or Stratified Sampling\nWhen data are collected through stratified or cluster sampling, hierarchical models allow for regression analyses that respect these data groupings, providing insights within and across clusters."
   },
   {
     "objectID": "9-BHRM.html#hierarchical-linear-models-1",

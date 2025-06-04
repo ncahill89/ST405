@@ -11,36 +11,33 @@ editor: visual
 
 ## **Solutions**
 
-
 ### **Question 1: Bayesian Model for Multiple Proportions - Email Campaign Click-Through Rates**
 
 #### 1. **Model Specification**
 
 (a) The likelihood for each campaign $i$ can be modeled as a binomial distribution:
 
-
 $\text{y}_i \sim \text{Binomial}(\text{N}_i, \theta_i)$
-
 
 where:
 
-- $\text{N}_i$ is the number of emails sent for campaign $i$,
+-   $\text{N}_i$ is the number of emails sent for campaign $i$,
 
-- $\text{y}_i$ is the number of emails clicked for campaign $i$,
+-   $\text{y}_i$ is the number of emails clicked for campaign $i$,
 
-- $\theta_i$ is the click-through rate (CTR) for campaign $i$.
+-   $\theta_i$ is the click-through rate (CTR) for campaign $i$.
 
 (b) We assume a **Beta(1,1)** prior for each $\theta_i$, which represents no strong prior belief about the CTR:
 
 $\theta_i \sim \text{Beta}(1, 1)$
 
-This is a uniform prior on the interval [0, 1].
+This is a uniform prior on the interval \[0, 1\].
 
 #### 2. **JAGS Model**
 
 (a) Here is the corresponding JAGS code for this model:
 
-```r
+``` r
 CTR_model <- "
 model {
   # Loop over the three campaigns
@@ -57,9 +54,9 @@ model {
 
 (b) To implement the JAGS model we need data and paramters to monitor. We can also specify initial values if we wish (JAGS will also do this by default).
 
-- **Data Input for JAGS**:
+-   **Data Input for JAGS**:
 
-```r
+``` r
 CTR_data <- list(
   y.i = c(15, 20, 12),   # Number of clicks for campaigns A, B, C
   N.i = c(100, 120, 110), # Number of emails sent for campaigns A, B, C
@@ -67,15 +64,14 @@ CTR_data <- list(
 )
 ```
 
-- **Initial Values and Parameters to Monitor**:
+-   **Initial Values and Parameters to Monitor**:
 
-```r
+``` r
 inits <- function() list(theta.i = runif(3)) # Random initial values for CTRs
 params <- c("theta.i") # Monitor the CTRs
 ```
 
-
-- **Putting all of this together and running JAGS** 
+-   **Putting all of this together and running JAGS**
 
 ```{r, message=FALSE}
 library(rjags)
@@ -109,26 +105,28 @@ mod <- jags(data = CTR_data,
             n.burnin = 2000, 
             model.file = textConnection(CTR_model))
 ```
+
 (c) To check for convergence we can have a quick look at the summary output and trace plots.
 
 ```{r}
 mod$BUGSoutput$summary
 ```
 
-  - Rhat values and ESS look good. 
-  
+-   Rhat values and ESS look good.
+
 ```{r, fig.height=10}
 library(coda)
 # turn the model into an mcmc object
 mod_mcmc <- as.mcmc(mod)
 # get trace plot and density
 plot(mod_mcmc) 
-```  
+```
+
 #### 3. **Interpretation of Results**
 
-- After running the MCMC sampling (e.g., using 4,000 iterations and discarding the first 2,000 as burn-in), you will obtain samples from the posterior distributions of $\theta_i$.
+-   After running the MCMC sampling (e.g., using 4,000 iterations and discarding the first 2,000 as burn-in), you will obtain samples from the posterior distributions of $\theta_i$.
 
-- **(a) Plot the posterior distributions** of the CTRs for the three campaigns using a package like `tidybayes` in R (or `coda` or the base plotting functions).
+-   **(a) Plot the posterior distributions** of the CTRs for the three campaigns using a package like `tidybayes` in R (or `coda` or the base plotting functions).
 
 ```{r,message=FALSE}
 library(tidybayes)
@@ -146,12 +144,11 @@ mcmc.matrix %>%
   ylab("Campaign")
 ```
 
-- **(b) Compare the distributions** to assess the relative effectiveness of the campaigns. It appears that the posterior distribution for $\theta_B$ is shifted to the right compared to $\theta_A$ and $\theta_C$, suggesting that Campaign B is likely more effective, i.e., the click through rate is estimated to be higher. Note however, there is an overlap in terms of uncertainty in the estimated click through rate. 
-
+-   **(b) Compare the distributions** to assess the relative effectiveness of the campaigns. It appears that the posterior distribution for $\theta_B$ is shifted to the right compared to $\theta_A$ and $\theta_C$, suggesting that Campaign B is likely more effective, i.e., the click through rate is estimated to be higher. Note however, there is an overlap in terms of uncertainty in the estimated click through rate.
 
 #### 4. **Additional Analysis**
 
-- **(a) Calculate the posterior probability** that Campaign B has a higher CTR than Campaign A and Campaign C:
+-   **(a) Calculate the posterior probability** that Campaign B has a higher CTR than Campaign A and Campaign C:
 
 $P(\theta_B > \theta_A) = \frac{1}{S} \sum_{s=1}^{S} I(\theta_B^{(s)} > \theta_A^{(s)})$
 
@@ -174,10 +171,10 @@ sum(theta_B > theta_C)/length(theta_B)
 
 **Interpretation:**
 
-- The posterior probability that $\theta_B > \theta_A$ is 0.61, indicating that there is a 61% chance Campaign B has a higher CTR than Campaign A.
-- The posterior probability that $\theta_B > \theta_C$ is 0.89, indicating that there is a 89% chance Campaign B has a higher CTR than Campaign C.
+-   The posterior probability that $\theta_B > \theta_A$ is 0.61, indicating that there is a 61% chance Campaign B has a higher CTR than Campaign A.
+-   The posterior probability that $\theta_B > \theta_C$ is 0.89, indicating that there is a 89% chance Campaign B has a higher CTR than Campaign C.
 
----
+------------------------------------------------------------------------
 
 <!-- ## Additional Question - Markov Chain -->
 
@@ -198,6 +195,5 @@ sum(theta_B > theta_C)/length(theta_B)
 <!-- The multinomial distribution arises from an extension of the binomial to situations where each trial has $k \geq 2$  possible outcomes. Suppose that we have an experiment with n independent trials, where each trial produces exactly one of the events $E_1$, $E_2, \ldots, E_k$ and on each trial each event occurs with probability $\pi_1$, $\pi_2, \ldots, \pi_k$. For example, when you have 3 events $E1, E_2$ and $E_3$ that are equally likely then you can simulate a single outcome using `rmultinom(n=1, size = 1, prob = c(1/3,1/3,1/3))` -->
 
 <!-- __Hint:__ -->
+
 <!-- I suggest modifying the code from the weather example used in Week 4 to answer the question.  -->
-
-

@@ -213,7 +213,7 @@ n <- c(20,20,20,20,20,20,20,19,19,19,
 paste0(y,"/",n)
 ```
 
-- You will find Rcode on the Rstudio server that will work through the modelling options for these data. The file is called `Week8_BinomialBHM`.
+-   You will find Rcode on the Rstudio server that will work through the modelling options for these data. The file is called `Week8_BinomialBHM`.
 
 <!-- For a particular study drawn from the statistical literature, suppose the immediate aim is to estimate $\theta$, the probability of tumor in a population of female laboratory rats of type ‘F344’ that receive a zero dose of the drug (a control group). The data show that 4 out of 14 rats developed endometrial stromal polyps (a kind of tumor). It is natural to assume a binomial model for the number of tumors, given $\theta$. For convenience, we select a prior distribution for θ from the conjugate family, θ ∼ Beta(α, β). -->
 
