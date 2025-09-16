@@ -18,14 +18,14 @@ format: revealjs
 
 **📚 Tutorials:**
 
--   📍 **Wednesdays** @3pm, 4pm, 5pm in **GFLAB**, starting **Week 4 (Oct 14th)**
+-   📍 **Wednesdays** @3pm, 4pm, 5pm in **GFLAB**, starting **Week 4 (Oct 13th)**
 
 ## Information {style="font-size: 80%;"}
 
 **📝 Assessment:**
 
 -   4 **Assignments** worth **10%**
--   1 **Midterm** worth **15%** (November 11th)
+-   1 **Midterm** worth **15%** (November 10th)
 -   **Final Exam** worth **75%** (Date TBC)
 
 **📖 Textbooks:**
