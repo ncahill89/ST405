@@ -1,0 +1,53 @@
+---
+title: "Bayesian Analysis - Class Exercise"
+author: "Prof. Niamh Cahill"
+format: html
+---
+
+
+We are interested in the proportion of people that approve of the Irish government’s response to the housing crisis. Suppose you surveyed a sample of $n = 50$ people and $y = 20$ responded saying they approve. You wish to assume a Binomial likelihood for these data such that:
+
+$$
+y \sim \text{Binomial}(n, \theta)
+$$
+
+$$
+p(y \mid \theta) = c \, \theta^y (1 - \theta)^{n-y}, \quad \text{with } c = \binom{n}{y}
+$$
+
+---
+
+Now suppose a previous studyfound that the approval proportion was 
+
+$$0.5 \pm 0.1$$ 
+
+and you wish to define a Beta prior that incorporates this prior information such that:
+
+$$
+\theta \mid a, b \sim \text{Beta}(a, b)
+$$
+
+$$
+p(\theta \mid a, b) = k \, \theta^{a-1} (1 - \theta)^{b-1}, \quad \text{with } k = \frac{1}{B(a, b)}
+$$
+
+Recall that if 
+
+$$\theta \sim \text{Beta}(a, b)$$ 
+
+then:
+
+$$
+\mathbb{E}(\theta) = \frac{a}{a+b}, \qquad
+\text{Var}(\theta) = \frac{ab}{(a+b)^2 (a+b+1)}
+$$
+
+---
+
+## Exercises
+
+1. What values would you assign to \(a\) and \(b\)?  
+
+2. Write down the posterior distribution for \(\theta\).  
+
+3. What is the expected value of \(\theta\) based on the posterior distribution?  
