@@ -270,8 +270,8 @@ Suppose for the Happiness example, you want to express your underlying belief ab
 ::: {.column width="50%"}
 ```{r, fig.align='center'}
 # Beta parameters (prior)
-a <- 23
-b <- 16
+a <- 14
+b <- 9
 
 n_grid = 1000 # grid size 
 theta <- seq(0,1,length = n_grid) # grid of theta values
@@ -308,8 +308,8 @@ We can use these equations to solve for $a$ and $b$, the parameters of the Beta 
 #| output-location: column-fragment
 
 # Beta parameters (prior)
-a <- 23
-b <- 16
+a <- 14
+b <- 9
 
 n_grid = 1000 # grid size 
 theta <- seq(0,1,length = n_grid) # grid of theta values
@@ -329,8 +329,8 @@ ggplot2::ggplot(ptheta_dat, aes(x = theta, y = prior)) +
 ```{r, fig.width=6, fig.height=4.5, fig.align='center'}
 y <- 14
 n <- 20
-a <- 23
-b <- 16
+a <- 14
+b <- 9
 
 n_grid = 1000
 theta <- seq(0,1,length = n_grid) # grid of theta values
@@ -352,9 +352,9 @@ ptheta_dat_long <-
                 values_to = "value") %>%
    mutate(type = factor(type, 
                         levels =c("prior","likelihood","posterior"))) %>%    mutate(type = recode_factor(type, 
-                              `prior` = "theta %~% Be(23,16)", 
+                              `prior` = "theta %~% Be(14,9)", 
                               `likelihood` = "y %~% Binomial(n,theta)",
-                              `posterior` = "theta / y %~% Be(y+1,n-y+1)"))
+                              `posterior` = "theta / y %~% Be(y+a,n-y+b)"))
 
 
 ggplot(ptheta_dat_long, aes(x = theta, y = value)) +
