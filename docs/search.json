@@ -228,7 +228,7 @@
     "href": "index.html#lecture-slides",
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Lecture Slides",
-    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression\n\n\nWeek 7\n7: Model Checking\n\n\nWeek 8\n8: Introducing Bayesian Hierarchical Modelling\n\n\nWeek 9\n9: Bayesian Hierarchical Regression Modelling\n\n\nWeek 10\n10: Bayesian Generalised Linear Models (GLMs)\n\n\nWeek 11\n11: Bayesian Hierarchical Modelling - GLM"
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\nClass Exercise\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression\n\n\nWeek 7\n7: Model Checking\n\n\nWeek 8\n8: Introducing Bayesian Hierarchical Modelling\n\n\nWeek 9\n9: Bayesian Hierarchical Regression Modelling\n\n\nWeek 10\n10: Bayesian Generalised Linear Models (GLMs)\n\n\nWeek 11\n11: Bayesian Hierarchical Modelling - GLM"
   },
   {
     "objectID": "2a-BetaBinomial.html#scenario",
