@@ -353,8 +353,8 @@ ptheta_dat_long <-
    mutate(type = factor(type, 
                         levels =c("prior","likelihood","posterior"))) %>%    mutate(type = recode_factor(type, 
                               `prior` = "theta %~% Be(14,9)", 
-                              `likelihood` = "y %~% Binomial(n,theta)",
-                              `posterior` = "theta / y %~% Be(y+a,n-y+b)"))
+                              `likelihood` = "y %~% Binomial(20,theta)",
+                              `posterior` = "theta / y %~% Be(28,15)"))
 
 
 ggplot(ptheta_dat_long, aes(x = theta, y = value)) +
