@@ -1936,7 +1936,7 @@
     "href": "class_example.html#exercises",
     "title": "Bayesian Analysis - Class Exercise",
     "section": "Exercises",
-    "text": "Exercises\n\nWhat values would you assign to (a) and (b)?\nWrite down the posterior distribution for ().\nWhat is the expected value of () based on the posterior distribution?"
+    "text": "Exercises\n\nWhat values would you assign to \\(a\\) and \\(b\\)?\nWrite down the posterior distribution for \\(\\theta\\).\nWhat is the expected value of \\(\\theta\\) based on the posterior distribution?"
   },
   {
     "objectID": "1b-InferringBinomialProp.html",

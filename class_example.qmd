@@ -46,8 +46,8 @@ $$
 
 ## Exercises
 
-1. What values would you assign to \(a\) and \(b\)?  
+1. What values would you assign to $a$ and $b$?  
 
-2. Write down the posterior distribution for \(\theta\).  
+2. Write down the posterior distribution for $\theta$.  
 
-3. What is the expected value of \(\theta\) based on the posterior distribution?  
+3. What is the expected value of $\theta$ based on the posterior distribution?  
