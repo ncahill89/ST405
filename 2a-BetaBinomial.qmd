@@ -301,6 +301,7 @@ $Var(\theta) = \frac{ab}{(a+b)^2(a+b+1)} = 0.1^2$
 We can use these equations to solve for $a$ and $b$, the parameters of the Beta prior.
 
 ::: panel-tabset
+
 ### Visualise the Prior
 
 ```{r, echo = TRUE, include=TRUE}
