@@ -17,7 +17,8 @@ data(kidiq)
 
 ::: columns
 ::: {.column width="50%"}
-We do Bayesian inference:
+
+To do Bayesian inference:
 
 -   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$
 
@@ -103,7 +104,7 @@ ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
 
 ::: columns
 ::: {.column width="50%"}
-We do Bayesian inference:
+To do Bayesian inference:
 
 -   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$
 
@@ -190,7 +191,7 @@ ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
 
 ::: columns
 ::: {.column width="50%"}
-We do Bayesian inference:
+To do Bayesian inference:
 
 -   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$
 
@@ -277,7 +278,7 @@ ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
 
 ::: columns
 ::: {.column width="50%"}
-We do Bayesian inference:
+To do Bayesian inference:
 
 -   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$
 
@@ -364,7 +365,7 @@ ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
 
 ::: columns
 ::: {.column width="50%"}
-We do Bayesian inference:
+To do Bayesian inference:
 
 -   Start off with prior probability distribution to quantify information related to $\tau = 1/\sigma^2$ - example in blue with $\tau = 1/\sigma^2 \sim gamma(2,1)$
 
@@ -444,7 +445,7 @@ ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
 
 ::: columns
 ::: {.column width="50%"}
-We do Bayesian inference:
+To do Bayesian inference:
 
 -   Start off with prior probability distribution to quantify information related to $\tau = 1/\sigma^2$ - example in blue with $\tau = 1/\sigma^2 \sim gamma(8,4)$
 

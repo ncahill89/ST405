@@ -368,42 +368,42 @@
     "href": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution",
     "title": "Bayesian Data Analysis",
     "section": "Estimating \\(\\mu\\) from a Normal Distribution",
-    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 10.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 1)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nTo do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 10.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 1)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
   },
   {
     "objectID": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-1",
     "href": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-1",
     "title": "Bayesian Data Analysis",
     "section": "Estimating \\(\\mu\\) from a Normal Distribution",
-    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 2)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nTo do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 2)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
   },
   {
     "objectID": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-2",
     "href": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-2",
     "title": "Bayesian Data Analysis",
     "section": "Estimating \\(\\mu\\) from a Normal Distribution",
-    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 500.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 1)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nTo do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 500.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 1)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
   },
   {
     "objectID": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-3",
     "href": "3a-SingleParameterNormal.html#estimating-mu-from-a-normal-distribution-3",
     "title": "Bayesian Data Analysis",
     "section": "Estimating \\(\\mu\\) from a Normal Distribution",
-    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 500.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 2)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+    "text": "Estimating \\(\\mu\\) from a Normal Distribution\n\n\nTo do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 500.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 2)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
   },
   {
     "objectID": "3a-SingleParameterNormal.html#estimating-sigma-text-tau-1sigma2-from-a-normal-distribution",
     "href": "3a-SingleParameterNormal.html#estimating-sigma-text-tau-1sigma2-from-a-normal-distribution",
     "title": "Bayesian Data Analysis",
     "section": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution",
-    "text": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\tau = 1/\\sigma^2\\) - example in blue with \\(\\tau = 1/\\sigma^2 \\sim gamma(2,1)\\)\nCollect data, \\(y\\), assume y has a standard deviation \\(s = 2, 1/s^2 = 0.5\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\tau\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu = 0, \\sigma^2 = 1/\\tau)\\).\n\nwe’re assuming \\(\\mu\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\tau|y) \\sim gamma(?,?)\\)."
+    "text": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution\n\n\nTo do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\tau = 1/\\sigma^2\\) - example in blue with \\(\\tau = 1/\\sigma^2 \\sim gamma(2,1)\\)\nCollect data, \\(y\\), assume y has a standard deviation \\(s = 2, 1/s^2 = 0.5\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\tau\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu = 0, \\sigma^2 = 1/\\tau)\\).\n\nwe’re assuming \\(\\mu\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\tau|y) \\sim gamma(?,?)\\)."
   },
   {
     "objectID": "3a-SingleParameterNormal.html#estimating-sigma-text-tau-1sigma2-from-a-normal-distribution-1",
     "href": "3a-SingleParameterNormal.html#estimating-sigma-text-tau-1sigma2-from-a-normal-distribution-1",
     "title": "Bayesian Data Analysis",
     "section": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution",
-    "text": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution\n\n\nWe do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\tau = 1/\\sigma^2\\) - example in blue with \\(\\tau = 1/\\sigma^2 \\sim gamma(8,4)\\)\nCollect data, \\(y\\), assume y has a standard deviation \\(s = 2, 1/s^2 = 0.5\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\tau\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu = 0, \\sigma^2 = 1/\\tau)\\).\n\nwe’re assuming \\(\\mu\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\tau|y) \\sim gamma(?,?)\\)."
+    "text": "Estimating \\(\\sigma \\text{ } (\\tau = 1/\\sigma^2)\\) from a Normal Distribution\n\n\nTo do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\tau = 1/\\sigma^2\\) - example in blue with \\(\\tau = 1/\\sigma^2 \\sim gamma(8,4)\\)\nCollect data, \\(y\\), assume y has a standard deviation \\(s = 2, 1/s^2 = 0.5\\) and that n = 10.\n\nDefine the relationship between \\(y\\) and \\(\\tau\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu = 0, \\sigma^2 = 1/\\tau)\\).\n\nwe’re assuming \\(\\mu\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\tau|y) \\sim gamma(?,?)\\)."
   },
   {
     "objectID": "3a-SingleParameterNormal.html#example-cognitive-test-scores",
