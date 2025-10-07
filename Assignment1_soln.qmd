@@ -1,0 +1,139 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Assignment 1 Solutions "
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+# Solution — Bayesian estimation for Exponential data (worked solution)
+
+Recall the model: $X_1,\dots,X_n \overset{\text{iid}}{\sim}\mathrm{Exponential}(\lambda)$ with density
+
+$$f(x_i\mid\lambda)=\lambda e^{-\lambda x_i},\qquad x_i>0,\ \lambda>0.$$
+
+Prior: $\lambda\sim\mathrm{Gamma}(\alpha,\beta)$ with the **rate** parameterization
+
+$p(\lambda)\propto \lambda^{\alpha-1} e^{-\beta\lambda}$,
+
+so $\mathbb{E}[\lambda]=\dfrac{\alpha}{\beta}$ and $\mathrm{Var}(\lambda)=\dfrac{\alpha}{\beta^2}$.
+
+---
+
+## 1. Likelihood (up to proportionality)
+
+For data (x_1,\dots,x_n),
+
+$$L(\lambda\mid x_{1:n})=\prod_{i=1}^n \lambda e^{-\lambda x_i}
+= \lambda^n e^{-\lambda\sum_{i=1}^n x_i}$$.
+
+(We may drop constants not involving (\lambda).)
+
+---
+
+## 2. Why Gamma is appropriate as a prior for (\lambda)
+
+* $\lambda>0$, and the Gamma distribution has support $(0,\infty)$, so it is a natural choice.
+
+---
+
+## 3. Determine (\alpha) and (\beta) from prior beliefs
+
+The user-specified beliefs:
+
+* mean rate ≈ 0.2 units. Thus $\mathbb{E}[\lambda] =0.2$.
+  
+* prior standard deviation for the **rate** $\lambda$ is 2. Thus $\mathrm{Var}(\lambda)=4$.
+
+With the $Gamma(\alpha,\beta)$ (rate) parameterization:
+
+$$\frac{\alpha}{\beta}=0.2,\qquad \frac{\alpha}{\beta^2}=4$$.
+
+Solve for $\beta$ first from $\mathrm{Var}= \dfrac{\alpha}{\beta^2}$ and $\alpha=\beta\times 0.2$:
+
+$$\mathrm{Var} = \frac{0.2\beta}{\beta^2}=\frac{0.2}{\beta}=4
+\quad\Longrightarrow\quad
+\beta=\frac{0.2}{4}=0.05.$$
+
+Then $\alpha = 0.2\beta = 0.2\times0.05 = 0.01.$
+
+So the prior hyperparameters are
+
+$$\boxed{\alpha=0.01,\ \beta=0.05.}$$
+---
+
+## 4. Posterior distribution
+
+Multiply prior and likelihood:
+
+$$p(\lambda\mid x_{1:n})
+\propto \lambda^{\alpha-1} e^{-\beta\lambda}\times \lambda^n e^{-\lambda\sum x_i}
+= \lambda^{(\alpha+n)-1} e^{-(\beta+\sum x_i)\lambda}.
+$$
+
+Thus the posterior is
+
+$$\boxed{\lambda\mid x_{1:n}\ \sim\ \mathrm{Gamma}(\alpha+n,\ \beta+\sum_{i=1}^n x_i,).}$$
+
+---
+
+## 5. Posterior mean for the given data
+
+Observed data: 2.1,,0.9,,4.3,,3.7,,1.8.
+
+Compute:
+
+* n=5.
+* $\sum_{i=1}^n x_i = 2.1+0.9+4.3+3.7+1.8 = 12.8$.
+
+Posterior hyperparameters:
+
+$$\alpha_{\text{post}}=\alpha+n=0.01+5=5.01,\qquad
+\beta_{\text{post}}=\beta+\sum x_i=0.05+12.8=12.85.$$
+
+
+Posterior mean:
+
+$$\mathbb{E}[\lambda\mid\text{data}] = \frac{\alpha_{\text{post}}}{\beta_{\text{post}}}
+= \frac{5.01}{12.85}\approx 0.389883.$$
+
+
+Posterior variance and sd (for completeness):
+
+$$\mathrm{Var}(\lambda\mid\text{data})=\frac{5.01}{12.85^2}\approx 0.03034,
+\qquad \mathrm{sd}\approx 0.17419.$$
+
+
+So
+
+$$\boxed{\mathbb{E}[\lambda\mid\text{data}]\approx 0.3899,\quad \mathrm{sd}\approx 0.1742.}$$
+
+
+---
+
+## 6. Is Gamma conjugate to the exponential likelihood?
+
+Yes. As shown in (4), a Gamma prior times the exponential likelihood yields a Gamma posterior (same family). Therefore the Gamma is a conjugate prior for the exponential rate parameter $\lambda$.
+
+---
+
+## 7. Compare posterior mean, prior mean, and MLE — interpretation
+
+Compute the relevant quantities:
+
+* Prior mean for $\lambda$: $\mathbb{E}[\lambda] = 0.2.$
+* Sample mean lifetime: (\bar{x} = \dfrac{12.8}{5}=2.56) so the **MLE** for the rate (frequentist) is
+  
+$$  \hat\lambda_{\text{MLE}} = \frac{n}{\sum x_i} = \frac{5}{12.8}=0.390625.$$
+  
+* Posterior mean: (\approx 0.389883).
+
+Comparison / interpretation:
+
+* The posterior mean (0.3899) is almost the same as the MLE (0.390625). This happens because the prior was very weak (tiny (\alpha=0.01)); the data dominate the posterior. In effect the posterior is close to the likelihood-based estimate because the prior contributed very little information relative to the 5 observations.
+* The prior mean (0.2) was much smaller than the data-supported rate ≈0.39 (equivalently, the prior implied mean lifetime 5 units vs the sample mean lifetime 2.56 units). The data pulled the posterior away from the prior toward the MLE.
+* The posterior sd (~0.174) is much smaller than the prior sd (2), reflecting the information gained from data: the posterior concentrates substantially compared to the diffuse prior.
+

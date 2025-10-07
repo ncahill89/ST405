@@ -1,6 +1,6 @@
 ---
 title: "ST405/ST645 Bayesian Data Analysis"
-subtitle: "Assignment 1: Bayesian Inference on Particle Emission Energy"
+subtitle: "Assignment 1: "
 author: "Prof. Niamh Cahill"
 format: 
   html:
@@ -16,31 +16,50 @@ library(tidyverse)
 
 ## Instructions
 
-Please submit your answers to this assignment by October 23rd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers.
+Please submit your answers to this assignment by October 22nd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers.
 
-## Question
+---
 
-The energy of eight(8) particles being emitted form a radioactive source was recorded as:
 
-$y = 50, 60, 60, 80, 40, 40, 80, 70\text{ MeV}$.
+Suppose you are modeling lifetimes of components, where each lifetime is assumed to follow an **Exponential distribution** with rate parameter $\lambda$. That is, the density for a single observation $x_i$ is:
 
-We assume the particles have the following data model:
 
-$y_i \sim N(\mu,\rho \mu^2)$,
+$$f(x_i \mid \lambda) = \lambda e^{-\lambda x_i}, \quad x_i > 0, \ \lambda > 0.$$
 
-where $\rho = 1$
 
-A nuclear physicist provides an expert opinion that particles will be emitted with an average energy of 80 MeV. However, she acknowledges uncertainty in this value and suggests the average energy could lie anywhere between 50 MeV and 110 MeV.
+You wish to use Bayesian methods to estimate $\lambda$. As a prior, you use a $Gamma(\alpha, \beta)$ distribution for $\lambda$.
 
-(a) Show that the likelihood for ${\bf y}$ is of the form:
+---
 
-$$p({\bf y}|\mu) \propto \frac{1}{\mu^8} \exp \left[ -\frac{15300}{\mu^2} + \frac{480}{\mu} \right]$$
+### Tasks
 
-(b) Assume a prior for $\mu$, such that $\mu \sim gamma(a,b)$. Use moment matching to determine the values of $a$ and $b$ such that this prior reflects the nuclear physicist's opinions about the average energy of the particles. Specifically, assume that the range she provided (50 MeV to 110 MeV) is $\pm$ 3 standard deviations from the mean.
+1. **Likelihood Function**
+   Write down the likelihood function $L(\lambda \mid x_1, \dots, x_n)$ for the sample $x_1, \dots, x_n$ (up to proportionality).
 
-(c) Write down the prior probability density function $p(\mu)$, up to a constant.
+2. **Appropriateness of Gamma Prior**
+   Why is the Gamma distribution an appropriate prior for the rate parameter (\lambda) in this model?
 
-(d) Write down the posterior probability density function $p(\mu |y)$, up to a constant.
+3. **Determining Prior Hyperparameters**
+   Suppose your prior belief is that the expected rate is about 0.2 units, with prior standard deviation of 2 units for the *rate parameter* $\lambda$. Find the values of $\alpha$ and $\beta$ for the Gamma prior that encode this belief.
+
+4. **Posterior Distribution**
+   Derive the posterior distribution for $\lambda$ given observations $x_1, \dots, x_n$.
+
+5. **Posterior Mean Estimate**
+   Suppose the observed data are $2.1, 0.9, 4.3, 3.7, 1.8$. Find the posterior mean estimate of $\lambda$.
+
+6. **Conjugacy of the Prior**
+   Is the Gamma distribution a conjugate prior for the exponential likelihood? Explain clearly.
+
+7. **Comparing Posterior, Prior, and Data-Based Estimates**
+   Compare the posterior mean estimate of (\lambda) to:
+
+   * The prior mean, and
+   * The maximum likelihood estimate (MLE) from the observed data.
+     What insights do you gain from this comparison in terms of how Bayesian updating works?
+
+---
+
 
 ### **Distribution Information**
 
