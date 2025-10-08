@@ -487,14 +487,14 @@
     "href": "Assignment1.html",
     "title": "ST405/ST645 Bayesian Data Analysis",
     "section": "",
-    "text": "Please submit your answers to this assignment by October 23rd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers."
+    "text": "Please submit your answers to this assignment by October 22nd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers.\n\nSuppose you are modeling the waiting times (in hours) for patients in a hospital emergency room, where each waiting time is assumed to follow an Exponential distribution with rate parameter \\(\\lambda\\).\nYou wish to use Bayesian methods to estimate \\(\\lambda\\). As a prior, you use a \\(Gamma(a, b)\\) distribution for \\(\\lambda\\).\n\n\n\n\nWrite down the likelihood function \\(p(x|\\lambda)\\) for the sample \\(x_1, \\dots, x_n\\) (up to proportionality).\nWhy is the Gamma distribution an appropriate prior for the rate parameter (\\(\\lambda\\)) in this model?\nSuppose your prior belief is that the expected rate at which patients are seen is 2 per hour , with prior standard deviation of 0.5 units. Find the values of \\(a\\) and \\(b\\) for the Gamma prior that encode this belief.\nAssuming that the Gamma distribution is a conjugate prior for the exponential likelihood, derive the posterior distribution for \\(\\lambda\\) given observations \\(x_1, \\dots, x_n\\).\nSuppose the observed data are \\(y = 2, 3, 1.5, 2, 3.5\\). Find the posterior expected value of \\(\\lambda\\).\nCompare the posterior expected value of \\(\\lambda\\) to:\n\nThe prior expected value of \\(\\lambda\\), and\nThe maximum likelihood estimate (MLE) from the observed data (\\(1/\\bar{y}\\)). What insights do you gain from this comparison in terms of how Bayesian updating works?\n\n\n\n\n\n\nYou can use the following information about the Exponential and Gamma distributions to help you with the question:\n\n\n\n\n\n\n\n\n\n\n\nProbability Distribution\nPMF/PDF\nE(X)\nVar(X)\n\n\n\n\nExponential\n\\[f(x \\mid \\lambda) = \\lambda e^{-\\lambda x},\\ x \\ge 0\\]\n\\[\\frac{1}{\\lambda}\\]\n\\[\\frac{1}{\\lambda^2}\\]\n\n\nGamma\n\\[f(x \\mid a,b) = \\frac{b^a}{\\Gamma(a)} x^{a-1} e^{-b x},\\ x \\ge 0\\]\n\\[\\frac{a}{b}\\]\n\\[\\frac{a}{b^2}\\]"
   },
   {
     "objectID": "Assignment1.html#instructions",
     "href": "Assignment1.html#instructions",
     "title": "ST405/ST645 Bayesian Data Analysis",
     "section": "",
-    "text": "Please submit your answers to this assignment by October 23rd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers."
+    "text": "Please submit your answers to this assignment by October 22nd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers.\n\nSuppose you are modeling the waiting times (in hours) for patients in a hospital emergency room, where each waiting time is assumed to follow an Exponential distribution with rate parameter \\(\\lambda\\).\nYou wish to use Bayesian methods to estimate \\(\\lambda\\). As a prior, you use a \\(Gamma(a, b)\\) distribution for \\(\\lambda\\).\n\n\n\n\nWrite down the likelihood function \\(p(x|\\lambda)\\) for the sample \\(x_1, \\dots, x_n\\) (up to proportionality).\nWhy is the Gamma distribution an appropriate prior for the rate parameter (\\(\\lambda\\)) in this model?\nSuppose your prior belief is that the expected rate at which patients are seen is 2 per hour , with prior standard deviation of 0.5 units. Find the values of \\(a\\) and \\(b\\) for the Gamma prior that encode this belief.\nAssuming that the Gamma distribution is a conjugate prior for the exponential likelihood, derive the posterior distribution for \\(\\lambda\\) given observations \\(x_1, \\dots, x_n\\).\nSuppose the observed data are \\(y = 2, 3, 1.5, 2, 3.5\\). Find the posterior expected value of \\(\\lambda\\).\nCompare the posterior expected value of \\(\\lambda\\) to:\n\nThe prior expected value of \\(\\lambda\\), and\nThe maximum likelihood estimate (MLE) from the observed data (\\(1/\\bar{y}\\)). What insights do you gain from this comparison in terms of how Bayesian updating works?\n\n\n\n\n\n\nYou can use the following information about the Exponential and Gamma distributions to help you with the question:\n\n\n\n\n\n\n\n\n\n\n\nProbability Distribution\nPMF/PDF\nE(X)\nVar(X)\n\n\n\n\nExponential\n\\[f(x \\mid \\lambda) = \\lambda e^{-\\lambda x},\\ x \\ge 0\\]\n\\[\\frac{1}{\\lambda}\\]\n\\[\\frac{1}{\\lambda^2}\\]\n\n\nGamma\n\\[f(x \\mid a,b) = \\frac{b^a}{\\Gamma(a)} x^{a-1} e^{-b x},\\ x \\ge 0\\]\n\\[\\frac{a}{b}\\]\n\\[\\frac{a}{b^2}\\]"
   },
   {
     "objectID": "Assignment1.html#question",
@@ -1958,5 +1958,61 @@
     "title": "Bayesian Data Analysis",
     "section": "",
     "text": "We do Bayesian inference:\n\nStart off with prior probability distribution to quantify information related to \\(\\mu\\) - example in blue with \\(\\mu \\sim N(4,0.5^2)\\)\nCollect data, \\(y\\), assume y has a mean \\(\\bar{y} = 0\\) and that n = 10.\nDefine the relationship between \\(y\\) and \\(\\mu\\) through the likelihood function - example in red with \\(y_i \\sim N(\\mu, \\sigma = 1)\\).\n\nwe’re assuming \\(\\sigma\\) is known here.\n\nUse Bayes’ rule to update the prior into the posterior distribution \\(p(\\mu|y) \\sim N(?,?)\\)."
+  },
+  {
+    "objectID": "Assignment1_soln.html",
+    "href": "Assignment1_soln.html",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "Solution\nSuppose you are modeling the waiting times (in minutes) for patients in a hospital emergency room, where each waiting time is assumed to follow an Exponential distribution with rate parameter \\(\\lambda\\). That is, the density for a single observation \\(x_i\\) is:\n\\[\nf(x_i \\mid \\lambda) = \\lambda e^{-\\lambda x_i}, \\quad x_i &gt; 0, \\ \\lambda &gt; 0.\n\\]\nYou wish to use Bayesian methods to estimate \\(\\lambda\\). As a prior, you use a \\(Gamma(a, b)\\) distribution for \\(\\lambda\\).\n\n1. Likelihood Function\nThe likelihood for \\(x_1, \\dots, x_n\\) is the product of individual densities:\n\\[\np(x \\mid \\lambda) = \\prod_{i=1}^n f(x_i \\mid \\lambda) = \\prod_{i=1}^n \\lambda e^{-\\lambda x_i} \\propto \\lambda^n e^{-\\lambda \\sum_{i=1}^n x_i}.\n\\]\n\n\n\n2. Why Gamma is an Appropriate Prior\n\nThe rate parameter \\(\\lambda &gt; 0\\), and the Gamma distribution is defined on \\((0, \\infty)\\).\n\n\n\n\n3. Prior Parameters for Gamma\nGiven:\n\\[\nE[\\lambda] = \\frac{a}{b} = 2, \\quad SD[\\lambda] = \\sqrt{\\frac{a}{b^2}} = 0.5\n\\]\nStep 1: Solve for \\(b\\) in terms of \\(a\\) using SD:\n\\[\nb = \\frac{\\sqrt{a}}{0.5}\n\\]\nStep 2: Solve using mean:\n\\[\n\\frac{a}{b} = 2 \\implies \\frac{a}{\\sqrt{a}/0.5} = 2 \\implies 0.5 \\sqrt{a} = 2 \\implies a = 16\n\\]\nThen:\n\\[\nb = \\frac{\\sqrt{16}}{0.5} = \\frac{4}{0.5} = 8\n\\]\nSo, the prior is \\(\\lambda \\sim Gamma(16,8)\\)\n\n\n\n4. Posterior Distribution\nThe posterior, using conjugacy, is:\n\\[\np(\\lambda \\mid x) \\propto \\lambda^{a-1} e^{-b\\lambda} \\cdot \\lambda^n e^{-\\lambda \\sum x_i} = \\lambda^{a+n-1} e^{-(b+\\sum x_i)\\lambda}\n\\]\nThus:\n\\[\n\\lambda \\mid x \\sim Gamma(a + n,\\, b + \\sum_{i=1}^n x_i)\n\\]\n\n\n\n5. Posterior Mean with Observed Data\nObserved data: \\(y = 2, 3, 1.5, 2, 3.5\\)\n\n\\(n = 5\\)\n\n\\(\\sum y_i = 12\\)\n\nPrior: \\(a = 16, b = 8\\)\n\nPosterior:\n\\[\n\\lambda \\mid y \\sim Gamma(16+5, 8+12) = Gamma(21, 20)\n\\]\nPosterior mean:\n\\[\nE[\\lambda \\mid y] = \\frac{21}{20} = 1.05\n\\]\n\n\n\n6. Comparison and Insights\n\n\n\nEstimate\nValue\n\n\n\n\nPrior mean \\(E[\\lambda]\\)\n2\n\n\nPosterior mean \\(E[\\lambda \\mid y]\\)\n1.05\n\n\nMLE \\(1/\\bar{y}\\)\n0.42\n\n\n\nInsights:\n\nPosterior mean is a compromise between prior and data: slightly lower than prior because observed waiting times are longer than expected.\n\n\n\n\nDistribution Information\nYou can use the following information about the Exponential and Gamma distributions to help you with the question:\n\n\n\n\n\n\n\n\n\n\n\nProbability Distribution\nPMF/PDF\nE(X)\nVar(X)\n\n\n\n\nExponential\n\\[f(x \\mid \\lambda) = \\lambda e^{-\\lambda x},\\ x \\ge 0\\]\n\\[\\frac{1}{\\lambda}\\]\n\\[\\frac{1}{\\lambda^2}\\]\n\n\nGamma\n\\[f(x \\mid a,b) = \\frac{b^a}{\\Gamma(a)} x^{a-1} e^{-b x},\\ x \\ge 0\\]\n\\[\\frac{a}{b}\\]\n\\[\\frac{a}{b^2}\\]"
+  },
+  {
+    "objectID": "Assignment1_soln.html#likelihood-up-to-proportionality",
+    "href": "Assignment1_soln.html#likelihood-up-to-proportionality",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "For data (x_1,,x_n),\n\\[L(\\lambda\\mid x_{1:n})=\\prod_{i=1}^n \\lambda e^{-\\lambda x_i}\n= \\lambda^n e^{-\\lambda\\sum_{i=1}^n x_i}\\].\n(We may drop constants not involving ().)"
+  },
+  {
+    "objectID": "Assignment1_soln.html#why-gamma-is-appropriate-as-a-prior-for",
+    "href": "Assignment1_soln.html#why-gamma-is-appropriate-as-a-prior-for",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "\\(\\lambda&gt;0\\), and the Gamma distribution has support \\((0,\\infty)\\), so it is a natural choice."
+  },
+  {
+    "objectID": "Assignment1_soln.html#determine-and-from-prior-beliefs",
+    "href": "Assignment1_soln.html#determine-and-from-prior-beliefs",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "The user-specified beliefs:\n\nmean rate ≈ 0.2 units. Thus \\(\\mathbb{E}[\\lambda] =0.2\\).\nprior standard deviation for the rate \\(\\lambda\\) is 2. Thus \\(\\mathrm{Var}(\\lambda)=4\\).\n\nWith the \\(Gamma(\\alpha,\\beta)\\) (rate) parameterization:\n\\[\\frac{\\alpha}{\\beta}=0.2,\\qquad \\frac{\\alpha}{\\beta^2}=4\\].\nSolve for \\(\\beta\\) first from \\(\\mathrm{Var}= \\dfrac{\\alpha}{\\beta^2}\\) and \\(\\alpha=\\beta\\times 0.2\\):\n\\[\\mathrm{Var} = \\frac{0.2\\beta}{\\beta^2}=\\frac{0.2}{\\beta}=4\n\\quad\\Longrightarrow\\quad\n\\beta=\\frac{0.2}{4}=0.05.\\]\nThen \\(\\alpha = 0.2\\beta = 0.2\\times0.05 = 0.01.\\)\nSo the prior hyperparameters are\n\\[\\boxed{\\alpha=0.01,\\ \\beta=0.05.}\\]"
+  },
+  {
+    "objectID": "Assignment1_soln.html#posterior-distribution",
+    "href": "Assignment1_soln.html#posterior-distribution",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "Multiply prior and likelihood:\n\\[p(\\lambda\\mid x_{1:n})\n\\propto \\lambda^{\\alpha-1} e^{-\\beta\\lambda}\\times \\lambda^n e^{-\\lambda\\sum x_i}\n= \\lambda^{(\\alpha+n)-1} e^{-(\\beta+\\sum x_i)\\lambda}.\n\\]\nThus the posterior is\n\\[\\boxed{\\lambda\\mid x_{1:n}\\ \\sim\\ \\mathrm{Gamma}(\\alpha+n,\\ \\beta+\\sum_{i=1}^n x_i,).}\\]"
+  },
+  {
+    "objectID": "Assignment1_soln.html#posterior-mean-for-the-given-data",
+    "href": "Assignment1_soln.html#posterior-mean-for-the-given-data",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "Observed data: 2.1,,0.9,,4.3,,3.7,,1.8.\nCompute:\n\nn=5.\n\\(\\sum_{i=1}^n x_i = 2.1+0.9+4.3+3.7+1.8 = 12.8\\).\n\nPosterior hyperparameters:\n\\[\\alpha_{\\text{post}}=\\alpha+n=0.01+5=5.01,\\qquad\n\\beta_{\\text{post}}=\\beta+\\sum x_i=0.05+12.8=12.85.\\]\nPosterior mean:\n\\[\\mathbb{E}[\\lambda\\mid\\text{data}] = \\frac{\\alpha_{\\text{post}}}{\\beta_{\\text{post}}}\n= \\frac{5.01}{12.85}\\approx 0.389883.\\]\nPosterior variance and sd (for completeness):\n\\[\\mathrm{Var}(\\lambda\\mid\\text{data})=\\frac{5.01}{12.85^2}\\approx 0.03034,\n\\qquad \\mathrm{sd}\\approx 0.17419.\\]\nSo\n\\[\\boxed{\\mathbb{E}[\\lambda\\mid\\text{data}]\\approx 0.3899,\\quad \\mathrm{sd}\\approx 0.1742.}\\]"
+  },
+  {
+    "objectID": "Assignment1_soln.html#is-gamma-conjugate-to-the-exponential-likelihood",
+    "href": "Assignment1_soln.html#is-gamma-conjugate-to-the-exponential-likelihood",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "Yes. As shown in (4), a Gamma prior times the exponential likelihood yields a Gamma posterior (same family). Therefore the Gamma is a conjugate prior for the exponential rate parameter \\(\\lambda\\)."
+  },
+  {
+    "objectID": "Assignment1_soln.html#compare-posterior-mean-prior-mean-and-mle-interpretation",
+    "href": "Assignment1_soln.html#compare-posterior-mean-prior-mean-and-mle-interpretation",
+    "title": "ST405/ST645 Bayesian Data Analysis",
+    "section": "",
+    "text": "Compute the relevant quantities:\n\nPrior mean for \\(\\lambda\\): \\(\\mathbb{E}[\\lambda] = 0.2.\\)\nSample mean lifetime: ({x} = =2.56) so the MLE for the rate (frequentist) is\n\n\\[  \\hat\\lambda_{\\text{MLE}} = \\frac{n}{\\sum x_i} = \\frac{5}{12.8}=0.390625.\\]\n\nPosterior mean: ().\n\nComparison / interpretation:\n\nThe posterior mean (0.3899) is almost the same as the MLE (0.390625). This happens because the prior was very weak (tiny ()); the data dominate the posterior. In effect the posterior is close to the likelihood-based estimate because the prior contributed very little information relative to the 5 observations.\nThe prior mean (0.2) was much smaller than the data-supported rate ≈0.39 (equivalently, the prior implied mean lifetime 5 units vs the sample mean lifetime 2.56 units). The data pulled the posterior away from the prior toward the MLE.\nThe posterior sd (~0.174) is much smaller than the prior sd (2), reflecting the information gained from data: the posterior concentrates substantially compared to the diffuse prior."
   }
 ]

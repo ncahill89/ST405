@@ -4878,14 +4878,9 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><strong>Introduction</strong></a>
+  <li><a href="#solution" id="toc-solution" class="nav-link active" data-scroll-target="#solution">Solution</a>
   <ul class="collapse">
-  <li><a href="#question-1-posterior-distribution-for-placenta-previa-birth-data" id="toc-question-1-posterior-distribution-for-placenta-previa-birth-data" class="nav-link" data-scroll-target="#question-1-posterior-distribution-for-placenta-previa-birth-data"><strong>Question 1: Posterior Distribution for Placenta Previa Birth Data</strong></a></li>
-  <li><a href="#question-2-simulation-of-the-posterior-distribution" id="toc-question-2-simulation-of-the-posterior-distribution" class="nav-link" data-scroll-target="#question-2-simulation-of-the-posterior-distribution"><strong>Question 2: Simulation of the Posterior Distribution</strong></a></li>
-  <li><a href="#question-3-sensitivity-to-prior-assumptions" id="toc-question-3-sensitivity-to-prior-assumptions" class="nav-link" data-scroll-target="#question-3-sensitivity-to-prior-assumptions"><strong>Question 3: Sensitivity to Prior Assumptions</strong></a></li>
-  <li><a href="#additional-question-bayesian-estimation-for-poisson-data" id="toc-additional-question-bayesian-estimation-for-poisson-data" class="nav-link" data-scroll-target="#additional-question-bayesian-estimation-for-poisson-data"><strong>Additional Question: Bayesian Estimation for Poisson Data</strong></a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><strong>Summary</strong></a></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes"><strong>Notes</strong></a></li>
+  <li><a href="#distribution-information" id="toc-distribution-information" class="nav-link" data-scroll-target="#distribution-information"><strong>Distribution Information</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -4896,7 +4891,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">ST405/ST645 Bayesian Data Analysis</h1>
-<p class="subtitle lead">Tutorial Questions (1)</p>
+<p class="subtitle lead">Assignment 1 Solutions</p>
 </div>
 
 
@@ -4919,101 +4914,122 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h2>
-<p>This tutorial explores Bayesian inference using binomial and Poisson models, focusing on deriving posterior distributions, credible intervals, and the impact of prior assumptions. You will also perform simulations and compare posterior results with analytical calculations.</p>
-<hr>
-<section id="question-1-posterior-distribution-for-placenta-previa-birth-data" class="level3">
-<h3 class="anchored" data-anchor-id="question-1-posterior-distribution-for-placenta-previa-birth-data"><strong>Question 1: Posterior Distribution for Placenta Previa Birth Data</strong></h3>
-<p>Consider the maternal condition known as <em>placenta previa</em>, an uncommon condition where the placenta obstructs the fetus, leading to possible complications during delivery.</p>
-<p>An early study in Germany collected data on placenta previa births, finding that out of 980 births, 437 were female.</p>
-<section id="tasks" class="level4">
-<h4 class="anchored" data-anchor-id="tasks">Tasks:</h4>
-<ol type="1">
-<li><p><strong>Posterior Distribution</strong><br>
-Assuming a Binomial likelihood for the data and a Beta(1,1) prior distribution for the probability of a female birth, derive the posterior distribution.</p></li>
-<li><p><strong>Posterior Mean</strong><br>
-Calculate the posterior mean for the probability of a girl birth in placenta previa pregnancies.</p></li>
-<li><p><strong>95% Credible Interval</strong><br>
-Compute the 95% credible interval for the probability of a girl birth in placenta previa pregnancies.</p></li>
-</ol>
+<section id="solution" class="level1">
+<h1>Solution</h1>
+<p>Suppose you are modeling the waiting times (in minutes) for patients in a hospital emergency room, where each waiting time is assumed to follow an <strong>Exponential distribution</strong> with rate parameter <span class="math inline">\(\lambda\)</span>. That is, the density for a single observation <span class="math inline">\(x_i\)</span> is:</p>
+<p><span class="math display">\[
+f(x_i \mid \lambda) = \lambda e^{-\lambda x_i}, \quad x_i &gt; 0, \ \lambda &gt; 0.
+\]</span></p>
+<p>You wish to use Bayesian methods to estimate <span class="math inline">\(\lambda\)</span>. As a prior, you use a <span class="math inline">\(Gamma(a, b)\)</span> distribution for <span class="math inline">\(\lambda\)</span>.</p>
+<section id="likelihood-function" class="level4">
+<h4 class="anchored" data-anchor-id="likelihood-function">1. Likelihood Function</h4>
+<p>The likelihood for <span class="math inline">\(x_1, \dots, x_n\)</span> is the product of individual densities:</p>
+<p><span class="math display">\[
+p(x \mid \lambda) = \prod_{i=1}^n f(x_i \mid \lambda) = \prod_{i=1}^n \lambda e^{-\lambda x_i} \propto \lambda^n e^{-\lambda \sum_{i=1}^n x_i}.
+\]</span></p>
 <hr>
 </section>
-</section>
-<section id="question-2-simulation-of-the-posterior-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="question-2-simulation-of-the-posterior-distribution"><strong>Question 2: Simulation of the Posterior Distribution</strong></h3>
-<p>In many cases, direct calculation of the posterior density function may not be feasible. Simulation offers a practical solution for obtaining inference from the posterior distribution.</p>
-<section id="tasks-1" class="level4">
-<h4 class="anchored" data-anchor-id="tasks-1">Tasks:</h4>
-<ol type="1">
-<li><p><strong>Simulating 1000 Samples</strong><br>
-Simulate 1000 samples from the posterior distribution derived in <strong>Question 1</strong>.</p></li>
-<li><p><strong>Histogram</strong><br>
-Create a histogram of the simulated samples.</p></li>
-<li><p><strong>95% Credible Interval from Simulated Data</strong><br>
-Calculate the 95% credible interval based on the simulated samples.</p></li>
-<li><p><strong>Comparison with Analytical Interval</strong><br>
-Compare the credible interval obtained from the simulation to the one calculated analytically in <strong>Question 1</strong>.</p></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="question-3-sensitivity-to-prior-assumptions" class="level3">
-<h3 class="anchored" data-anchor-id="question-3-sensitivity-to-prior-assumptions"><strong>Question 3: Sensitivity to Prior Assumptions</strong></h3>
-<p>Now, assume we change the prior distribution. Suppose the prior distribution is Beta(6,20) instead of Beta(1,1).</p>
-<section id="tasks-2" class="level4">
-<h4 class="anchored" data-anchor-id="tasks-2">Tasks:</h4>
-<ol type="1">
-<li><p><strong>New Posterior Distribution</strong><br>
-Derive the new posterior distribution given the updated Beta(6,20) prior.</p></li>
-<li><p><strong>Posterior Mean and Credible Interval</strong><br>
-Compute the new posterior mean and 95% credible interval for the probability of a girl birth in placenta previa pregnancies.</p></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="additional-question-bayesian-estimation-for-poisson-data" class="level3">
-<h3 class="anchored" data-anchor-id="additional-question-bayesian-estimation-for-poisson-data"><strong>Additional Question: Bayesian Estimation for Poisson Data</strong></h3>
-<p>Assume you are modeling data <span class="math inline">\(y_{i},\; i=1,\ldots,n\)</span> that arise from a Poisson distribution with rate parameter <span class="math inline">\(\lambda\)</span>. (Note: Poisson distributions are often used for count data.) Use Bayesian methods to estimate <span class="math inline">\(\lambda\)</span>, with a Gamma(<span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>) distribution as the prior for <span class="math inline">\(\lambda\)</span>.</p>
-<section id="tasks-3" class="level4">
-<h4 class="anchored" data-anchor-id="tasks-3">Tasks:</h4>
-<ol type="1">
-<li><p><strong>Likelihood Function</strong><br>
-Write down the likelihood for the Poisson model (up to the constant of proportionality).</p></li>
-<li><p><strong>Appropriateness of Gamma Prior</strong><br>
-Why is the Gamma distribution an appropriate prior to use for the rate parameter <span class="math inline">\(\lambda\)</span> in this case?</p></li>
-<li><p><strong>Determining Parameters of the Gamma Prior</strong><br>
-Find the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> for the Gamma prior that reflect the belief that <span class="math inline">\(\lambda\)</span> is <span class="math inline">\(10 \pm 1\)</span> (i.e., has mean = 10 and standard deviation = 1).</p></li>
-<li><p><strong>Posterior Distribution</strong><br>
-Derive the posterior distribution for <span class="math inline">\(\lambda\)</span>.</p></li>
-<li><p><strong>Posterior Mean Estimate</strong><br>
-If the observed data are <span class="math inline">\(\mathbf{y} = (17, 25, 25, 21, 13, 22, 23)\)</span>, find the posterior mean estimate for <span class="math inline">\(\lambda\)</span>.</p></li>
-<li><p><strong>Conjugacy of the Prior</strong><br>
-Is the Gamma prior a conjugate prior for the Poisson likelihood? Explain your answer.</p></li>
-<li><p><strong>Comparing Posterior, Prior, and Data Means</strong><br>
-Comment on how the posterior mean estimate compares to the prior mean and the mean of the observed data. What insights do you gain from this comparison?</p></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary"><strong>Summary</strong></h3>
-<p>Through these exercises, you will explore how prior beliefs shape posterior distributions, utilize simulation techniques to derive credible intervals, and understand the impact of different priors on Bayesian inference. The additional question introduces a new distribution, expanding your skills in Bayesian data analysis using Poisson likelihoods and Gamma priors.</p>
-<hr>
-</section>
-<section id="notes" class="level3">
-<h3 class="anchored" data-anchor-id="notes"><strong>Notes</strong></h3>
+<section id="why-gamma-is-an-appropriate-prior" class="level4">
+<h4 class="anchored" data-anchor-id="why-gamma-is-an-appropriate-prior">2. Why Gamma is an Appropriate Prior</h4>
 <ul>
-<li>You can use the following information about the Binomial, Beta, Poisson and Gamma distributions to help you with the questions</li>
+<li>The rate parameter <span class="math inline">\(\lambda &gt; 0\)</span>, and the Gamma distribution is defined on <span class="math inline">\((0, \infty)\)</span>.</li>
 </ul>
+<hr>
+</section>
+<section id="prior-parameters-for-gamma" class="level4">
+<h4 class="anchored" data-anchor-id="prior-parameters-for-gamma">3. Prior Parameters for Gamma</h4>
+<p>Given:</p>
+<p><span class="math display">\[
+E[\lambda] = \frac{a}{b} = 2, \quad SD[\lambda] = \sqrt{\frac{a}{b^2}} = 0.5
+\]</span></p>
+<p>Step 1: Solve for <span class="math inline">\(b\)</span> in terms of <span class="math inline">\(a\)</span> using SD:</p>
+<p><span class="math display">\[
+b = \frac{\sqrt{a}}{0.5}
+\]</span></p>
+<p>Step 2: Solve using mean:</p>
+<p><span class="math display">\[
+\frac{a}{b} = 2 \implies \frac{a}{\sqrt{a}/0.5} = 2 \implies 0.5 \sqrt{a} = 2 \implies a = 16
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+b = \frac{\sqrt{16}}{0.5} = \frac{4}{0.5} = 8
+\]</span></p>
+<p>So, the prior is <span class="math inline">\(\lambda \sim Gamma(16,8)\)</span></p>
+<hr>
+</section>
+<section id="posterior-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="posterior-distribution">4. Posterior Distribution</h4>
+<p>The posterior, using conjugacy, is:</p>
+<p><span class="math display">\[
+p(\lambda \mid x) \propto \lambda^{a-1} e^{-b\lambda} \cdot \lambda^n e^{-\lambda \sum x_i} = \lambda^{a+n-1} e^{-(b+\sum x_i)\lambda}
+\]</span></p>
+<p>Thus:</p>
+<p><span class="math display">\[
+\lambda \mid x \sim Gamma(a + n,\, b + \sum_{i=1}^n x_i)
+\]</span></p>
+<hr>
+</section>
+<section id="posterior-mean-with-observed-data" class="level4">
+<h4 class="anchored" data-anchor-id="posterior-mean-with-observed-data">5. Posterior Mean with Observed Data</h4>
+<p>Observed data: <span class="math inline">\(y = 2, 3, 1.5, 2, 3.5\)</span></p>
+<ul>
+<li><span class="math inline">\(n = 5\)</span><br>
+</li>
+<li><span class="math inline">\(\sum y_i = 12\)</span><br>
+</li>
+<li>Prior: <span class="math inline">\(a = 16, b = 8\)</span></li>
+</ul>
+<p>Posterior:</p>
+<p><span class="math display">\[
+\lambda \mid y \sim Gamma(16+5, 8+12) = Gamma(21, 20)
+\]</span></p>
+<p>Posterior mean:</p>
+<p><span class="math display">\[
+E[\lambda \mid y] = \frac{21}{20} = 1.05
+\]</span></p>
+<hr>
+</section>
+<section id="comparison-and-insights" class="level4">
+<h4 class="anchored" data-anchor-id="comparison-and-insights">6. Comparison and Insights</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Estimate</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Prior mean <span class="math inline">\(E[\lambda]\)</span></td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Posterior mean <span class="math inline">\(E[\lambda \mid y]\)</span></td>
+<td>1.05</td>
+</tr>
+<tr class="odd">
+<td>MLE <span class="math inline">\(1/\bar{y}\)</span></td>
+<td>0.42</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Insights:</strong></p>
+<ul>
+<li>Posterior mean is a compromise between prior and data: slightly lower than prior because observed waiting times are longer than expected.</li>
+</ul>
+<hr>
+</section>
+<section id="distribution-information" class="level3">
+<h3 class="anchored" data-anchor-id="distribution-information"><strong>Distribution Information</strong></h3>
+<p>You can use the following information about the Exponential and Gamma distributions to help you with the question:</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 17%">
-<col style="width: 48%">
-<col style="width: 12%">
-<col style="width: 20%">
+<col style="width: 49%">
+<col style="width: 15%">
+<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -5025,26 +5041,14 @@ Comment on how the posterior mean estimate compares to the prior mean and the me
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Binomial</td>
-<td style="text-align: left;"><span class="math display">\[{n \choose x}\theta^x(1-\theta)^{n-x},\ x \in \{0,1,2,\ldots, n\}\]</span></td>
-<td style="text-align: left;"><span class="math display">\[n\theta\]</span></td>
-<td style="text-align: left;"><span class="math display">\[n\theta(1-\theta)\]</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Beta</td>
-<td style="text-align: left;"><span class="math display">\[\frac{1}{B(a,b)}x^{a-1}(1-x)^{b-1},\ x \in (0,1)\]</span></td>
-<td style="text-align: left;"><span class="math display">\[\frac{a}{a+b}\]</span></td>
-<td style="text-align: left;"><span class="math display">\[\frac{ab}{(a+b)^2(a+b+1)}\]</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Poisson</td>
-<td style="text-align: left;"><span class="math display">\[\lambda^x \frac{e^{-\lambda}}{x!},\ x = 0,1,\ldots\]</span></td>
-<td style="text-align: left;"><span class="math display">\[\lambda\]</span></td>
-<td style="text-align: left;"><span class="math display">\[\lambda\]</span></td>
+<td style="text-align: left;">Exponential</td>
+<td style="text-align: left;"><span class="math display">\[f(x \mid \lambda) = \lambda e^{-\lambda x},\ x \ge 0\]</span></td>
+<td style="text-align: left;"><span class="math display">\[\frac{1}{\lambda}\]</span></td>
+<td style="text-align: left;"><span class="math display">\[\frac{1}{\lambda^2}\]</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Gamma</td>
-<td style="text-align: left;"><span class="math display">\[\frac{b^a}{\Gamma(a)}x^{a-1}e^{-bx},\ x\geq 0\]</span></td>
+<td style="text-align: left;"><span class="math display">\[f(x \mid a,b) = \frac{b^a}{\Gamma(a)} x^{a-1} e^{-b x},\ x \ge 0\]</span></td>
 <td style="text-align: left;"><span class="math display">\[\frac{a}{b}\]</span></td>
 <td style="text-align: left;"><span class="math display">\[\frac{a}{b^2}\]</span></td>
 </tr>
@@ -5052,11 +5056,6 @@ Comment on how the posterior mean estimate compares to the prior mean and the me
 </table>
 </div>
 </div>
-<ul>
-<li>For simulations, use <code>rbeta()</code> in R for Beta-distributed samples.</li>
-<li>For plotting histograms and posterior distributions, use <code>ggplot2</code> or base R (<code>hist()</code>) plotting functions.</li>
-</ul>
-<hr>
 
 
 </section>

@@ -9,131 +9,139 @@ format:
 editor: visual
 ---
 
-# Solution — Bayesian estimation for Exponential data (worked solution)
+# Solution 
 
-Recall the model: $X_1,\dots,X_n \overset{\text{iid}}{\sim}\mathrm{Exponential}(\lambda)$ with density
+Suppose you are modeling the waiting times (in minutes) for patients in a hospital emergency room, where each waiting time is assumed to follow an **Exponential distribution** with rate parameter $\lambda$. That is, the density for a single observation $x_i$ is:
 
-$$f(x_i\mid\lambda)=\lambda e^{-\lambda x_i},\qquad x_i>0,\ \lambda>0.$$
-
-Prior: $\lambda\sim\mathrm{Gamma}(\alpha,\beta)$ with the **rate** parameterization
-
-$p(\lambda)\propto \lambda^{\alpha-1} e^{-\beta\lambda}$,
-
-so $\mathbb{E}[\lambda]=\dfrac{\alpha}{\beta}$ and $\mathrm{Var}(\lambda)=\dfrac{\alpha}{\beta^2}$.
-
----
-
-## 1. Likelihood (up to proportionality)
-
-For data (x_1,\dots,x_n),
-
-$$L(\lambda\mid x_{1:n})=\prod_{i=1}^n \lambda e^{-\lambda x_i}
-= \lambda^n e^{-\lambda\sum_{i=1}^n x_i}$$.
-
-(We may drop constants not involving (\lambda).)
-
----
-
-## 2. Why Gamma is appropriate as a prior for (\lambda)
-
-* $\lambda>0$, and the Gamma distribution has support $(0,\infty)$, so it is a natural choice.
-
----
-
-## 3. Determine (\alpha) and (\beta) from prior beliefs
-
-The user-specified beliefs:
-
-* mean rate ≈ 0.2 units. Thus $\mathbb{E}[\lambda] =0.2$.
-  
-* prior standard deviation for the **rate** $\lambda$ is 2. Thus $\mathrm{Var}(\lambda)=4$.
-
-With the $Gamma(\alpha,\beta)$ (rate) parameterization:
-
-$$\frac{\alpha}{\beta}=0.2,\qquad \frac{\alpha}{\beta^2}=4$$.
-
-Solve for $\beta$ first from $\mathrm{Var}= \dfrac{\alpha}{\beta^2}$ and $\alpha=\beta\times 0.2$:
-
-$$\mathrm{Var} = \frac{0.2\beta}{\beta^2}=\frac{0.2}{\beta}=4
-\quad\Longrightarrow\quad
-\beta=\frac{0.2}{4}=0.05.$$
-
-Then $\alpha = 0.2\beta = 0.2\times0.05 = 0.01.$
-
-So the prior hyperparameters are
-
-$$\boxed{\alpha=0.01,\ \beta=0.05.}$$
----
-
-## 4. Posterior distribution
-
-Multiply prior and likelihood:
-
-$$p(\lambda\mid x_{1:n})
-\propto \lambda^{\alpha-1} e^{-\beta\lambda}\times \lambda^n e^{-\lambda\sum x_i}
-= \lambda^{(\alpha+n)-1} e^{-(\beta+\sum x_i)\lambda}.
+$$
+f(x_i \mid \lambda) = \lambda e^{-\lambda x_i}, \quad x_i > 0, \ \lambda > 0.
 $$
 
-Thus the posterior is
+You wish to use Bayesian methods to estimate $\lambda$. As a prior, you use a $Gamma(a, b)$ distribution for $\lambda$.
 
-$$\boxed{\lambda\mid x_{1:n}\ \sim\ \mathrm{Gamma}(\alpha+n,\ \beta+\sum_{i=1}^n x_i,).}$$
+
+#### 1. Likelihood Function
+
+The likelihood for $x_1, \dots, x_n$ is the product of individual densities:
+
+$$
+p(x \mid \lambda) = \prod_{i=1}^n f(x_i \mid \lambda) = \prod_{i=1}^n \lambda e^{-\lambda x_i} \propto \lambda^n e^{-\lambda \sum_{i=1}^n x_i}.
+$$
 
 ---
 
-## 5. Posterior mean for the given data
+#### 2. Why Gamma is an Appropriate Prior
 
-Observed data: 2.1,,0.9,,4.3,,3.7,,1.8.
+- The rate parameter $\lambda > 0$, and the Gamma distribution is defined on $(0, \infty)$.  
 
-Compute:
+---
 
-* n=5.
-* $\sum_{i=1}^n x_i = 2.1+0.9+4.3+3.7+1.8 = 12.8$.
+#### 3. Prior Parameters for Gamma
 
-Posterior hyperparameters:
+Given:
 
-$$\alpha_{\text{post}}=\alpha+n=0.01+5=5.01,\qquad
-\beta_{\text{post}}=\beta+\sum x_i=0.05+12.8=12.85.$$
+$$
+E[\lambda] = \frac{a}{b} = 2, \quad SD[\lambda] = \sqrt{\frac{a}{b^2}} = 0.5
+$$
 
+Step 1: Solve for $b$ in terms of $a$ using SD:
+
+$$
+b = \frac{\sqrt{a}}{0.5}
+$$
+
+Step 2: Solve using mean:
+
+$$
+\frac{a}{b} = 2 \implies \frac{a}{\sqrt{a}/0.5} = 2 \implies 0.5 \sqrt{a} = 2 \implies a = 16
+$$
+
+Then:
+
+$$
+b = \frac{\sqrt{16}}{0.5} = \frac{4}{0.5} = 8
+$$
+
+So, the prior is $\lambda \sim Gamma(16,8)$
+---
+
+#### 4. Posterior Distribution
+
+The posterior, using conjugacy, is:
+
+$$
+p(\lambda \mid x) \propto \lambda^{a-1} e^{-b\lambda} \cdot \lambda^n e^{-\lambda \sum x_i} = \lambda^{a+n-1} e^{-(b+\sum x_i)\lambda}
+$$
+
+Thus:
+
+$$
+\lambda \mid x \sim Gamma(a + n,\, b + \sum_{i=1}^n x_i)
+$$
+
+---
+
+#### 5. Posterior Mean with Observed Data
+
+Observed data: $y = 2, 3, 1.5, 2, 3.5$
+
+- $n = 5$  
+- $\sum y_i = 12$  
+- Prior: $a = 16, b = 8$
+
+Posterior:
+
+$$
+\lambda \mid y \sim Gamma(16+5, 8+12) = Gamma(21, 20)
+$$
 
 Posterior mean:
 
-$$\mathbb{E}[\lambda\mid\text{data}] = \frac{\alpha_{\text{post}}}{\beta_{\text{post}}}
-= \frac{5.01}{12.85}\approx 0.389883.$$
-
-
-Posterior variance and sd (for completeness):
-
-$$\mathrm{Var}(\lambda\mid\text{data})=\frac{5.01}{12.85^2}\approx 0.03034,
-\qquad \mathrm{sd}\approx 0.17419.$$
-
-
-So
-
-$$\boxed{\mathbb{E}[\lambda\mid\text{data}]\approx 0.3899,\quad \mathrm{sd}\approx 0.1742.}$$
-
+$$
+E[\lambda \mid y] = \frac{21}{20} = 1.05
+$$
 
 ---
 
-## 6. Is Gamma conjugate to the exponential likelihood?
+#### 6. Comparison and Insights
 
-Yes. As shown in (4), a Gamma prior times the exponential likelihood yields a Gamma posterior (same family). Therefore the Gamma is a conjugate prior for the exponential rate parameter $\lambda$.
+| Estimate | Value |
+|----------|-------|
+| Prior mean $E[\lambda]$ | 2 |
+| Posterior mean $E[\lambda \mid y]$ | 1.05 |
+| MLE $1/\bar{y}$ | 0.42 |
+
+**Insights:**
+
+- Posterior mean is a compromise between prior and data: slightly lower than prior because observed waiting times are longer than expected.  
 
 ---
 
-## 7. Compare posterior mean, prior mean, and MLE — interpretation
+### **Distribution Information**
 
-Compute the relevant quantities:
+You can use the following information about the Exponential and Gamma distributions to help you with the question:
 
-* Prior mean for $\lambda$: $\mathbb{E}[\lambda] = 0.2.$
-* Sample mean lifetime: (\bar{x} = \dfrac{12.8}{5}=2.56) so the **MLE** for the rate (frequentist) is
-  
-$$  \hat\lambda_{\text{MLE}} = \frac{n}{\sum x_i} = \frac{5}{12.8}=0.390625.$$
-  
-* Posterior mean: (\approx 0.389883).
+```{r, echo=FALSE}
+library(knitr)
 
-Comparison / interpretation:
+# Create the data for the table
+data <- data.frame(
+  `Probability Distribution` = c("Exponential", "Gamma"),
+  `PMF/PDF` = c(
+    "$$f(x \\mid \\lambda) = \\lambda e^{-\\lambda x},\\ x \\ge 0$$",
+    "$$f(x \\mid a,b) = \\frac{b^a}{\\Gamma(a)} x^{a-1} e^{-b x},\\ x \\ge 0$$"
+  ),
+  `E(X)` = c(
+    "$$\\frac{1}{\\lambda}$$",
+    "$$\\frac{a}{b}$$"
+  ),
+  `Var(X)` = c(
+    "$$\\frac{1}{\\lambda^2}$$",
+    "$$\\frac{a}{b^2}$$"
+  )
+)
 
-* The posterior mean (0.3899) is almost the same as the MLE (0.390625). This happens because the prior was very weak (tiny (\alpha=0.01)); the data dominate the posterior. In effect the posterior is close to the likelihood-based estimate because the prior contributed very little information relative to the 5 observations.
-* The prior mean (0.2) was much smaller than the data-supported rate ≈0.39 (equivalently, the prior implied mean lifetime 5 units vs the sample mean lifetime 2.56 units). The data pulled the posterior away from the prior toward the MLE.
-* The posterior sd (~0.174) is much smaller than the prior sd (2), reflecting the information gained from data: the posterior concentrates substantially compared to the diffuse prior.
+# Render the table using knitr::kable
+kable(data, col.names = c("Probability Distribution", "PMF/PDF", "E(X)", "Var(X)"), escape = FALSE)
+```
 

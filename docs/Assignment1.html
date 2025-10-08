@@ -4878,9 +4878,9 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question">Question</a>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a>
   <ul class="collapse">
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
   <li><a href="#distribution-information" id="toc-distribution-information" class="nav-link" data-scroll-target="#distribution-information"><strong>Distribution Information</strong></a></li>
   </ul></li>
   </ul>
@@ -4892,7 +4892,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">ST405/ST645 Bayesian Data Analysis</h1>
-<p class="subtitle lead">Assignment 1: Bayesian Inference on Particle Emission Energy</p>
+<p class="subtitle lead">Assignment 1:</p>
 </div>
 
 
@@ -4917,38 +4917,38 @@ window.Quarto = {
 
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
-<p>Please submit your answers to this assignment by October 23rd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers.</p>
+<p>Please submit your answers to this assignment by October 22nd, 4:00 PM. Ensure that all calculations are clearly shown, and include explanations where necessary. You may refer to the provided distribution information to help with your answers.</p>
+<hr>
+<p>Suppose you are modeling the waiting times (in hours) for patients in a hospital emergency room, where each waiting time is assumed to follow an <strong>Exponential distribution</strong> with rate parameter <span class="math inline">\(\lambda\)</span>.</p>
+<p>You wish to use Bayesian methods to estimate <span class="math inline">\(\lambda\)</span>. As a prior, you use a <span class="math inline">\(Gamma(a, b)\)</span> distribution for <span class="math inline">\(\lambda\)</span>.</p>
+<hr>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
+<ol type="1">
+<li><p>Write down the likelihood function <span class="math inline">\(p(x|\lambda)\)</span> for the sample <span class="math inline">\(x_1, \dots, x_n\)</span> (up to proportionality).</p></li>
+<li><p>Why is the Gamma distribution an appropriate prior for the rate parameter (<span class="math inline">\(\lambda\)</span>) in this model?</p></li>
+<li><p>Suppose your prior belief is that the expected rate at which patients are seen is 2 per hour , with prior standard deviation of 0.5 units. Find the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> for the Gamma prior that encode this belief.</p></li>
+<li><p>Assuming that the Gamma distribution is a conjugate prior for the exponential likelihood, derive the posterior distribution for <span class="math inline">\(\lambda\)</span> given observations <span class="math inline">\(x_1, \dots, x_n\)</span>.</p></li>
+<li><p>Suppose the observed data are <span class="math inline">\(y = 2, 3, 1.5, 2, 3.5\)</span>. Find the posterior expected value of <span class="math inline">\(\lambda\)</span>.</p></li>
+<li><p>Compare the posterior expected value of <span class="math inline">\(\lambda\)</span> to:</p>
+<ul>
+<li><p>The prior expected value of <span class="math inline">\(\lambda\)</span>, and</p></li>
+<li><p>The maximum likelihood estimate (MLE) from the observed data (<span class="math inline">\(1/\bar{y}\)</span>). What insights do you gain from this comparison in terms of how Bayesian updating works?</p></li>
+</ul></li>
+</ol>
+<hr>
 </section>
-<section id="question" class="level2">
-<h2 class="anchored" data-anchor-id="question">Question</h2>
-<p>The energy of eight(8) particles being emitted form a radioactive source was recorded as:</p>
-<p><span class="math inline">\(y = 50, 60, 60, 80, 40, 40, 80, 70\text{ MeV}\)</span>.</p>
-<p>We assume the particles have the following data model:</p>
-<p><span class="math inline">\(y_i \sim N(\mu,\rho \mu^2)\)</span>,</p>
-<p>where <span class="math inline">\(\rho = 1\)</span></p>
-<p>A nuclear physicist provides an expert opinion that particles will be emitted with an average energy of 80 MeV. However, she acknowledges uncertainty in this value and suggests the average energy could lie anywhere between 50 MeV and 110 MeV.</p>
-<ol type="a">
-<li>Show that the likelihood for <span class="math inline">\({\bf y}\)</span> is of the form:</li>
-</ol>
-<p><span class="math display">\[p({\bf y}|\mu) \propto \frac{1}{\mu^8} \exp \left[ -\frac{15300}{\mu^2} + \frac{480}{\mu} \right]\]</span></p>
-<ol start="2" type="a">
-<li><p>Assume a prior for <span class="math inline">\(\mu\)</span>, such that <span class="math inline">\(\mu \sim gamma(a,b)\)</span>. Use moment matching to determine the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> such that this prior reflects the nuclear physicist’s opinions about the average energy of the particles. Specifically, assume that the range she provided (50 MeV to 110 MeV) is <span class="math inline">\(\pm\)</span> 3 standard deviations from the mean.</p></li>
-<li><p>Write down the prior probability density function <span class="math inline">\(p(\mu)\)</span>, up to a constant.</p></li>
-<li><p>Write down the posterior probability density function <span class="math inline">\(p(\mu |y)\)</span>, up to a constant.</p></li>
-</ol>
 <section id="distribution-information" class="level3">
 <h3 class="anchored" data-anchor-id="distribution-information"><strong>Distribution Information</strong></h3>
-<ul>
-<li>You can use the following information about the Normal and Gamma distributions to help you with the question:</li>
-</ul>
+<p>You can use the following information about the Exponential and Gamma distributions to help you with the question:</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 17%">
-<col style="width: 58%">
-<col style="width: 11%">
-<col style="width: 12%">
+<col style="width: 49%">
+<col style="width: 15%">
+<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -4960,14 +4960,14 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Normal</td>
-<td style="text-align: left;"><span class="math display">\[\frac{1}{\sqrt{2\pi} \sigma} \exp\left(-\frac{1}{2\sigma^2}(x_i - \mu)^2\right)\]</span></td>
-<td style="text-align: left;"><span class="math display">\[\mu\]</span></td>
-<td style="text-align: left;"><span class="math display">\[\sigma^2\]</span></td>
+<td style="text-align: left;">Exponential</td>
+<td style="text-align: left;"><span class="math display">\[f(x \mid \lambda) = \lambda e^{-\lambda x},\ x \ge 0\]</span></td>
+<td style="text-align: left;"><span class="math display">\[\frac{1}{\lambda}\]</span></td>
+<td style="text-align: left;"><span class="math display">\[\frac{1}{\lambda^2}\]</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Gamma</td>
-<td style="text-align: left;"><span class="math display">\[\frac{b^a}{\Gamma(a)}x^{a-1}e^{-b x},\ x \geq 0\]</span></td>
+<td style="text-align: left;"><span class="math display">\[f(x \mid a,b) = \frac{b^a}{\Gamma(a)} x^{a-1} e^{-b x},\ x \ge 0\]</span></td>
 <td style="text-align: left;"><span class="math display">\[\frac{a}{b}\]</span></td>
 <td style="text-align: left;"><span class="math display">\[\frac{a}{b^2}\]</span></td>
 </tr>
