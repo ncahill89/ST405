@@ -80,14 +80,12 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 [Tutorial Sheet 4: Bayesian Hierarchical Regression Modelling - Simulation](https://ncahill89.github.io/ST405/Tutorial4.html)
 
-
 ## Assignments
 
-[Assignment 1: Bayesian Inference on Particle Emission Energy](https://ncahill89.github.io/ST405/Assignment1.html)
+[Assignment 1: Bayesian Inference on Waiting Times](https://ncahill89.github.io/ST405/Assignment1.html)
 
-[Assignment 2: Comparing Video Game Playing Among Students in 5 Different Countries](https://ncahill89.github.io/ST405/Assignment2.html)
+<!-- [Assignment 2: Comparing Video Game Playing Among Students in 5 Different Countries](https://ncahill89.github.io/ST405/Assignment2.html) -->
 
-[Assignment 3: Football outcomes vs point spread](https://ncahill89.github.io/ST405/Assignment3.html)
+<!-- [Assignment 3: Football outcomes vs point spread](https://ncahill89.github.io/ST405/Assignment3.html) -->
 
-[Assignment 4: Radon Analysis](https://ncahill89.github.io/ST405/Assignment4.html)
-
+<!-- [Assignment 4: Radon Analysis](https://ncahill89.github.io/ST405/Assignment4.html) -->
