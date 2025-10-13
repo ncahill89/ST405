@@ -177,10 +177,14 @@ plot(p_sunny, type = "l", xlab = "Iteration", ylab = "P(S)")
 
 2.  Calculate the acceptance ratio $r = min \bigg(1, \frac{ p(y|\theta_{pro})p(\theta_{pro})}{p(y|\theta_{cur})p(\theta_{cur})}\bigg)$.
 
-3.  Draw a random number, $u$ between 0 and 1. If $u < r$ then the move is accepted.
+3.  Draw a random number, $u$ between 0 and 1. If $u < r$ then the move is accepted*. 
 
 4.  Repeat until a representative sample from the target distribution has been generated (more on this later).
+
+*The random $u$ allows occasional acceptance of worse proposals (with probability $r < 1$). This introduces randomness that lets the chain explore the entire parameter space.
+
 :::
+
 
 ## Metropolis Algorithm for the Happiness example {style="font-size: 60%;"}
 
