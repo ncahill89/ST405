@@ -350,7 +350,7 @@ $\mu|\mu_0,\sigma_0 \sim N(\mu_0 = 80, \sigma^2_{_0} = 10^2)$
 
 2.  Calculate the acceptance ratio on the log scale (avoids numerical instability).
 
-$log(r) = \text{min}(0, \sum_i log(dnorm(y_i,\mu_{pro},\sigma)) + log(dnorm(\mu_{pro},\mu_0,\sigma_0))$ $- \sum_i log(dnorm(y_i,\mu_{cur},\sigma)) - log(dnorm(\mu_{cur},\mu_0,\sigma_0)))$
+$log(r) = \text{min}(0, \sum_i (dnorm(y_i,\mu_{pro},\sigma, log = T)) + dnorm(\mu_{pro},\mu_0,\sigma_0, log = T)$ $- \sum_i (dnorm(y_i,\mu_{cur},\sigma, log = T)) - dnorm(\mu_{cur},\mu_0,\sigma_0, log = T))$
 
 3.  Compare $u \sim Uniform(0,1)$ with $r$ and accept move if $log(u) < r$.
 

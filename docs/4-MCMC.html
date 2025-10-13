@@ -648,7 +648,7 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <li><p>Propose a new move using a Normal proposal distribution such that <span class="math inline">\(\mu_{pro} = \mu_{cur} + N(0,1)\)</span>.</p></li>
 <li><p>Calculate the acceptance ratio on the log scale (avoids numerical instability).</p></li>
 </ol>
-<p><span class="math inline">\(log(r) = \text{min}(0, \sum_i log(dnorm(y_i,\mu_{pro},\sigma)) + log(dnorm(\mu_{pro},\mu_0,\sigma_0))\)</span> <span class="math inline">\(- \sum_i log(dnorm(y_i,\mu_{cur},\sigma)) - log(dnorm(\mu_{cur},\mu_0,\sigma_0)))\)</span></p>
+<p><span class="math inline">\(log(r) = \text{min}(0, \sum_i (dnorm(y_i,\mu_{pro},\sigma, log = T)) + dnorm(\mu_{pro},\mu_0,\sigma_0, log = T)\)</span> <span class="math inline">\(- \sum_i (dnorm(y_i,\mu_{cur},\sigma, log = T)) - dnorm(\mu_{cur},\mu_0,\sigma_0, log = T))\)</span></p>
 <ol start="3" type="1">
 <li>Compare <span class="math inline">\(u \sim Uniform(0,1)\)</span> with <span class="math inline">\(r\)</span> and accept move if <span class="math inline">\(log(u) &lt; r\)</span>.</li>
 </ol>
@@ -774,16 +774,16 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <pre><code># A tibble: 9,900 × 3
    sample_index  mu_s sigma_s
           &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
- 1            1  85.7    21.7
- 2            2  86.2    20.8
- 3            3  87.8    20.2
- 4            4  87.9    21.5
- 5            5  86.6    21.1
- 6            6  87.0    19.9
- 7            7  87.7    19.6
- 8            8  86.1    21.0
- 9            9  87.7    19.9
-10           10  86.8    20.6
+ 1            1  85.3    21.1
+ 2            2  86.3    20.6
+ 3            3  87.3    21.2
+ 4            4  88.6    20.7
+ 5            5  87.0    20.7
+ 6            6  87.4    19.6
+ 7            7  86.4    19.0
+ 8            8  89.1    19.8
+ 9            9  85.0    20.9
+10           10  86.1    19.2
 # ℹ 9,890 more rows</code></pre>
 </div>
 </div></div>
@@ -880,10 +880,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Mu: 86.72347 </code></pre>
+<pre><code>Mean of Mu: 86.73696 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Mu: 84.80829 88.58212 </code></pre>
+<pre><code>95% Credible Interval for Mu: 84.81947 88.6371 </code></pre>
 </div>
 </div></div>
 <div class="cell columns column-output-location">
@@ -908,10 +908,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Sigma: 20.40462 </code></pre>
+<pre><code>Mean of Sigma: 20.39745 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Sigma: 19.0815 21.81461 </code></pre>
+<pre><code>95% Credible Interval for Sigma: 19.09726 21.82575 </code></pre>
 </div>
 </div></div>
 
