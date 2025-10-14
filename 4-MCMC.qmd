@@ -505,8 +505,8 @@ for(s in 2:n_iter){
 tau_s[s] <- rgamma(1,post.a,post.b)
 sigma_s[s] <- sqrt(1/tau_s[s]) # transform to sigma
 ## update posterior parameters for mu
-mupost.mean = (mu0/(sigma.mu0^2) + tau_s[s]*n*mean(y))/(1/(sigma.mu0^2) + tau_s[s]*n)
-mupost.sd = sqrt(1/(1/(sigma.mu0^2)+tau_s[s]*n))
+mupost.mean = (tau_s[s]*n*mean(y) + mu0/(sigma.mu0^2))/(tau_s[s]*n + 1/(sigma.mu0^2))
+mupost.sd = sqrt(tau_s[s]*n + 1/(1/(sigma.mu0^2)))
 ## 1.2 sample from complete conditional for mu
 mu_s[s] <- rnorm(1,mupost.mean,mupost.sd)
 ## update posterior parameters for tau
