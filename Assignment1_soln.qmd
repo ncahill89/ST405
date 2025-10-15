@@ -9,7 +9,7 @@ format:
 editor: visual
 ---
 
-# Solution [Total = 30 Marks]
+# Solution \[Total = 30 Marks\]
 
 Suppose you are modeling the waiting times (in minutes) for patients in a hospital emergency room, where each waiting time is assumed to follow an **Exponential distribution** with rate parameter $\lambda$. That is, the density for a single observation $x_i$ is:
 
@@ -19,7 +19,7 @@ $$
 
 You wish to use Bayesian methods to estimate $\lambda$. As a prior, you use a $Gamma(a, b)$ distribution for $\lambda$.
 
-#### 1. Likelihood Function [5 Marks]
+#### 1. Likelihood Function \[5 Marks\]
 
 The likelihood for $x_1, \dots, x_n$ is the product of individual densities:
 
@@ -29,13 +29,13 @@ $$
 
 ------------------------------------------------------------------------
 
-#### 2. Why Gamma is an Appropriate Prior [2 Marks]
+#### 2. Why Gamma is an Appropriate Prior \[2 Marks\]
 
 -   The rate parameter $\lambda > 0$, and the Gamma distribution is defined on $(0, \infty)$.
 
 ------------------------------------------------------------------------
 
-#### 3. Prior Parameters for Gamma [8 Marks]
+#### 3. Prior Parameters for Gamma \[8 Marks\]
 
 Given:
 
@@ -61,9 +61,9 @@ $$
 b = \frac{\sqrt{16}}{0.5} = \frac{4}{0.5} = 8
 $$
 
-## So, the prior is $\lambda \sim Gamma(16,8)$
+So, the prior is $\lambda \sim Gamma(16,8)$
 
-#### 4. Posterior Distribution [6 Marks]
+#### 4. Posterior Distribution \[6 Marks\]
 
 The posterior, using conjugacy, is:
 
@@ -79,7 +79,7 @@ $$
 
 ------------------------------------------------------------------------
 
-#### 5. Posterior Mean with Observed Data [5 Marks]
+#### 5. Posterior Mean with Observed Data \[5 Marks\]
 
 Observed data: $y = 2, 3, 1.5, 2, 3.5$
 
@@ -101,7 +101,7 @@ $$
 
 ------------------------------------------------------------------------
 
-#### 6. Comparison and Insights [4 Marks]
+#### 6. Comparison and Insights \[4 Marks\]
 
 | Estimate                           | Value |
 |------------------------------------|-------|
