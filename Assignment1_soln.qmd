@@ -9,7 +9,7 @@ format:
 editor: visual
 ---
 
-# Solution 
+# Solution [Total = 30 Marks]
 
 Suppose you are modeling the waiting times (in minutes) for patients in a hospital emergency room, where each waiting time is assumed to follow an **Exponential distribution** with rate parameter $\lambda$. That is, the density for a single observation $x_i$ is:
 
@@ -19,8 +19,7 @@ $$
 
 You wish to use Bayesian methods to estimate $\lambda$. As a prior, you use a $Gamma(a, b)$ distribution for $\lambda$.
 
-
-#### 1. Likelihood Function
+#### 1. Likelihood Function [5 Marks]
 
 The likelihood for $x_1, \dots, x_n$ is the product of individual densities:
 
@@ -28,15 +27,15 @@ $$
 p(x \mid \lambda) = \prod_{i=1}^n f(x_i \mid \lambda) = \prod_{i=1}^n \lambda e^{-\lambda x_i} \propto \lambda^n e^{-\lambda \sum_{i=1}^n x_i}.
 $$
 
----
+------------------------------------------------------------------------
 
-#### 2. Why Gamma is an Appropriate Prior
+#### 2. Why Gamma is an Appropriate Prior [2 Marks]
 
-- The rate parameter $\lambda > 0$, and the Gamma distribution is defined on $(0, \infty)$.  
+-   The rate parameter $\lambda > 0$, and the Gamma distribution is defined on $(0, \infty)$.
 
----
+------------------------------------------------------------------------
 
-#### 3. Prior Parameters for Gamma
+#### 3. Prior Parameters for Gamma [8 Marks]
 
 Given:
 
@@ -62,10 +61,9 @@ $$
 b = \frac{\sqrt{16}}{0.5} = \frac{4}{0.5} = 8
 $$
 
-So, the prior is $\lambda \sim Gamma(16,8)$
----
+## So, the prior is $\lambda \sim Gamma(16,8)$
 
-#### 4. Posterior Distribution
+#### 4. Posterior Distribution [6 Marks]
 
 The posterior, using conjugacy, is:
 
@@ -79,15 +77,15 @@ $$
 \lambda \mid x \sim Gamma(a + n,\, b + \sum_{i=1}^n x_i)
 $$
 
----
+------------------------------------------------------------------------
 
-#### 5. Posterior Mean with Observed Data
+#### 5. Posterior Mean with Observed Data [5 Marks]
 
 Observed data: $y = 2, 3, 1.5, 2, 3.5$
 
-- $n = 5$  
-- $\sum y_i = 12$  
-- Prior: $a = 16, b = 8$
+-   $n = 5$\
+-   $\sum y_i = 12$\
+-   Prior: $a = 16, b = 8$
 
 Posterior:
 
@@ -101,21 +99,21 @@ $$
 E[\lambda \mid y] = \frac{21}{20} = 1.05
 $$
 
----
+------------------------------------------------------------------------
 
-#### 6. Comparison and Insights
+#### 6. Comparison and Insights [4 Marks]
 
-| Estimate | Value |
-|----------|-------|
-| Prior mean $E[\lambda]$ | 2 |
-| Posterior mean $E[\lambda \mid y]$ | 1.05 |
-| MLE $1/\bar{y}$ | 0.42 |
+| Estimate                           | Value |
+|------------------------------------|-------|
+| Prior mean $E[\lambda]$            | 2     |
+| Posterior mean $E[\lambda \mid y]$ | 1.05  |
+| MLE $1/\bar{y}$                    | 0.42  |
 
 **Insights:**
 
-- Posterior mean is a compromise between prior and data: slightly lower than prior because observed waiting times are longer than expected.  
+-   Posterior mean is a compromise between prior and data: slightly lower than prior because observed waiting times are longer than expected.
 
----
+------------------------------------------------------------------------
 
 ### **Distribution Information**
 
@@ -144,4 +142,3 @@ data <- data.frame(
 # Render the table using knitr::kable
 kable(data, col.names = c("Probability Distribution", "PMF/PDF", "E(X)", "Var(X)"), escape = FALSE)
 ```
-

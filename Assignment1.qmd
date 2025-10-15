@@ -20,30 +20,31 @@ Please submit your answers to this assignment by October 22nd, 4:00 PM. Ensure t
 
 ------------------------------------------------------------------------
 
-Suppose you are modeling the waiting times (in hours) for patients in a hospital emergency room, where each waiting time is assumed to follow an **Exponential distribution** with rate parameter $\lambda$. 
+Suppose you are modeling the waiting times (in hours) for patients in a hospital emergency room, where each waiting time is assumed to follow an **Exponential distribution** with rate parameter $\lambda$.
 
 You wish to use Bayesian methods to estimate $\lambda$. As a prior, you use a $Gamma(a, b)$ distribution for $\lambda$.
 
 ------------------------------------------------------------------------
 
-### Questions
+### Questions [Total = 30 Marks]
 
-1.  Write down the likelihood function $p(x|\lambda)$ for the sample $x_1, \dots, x_n$ (up to proportionality).
+__1. [5 Marks]__ Write down the likelihood function $p(x|\lambda)$ for the sample $x_1, \dots, x_n$ (up to proportionality). 
 
-2.  Why is the Gamma distribution an appropriate prior for the rate parameter ($\lambda$) in this model?
+__2. [2 Marks]__ Why is the Gamma distribution an appropriate prior for the rate parameter ($\lambda$) in this model? 
 
-3.  Suppose your prior belief is that the expected rate at which patients are seen is 2 per hour , with prior standard deviation of 0.5 units. Find the values of $a$ and $b$ for the Gamma prior that encode this belief.
+__3. [8 Marks]__ Suppose your prior belief is that the expected rate at which patients are seen is 2 per hour , with prior standard deviation of 0.5 units. Find the values of $a$ and $b$ for the Gamma prior that encode this belief. 
 
-4.  Assuming that the Gamma distribution is a conjugate prior for the exponential likelihood, derive the posterior distribution for $\lambda$ given observations $x_1, \dots, x_n$.
+__4. [6 Marks]__  Assuming that the Gamma distribution is a conjugate prior for the exponential likelihood, derive the posterior distribution for $\lambda$ given observations $x_1, \dots, x_n$. 
 
-5.  Suppose the observed data are $y = 2, 3, 1.5, 2, 3.5$. Find the posterior expected value of $\lambda$.
+__5. [5 marks]__ Suppose the observed data are $y = 2, 3, 1.5, 2, 3.5$. Find the posterior expected value of $\lambda$. 
 
+__6. [4 Marks]__ Compare the posterior expected value of $\lambda$ to:
 
-6.  Compare the posterior expected value of $\lambda$ to:
-
-    -   The prior expected value of $\lambda$, and
+  - The prior expected value of $\lambda$, and
+  
+  - The maximum likelihood estimate (MLE) from the observed data ($1/\bar{y}$). 
     
-    -   The maximum likelihood estimate (MLE) from the observed data ($1/\bar{y}$). What insights do you gain from this comparison in terms of how Bayesian updating works?
+What insights do you gain from this comparison in terms of how Bayesian updating works? 
 
 ------------------------------------------------------------------------
 
@@ -74,4 +75,3 @@ data <- data.frame(
 # Render the table using knitr::kable
 kable(data, col.names = c("Probability Distribution", "PMF/PDF", "E(X)", "Var(X)"), escape = FALSE)
 ```
-

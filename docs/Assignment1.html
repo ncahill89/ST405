@@ -4880,7 +4880,7 @@ window.Quarto = {
   <ul>
   <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a>
   <ul class="collapse">
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
+  <li><a href="#questions-total-30-marks" id="toc-questions-total-30-marks" class="nav-link" data-scroll-target="#questions-total-30-marks">Questions [Total = 30 Marks]</a></li>
   <li><a href="#distribution-information" id="toc-distribution-information" class="nav-link" data-scroll-target="#distribution-information"><strong>Distribution Information</strong></a></li>
   </ul></li>
   </ul>
@@ -4922,20 +4922,19 @@ window.Quarto = {
 <p>Suppose you are modeling the waiting times (in hours) for patients in a hospital emergency room, where each waiting time is assumed to follow an <strong>Exponential distribution</strong> with rate parameter <span class="math inline">\(\lambda\)</span>.</p>
 <p>You wish to use Bayesian methods to estimate <span class="math inline">\(\lambda\)</span>. As a prior, you use a <span class="math inline">\(Gamma(a, b)\)</span> distribution for <span class="math inline">\(\lambda\)</span>.</p>
 <hr>
-<section id="questions" class="level3">
-<h3 class="anchored" data-anchor-id="questions">Questions</h3>
-<ol type="1">
-<li><p>Write down the likelihood function <span class="math inline">\(p(x|\lambda)\)</span> for the sample <span class="math inline">\(x_1, \dots, x_n\)</span> (up to proportionality).</p></li>
-<li><p>Why is the Gamma distribution an appropriate prior for the rate parameter (<span class="math inline">\(\lambda\)</span>) in this model?</p></li>
-<li><p>Suppose your prior belief is that the expected rate at which patients are seen is 2 per hour , with prior standard deviation of 0.5 units. Find the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> for the Gamma prior that encode this belief.</p></li>
-<li><p>Assuming that the Gamma distribution is a conjugate prior for the exponential likelihood, derive the posterior distribution for <span class="math inline">\(\lambda\)</span> given observations <span class="math inline">\(x_1, \dots, x_n\)</span>.</p></li>
-<li><p>Suppose the observed data are <span class="math inline">\(y = 2, 3, 1.5, 2, 3.5\)</span>. Find the posterior expected value of <span class="math inline">\(\lambda\)</span>.</p></li>
-<li><p>Compare the posterior expected value of <span class="math inline">\(\lambda\)</span> to:</p>
+<section id="questions-total-30-marks" class="level3">
+<h3 class="anchored" data-anchor-id="questions-total-30-marks">Questions [Total = 30 Marks]</h3>
+<p><strong>1. [5 Marks]</strong> Write down the likelihood function <span class="math inline">\(p(x|\lambda)\)</span> for the sample <span class="math inline">\(x_1, \dots, x_n\)</span> (up to proportionality).</p>
+<p><strong>2. [2 Marks]</strong> Why is the Gamma distribution an appropriate prior for the rate parameter (<span class="math inline">\(\lambda\)</span>) in this model?</p>
+<p><strong>3. [8 Marks]</strong> Suppose your prior belief is that the expected rate at which patients are seen is 2 per hour , with prior standard deviation of 0.5 units. Find the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> for the Gamma prior that encode this belief.</p>
+<p><strong>4. [6 Marks]</strong> Assuming that the Gamma distribution is a conjugate prior for the exponential likelihood, derive the posterior distribution for <span class="math inline">\(\lambda\)</span> given observations <span class="math inline">\(x_1, \dots, x_n\)</span>.</p>
+<p><strong>5. [5 marks]</strong> Suppose the observed data are <span class="math inline">\(y = 2, 3, 1.5, 2, 3.5\)</span>. Find the posterior expected value of <span class="math inline">\(\lambda\)</span>.</p>
+<p><strong>6. [4 Marks]</strong> Compare the posterior expected value of <span class="math inline">\(\lambda\)</span> to:</p>
 <ul>
 <li><p>The prior expected value of <span class="math inline">\(\lambda\)</span>, and</p></li>
-<li><p>The maximum likelihood estimate (MLE) from the observed data (<span class="math inline">\(1/\bar{y}\)</span>). What insights do you gain from this comparison in terms of how Bayesian updating works?</p></li>
-</ul></li>
-</ol>
+<li><p>The maximum likelihood estimate (MLE) from the observed data (<span class="math inline">\(1/\bar{y}\)</span>).</p></li>
+</ul>
+<p>What insights do you gain from this comparison in terms of how Bayesian updating works?</p>
 <hr>
 </section>
 <section id="distribution-information" class="level3">
