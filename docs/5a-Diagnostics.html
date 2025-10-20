@@ -480,16 +480,16 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <pre><code># A tibble: 9,900 × 3
    sample_index  mu_s sigma_s
           &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
- 1            1  85.5    21.0
- 2            2  87.2    20.9
- 3            3  85.9    21.4
- 4            4  87.9    20.8
- 5            5  87.7    20.0
- 6            6  86.1    20.0
- 7            7  85.6    18.9
- 8            8  86.4    19.7
- 9            9  87.7    19.8
-10           10  86.3    19.9
+ 1            1  85.6    20.3
+ 2            2  85.6    20.9
+ 3            3  86.1    21.1
+ 4            4  84.8    21.4
+ 5            5  87.2    21.7
+ 6            6  87.1    21.2
+ 7            7  85.4    21.9
+ 8            8  87.0    21.1
+ 9            9  87.5    20.4
+10           10  87.3    20.0
 # ℹ 9,890 more rows</code></pre>
 </div>
 </div></div>
@@ -555,10 +555,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Mu: 86.71911 </code></pre>
+<pre><code>Mean of Mu: 86.74923 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Mu: 84.77567 88.66795 </code></pre>
+<pre><code>95% Credible Interval for Mu: 84.8541 88.64509 </code></pre>
 </div>
 </div></div>
 <div class="cell columns column-output-location">
@@ -583,10 +583,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Sigma: 20.39994 </code></pre>
+<pre><code>Mean of Sigma: 20.3967 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Sigma: 19.07463 21.85732 </code></pre>
+<pre><code>95% Credible Interval for Sigma: 19.09901 21.80961 </code></pre>
 </div>
 </div></div>
 </section>
@@ -750,15 +750,11 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <p>Extending this to MCMC chains, we substitute the sample size N with the ESS to get</p>
 <p>MCSE = SD/<span class="math inline">\(\sqrt{\text{ESS}}\)</span></p>
 <p>where SD is the standard deviation of the chain.</p>
-</section>
-<section id="mcmc-efficiency" class="slide level2" style="font-size: 70%;">
-<h2>MCMC efficiency</h2>
-<p>There are a number of ways to attempt to improve efficiency in the MCMC process</p>
-<ol type="1">
-<li><p>Run chains in parallel</p></li>
-<li><p>Adjust the sampling algorithm e.g., use Gibbs instead of Metropolis</p></li>
-<li><p>Change model parameterisation (e.g., mean center the data for regression analysis)</p></li>
-</ol>
+<!-- ## MCMC efficiency {style="font-size: 70%;"} -->
+<!-- There are a number of ways to attempt to improve efficiency in the MCMC process -->
+<!-- 1.  Run chains in parallel -->
+<!-- 2.  Adjust the sampling algorithm e.g., use Gibbs instead of Metropolis -->
+<!-- 3.  Change model parameterisation (e.g., mean center the data for regression analysis) -->
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

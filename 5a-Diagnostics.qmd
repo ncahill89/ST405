@@ -566,12 +566,12 @@ MCSE = SD/$\sqrt{\text{ESS}}$
 
 where SD is the standard deviation of the chain.
 
-## MCMC efficiency {style="font-size: 70%;"}
+<!-- ## MCMC efficiency {style="font-size: 70%;"} -->
 
-There are a number of ways to attempt to improve efficiency in the MCMC process
+<!-- There are a number of ways to attempt to improve efficiency in the MCMC process -->
 
-1.  Run chains in parallel
+<!-- 1.  Run chains in parallel -->
 
-2.  Adjust the sampling algorithm e.g., use Gibbs instead of Metropolis
+<!-- 2.  Adjust the sampling algorithm e.g., use Gibbs instead of Metropolis -->
 
-3.  Change model parameterisation (e.g., mean center the data for regression analysis)
+<!-- 3.  Change model parameterisation (e.g., mean center the data for regression analysis) -->
