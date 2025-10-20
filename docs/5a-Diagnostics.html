@@ -480,16 +480,16 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <pre><code># A tibble: 9,900 × 3
    sample_index  mu_s sigma_s
           &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
- 1            1  87.8    21.2
- 2            2  87.7    20.1
- 3            3  86.8    20.4
- 4            4  87.0    20.0
- 5            5  89.2    21.2
- 6            6  86.4    19.6
- 7            7  87.1    19.1
- 8            8  85.7    19.8
- 9            9  85.2    20.3
-10           10  84.3    21.3
+ 1            1  85.5    21.0
+ 2            2  87.2    20.9
+ 3            3  85.9    21.4
+ 4            4  87.9    20.8
+ 5            5  87.7    20.0
+ 6            6  86.1    20.0
+ 7            7  85.6    18.9
+ 8            8  86.4    19.7
+ 9            9  87.7    19.8
+10           10  86.3    19.9
 # ℹ 9,890 more rows</code></pre>
 </div>
 </div></div>
@@ -555,10 +555,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Mu: 86.73365 </code></pre>
+<pre><code>Mean of Mu: 86.71911 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Mu: 84.8307 88.6514 </code></pre>
+<pre><code>95% Credible Interval for Mu: 84.77567 88.66795 </code></pre>
 </div>
 </div></div>
 <div class="cell columns column-output-location">
@@ -583,10 +583,10 @@ Prof.&nbsp;Niamh Cahill (she/her)
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean of Sigma: 20.38515 </code></pre>
+<pre><code>Mean of Sigma: 20.39994 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% Credible Interval for Sigma: 19.09044 21.81506 </code></pre>
+<pre><code>95% Credible Interval for Sigma: 19.07463 21.85732 </code></pre>
 </div>
 </div></div>
 </section>
@@ -714,7 +714,7 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <img data-src="5a-Diagnostics_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="mcmc-diagnostics-effective-sample-size-ess" class="slide level2" style="font-size: 70%;">
 <h2>MCMC diagnostics: effective sample size (ESS)</h2>
-<p>We want to know what the sample size of a non-autocorrelated chain, that yields the same information, would be. An answer to this question can be provided with a measure called <em>effective sample size (ESS)</em></p>
+<p>We want to know what the sample size of a non-autocorrelated chain would be. An answer to this question can be provided with a measure called <em>effective sample size (ESS)</em></p>
 <p>The effective sample size (ESS) divides the actual sample size by the amount of autocorrelation.</p>
 <p><span class="math display">\[ESS = \frac{N}{1 + 2\sum_{k=1}^\infty\rho_k}\]</span></p>
 <p>where <span class="math inline">\(\rho_k\)</span> is the autocorrelation of the chain at lag <span class="math inline">\(k\)</span>. A good rule of thumb for the ESS is for it to be 10% of the total number of samples.</p>

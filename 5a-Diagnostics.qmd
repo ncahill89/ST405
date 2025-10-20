@@ -520,7 +520,7 @@ autocorr.plot(theta.mcmc[,1])
 
 ## MCMC diagnostics: effective sample size (ESS) {style="font-size: 70%;"}
 
-We want to know what the sample size of a non-autocorrelated chain, that yields the same information, would be. An answer to this question can be provided with a measure called *effective sample size (ESS)*
+We want to know what the sample size of a non-autocorrelated chain would be. An answer to this question can be provided with a measure called *effective sample size (ESS)*
 
 The effective sample size (ESS) divides the actual sample size by the amount of autocorrelation.
 
@@ -530,30 +530,27 @@ where $\rho_k$ is the autocorrelation of the chain at lag $k$. A good rule of th
 
 ## Thinning {style="font-size: 70%;"}
 
-- **Thinning** is the practice of **retaining only every _k-th_ sample** from a Markov Chain in MCMC sampling.
+-   **Thinning** is the practice of **retaining only every *k-th* sample** from a Markov Chain in MCMC sampling.
 
-  - Typically used to **reduce autocorrelation** in the chain or manage **large storage** demands.
+    -   Typically used to **reduce autocorrelation** in the chain or manage **large storage** demands.
 
+**How Thinning Works**
 
- **How Thinning Works**
- 
-- Given a sequence of samples: \[ x_1, x_2, x_3, ..., x_N \]
+-   Given a sequence of samples: \[ x_1, x_2, x_3, ..., x_N \]
 
-- Thinning by a factor of _k_: Retain \[ x_k, x_{2k}, x_{3k}, ... \]
+-   Thinning by a factor of *k*: Retain \[ x_k, x\_{2k}, x\_{3k}, ... \]
 
-- Thinning factor (k): Number of iterations between successive retained samples.
-
+-   Thinning factor (k): Number of iterations between successive retained samples.
 
 **Best Practices**
 
-1. **Avoid thinning if possible**: It can unnecessarily discard valuable samples.
+1.  **Avoid thinning if possible**: It can unnecessarily discard valuable samples.
 
-2. Use **diagnostics** like autocorrelation plots and the **effective sample size** (which we'll talk about next) to decide whether thinning is needed.
+2.  Use **diagnostics** like autocorrelation plots and the **effective sample size** (which we'll talk about next) to decide whether thinning is needed.
 
-3. If using, choose a thinning factor based on the **autocorrelation time** of the chain.
+3.  If using, choose a thinning factor based on the **autocorrelation time** of the chain.
 
----
-
+------------------------------------------------------------------------
 
 ## MCMC diagnostics: Monte Carlo Standard Error (MCSE) {style="font-size: 70%;"}
 
