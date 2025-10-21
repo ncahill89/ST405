@@ -29,9 +29,8 @@ library(tidyverse)
 
 2.  Minimum things to do:
 
-```{=html}
 <!-- -->
-```
+
 i.  Write down your model specification and its corresponding JAGS model.
 ii. Specify data list and the names of the parameters for which you want to save the posterior samples.
 iii. GO: Run JAGS!
@@ -245,7 +244,7 @@ mcmc.matrix %>% spread_draws(theta)
 
 ## Tidybayes {style="font-size: 60%;"}
 
--   tidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme \[median\|mean\|mode\]\_\[qi\|hdi\], for example, median_qi, mean_qi, mode_hdi, and so on.
+-   tidybayes provides a family of functions for generating point summaries and intervals from draws in a tidy format. These functions follow the naming scheme, for example, median_qi, mean_qi, mode_qi.
 
 ```{r, echo = TRUE, include=TRUE}
 #| code-line-numbers: ""
@@ -269,10 +268,9 @@ mcmc.matrix %>%
   stat_halfeye()
 ```
 
-
 ## Another Happiness Example {style="font-size: 60%;"}
 
-Assume we have survey data from 5 countries related to the happiness of women aged 65+ and we want to compare the proportions accross countries. 
+Assume we have survey data from 5 countries related to the happiness of women aged 65+ and we want to compare the proportions accross countries.
 
 ```{r}
 # Set seed for reproducibility
@@ -324,7 +322,6 @@ model{
 :::
 :::
 
-
 ## Another Happiness Example: Rcode {style="font-size: 60%;"}
 
 ```{r, echo = TRUE, include=TRUE, eval = FALSE}
@@ -339,7 +336,6 @@ mod <- jags(data = jags.data,
             parameters.to.save = parnames, 
             model.file = textConnection(binomialmodel))
 ```
-
 
 ```{r, echo = TRUE, include=TRUE, eval = FALSE}
 ## quick look output
@@ -364,4 +360,3 @@ mcmc.matrix %>%
   stat_halfeye() +
   ylab("")
 ```
-
