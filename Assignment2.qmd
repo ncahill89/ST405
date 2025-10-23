@@ -11,7 +11,7 @@ editor: visual
 
 ## Instructions
 
-Please submit your answers to this assignment by **November 13th, 4:00PM**. 
+Please submit your answers to this assignment by **November 12th, 4:00PM**. 
 
 ------------------------------------------------------------------------
 
@@ -34,19 +34,19 @@ video_game_data
 ```
 ---
 
-### Questions
+### Questions **\[Total = 25 Marks\]**
 
 Using these data, carry out the following tasks and answer questions 1-6 below.
 
 - [ ] **Task: Model Specification**
 
-  (@) Specify an appropriate likelihood.
+  (@) **\[1 Marks\]** Specify an appropriate likelihood.
    
-  (@) Specify a Beta prior distribution for the proportion of video game players that reflects prior information that the expected proportion $\pm$ 1 standard deviation is $0.6 \pm 0.2$. Round the Beta distribution parameters to the nearest whole numbers. 
+  (@) **\[3 Marks\]** Specify a Beta prior distribution for the proportion of video game players that reflects prior information that the expected proportion $\pm$ 1 standard deviation is $0.6 \pm 0.2$. Round the Beta distribution parameters to the nearest whole numbers. 
 
 - [ ] **Task: Correct JAGS Model Specification**
 
-  (@) Assume that you’ve specified the JAGS model below, but there are **5 errors** in it. What are the errors?
+  (@) **\[5 Marks\]** Assume that you’ve specified the JAGS model below, but there are **5 errors** in it. What are the errors?
    
 ```{r, message=FALSE, eval = FALSE}
 library(rjags)
@@ -68,7 +68,7 @@ vg_model <- "
 
 - [ ] **Task: Run the JAGS Model**
 
-   (@)  After making the modifications to the JAGS model, replace the `??` in the code below to provide the appropriate data for the JAGS model. Run the code and provide the overview plot you obtain from `plot(mod)`.
+   (@) **\[5 Marks\]**  After making the modifications to the JAGS model, replace the `??` in the code below to provide the appropriate data for the JAGS model. Run the code and provide the overview plot you obtain from `plot(mod)`.
    
 
 ```{r,  message=FALSE, eval = FALSE}
@@ -125,11 +125,11 @@ mod <- jags(data = vg_data,
 
 - [ ] **Task: Inference**
 
-   (@)   For each country, report the posterior median and 80% credible interval for the proportion of video game players.
+   (@)  **\[5 Marks\]**  For each country, report the posterior median and 80% credible interval for the proportion of video game players.
    
 - [ ] **Task: Additional Analysis**
 
-   (@)  Calculate the posterior probability that India has a higher proportion of video game players than the USA, and interpret this probability.
+   (@) **\[6 Marks\]** Calculate the posterior probability that India has a higher proportion of video game players than the USA, and interpret this probability.
 
 ---
 

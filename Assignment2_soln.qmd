@@ -1,0 +1,122 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Assignment 2: comparing video game playing among students in 5 different countries"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+## **Solutions** **\[Total = 25 Marks\]**
+
+
+  (@)  **\[1 Marks\]** The likelihood for each country $i$ can be modeled as a binomial distribution: 
+
+
+$$\text{y}_i \sim \text{Binomial}(\text{N}_i, \theta_i)$$
+
+   
+  (@) **\[3 Marks\]**  Using moment matching to find a and b: 
+
+
+ $$\theta_i \sim \text{Beta}(a = 3, b = 2)$$
+
+  
+  (@) **\[5 Marks\]** The errors are: 
+  
+  a. missing `model` 
+  
+  b. should be `1:n_country` in the i loop
+  
+  c. `~` when specifying the likelihood
+  
+  d. `theta.i[i]` in the binomial distribution
+  
+  e. `dbeta` for the prior
+  
+  
+   
+```{r, message=FALSE, eval = TRUE}
+library(rjags)
+library(R2jags)
+
+vg_model <- "
+ model{
+  # Loop over the three campaigns
+  for (i in 1:n_country) {
+    # Likelihood: binomial distribution for the number playing video games
+    y.i[i] ~ dbinom(theta.i[i], N.i[i])
+    
+    # Prior: Beta distribution for the proportion
+    theta.i[i] ~ dbeta(a, b)
+  }
+}
+"
+```
+
+   (@) **\[5 Marks\]** JAGS needs, `y.i`, `N.i`, `n_country`, `a` and `b` to run 
+   
+
+```{r,  message=FALSE}
+vg_data <- list(
+  y.i = c(70, 64, 58, 81, 45),   # Number of players from each country
+  N.i = c(120, 80, 90, 95, 70), # Number of students 
+  n_country = 5,
+  a = 3,
+  b = 2
+)
+
+inits <- function() list(theta.i = runif(5)) # Random initial values for CTRs
+params <- c("theta.i") # Monitor the CTRs
+
+mod <- jags(data = vg_data, 
+            inits = inits, 
+            parameters.to.save = params, 
+            n.iter = 4000,
+            n.burnin = 2000, 
+            model.file = textConnection(vg_model))
+plot(mod)
+```
+
+
+   (@) **\[5 Marks\]**  Using tidybayes: 
+   
+```{r, message = FALSE}
+library(tidybayes)
+library(tidyverse)
+mcmc.matrix <- mod$BUGSoutput$sims.matrix
+country_index <- 1:5
+## summary for parameters
+mcmc.matrix %>% 
+  gather_rvars(theta.i[country_index]) %>% 
+  median_qi(.value, .width = c(0.8))
+```
+   
+
+   (@) **\[6 Marks\]**  Use the posterior samples to work out the probability such that: 
+   
+   $$P(\theta_{India} > \theta_{USA}) = \frac{1}{S} \sum_{s=1}^{S} I(\theta_{India}^{(s)} > \theta_{USA}^{(s)})$$
+
+where $S$ is the number of posterior samples, and $I(\cdot)$ is an indicator function. 
+
+We can implement this in R as follows
+
+```{r}
+theta_samps <- mcmc.matrix %>%
+                spread_draws(theta.i[country_index]) 
+
+theta_India <- theta_samps %>% filter(country_index == 5) %>% pull(theta.i)
+theta_USA <- theta_samps %>% filter(country_index == 1) %>% pull(theta.i)
+
+sum(theta_India > theta_USA)/length(theta_India)
+```
+
+**Interpretation:**
+
+- The posterior probability that $\theta_{India} > \theta_{USA}$ is 0.79, indicating that there is a 79% chance India has a higher proportion of gamers in the student population than the USA does.
+
+---
+
+
