@@ -143,9 +143,6 @@ max_y <- max(kidiq$kid_score)
 ppc_stat_grouped(y,yrep,group = kidiq$mom_hs,  stat = "max")
 ```
 
-
-
-
 ## Sensitivity Analysis {style="font-size: 60%;"}
 
 How do model structure and prior choices impact the results?
@@ -166,122 +163,122 @@ How do model structure and prior choices impact the results?
 
     Predictions made outside the observed predictor range (extrapolation) show higher sensitivity to model assumptions than predictions within this range (interpolation).
 
-## Prior predictive checks {style="font-size: 60%;"}
+<!-- ## Prior predictive checks {style="font-size: 60%;"} -->
 
-Prior predictive checks allow us to look at the situation prior to any data being observed in order to see what data distribution is being implied by the choice of priors and likelihood.
+<!-- Prior predictive checks allow us to look at the situation prior to any data being observed in order to see what data distribution is being implied by the choice of priors and likelihood. -->
 
--   Ideally this distribution would have at least some mass around all plausible data sets.
+<!-- -   Ideally this distribution would have at least some mass around all plausible data sets. -->
 
-JAGS has a simulation functionality that allows us to easily generate prior predictive distributions based on our specified model.
+<!-- JAGS has a simulation functionality that allows us to easily generate prior predictive distributions based on our specified model. -->
 
--   The likelihood and priors can be specified in a "data" block so that we can simulate what data generated from the likelihood would look like, based solely on our prior assumptions.
+<!-- -   The likelihood and priors can be specified in a "data" block so that we can simulate what data generated from the likelihood would look like, based solely on our prior assumptions. -->
 
-```{r}
-lrmodel_prior ="
-data{
-    for (i in 1:n){
-      yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2)
-        mu.i[i] <- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i))
-    }
-#Priors
-for(j in 1:m)
-{
-alpha.j[j] ~ dnorm(100, 30^-2) 
-beta.j[j] ~ dnorm(0, 2^-2) 
-}
-sigma ~ dunif(0,50)
-} # end data block
-model{
-fake <- 0
-}
-"
-```
+<!-- ```{r} -->
+<!-- lrmodel_prior =" -->
+<!-- data{ -->
+<!--     for (i in 1:n){ -->
+<!--       yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2) -->
+<!--         mu.i[i] <- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i)) -->
+<!--     } -->
+<!-- #Priors -->
+<!-- for(j in 1:m) -->
+<!-- { -->
+<!-- alpha.j[j] ~ dnorm(100, 30^-2)  -->
+<!-- beta.j[j] ~ dnorm(0, 2^-2)  -->
+<!-- } -->
+<!-- sigma ~ dunif(0,50) -->
+<!-- } # end data block -->
+<!-- model{ -->
+<!-- fake <- 0 -->
+<!-- } -->
+<!-- " -->
+<!-- ``` -->
 
-## Prior predictive checks {style="font-size: 60%;"}
+<!-- ## Prior predictive checks {style="font-size: 60%;"} -->
 
-We can use the `run.jags()` function from the `runjags` package to generate the simulations.
+<!-- We can use the `run.jags()` function from the `runjags` package to generate the simulations. -->
 
-```{r, message = FALSE, eval = FALSE}
-jags.data <- list(x.i = kidiq$mom_iq, 
-                  hs_index = as.numeric(kidiq$mom_hs + 1),
-                  n = nrow(kidiq),
-                  m = 2)
+<!-- ```{r, message = FALSE, eval = FALSE} -->
+<!-- jags.data <- list(x.i = kidiq$mom_iq,  -->
+<!--                   hs_index = as.numeric(kidiq$mom_hs + 1), -->
+<!--                   n = nrow(kidiq), -->
+<!--                   m = 2) -->
 
-yrep_prior <- matrix(NA, nrow = 50, ncol = nrow(kidiq))
+<!-- yrep_prior <- matrix(NA, nrow = 50, ncol = nrow(kidiq)) -->
 
-for(i in 1:50)
-  {
-out <- runjags::run.jags(lrmodel_prior, 
-                         data = jags.data,monitor=c("yrep_prior"), 
-                         sample=1, 
-                         n.chains=1, 
-                         summarise=FALSE)
+<!-- for(i in 1:50) -->
+<!--   { -->
+<!-- out <- runjags::run.jags(lrmodel_prior,  -->
+<!--                          data = jags.data,monitor=c("yrep_prior"),  -->
+<!--                          sample=1,  -->
+<!--                          n.chains=1,  -->
+<!--                          summarise=FALSE) -->
 
- yrep_prior[i,] <- coda::as.mcmc(out)
- }
-```
+<!--  yrep_prior[i,] <- coda::as.mcmc(out) -->
+<!--  } -->
+<!-- ``` -->
 
-```{r, include = FALSE, echo = FALSE,message = FALSE}
-jags.data <- list(x.i = kidiq$mom_iq, 
-                  hs_index = as.numeric(kidiq$mom_hs + 1),
-                  n = nrow(kidiq),
-                  m = 2)
+<!-- ```{r, include = FALSE, echo = FALSE,message = FALSE} -->
+<!-- jags.data <- list(x.i = kidiq$mom_iq,  -->
+<!--                   hs_index = as.numeric(kidiq$mom_hs + 1), -->
+<!--                   n = nrow(kidiq), -->
+<!--                   m = 2) -->
 
-yrep_prior <- matrix(NA, nrow = 50, ncol = nrow(kidiq))
+<!-- yrep_prior <- matrix(NA, nrow = 50, ncol = nrow(kidiq)) -->
 
-for(i in 1:50)
-  {
-  out <- runjags::run.jags(lrmodel_prior, 
-                         data = jags.data,monitor=c("yrep_prior"), 
-                         sample=1, 
-                         n.chains=1, 
-                         summarise=FALSE)
+<!-- for(i in 1:50) -->
+<!--   { -->
+<!--   out <- runjags::run.jags(lrmodel_prior,  -->
+<!--                          data = jags.data,monitor=c("yrep_prior"),  -->
+<!--                          sample=1,  -->
+<!--                          n.chains=1,  -->
+<!--                          summarise=FALSE) -->
 
-  yrep_prior[i,] <- coda::as.mcmc(out)
-}
-```
+<!--   yrep_prior[i,] <- coda::as.mcmc(out) -->
+<!-- } -->
+<!-- ``` -->
 
-## Prior predictive checks {style="font-size: 60%;"}
+<!-- ## Prior predictive checks {style="font-size: 60%;"} -->
 
-We can then use the PPC functions from the `bayesplot` package by providing replicates `yrep_prior` instead of `y_rep`
+<!-- We can then use the PPC functions from the `bayesplot` package by providing replicates `yrep_prior` instead of `y_rep` -->
 
-```{r, echo = TRUE, message = FALSE,fig.height=2.5, fig.width=5}
-ppc_hist(y, yrep_prior[1:5, ])
-```
+<!-- ```{r, echo = TRUE, message = FALSE,fig.height=2.5, fig.width=5} -->
+<!-- ppc_hist(y, yrep_prior[1:5, ]) -->
+<!-- ``` -->
 
-## Prior vs Posterior for parameters ($\alpha_j$) {style="font-size: 60%;"}
+<!-- ## Prior vs Posterior for parameters ($\alpha_j$) {style="font-size: 60%;"} -->
 
-```{r, echo = FALSE, message = FALSE, warning=FALSE}
-m1 <- mod2$BUGSoutput$sims.matrix
+<!-- ```{r, echo = FALSE, message = FALSE, warning=FALSE} -->
+<!-- m1 <- mod2$BUGSoutput$sims.matrix -->
 
-par_samps <- m1 %>% spread_draws(alpha.j[1:2],beta.j[1:2]) 
+<!-- par_samps <- m1 %>% spread_draws(alpha.j[1:2],beta.j[1:2])  -->
 
-par_dat <- tibble(prior_alpha = rnorm(1000,80,30),
-              post_alpha1 = par_samps %>% filter(`1:2` == 1) %>% pull(alpha.j) %>% sample(1000),
-              post_alpha2 = par_samps %>% filter(`1:2` == 2) %>% pull(alpha.j) %>% sample(1000))
+<!-- par_dat <- tibble(prior_alpha = rnorm(1000,80,30), -->
+<!--               post_alpha1 = par_samps %>% filter(`1:2` == 1) %>% pull(alpha.j) %>% sample(1000), -->
+<!--               post_alpha2 = par_samps %>% filter(`1:2` == 2) %>% pull(alpha.j) %>% sample(1000)) -->
 
-ggplot(par_dat) +
-  geom_histogram(aes(x = prior_alpha, fill = "prior (alpha_j)"), alpha = 0.4) +
-  geom_histogram(aes(x = post_alpha1, fill = "posterior (alpha1)"),alpha = 0.4) +
-  geom_histogram(aes(x = post_alpha2, fill = "posterior (alpha2)"),alpha = 0.4) +
-  labs(fill = "") +
-  xlab("beta")
+<!-- ggplot(par_dat) + -->
+<!--   geom_histogram(aes(x = prior_alpha, fill = "prior (alpha_j)"), alpha = 0.4) + -->
+<!--   geom_histogram(aes(x = post_alpha1, fill = "posterior (alpha1)"),alpha = 0.4) + -->
+<!--   geom_histogram(aes(x = post_alpha2, fill = "posterior (alpha2)"),alpha = 0.4) + -->
+<!--   labs(fill = "") + -->
+<!--   xlab("beta") -->
 
 
-```
+<!-- ``` -->
 
-## Prior vs Posterior for parameters ($\beta_j$) {style="font-size: 60%;"}
+<!-- ## Prior vs Posterior for parameters ($\beta_j$) {style="font-size: 60%;"} -->
 
-```{r, echo = FALSE, message = FALSE, warning=FALSE}
-par_dat <- tibble(prior_beta = rnorm(1000,0,2),
-              post_beta1 = par_samps %>% filter(`1:2` == 1) %>% pull(beta.j) %>% sample(1000),
-              post_beta2 = par_samps %>% filter(`1:2` == 2) %>% pull(beta.j) %>% sample(1000))
+<!-- ```{r, echo = FALSE, message = FALSE, warning=FALSE} -->
+<!-- par_dat <- tibble(prior_beta = rnorm(1000,0,2), -->
+<!--               post_beta1 = par_samps %>% filter(`1:2` == 1) %>% pull(beta.j) %>% sample(1000), -->
+<!--               post_beta2 = par_samps %>% filter(`1:2` == 2) %>% pull(beta.j) %>% sample(1000)) -->
 
-ggplot(par_dat) +
-  geom_histogram(aes(x = prior_beta, fill = "prior (beta_j)"), alpha = 0.4) +
-  geom_histogram(aes(x = post_beta1, fill = "posterior (beta1)"),alpha = 0.4) +
-  geom_histogram(aes(x = post_beta2, fill = "posterior (beta2)"),alpha = 0.4) +
-  labs(fill = "") +
-  xlab("beta")
+<!-- ggplot(par_dat) + -->
+<!--   geom_histogram(aes(x = prior_beta, fill = "prior (beta_j)"), alpha = 0.4) + -->
+<!--   geom_histogram(aes(x = post_beta1, fill = "posterior (beta1)"),alpha = 0.4) + -->
+<!--   geom_histogram(aes(x = post_beta2, fill = "posterior (beta2)"),alpha = 0.4) + -->
+<!--   labs(fill = "") + -->
+<!--   xlab("beta") -->
 
-```
+<!-- ``` -->

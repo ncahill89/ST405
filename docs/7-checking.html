@@ -519,78 +519,98 @@ Prof.&nbsp;Niamh Cahill (she/her)
 <li><p><strong>Extrapolation vs.&nbsp;Interpolation</strong></p>
 <p>Predictions made outside the observed predictor range (extrapolation) show higher sensitivity to model assumptions than predictions within this range (interpolation).</p></li>
 </ul>
-</section>
-<section id="prior-predictive-checks" class="slide level2" style="font-size: 60%;">
-<h2>Prior predictive checks</h2>
-<p>Prior predictive checks allow us to look at the situation prior to any data being observed in order to see what data distribution is being implied by the choice of priors and likelihood.</p>
-<ul>
-<li>Ideally this distribution would have at least some mass around all plausible data sets.</li>
-</ul>
-<p>JAGS has a simulation functionality that allows us to easily generate prior predictive distributions based on our specified model.</p>
-<ul>
-<li>The likelihood and priors can be specified in a “data” block so that we can simulate what data generated from the likelihood would look like, based solely on our prior assumptions.</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>lrmodel_prior <span class="ot">=</span><span class="st">"</span></span>
-<span id="cb7-2"><a></a><span class="st">data{</span></span>
-<span id="cb7-3"><a></a><span class="st">    for (i in 1:n){</span></span>
-<span id="cb7-4"><a></a><span class="st">      yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2)</span></span>
-<span id="cb7-5"><a></a><span class="st">        mu.i[i] &lt;- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i))</span></span>
-<span id="cb7-6"><a></a><span class="st">    }</span></span>
-<span id="cb7-7"><a></a><span class="st">#Priors</span></span>
-<span id="cb7-8"><a></a><span class="st">for(j in 1:m)</span></span>
-<span id="cb7-9"><a></a><span class="st">{</span></span>
-<span id="cb7-10"><a></a><span class="st">alpha.j[j] ~ dnorm(100, 30^-2) </span></span>
-<span id="cb7-11"><a></a><span class="st">beta.j[j] ~ dnorm(0, 2^-2) </span></span>
-<span id="cb7-12"><a></a><span class="st">}</span></span>
-<span id="cb7-13"><a></a><span class="st">sigma ~ dunif(0,50)</span></span>
-<span id="cb7-14"><a></a><span class="st">} # end data block</span></span>
-<span id="cb7-15"><a></a><span class="st">model{</span></span>
-<span id="cb7-16"><a></a><span class="st">fake &lt;- 0</span></span>
-<span id="cb7-17"><a></a><span class="st">}</span></span>
-<span id="cb7-18"><a></a><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="prior-predictive-checks-1" class="slide level2" style="font-size: 60%;">
-<h2>Prior predictive checks</h2>
-<p>We can use the <code>run.jags()</code> function from the <code>runjags</code> package to generate the simulations.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>jags.data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x.i =</span> kidiq<span class="sc">$</span>mom_iq, </span>
-<span id="cb8-2"><a></a>                  <span class="at">hs_index =</span> <span class="fu">as.numeric</span>(kidiq<span class="sc">$</span>mom_hs <span class="sc">+</span> <span class="dv">1</span>),</span>
-<span id="cb8-3"><a></a>                  <span class="at">n =</span> <span class="fu">nrow</span>(kidiq),</span>
-<span id="cb8-4"><a></a>                  <span class="at">m =</span> <span class="dv">2</span>)</span>
-<span id="cb8-5"><a></a></span>
-<span id="cb8-6"><a></a>yrep_prior <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">50</span>, <span class="at">ncol =</span> <span class="fu">nrow</span>(kidiq))</span>
-<span id="cb8-7"><a></a></span>
-<span id="cb8-8"><a></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)</span>
-<span id="cb8-9"><a></a>  {</span>
-<span id="cb8-10"><a></a>out <span class="ot">&lt;-</span> runjags<span class="sc">::</span><span class="fu">run.jags</span>(lrmodel_prior, </span>
-<span id="cb8-11"><a></a>                         <span class="at">data =</span> jags.data,<span class="at">monitor=</span><span class="fu">c</span>(<span class="st">"yrep_prior"</span>), </span>
-<span id="cb8-12"><a></a>                         <span class="at">sample=</span><span class="dv">1</span>, </span>
-<span id="cb8-13"><a></a>                         <span class="at">n.chains=</span><span class="dv">1</span>, </span>
-<span id="cb8-14"><a></a>                         <span class="at">summarise=</span><span class="cn">FALSE</span>)</span>
-<span id="cb8-15"><a></a></span>
-<span id="cb8-16"><a></a> yrep_prior[i,] <span class="ot">&lt;-</span> coda<span class="sc">::</span><span class="fu">as.mcmc</span>(out)</span>
-<span id="cb8-17"><a></a> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="prior-predictive-checks-2" class="slide level2" style="font-size: 60%;">
-<h2>Prior predictive checks</h2>
-<p>We can then use the PPC functions from the <code>bayesplot</code> package by providing replicates <code>yrep_prior</code> instead of <code>y_rep</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">ppc_hist</span>(y, yrep_prior[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- ## Prior predictive checks {style="font-size: 60%;"} -->
+<!-- Prior predictive checks allow us to look at the situation prior to any data being observed in order to see what data distribution is being implied by the choice of priors and likelihood. -->
+<!-- -   Ideally this distribution would have at least some mass around all plausible data sets. -->
+<!-- JAGS has a simulation functionality that allows us to easily generate prior predictive distributions based on our specified model. -->
+<!-- -   The likelihood and priors can be specified in a "data" block so that we can simulate what data generated from the likelihood would look like, based solely on our prior assumptions. -->
+<!-- ```{r} -->
+<!-- lrmodel_prior =" -->
+<!-- data{ -->
+<!--     for (i in 1:n){ -->
+<!--       yrep_prior[i] ~ dnorm(mu.i[i], sigma^-2) -->
+<!--         mu.i[i] <- alpha.j[hs_index[i]] + beta.j[hs_index[i]]*(x.i[i] - mean(x.i)) -->
+<!--     } -->
+<!-- #Priors -->
+<!-- for(j in 1:m) -->
+<!-- { -->
+<!-- alpha.j[j] ~ dnorm(100, 30^-2)  -->
+<!-- beta.j[j] ~ dnorm(0, 2^-2)  -->
+<!-- } -->
+<!-- sigma ~ dunif(0,50) -->
+<!-- } # end data block -->
+<!-- model{ -->
+<!-- fake <- 0 -->
+<!-- } -->
+<!-- " -->
+<!-- ``` -->
+<!-- ## Prior predictive checks {style="font-size: 60%;"} -->
+<!-- We can use the `run.jags()` function from the `runjags` package to generate the simulations. -->
+<!-- ```{r, message = FALSE, eval = FALSE} -->
+<!-- jags.data <- list(x.i = kidiq$mom_iq,  -->
+<!--                   hs_index = as.numeric(kidiq$mom_hs + 1), -->
+<!--                   n = nrow(kidiq), -->
+<!--                   m = 2) -->
+<!-- yrep_prior <- matrix(NA, nrow = 50, ncol = nrow(kidiq)) -->
+<!-- for(i in 1:50) -->
+<!--   { -->
+<!-- out <- runjags::run.jags(lrmodel_prior,  -->
+<!--                          data = jags.data,monitor=c("yrep_prior"),  -->
+<!--                          sample=1,  -->
+<!--                          n.chains=1,  -->
+<!--                          summarise=FALSE) -->
+<!--  yrep_prior[i,] <- coda::as.mcmc(out) -->
+<!--  } -->
+<!-- ``` -->
+<!-- ```{r, include = FALSE, echo = FALSE,message = FALSE} -->
+<!-- jags.data <- list(x.i = kidiq$mom_iq,  -->
+<!--                   hs_index = as.numeric(kidiq$mom_hs + 1), -->
+<!--                   n = nrow(kidiq), -->
+<!--                   m = 2) -->
+<!-- yrep_prior <- matrix(NA, nrow = 50, ncol = nrow(kidiq)) -->
+<!-- for(i in 1:50) -->
+<!--   { -->
+<!--   out <- runjags::run.jags(lrmodel_prior,  -->
+<!--                          data = jags.data,monitor=c("yrep_prior"),  -->
+<!--                          sample=1,  -->
+<!--                          n.chains=1,  -->
+<!--                          summarise=FALSE) -->
+<!--   yrep_prior[i,] <- coda::as.mcmc(out) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ## Prior predictive checks {style="font-size: 60%;"} -->
+<!-- We can then use the PPC functions from the `bayesplot` package by providing replicates `yrep_prior` instead of `y_rep` -->
+<!-- ```{r, echo = TRUE, message = FALSE,fig.height=2.5, fig.width=5} -->
+<!-- ppc_hist(y, yrep_prior[1:5, ]) -->
+<!-- ``` -->
+<!-- ## Prior vs Posterior for parameters ($\alpha_j$) {style="font-size: 60%;"} -->
+<!-- ```{r, echo = FALSE, message = FALSE, warning=FALSE} -->
+<!-- m1 <- mod2$BUGSoutput$sims.matrix -->
+<!-- par_samps <- m1 %>% spread_draws(alpha.j[1:2],beta.j[1:2])  -->
+<!-- par_dat <- tibble(prior_alpha = rnorm(1000,80,30), -->
+<!--               post_alpha1 = par_samps %>% filter(`1:2` == 1) %>% pull(alpha.j) %>% sample(1000), -->
+<!--               post_alpha2 = par_samps %>% filter(`1:2` == 2) %>% pull(alpha.j) %>% sample(1000)) -->
+<!-- ggplot(par_dat) + -->
+<!--   geom_histogram(aes(x = prior_alpha, fill = "prior (alpha_j)"), alpha = 0.4) + -->
+<!--   geom_histogram(aes(x = post_alpha1, fill = "posterior (alpha1)"),alpha = 0.4) + -->
+<!--   geom_histogram(aes(x = post_alpha2, fill = "posterior (alpha2)"),alpha = 0.4) + -->
+<!--   labs(fill = "") + -->
+<!--   xlab("beta") -->
+<!-- ``` -->
+<!-- ## Prior vs Posterior for parameters ($\beta_j$) {style="font-size: 60%;"} -->
+<!-- ```{r, echo = FALSE, message = FALSE, warning=FALSE} -->
+<!-- par_dat <- tibble(prior_beta = rnorm(1000,0,2), -->
+<!--               post_beta1 = par_samps %>% filter(`1:2` == 1) %>% pull(beta.j) %>% sample(1000), -->
+<!--               post_beta2 = par_samps %>% filter(`1:2` == 2) %>% pull(beta.j) %>% sample(1000)) -->
+<!-- ggplot(par_dat) + -->
+<!--   geom_histogram(aes(x = prior_beta, fill = "prior (beta_j)"), alpha = 0.4) + -->
+<!--   geom_histogram(aes(x = post_beta1, fill = "posterior (beta1)"),alpha = 0.4) + -->
+<!--   geom_histogram(aes(x = post_beta2, fill = "posterior (beta2)"),alpha = 0.4) + -->
+<!--   labs(fill = "") + -->
+<!--   xlab("beta") -->
+<!-- ``` -->
 
-</div>
-<img data-src="7-checking_files/figure-revealjs/unnamed-chunk-11-1.png" width="480" class="r-stretch"></section>
-<section id="prior-vs-posterior-for-parameters-alpha_j" class="slide level2" style="font-size: 60%;">
-<h2>Prior vs Posterior for parameters (<span class="math inline">\(\alpha_j\)</span>)</h2>
-
-<img data-src="7-checking_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="prior-vs-posterior-for-parameters-beta_j" class="slide level2" style="font-size: 60%;">
-<h2>Prior vs Posterior for parameters (<span class="math inline">\(\beta_j\)</span>)</h2>
-
-
-<img data-src="7-checking_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

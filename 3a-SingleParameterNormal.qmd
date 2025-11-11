@@ -17,7 +17,6 @@ data(kidiq)
 
 ::: columns
 ::: {.column width="50%"}
-
 To do Bayesian inference:
 
 -   Start off with prior probability distribution to quantify information related to $\mu$ - example in blue with $\mu \sim N(4,0.5^2)$

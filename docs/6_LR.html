@@ -573,16 +573,16 @@ Initializing model</code></pre>
 <pre><code># A tibble: 3,000 × 6
    .chain .iteration .draw alpha  beta sigma
     &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1      1          1     1  86.7 0.541  18.5
- 2      1          2     2  87.2 0.624  18.8
- 3      1          3     3  86.9 0.545  18.4
- 4      1          4     4  87.1 0.623  18.6
- 5      1          5     5  85.4 0.613  18.6
- 6      1          6     6  88.3 0.621  18.4
- 7      1          7     7  87.0 0.540  19.3
- 8      1          8     8  85.7 0.639  18.3
- 9      1          9     9  87.4 0.643  18.7
-10      1         10    10  87.8 0.641  18.7
+ 1      1          1     1  86.6 0.649  17.3
+ 2      1          2     2  86.4 0.622  17.8
+ 3      1          3     3  86.4 0.687  18.0
+ 4      1          4     4  86.8 0.612  18.2
+ 5      1          5     5  86.7 0.591  18.0
+ 6      1          6     6  85.0 0.673  18.1
+ 7      1          7     7  86.2 0.641  18.1
+ 8      1          8     8  85.9 0.653  19.0
+ 9      1          9     9  86.1 0.647  18.2
+10      1         10    10  87.8 0.471  18.0
 # ℹ 2,990 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>par_summary1 <span class="ot">&lt;-</span> mcmc.matrix1 <span class="sc">%&gt;%</span> </span>
@@ -593,11 +593,11 @@ Initializing model</code></pre>
 <pre><code># A tibble: 6 × 7
   .variable .value .lower .upper .width .point .interval
   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1 alpha     86.8   85.1   88.5     0.95 median qi       
-2 beta       0.609  0.494  0.726   0.95 median qi       
-3 sigma     18.3   17.2   19.6     0.95 median qi       
+1 alpha     86.8   85.1   88.6     0.95 median qi       
+2 beta       0.609  0.498  0.722   0.95 median qi       
+3 sigma     18.3   17.2   19.7     0.95 median qi       
 4 alpha     86.8   85.4   88.3     0.9  median qi       
-5 beta       0.609  0.513  0.707   0.9  median qi       
+5 beta       0.609  0.515  0.706   0.9  median qi       
 6 sigma     18.3   17.3   19.4     0.9  median qi       </code></pre>
 </div>
 </div>
@@ -617,16 +617,16 @@ Initializing model</code></pre>
 # Groups:   mu_ind [434]
    mu_ind  mu.i .chain .iteration .draw
     &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;
- 1      1  98.2      1          1     1
- 2      1 100.       1          2     2
- 3      1  98.4      1          3     3
- 4      1 100.       1          4     4
- 5      1  98.3      1          5     5
- 6      1 101.       1          6     6
- 7      1  98.4      1          7     7
- 8      1  99.2      1          8     8
- 9      1 101.       1          9     9
-10      1 101.       1         10    10
+ 1      1 100.       1          1     1
+ 2      1  99.5      1          2     2
+ 3      1 101.       1          3     3
+ 4      1  99.8      1          4     4
+ 5      1  99.2      1          5     5
+ 6      1  99.2      1          6     6
+ 7      1  99.7      1          7     7
+ 8      1  99.7      1          8     8
+ 9      1  99.8      1          9     9
+10      1  97.8      1         10    10
 # ℹ 1,301,990 more rows</code></pre>
 </div>
 </div>
@@ -654,16 +654,16 @@ Initializing model</code></pre>
 # Groups:   mu_ind [434]
    mu_ind  mu.i .chain .iteration .draw
     &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;
- 1      1  98.2      1          1     1
- 2      1 100.       1          2     2
- 3      1  98.4      1          3     3
- 4      1 100.       1          4     4
- 5      1  98.3      1          5     5
- 6      1 101.       1          6     6
- 7      1  98.4      1          7     7
- 8      1  99.2      1          8     8
- 9      1 101.       1          9     9
-10      1 101.       1         10    10
+ 1      1 100.       1          1     1
+ 2      1  99.5      1          2     2
+ 3      1 101.       1          3     3
+ 4      1  99.8      1          4     4
+ 5      1  99.2      1          5     5
+ 6      1  99.2      1          6     6
+ 7      1  99.7      1          7     7
+ 8      1  99.7      1          8     8
+ 9      1  99.8      1          9     9
+10      1  97.8      1         10    10
 # ℹ 1,301,990 more rows</code></pre>
 </div>
 </div>
@@ -694,15 +694,15 @@ Initializing model</code></pre>
 <pre><code># A tibble: 434 × 7
    mu_ind  mu.i .lower .upper .width .point .interval
     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
- 1      1  99.7   96.7  103.    0.95 median qi       
- 2      2  80.4   78.3   82.4   0.95 median qi       
+ 1      1  99.7   96.8  103.    0.95 median qi       
+ 2      2  80.3   78.2   82.4   0.95 median qi       
  3      3  96.3   93.8   98.7   0.95 median qi       
  4      4  86.5   84.8   88.2   0.95 median qi       
- 5      5  82.4   80.5   84.2   0.95 median qi       
+ 5      5  82.4   80.5   84.3   0.95 median qi       
  6      6  91.6   89.7   93.6   0.95 median qi       
- 7      7 111.   106.   116.    0.95 median qi       
- 8      8 102.    98.8  106.    0.95 median qi       
- 9      9  75.7   72.9   78.3   0.95 median qi       
+ 7      7 111.   106.   115.    0.95 median qi       
+ 8      8 102.    98.8  105.    0.95 median qi       
+ 9      9  75.6   72.9   78.3   0.95 median qi       
 10     10  83.8   82.0   85.6   0.95 median qi       
 # ℹ 424 more rows</code></pre>
 </div>
@@ -782,9 +782,9 @@ Initializing model</code></pre>
 <h2>Key Differences Between Bayesian Credible Intervals and Prediction Intervals</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 22%">
-<col style="width: 40%">
-<col style="width: 37%">
+<col style="width: 25%">
+<col style="width: 38%">
+<col style="width: 36%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -853,8 +853,8 @@ Initializing model</code></pre>
 <span id="cb14-12"><a></a><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="credible-interval-vs-prediction-interval" class="slide level2" style="font-size: 70%;">
-<h2>Credible interval vs prediction interval</h2>
+<section id="credible-vs-prediction-interval-for-kidiq-example" class="slide level2" style="font-size: 70%;">
+<h2>Credible vs prediction interval for kidiq example</h2>
 <p>Let’s consider the difference between the credible interval and the prediction interval for the Kid’s IQ when the Mother’s IQ = 120.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>par_samps1 <span class="ot">&lt;-</span> mcmc.matrix1 <span class="sc">%&gt;%</span> <span class="fu">spread_draws</span>(mu_pred,ytilde) </span>
@@ -863,16 +863,16 @@ Initializing model</code></pre>
 <pre><code># A tibble: 3,000 × 5
    .chain .iteration .draw mu_pred ytilde
     &lt;int&gt;      &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
- 1      1          1     1    99.1  104. 
- 2      1          2     2   102.   122. 
- 3      1          3     3    97.1   60.2
- 4      1          4     4   100.    58.3
- 5      1          5     5   103.   115. 
- 6      1          6     6    97.4   98.6
- 7      1          7     7    98.8   93.9
- 8      1          8     8   100.   111. 
- 9      1          9     9   101.   113. 
-10      1         10    10   100.   119. 
+ 1      1          1     1    98.5  112. 
+ 2      1          2     2    96.5  102. 
+ 3      1          3     3    99.3  117. 
+ 4      1          4     4   101.    79.3
+ 5      1          5     5    99.6  118. 
+ 6      1          6     6   102.   131. 
+ 7      1          7     7    99.8   69.0
+ 8      1          8     8    97.2   87.7
+ 9      1          9     9    98.1  132. 
+10      1         10    10   101.   109. 
 # ℹ 2,990 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>par_summary1 <span class="ot">&lt;-</span> mcmc.matrix1 <span class="sc">%&gt;%</span> </span>
@@ -883,13 +883,13 @@ Initializing model</code></pre>
 <pre><code># A tibble: 2 × 7
   .variable .value .lower .upper .width .point .interval
   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1 mu_pred     99.0   96.1   102.   0.95 median qi       
-2 ytilde      99.3   62.3   135.   0.95 median qi       </code></pre>
+1 mu_pred     99.0   96.0   102.   0.95 median qi       
+2 ytilde      99.1   62.6   134.   0.95 median qi       </code></pre>
 </div>
 </div>
 <p>What do you notice about the width of the intervals?</p>
 </section>
-<section id="extending-the-regression-model" class="slide level2" style="font-size: 60%;">
+<section id="extending-the-regression-model" class="slide level2" style="font-size: 70%;">
 <h2>Extending the regression model</h2>
 <p>Suppose now we want to see if there’s a “highschool” effect on the relationship between Mother’s IQ and Kid’s IQ.</p>
 <p>Some possible choices:</p>
@@ -978,10 +978,10 @@ Initializing model</code></pre>
 <pre><code># A tibble: 4 × 8
   `1:2` .variable .value .lower .upper .width .point .interval
   &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
-1     1 alpha.j   85.3   81.1   89.6     0.95 median qi       
-2     2 alpha.j   88.2   86.3   90.1     0.95 median qi       
-3     1 beta.j     0.962  0.668  1.25    0.95 median qi       
-4     2 beta.j     0.483  0.358  0.615   0.95 median qi       </code></pre>
+1     1 alpha.j   85.4   81.1   89.7     0.95 median qi       
+2     2 alpha.j   88.3   86.3   90.3     0.95 median qi       
+3     1 beta.j     0.963  0.677  1.26    0.95 median qi       
+4     2 beta.j     0.486  0.355  0.612   0.95 median qi       </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>mu_ind <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(kidiq)</span>
 <span id="cb24-2"><a></a>mu_samps2 <span class="ot">&lt;-</span> mcmc.matrix2 <span class="sc">%&gt;%</span> <span class="fu">spread_draws</span>(mu.i[mu_ind]) </span>
@@ -993,16 +993,16 @@ Initializing model</code></pre>
 <pre><code># A tibble: 434 × 7
    mu_ind  mu.i .lower .upper .width .point .interval
     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
- 1      1  98.4   95.3  102.    0.95 median qi       
- 2      2  83.1   80.6   85.6   0.95 median qi       
- 3      3  95.7   93.1   98.3   0.95 median qi       
- 4      4  88.0   86.0   89.9   0.95 median qi       
- 5      5  84.7   82.5   87.0   0.95 median qi       
- 6      6  93.0   86.9   98.7   0.95 median qi       
+ 1      1  98.5   95.4  102.    0.95 median qi       
+ 2      2  83.1   80.5   85.7   0.95 median qi       
+ 3      3  95.8   93.2   98.3   0.95 median qi       
+ 4      4  88.0   86.0   90.1   0.95 median qi       
+ 5      5  84.8   82.4   87.1   0.95 median qi       
+ 6      6  93.0   87.2   99.0   0.95 median qi       
  7      7 107.   102.   112.    0.95 median qi       
  8      8 100.    96.9  104.    0.95 median qi       
- 9      9  79.3   76.2   82.5   0.95 median qi       
-10     10  85.9   83.8   88.0   0.95 median qi       
+ 9      9  79.3   76.1   82.6   0.95 median qi       
+10     10  85.9   83.7   88.1   0.95 median qi       
 # ℹ 424 more rows</code></pre>
 </div>
 </div>
@@ -1092,12 +1092,12 @@ Initializing model</code></pre>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>DIC.m1 <span class="ot">=</span> mod1<span class="sc">$</span>BUGSoutput<span class="sc">$</span>DIC</span>
 <span id="cb27-2"><a></a>DIC.m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3757.142</code></pre>
+<pre><code>[1] 3757.213</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>DIC.m2 <span class="ot">=</span> mod2<span class="sc">$</span>BUGSoutput<span class="sc">$</span>DIC</span>
 <span id="cb29-2"><a></a>DIC.m2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3745.266</code></pre>
+<pre><code>[1] 3745.4</code></pre>
 </div>
 </div>
 <ul>
@@ -1106,11 +1106,11 @@ Initializing model</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  waic1 p_waic1 
- 3757.0     2.8 </code></pre>
+ 3757.1     2.9 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  waic2 p_waic2 
- 3744.9     4.9 </code></pre>
+ 3745.0     4.9 </code></pre>
 </div>
 </div>
 </section>

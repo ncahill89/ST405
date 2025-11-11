@@ -420,7 +420,7 @@ For example, if we have a 95% prediction interval for a future observation $y$ i
 ## Key Differences Between Bayesian Credible Intervals and Prediction Intervals {style="font-size: 60%;"}
 
 | Aspect                 | Bayesian Credible Interval                                        | Prediction Interval                                           |
-|----------------|-----------------------------|---------------------------|
+|------------------|----------------------------|--------------------------|
 | **Purpose**            | To estimate the range of a parameter with specified credibility   | To predict the range of a future observation                  |
 | **Focus**              | The value of the parameter, given observed data                   | A single future observation, given the model and data         |
 | **Variability Source** | Only parameter uncertainty, conditioned on data and prior beliefs | Both parameter uncertainty and data variability               |
@@ -497,7 +497,7 @@ mcmc.matrix1 <- mod1$BUGSoutput$sims.matrix
 
 ```
 
-## Credible interval vs prediction interval {style="font-size: 70%;"}
+## Credible vs prediction interval for kidiq example {style="font-size: 70%;"}
 
 Let's consider the difference between the credible interval and the prediction interval for the Kid's IQ when the Mother's IQ = 120.
 
@@ -513,7 +513,7 @@ par_summary1
 
 What do you notice about the width of the intervals?
 
-## Extending the regression model {style="font-size: 60%;"}
+## Extending the regression model {style="font-size: 70%;"}
 
 Suppose now we want to see if there's a "highschool" effect on the relationship between Mother's IQ and Kid's IQ.
 
