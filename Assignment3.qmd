@@ -23,7 +23,7 @@ football_dat <- read_csv("football_dat.csv")
 
 ## Instructions
 
-Please submit your answers to this assignment by **November 27th, 4:00PM**. Include your JAGS model with your answers.
+Please submit your answers to this assignment by **November 26th, 4:00PM**. Include your JAGS model with your answers.
 
 ------------------------------------------------------------------------
 
@@ -63,34 +63,34 @@ By fitting both the mean and variance as functions of $x$ in the regression mode
 
 -   The effect of the point spread on the variability of the outcome, potentially showing less variability in outcome values as the point spread grows.
 
-### Tasks
+### Questions **\[Total = 35 Marks\]**
 
 Based on this model, complete tasks 1 - 4 below.
 
 -   [ ] **Task 1: Model Fitting and Parameter Estimation**
 
-Write the JAGS code and run the model to provide parameter summaries (medians and 95% credible intervals) for $\alpha$, $\beta$, $\alpha_{\sigma}$ and $\beta_{\sigma}$.
+ **\[8 Marks\]** Write the JAGS code and run the model to provide parameter summaries (medians and 95% credible intervals) for $\alpha$, $\beta$, $\alpha_{\sigma}$ and $\beta_{\sigma}$.
 
 -   [ ] **Task 2: Inference**
 
 Based on your parameter estimates,
 
-a.  does there appear to be a relationship between the outcome ($y$) and the point spread? Explain your answer.
+a.  **\[2 Marks\]** does there appear to be a relationship between the outcome ($y$) and the point spread? Explain your answer.
 
-b.  does there appear to be a relationship between the residual variation ($\sigma_i$) and the point spread? Explain your answer.
+b.  **\[3 Marks\]** does there appear to be a relationship between the residual variation ($\sigma_i$) and the point spread? Explain your answer.
 
 -   [ ] **Task 3: Posterior Predictive Checking**
 
-Modify your JAGS code to create simulated datasets, `yrep`, used for posterior predictive checking. Then,
+**\[4 Marks\]** Modify your JAGS code to create simulated datasets, `yrep`, used for posterior predictive checking. Then,
 
-a.  produce a PPC plot using `ppc_stat()` to compare the distribution of minimums from `yrep` with the observed minimum from `y`;
+a.  **\[3 Marks\]**  produce a PPC plot using `ppc_stat()` to compare the distribution of minimums from `yrep` with the observed minimum from `y`;
 
-b.  produce a PPC plot using a PPC function called `ppc_intervals()`, which allows you to look at medians and uncertainty intervals for `yrep` vs a predictor variable, $x$ (use `?ppc_intervals()` to help);
+b.   **\[4 Marks\]** produce a PPC plot using a PPC function called `ppc_intervals()`, which allows you to look at medians and uncertainty intervals for `yrep` vs a predictor variable, $x$ (use `?ppc_intervals()` to help);
 
-c.  briefly explain what you have learned from these PPC plots.
+c.  **\[5 Marks\]** briefly explain what you have learned from these PPC plots.
 
 -   [ ] **Task 4: Additional Analysis**
 
-What is the median estimate and 95% prediction interval for an outcome when the point spread is 16?
+**\[8 Marks\]** What is the median estimate and 95% prediction interval for an outcome when the point spread is 16?
 
 ------------------------------------------------------------------------

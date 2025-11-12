@@ -1,0 +1,140 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Assignment 3: Football outcomes vs point spread"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rjags)
+library(R2jags)
+library(bayesplot)
+library(tidybayes)
+football <- read_csv("football.csv")
+
+football_dat <- football %>% select(outcome, spread)
+
+```
+
+## **Solutions** **\[Total = 35 Marks\]**
+
+```{r, echo=FALSE}
+p <- ggplot(football_dat, aes(spread, outcome)) +
+  geom_point()
+p
+```
+
+```{r}
+## Model spec
+sdmodel ="
+model{
+	for (i in 1:n){
+ 		y.i[i] ~ dnorm(mu.i[i], sigma.i[i]^-2)
+ 		mu.i[i] <- alpha + beta*x.i[i]
+ 		log_sigma.i[i] <- alpha_sig + beta_sig*x.i[i]
+ 		sigma.i[i] <- exp(log_sigma.i[i])
+	}
+
+#Priors
+
+alpha ~ dnorm(0,0.01)
+beta ~ dnorm(0,0.01)
+alpha_sig ~ dnorm(0,0.01)
+beta_sig ~ dnorm(0,0.01)
+
+### additional code for answering Tasks 3 and 4
+for(i in 1:n){yrep[i] ~ dnorm(mu.i[i],sigma.i[i]^-2)}
+sigma_tilde <- exp(alpha_sig + beta_sig*16)
+ytilde ~ dnorm(alpha + beta*16,sigma_tilde^-2)
+}
+"
+## data and parameters
+jags.data <- list(y.i = football_dat$outcome,
+                  x.i = football_dat$spread,
+                  n = nrow(football))
+
+parnames <- c("mu.i","alpha_sig","beta_sig","alpha","beta","yrep","ytilde")
+
+## run JAGS
+mod <- jags(data = jags.data,
+             parameters.to.save=parnames,
+             model.file = textConnection(sdmodel),
+             n.iter = 5000,
+             n.burnin = 1000,
+             n.thin = 2)
+
+## Output
+m <- mod$BUGSoutput$sims.matrix
+
+## parameters
+par_summary <- m %>% 
+                gather_rvars(alpha,beta,alpha_sig,beta_sig) %>% 
+                median_qi(.value)
+par_summary
+```
+
+-   [ ] **Task 1: Model Fitting and Parameter Estimation**
+
+**Notes for marking:**
+
+Marks for the correct JAGS model spec. The part for Tasks 3 and 4 doesn't need to be included to answer this question. **\[8 Marks\]**
+
+Summaries are only required for $\alpha$, $\beta$, $\alpha_{\sigma}$ and $\beta_{\sigma}$. **\[8 Marks\]**
+
+-   [ ] **Task 2: Inference**
+
+**Notes for marking:**
+
+(a) I expect students to note that there appears to be a positive relationship between the outcome and the point spread ($\beta > 0$). **\[2 Marks\]**
+
+(b) I expect students to note that there appears to be a slight negative relationship between the variation and the point spread ($\beta_{\sigma} < 0$) but it's not a strong relationship and the credible interval contains 0 so could actually be insignificant. **\[3 Marks\]**
+
+-   [ ] **Task 3: Posterior Predictive Checking**
+
+**Notes for marking:**
+
+The correct code for `yrep` added to the JAGS model **\[4 Marks\]**
+
+(a) Give marks for creating the correct plot. **\[3 Marks\]**
+
+```{r}
+## PPC
+y <-  football_dat$outcome
+yrep <- mod$BUGSoutput$sims.list$yrep
+```
+
+```{r}
+ppc_stat(y, yrep, "min")
+```
+
+(b) Give marks for creating the correct plots. **\[4 Marks\]**
+
+```{r}
+ppc_intervals(y,yrep[1:50,],football_dat$spread)
+```
+
+(c) 
+
+The model tends to slightly underestimate the minimum, but is overall is capturing this statistic well. **\[2 Marks\]**
+
+The model is doing a good job at capuring the variation in the outcome accross most values of the predictor. Perhaps the variation is being slightly underestimated at lower values of x. **\[3 Marks\]**
+
+-   [ ] **Task 4: Additional Analysis**
+
+**Notes for marking:**
+
+Give marks for creating the predictive distribution in the JAGS model and look out for the creation of the prediction interval in this model as sigma needs to be created first based on the predictor value and then used in the predictive distribution for y. **\[8 Marks\]**
+
+```{r}
+## Prediction for outcome when spread = 16
+ytilde_summary <- m %>% 
+                gather_rvars(ytilde) %>% 
+                median_qi(.value)
+ytilde_summary
+```
