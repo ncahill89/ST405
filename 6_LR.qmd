@@ -420,7 +420,7 @@ For example, if we have a 95% prediction interval for a future observation $y$ i
 ## Key Differences Between Bayesian Credible Intervals and Prediction Intervals {style="font-size: 60%;"}
 
 | Aspect                 | Bayesian Credible Interval                                        | Prediction Interval                                           |
-|------------------|----------------------------|--------------------------|
+|-------------------|----------------------------|--------------------------|
 | **Purpose**            | To estimate the range of a parameter with specified credibility   | To predict the range of a future observation                  |
 | **Focus**              | The value of the parameter, given observed data                   | A single future observation, given the model and data         |
 | **Variability Source** | Only parameter uncertainty, conditioned on data and prior beliefs | Both parameter uncertainty and data variability               |
