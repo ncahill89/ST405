@@ -1284,8 +1284,8 @@
     "objectID": "8-BHM.html#hierarchical-binomial-model",
     "href": "8-BHM.html#hierarchical-binomial-model",
     "title": "Bayesian Data Analysis",
-    "section": "",
-    "text": "Suppose we are considering the success of a treatment for cardio vascular disease (CVD) in a number of different hospitals. We are interested in \\(\\theta_j\\) the survival probability associated with hospital \\(j\\).\n\nWe have observations \\(y_{ij}\\) which tells us the status of patient \\(i\\) in hospital \\(j\\) such that \\(y_{ij} = 1\\) if the patient survived and \\(y_{ij} = 0\\) otherwise.\nWe could assume that \\(\\theta_j\\) are independent."
+    "section": "Hierarchical Binomial Model",
+    "text": "Hierarchical Binomial Model\nSuppose we are considering the success of a treatment for cardio vascular disease (CVD) in a number of different hospitals. We are interested in \\(\\theta_j\\) the survival probability associated with hospital \\(j\\).\n\nWe have observations \\(y_{ij}\\) which tells us the status of patient \\(i\\) in hospital \\(j\\) such that \\(y_{ij} = 1\\) if the patient survived and \\(y_{ij} = 0\\) otherwise.\nWe could assume that \\(\\theta_j\\) are independent."
   },
   {
     "objectID": "8-BHM.html#hierarchical-binomial-model-1",
@@ -1299,7 +1299,7 @@
     "href": "8-BHM.html#hierarchical-binomial-model-2",
     "title": "Bayesian Data Analysis",
     "section": "Hierarchical Binomial Model",
-    "text": "Hierarchical Binomial Model\nBut maybe it’s more sensible to assume that we have different \\(\\theta_j\\) but that they have something in common.\n\nA natural assumption to make is that \\(\\theta_j\\) have a common population distribution\n\n\n\n\n\n\nNow we are building up levels.\n\nWe have a data level, a parameter level and a hyperparameter level"
+    "text": "Hierarchical Binomial Model\nBut maybe it’s more sensible to assume that we have different \\(\\theta_j\\) but that they have something in common.\n\nA natural assumption to make is that \\(\\theta_j\\) have a common population distribution\n\n\nNow we are building up levels.\n\nWe have a data level, a parameter level and a hyperparameter level"
   },
   {
     "objectID": "8-BHM.html#hierarchical-models---terms",
@@ -1341,7 +1341,7 @@
     "href": "8-BHM.html#hierarchical-models---rats-example-4",
     "title": "Bayesian Data Analysis",
     "section": "Hierarchical Models - Rats example",
-    "text": "Hierarchical Models - Rats example\n\nSummary of hyperparameters \\(\\alpha\\) and \\(\\beta\\) from the population Beta prior distribution\n\n\n\n\n\n\n.variable\n.value\n.lower\n.upper\n.width\n.point\n.interval\n\n\n\n\nalpha\n2.48807\n1.442050\n4.19043\n0.95\nmedian\nqi\n\n\nbeta\n14.98052\n8.787516\n25.57904\n0.95\nmedian\nqi\n\n\n\n\n\n\n\\(Beta(\\alpha, \\beta)\\) given posterior draws of \\(\\alpha\\) and \\(\\beta\\)"
+    "text": "Hierarchical Models - Rats example\n\nSummary of hyperparameters \\(\\alpha\\) and \\(\\beta\\) from the population Beta prior distribution\n\n\n\n\n\n\n.variable\n.value\n.lower\n.upper\n.width\n.point\n.interval\n\n\n\n\nalpha\n2.498288\n1.384457\n4.26791\n0.95\nmedian\nqi\n\n\nbeta\n14.927844\n8.381019\n25.27205\n0.95\nmedian\nqi\n\n\n\n\n\n\n\\(Beta(\\alpha, \\beta)\\) given posterior draws of \\(\\alpha\\) and \\(\\beta\\)"
   },
   {
     "objectID": "8-BHM.html#hierarchical-normal-model",
@@ -1404,7 +1404,7 @@
     "href": "8-BHM.html#issues-with-spearate-and-pooled-effects-2",
     "title": "Bayesian Data Analysis",
     "section": "Issues with spearate and pooled effects",
-    "text": "Issues with spearate and pooled effects\n\nThe separate effects model treats School A completely in isolation, ignoring the fact that we have considerable evidence that courses similar to the one taught in School A evidently have typical effect size less than 20 points.\nThe pooled effects model would assume that the true effect in all schools is exactly equal, in spite of the courses being taught by different teachers to different students.\n\n\n\n\n\n\n\n\n\n\n\nWhat about a middle path?"
+    "text": "Issues with spearate and pooled effects\n\nThe separate effects model treats School A completely in isolation, ignoring the fact that we have considerable evidence that courses similar to the one taught in School A evidently have typical effect size less than 20 points.\nThe pooled effects model would assume that the true effect in all schools is exactly equal, in spite of the courses being taught by different teachers to different students.\n\n\n\nWhat about a middle path?"
   },
   {
     "objectID": "8-BHM.html#hierarchical-normal-model---8-schools",
@@ -1418,7 +1418,7 @@
     "href": "8-BHM.html#hierarchical-normal-model---8-schools-1",
     "title": "Bayesian Data Analysis",
     "section": "Hierarchical Normal Model - 8 Schools",
-    "text": "Hierarchical Normal Model - 8 Schools\n\n\n\\(y_{i} \\sim N(\\mu_i,\\sigma_i^2)\\)\n\\(\\mu_i \\sim N(\\mu_P, \\sigma_P^2)\\)\n\\(\\mu_P \\sim N(0,200^2)\\)\n\\(\\sigma_P \\sim Uniform(0,200)\\)\n\n\nnormalmodel = \"\nmodel{\n  for(i in 1:N)\n{\n y.i[i] ~ dnorm(mu.i[i],sigma.i[i]^-2) # data model\n mu.i[i] ~ dnorm(mu_p,sigma_p^-2)  # prior for effect\n} # end i loop\n\nmu_p ~ dnorm(0,200^-2)\nsigma_p ~ dunif(0,200)\n }\n \"\n\n\n\n\n\nPosterior distribution for the effects\n\n\n\n\n\n\n\n\n\n\nEffect summaries\n\n\n# A tibble: 8 × 8\n  school .variable .value .lower .upper .width .point .interval\n   &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1      1 mu.i       10.4   -2.14   32.2   0.95 median qi       \n2      2 mu.i        7.76  -4.89   20.8   0.95 median qi       \n3      3 mu.i        6.60 -11.4    21.0   0.95 median qi       \n4      4 mu.i        7.62  -5.13   20.8   0.95 median qi       \n5      5 mu.i        5.51  -9.10   16.4   0.95 median qi       \n6      6 mu.i        6.58  -8.48   18.7   0.95 median qi       \n7      7 mu.i       10.0   -1.40   25.4   0.95 median qi       \n8      8 mu.i        8.09  -7.39   25.4   0.95 median qi"
+    "text": "Hierarchical Normal Model - 8 Schools\n\n\n\\(y_{i} \\sim N(\\mu_i,\\sigma_i^2)\\)\n\\(\\mu_i \\sim N(\\mu_P, \\sigma_P^2)\\)\n\\(\\mu_P \\sim N(0,200^2)\\)\n\\(\\sigma_P \\sim Uniform(0,200)\\)\n\n\nnormalmodel = \"\nmodel{\n  for(i in 1:N)\n{\n y.i[i] ~ dnorm(mu.i[i],sigma.i[i]^-2) # data model\n mu.i[i] ~ dnorm(mu_p,sigma_p^-2)  # prior for effect\n} # end i loop\n\nmu_p ~ dnorm(0,200^-2)\nsigma_p ~ dunif(0,200)\n }\n \"\n\n\n\n\nPosterior distribution for the effects\n\n\n\n\n\n\n\n\n\n\nEffect summaries\n\n\n# A tibble: 8 × 8\n  school .variable .value .lower .upper .width .point .interval\n   &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1      1 mu.i        9.87  -2.61   30.8   0.95 median qi       \n2      2 mu.i        7.64  -4.88   20.4   0.95 median qi       \n3      3 mu.i        6.42 -11.1    20.4   0.95 median qi       \n4      4 mu.i        7.69  -5.00   21.0   0.95 median qi       \n5      5 mu.i        5.73  -8.76   16.4   0.95 median qi       \n6      6 mu.i        6.39  -7.71   18.5   0.95 median qi       \n7      7 mu.i        9.80  -1.20   25.3   0.95 median qi       \n8      8 mu.i        8.01  -6.98   24.9   0.95 median qi"
   },
   {
     "objectID": "8-BHM.html#what-about-sigma_p",
