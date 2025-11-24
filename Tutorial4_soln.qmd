@@ -1,0 +1,172 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Tutorial Questions (4)"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ISLR2)
+head(Carseats)
+library(tidyverse)
+library(rjags)
+library(R2jags)
+library(tidybayes)
+library(bayesplot)
+```
+
+## **Solutions**
+
+```{r, fig.width=5, fig.height=4}
+set.seed(28) # set the seed
+mean_slope = 2 # the 8 different slopes have a mean of 2
+sigma_slope = 0.2 # across group variation
+slopes = rnorm(8,mean_slope,sigma_slope) # groups slopes vary around the mean
+groups = c(rep(1:6,each = 14),rep(7,5), rep(8,5)) # some groups have smaller sample sizes
+sigma <- c(0.5,0.5,2,2,0.5,2,0.5,0.5) # have some groups with large variation
+x = rnorm(length(groups)) # simulate a predictor
+y =  slopes[groups]*x + rnorm(length(groups),0,sigma[groups]) # simulate y
+y[length(groups)] <- 8 # add an outlier
+sim_dat <- tibble(x = x, y = y, group = groups) # create the simulated dataset
+
+## Plot the simulated data
+ggplot(sim_dat, aes(x = x, y = y)) +
+  geom_point() +
+  facet_wrap(~group)
+```
+
+### Independent slopes regression model
+
+```{r}
+#unpooled regression model
+reg_model = "
+model{
+  for(i in 1:n)
+{
+ y.i[i] ~ dnorm(mu.i[i],sigma^-2) # data model
+ mu.i[i] <- alpha + beta.j[group[i]]*x.i[i]
+} # end i loop
+
+for(j in 1:m)
+{
+ beta.j[j] ~ dnorm(0,10^-2)
+}
+
+alpha ~ dnorm(0,2^-2)
+sigma ~ dt(0,2^-2,1)T(0,)
+
+}
+"
+
+# data
+jags.data <- list(y.i = sim_dat$y,
+                  x.i = sim_dat$x,
+                  group = sim_dat$group,
+                  n = nrow(sim_dat),
+                  m = sim_dat$group %>% unique() %>% length()) 
+# parameters 
+parnames <- c("alpha","beta.j","sigma")
+  
+# run model
+mod <- jags(data = jags.data, 
+            parameters.to.save = parnames, 
+            model.file = textConnection(reg_model),
+            n.iter = 10000,
+            n.burnin = 2000,
+            n.thin = 4)
+m <- mod$BUGSoutput$sims.matrix
+
+true_slopes <- tibble(slopes, group = factor(1:8))
+group_ind <- 1:8
+
+m %>% spread_draws(beta.j[group_ind]) %>% 
+  ggplot(aes(x = beta.j, y = factor(group_ind))) +
+  stat_halfeye() +
+  geom_point(data = true_slopes,aes(x = slopes, y = group, colour = "true slope"))
+
+mod$BUGSoutput$summary[1:11,]
+
+mod$BUGSoutput$DIC
+
+
+```
+
+-   The true slopes are not as close to the model point estimates for groups 3,4 and 6. The additional variation in these groups is making it a little bit more difficult to estimate the slope. However, the truth is still captured within the uncertainty interval.
+
+-   Note the additional paramter uncertainty in groups 7 and 8 relative to the other groups. This is because we have alot less data in these groups.
+
+-   Note for group 8 the presence of the outlier is really throwing off the model estimate for the true slope in this group.
+
+## Hierarchical regression model (partial pooling)
+
+```{r}
+# hierarchical regression model
+bhreg_model = "
+model{
+  for(i in 1:n)
+{
+ y.i[i] ~ dnorm(mu.i[i],sigma^-2) # data model
+ mu.i[i] <- alpha + beta.j[group[i]]*x.i[i]
+} # end i loop
+
+for(j in 1:m)
+{
+  beta.j[j] ~ dnorm(beta_mu,sigma_beta^-2)
+}
+
+beta_mu ~ dnorm(0,2^-2)
+alpha ~ dnorm(0,2^-2)
+sigma ~ dt(0,2^-2,1)T(0,)
+sigma_beta ~ dt(0,1^-2,1)T(0,)
+
+}
+"
+
+# data
+jags.data <- list(y.i = sim_dat$y,
+                  x.i = sim_dat$x,
+                  group = sim_dat$group,
+                  n = nrow(sim_dat),
+                  m = sim_dat$group %>% unique() %>% length()) 
+# parameters 
+parnames <- c("alpha","beta.j","sigma","beta_mu","sigma_beta")
+  
+# run model
+mod2 <- jags(data = jags.data, 
+            parameters.to.save = parnames, 
+            model.file = textConnection(bhreg_model),
+            n.iter = 10000,
+            n.burnin = 2000,
+            n.thin = 4)
+m2 <- mod2$BUGSoutput$sims.matrix
+
+true_slopes <- tibble(slopes, group = factor(1:8))
+group_ind <- 1:8
+
+m2 %>% spread_draws(beta.j[group_ind]) %>% 
+  ggplot(aes(x = beta.j, y = factor(group_ind))) +
+  stat_halfeye() +
+  geom_point(data = true_slopes,aes(x = slopes, y = group, colour = "true slope"))
+
+mod2$BUGSoutput$summary[1:13,]
+
+mod2$BUGSoutput$DIC
+
+```
+
+-   Doing slightly better with the slope estimates for groups 3 and 4. Not much difference with 6.
+
+-   Groups 7 and 8 are really benefiting from the BHM setup. The small sample sizes in these groups is not resulting in a much larger uncertainty, due to the information sharing.
+
+-   Group 8 is not being as impacted by the outlier due to the information sharing in the BHM.
+
+-   The estimate for beta_mu is 1.91, 95% CI(1.48, 2.35). The true value is 2. The estimate for sigma_beta is 0.3, 95% CI(0.01,0.95). The true value us 0.2. The model does a good job estimating these parameters.
+
+### Some changes to explore in the simulation
+
+-   Change the accross slope variation in the simulation to be larger/smaller - you should see the BHM having less/more impact. The bigger the across slope variation the closer you'll get to the independent model results. Conversely, if the across slope variation is smaller there'll be more pooling.

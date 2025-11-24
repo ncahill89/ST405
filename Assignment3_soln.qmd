@@ -83,9 +83,9 @@ par_summary
 
 **Notes for marking:**
 
-Marks for the correct JAGS model spec. The part for Tasks 3 and 4 doesn't need to be included to answer this question. **\[8 Marks\]**
+Marks for the correct JAGS model spec. The part for Tasks 3 and 4 doesn't need to be included to answer this question. **\[4 Marks\]**
 
-Summaries are only required for $\alpha$, $\beta$, $\alpha_{\sigma}$ and $\beta_{\sigma}$. **\[8 Marks\]**
+Summaries are only required for $\alpha$, $\beta$, $\alpha_{\sigma}$ and $\beta_{\sigma}$. **\[4 Marks\]**
 
 -   [ ] **Task 2: Inference**
 
@@ -99,7 +99,7 @@ Summaries are only required for $\alpha$, $\beta$, $\alpha_{\sigma}$ and $\beta_
 
 **Notes for marking:**
 
-The correct code for `yrep` added to the JAGS model **\[4 Marks\]**
+The correct code for `yrep` added to the JAGS model **\[3 Marks\]**
 
 (a) Give marks for creating the correct plot. **\[3 Marks\]**
 
@@ -123,13 +123,13 @@ ppc_intervals(y,yrep[1:50,],football_dat$spread)
 
 The model tends to slightly underestimate the minimum, but is overall is capturing this statistic well. **\[2 Marks\]**
 
-The model is doing a good job at capuring the variation in the outcome accross most values of the predictor. Perhaps the variation is being slightly underestimated at lower values of x. **\[3 Marks\]**
+The model is doing a good job at capturing the variation in the outcome accross most values of the predictor. Perhaps the variation is being slightly underestimated at lower values of x. **\[3 Marks\]**
 
 -   [ ] **Task 4: Additional Analysis**
 
 **Notes for marking:**
 
-Give marks for creating the predictive distribution in the JAGS model and look out for the creation of the prediction interval in this model as sigma needs to be created first based on the predictor value and then used in the predictive distribution for y. **\[8 Marks\]**
+Give marks for creating the predictive distribution in the JAGS model and look out for the creation of the prediction interval in this model as sigma needs to be created first based on the predictor value and then used in the predictive distribution for y. **\[7 Marks\]**
 
 ```{r}
 ## Prediction for outcome when spread = 16

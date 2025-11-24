@@ -157,7 +157,7 @@ ggplot(school_performance_dat, aes(x = homework_completed, y = math_score, colou
   facet_wrap(~school_id)
 ```
 
-## Hierarcical Regression on Individuals within Groups {style="font-size: 65%;"}
+## Hierarcical Regression on Individuals within Groups (Schools) {style="font-size: 65%;"}
 
 **Goal:** Model math scores with a linear regression and share information across schools to provide information where data are sparse. Include relevant predictors at the different levels in the hierarchy.
 

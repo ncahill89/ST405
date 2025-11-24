@@ -69,7 +69,7 @@ Based on this model, complete tasks 1 - 4 below.
 
 -   [ ] **Task 1: Model Fitting and Parameter Estimation**
 
- **\[8 Marks\]** Write the JAGS code and run the model to provide parameter summaries (medians and 95% credible intervals) for $\alpha$, $\beta$, $\alpha_{\sigma}$ and $\beta_{\sigma}$.
+**\[8 Marks\]** Write the JAGS code and run the model to provide parameter summaries (medians and 95% credible intervals) for $\alpha$, $\beta$, $\alpha_{\sigma}$ and $\beta_{\sigma}$.
 
 -   [ ] **Task 2: Inference**
 
@@ -81,16 +81,16 @@ b.  **\[3 Marks\]** does there appear to be a relationship between the residual 
 
 -   [ ] **Task 3: Posterior Predictive Checking**
 
-**\[4 Marks\]** Modify your JAGS code to create simulated datasets, `yrep`, used for posterior predictive checking. Then,
+**\[3 Marks\]** Modify your JAGS code to create simulated datasets, `yrep`, used for posterior predictive checking. Then,
 
-a.  **\[3 Marks\]**  produce a PPC plot using `ppc_stat()` to compare the distribution of minimums from `yrep` with the observed minimum from `y`;
+a.  **\[3 Marks\]** produce a PPC plot using `ppc_stat()` to compare the distribution of minimums from `yrep` with the observed minimum from `y`;
 
-b.   **\[4 Marks\]** produce a PPC plot using a PPC function called `ppc_intervals()`, which allows you to look at medians and uncertainty intervals for `yrep` vs a predictor variable, $x$ (use `?ppc_intervals()` to help);
+b.  **\[4 Marks\]** produce a PPC plot using a PPC function called `ppc_intervals()`, which allows you to look at medians and uncertainty intervals for `yrep` vs a predictor variable, $x$ (use `?ppc_intervals()` to help);
 
 c.  **\[5 Marks\]** briefly explain what you have learned from these PPC plots.
 
 -   [ ] **Task 4: Additional Analysis**
 
-**\[8 Marks\]** What is the median estimate and 95% prediction interval for an outcome when the point spread is 16?
+**\[7 Marks\]** What is the median estimate and 95% prediction interval for an outcome when the point spread is 16?
 
 ------------------------------------------------------------------------
