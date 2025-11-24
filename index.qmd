@@ -88,4 +88,4 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 [Assignment 3: Football outcomes vs point spread](https://ncahill89.github.io/ST405/Assignment3.html)
 
-<!-- [Assignment 4: Radon Analysis](https://ncahill89.github.io/ST405/Assignment4.html) -->
+[Assignment 4: Radon Analysis](https://ncahill89.github.io/ST405/Assignment4.html)
