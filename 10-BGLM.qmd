@@ -1,6 +1,6 @@
 ---
 title: "Bayesian Data Analysis"
-subtitle: "Bayesian Generalised Linear Models"
+subtitle: "Bayesian Generalised Linear Models (Introduction)"
 author: "Prof. Niamh Cahill (she/her)"
 format: revealjs
 editor: visual
@@ -116,11 +116,7 @@ Note that since we are interested in the parameter $\pi$:
 % \pi &=& \frac{e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}}{1 + e^{\alpha + \beta_{1}x_{1} + ... + \beta_{k}x_{k}}}\\
 \end{eqnarray*}
 ```
-
-
 Notice that $0 < \displaystyle\frac{e^{\eta}}{1 + e^{\eta}} < 1$.
-
-
 
 ## Aside: Interpreting Odds {style="font-size: 65%;"}
 
@@ -267,7 +263,7 @@ par_summary <- m %>%
 par_summary
 ```
 
-## Results Plot data and fit {style="font-size: 65%;"}
+## Results: plot data and fit {style="font-size: 65%;"}
 
 **Calculate & plot the rain rate by humidity bracket**
 

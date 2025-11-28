@@ -1733,14 +1733,14 @@
     "href": "10-BGLM.html#results-parameters",
     "title": "Bayesian Data Analysis",
     "section": "Results: Parameters",
-    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\n\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     -5.03   -6.47   -3.75     0.95 median qi       \n2 beta       0.0543  0.0359  0.0746   0.95 median qi"
+    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\n\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     -5.04   -6.46   -3.79     0.95 median qi       \n2 beta       0.0543  0.0367  0.0742   0.95 median qi"
   },
   {
     "objectID": "10-BGLM.html#results-plot-data-and-fit",
     "href": "10-BGLM.html#results-plot-data-and-fit",
     "title": "Bayesian Data Analysis",
-    "section": "Results Plot data and fit",
-    "text": "Results Plot data and fit\nCalculate & plot the rain rate by humidity bracket\n\n\nweather_bracket &lt;- weather %&gt;% \n  mutate(humidity_bracket = \n           cut(humidity9am, breaks = seq(10, 100, by = 10))) %&gt;% \n  group_by(humidity_bracket) %&gt;% \n  summarize(rain_rate = mean(raintomorrow == \"Yes\")) \n\n\n  ggplot(weather_bracket, aes(x = humidity_bracket, y = rain_rate)) + \n    geom_point() + \n    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\nPlot the model fit for probability of rain rate by humidity\n\n\npred_summary &lt;- m %&gt;% \n                gather_rvars(pi.i[pred_ind]) %&gt;% \n                median_qi(.value) %&gt;% \n                mutate(x = jags.data$x.i)\n\nggplot(pred_summary,aes(x = x, y = .value),alpha = 0.3) +\n  geom_line() +\n  geom_ribbon(data = pred_summary,aes(ymin = .lower, ymax = .upper), alpha = 0.2) +\n  theme_bw()"
+    "section": "Results: plot data and fit",
+    "text": "Results: plot data and fit\nCalculate & plot the rain rate by humidity bracket\n\n\nweather_bracket &lt;- weather %&gt;% \n  mutate(humidity_bracket = \n           cut(humidity9am, breaks = seq(10, 100, by = 10))) %&gt;% \n  group_by(humidity_bracket) %&gt;% \n  summarize(rain_rate = mean(raintomorrow == \"Yes\")) \n\n\n  ggplot(weather_bracket, aes(x = humidity_bracket, y = rain_rate)) + \n    geom_point() + \n    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\nPlot the model fit for probability of rain rate by humidity\n\n\npred_summary &lt;- m %&gt;% \n                gather_rvars(pi.i[pred_ind]) %&gt;% \n                median_qi(.value) %&gt;% \n                mutate(x = jags.data$x.i)\n\nggplot(pred_summary,aes(x = x, y = .value),alpha = 0.3) +\n  geom_line() +\n  geom_ribbon(data = pred_summary,aes(ymin = .lower, ymax = .upper), alpha = 0.2) +\n  theme_bw()"
   },
   {
     "objectID": "10-BGLM.html#posterior-predictive-check",
@@ -1803,7 +1803,7 @@
     "href": "10-BGLM.html#results-parameters-1",
     "title": "Bayesian Data Analysis",
     "section": "Results: Parameters",
-    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     2.10    1.97    2.22      0.95 median qi       \n2 beta      0.00194 0.00135 0.00253   0.95 median qi"
+    "text": "Results: Parameters\n\nm &lt;- mod$BUGSoutput$sims.matrix\npar_summary &lt;- m %&gt;% \n                gather_rvars(alpha,beta) %&gt;% \n                median_qi(.value)\npar_summary\n\n# A tibble: 2 × 7\n  .variable  .value  .lower  .upper .width .point .interval\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    \n1 alpha     2.10    1.97    2.22      0.95 median qi       \n2 beta      0.00194 0.00136 0.00253   0.95 median qi"
   },
   {
     "objectID": "10-BGLM.html#results-plot-data-and-fit-1",
