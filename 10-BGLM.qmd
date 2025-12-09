@@ -300,7 +300,9 @@ pred_summary <- m %>%
 ggplot(pred_summary,aes(x = x, y = .value),alpha = 0.3) +
   geom_line() +
   geom_ribbon(data = pred_summary,aes(ymin = .lower, ymax = .upper), alpha = 0.2) +
-  theme_bw() 
+  theme_bw() +
+  xlab("humidity9am") +
+  ylab("probabiity of rain")
 ```
 
 ## Posterior Predictive Check {style="font-size: 65%;"}

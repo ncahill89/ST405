@@ -110,11 +110,11 @@ plot(mod)
 
 ### Tasks
 
--   [ ] **Task 1**
+-   [ ] **Task 1** **\[15 Marks\]**
 
 Write the JAGS code and run the model to fit the Bayesian Hierarchical model outlined above to the log(activity) data.
 
--   [ ] **Task 2**
+-   [ ] **Task 2** **\[15 Marks\]**
 
 Create the following plots and interpret them:
 

@@ -1,0 +1,106 @@
+---
+title: "ST405/ST645 Bayesian Data Analysis"
+subtitle: "Assignment 4: Radon Analysis"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(rjags)
+library(R2jags)
+library(tidybayes)
+library(bayesplot)
+
+radon_dat <- read_csv("radon_dat.csv")
+
+```
+
+## **Solutions** **\[Total = 45 Marks\]**
+
+### Tasks
+
+-   [ ] **Task 1** **\[15 Marks\]**
+
+Write the JAGS code and run the model to fit the Bayesian Hierarchical model outlined above to the log(activity) data.
+
+```{r, echo = TRUE, include=TRUE}
+bhregmodel = "
+model{
+  for(i in 1:N)
+{
+ y.i[i] ~ dnorm(mu.i[i],sigma^-2) # data model
+ mu.i[i] <- alpha.j[county[i]] 
+} # end i loop
+
+for(j in 1:n_county)
+{
+alpha.j[j] ~ dnorm(mu_alpha,sigma_alpha^-2)
+}
+
+mu_alpha ~ dnorm(0,2^-2)
+sigma ~ dunif(0,10)
+sigma_alpha ~ dt(0,2^-2,1)T(0,)
+
+ }
+ "
+
+jags.data <- list(y.i = log(radon_dat$activity),
+                  n_county = radon_dat$county %>% unique() %>% length(),
+                  county = factor(radon_dat$county), 
+                  N = nrow(radon_dat))
+  
+parnames <- c("alpha.j","mu_alpha","sigma","sigma_alpha")
+  
+mod <- jags(data = jags.data, 
+              parameters.to.save = parnames, 
+              model.file = textConnection(bhregmodel))
+
+m <- mod$BUGSoutput$sims.matrix
+plot(mod)
+```
+
+**Note for Marking:** I just expect to see that they have fit the model as outlined in the specification. Priors should be reasonable but don't need to be exactly as specified below.
+
+-   [ ] **Task 2**
+
+i.  **\[15 Marks\]**
+
+```{r, echo = TRUE, include = TRUE}
+alpha_index <- 1:jags.data$n_county
+par_summary <- m %>% 
+                gather_rvars(alpha.j[alpha_index]) %>% 
+                median_qi(.value,.width = 0.68) %>% 
+                mutate(county = unique(jags.data$county)) %>% 
+                select(county, .value, .lower, .upper)
+
+
+county_means <- radon_dat %>% group_by(county) %>% summarise(mean_radon = mean(log(activity)),
+                                                             n = n())
+
+alpha_dat <- full_join(par_summary,county_means)
+
+ggplot(alpha_dat, aes(x = mean_radon, y = .value)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = .lower, ymax = .upper)) +
+  geom_abline(slope=1, intercept = 0) +
+  geom_hline(yintercept = mod$BUGSoutput$mean$mu_alpha) +
+  ylab("alpha.j")
+```
+
+**Note for Marking:** Students should note that the plot is displaying the partial pooling that is happening in the model. Some of the model based estimates for radon activity are being drawn towards the overall mean (horizontal line). Without the hierarchical model the estimates would all lie more closely to the identity line. Uncertainty (error bars) tend to be wider for the points that are being drawn towards the overall mean i.e., these county estimates are more uncertain (due to smaller sample size in those counties) and so are more influenced by the pooling.
+
+ii. **\[10 Marks\]**
+
+```{r, echo = TRUE, include = TRUE}
+ggplot(alpha_dat, aes(x = n, y = mean_radon - .value)) +
+  geom_point() +
+  geom_hline(yintercept = 0)
+
+```
+
+**Note for Marking:** Students should note that model based estimates of radon activity are much closer to the observed county-level estimates (based on sample mean) when the sample size is larger (i.e., the points are close to the zero line for large sample size). This plot confirms that the points that are pulled closer to the overall mean (and away from the observed county-specific means) in the previous plot, for the counties that had smaller sample sizes.
