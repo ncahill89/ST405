@@ -114,13 +114,13 @@ plot(mod)
 
 Write the JAGS code and run the model to fit the Bayesian Hierarchical model outlined above to the log(activity) data.
 
--   [ ] **Task 2** **\[15 Marks\]**
+-   [ ] **Task 2** 
 
 Create the following plots and interpret them:
 
-i.  Create a scatter plot with $\bar{y}_j$ = county level sample means for log(activity) on the x-axis vs $\hat{\alpha}_j$ = estimates of the $\alpha_j$'s from the hierarchical model on the y-axis. Add error bars for the $\alpha_j$'s that reflect the 68% credible intervals \[once you have the interval values you can use `geom_errorbar()` to do this with `ggplot()`\]. Add the identity line (i.e, the y = x line) to the plot \[you can use `geom_abline(slope = 1, intercept = 0)` to do this with `ggplot()`\]. Finally, add a horizontal line to the plot that represents the estimate of $\mu_{\alpha}$ from the model. Examine the plot and explain what it illustrates about the log(activity) estimates that you get from the hierarchical model.
+i.  **\[15 Marks\]** Create a scatter plot with $\bar{y}_j$ = county level sample means for log(activity) on the x-axis vs $\hat{\alpha}_j$ = estimates of the $\alpha_j$'s from the hierarchical model on the y-axis. Add error bars for the $\alpha_j$'s that reflect the 68% credible intervals \[once you have the interval values you can use `geom_errorbar()` to do this with `ggplot()`\]. Add the identity line (i.e, the y = x line) to the plot \[you can use `geom_abline(slope = 1, intercept = 0)` to do this with `ggplot()`\]. Finally, add a horizontal line to the plot that represents the estimate of $\mu_{\alpha}$ from the model. Examine the plot and explain what it illustrates about the log(activity) estimates that you get from the hierarchical model. 
 
-ii. Create a scatter plot with the county level sample sizes (i.e., the number of measurements in each county) on the x-axis vs $\bar{y}_j - \hat{\alpha}_j$ on the y-axis. Add a horizontal line at 0. Examine the plot and explain what it illustrates about the log(activity) estimates that you get from the hierarchical model. How does what you learned here relate to what you learned from the plot in (i)?
+ii. **\[10 Marks\]** Create a scatter plot with the county level sample sizes (i.e., the number of measurements in each county) on the x-axis vs $\bar{y}_j - \hat{\alpha}_j$ on the y-axis. Add a horizontal line at 0. Examine the plot and explain what it illustrates about the log(activity) estimates that you get from the hierarchical model. How does what you learned here relate to what you learned from the plot in (i)?
 
 ```{r, echo = FALSE, include = FALSE}
 alpha_index <- 1:jags.data$n_county
